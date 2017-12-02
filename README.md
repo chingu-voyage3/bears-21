@@ -13,10 +13,10 @@ would be super useful. Moreover seeing how landlords and agencies handled previo
 determine if you chose to rent said property.
 
 ## Project Scope
-Creating a housing platform for current students. This project will be completed by mid January, as given by the Chingu hosts. 
+Creating a housing platform for current students. This project will be completed by mid January, as given by the Chingu hosts.
 It will include a platform for future tenants to see available houses, with the ratings of the landlord and agency. Communication
 between user and landlord/agency such that they can book a house viewing. A dashboard such that the current tenants can report
-any issues with the house and see the status of the repair/discussion of the problem. Finally a tracking dashboard to see when 
+any issues with the house and see the status of the repair/discussion of the problem. Finally a tracking dashboard to see when
 future payments such like deposits and rent need to be made by.
 
 ## Project Deliverables
@@ -44,12 +44,13 @@ future payments such like deposits and rent need to be made by.
 ### v2 and later
 - Open it up to not only students. But also people looking for housing.
 
-
-# Stack
-()[./stack.png]
+![][logo]
 
 ### Authors
 - Leon Boehmer
 - Vivek poddar
 - Ed Mitchell
 - nik
+
+
+[logo]: stack.png
