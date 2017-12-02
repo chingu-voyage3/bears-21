@@ -45,6 +45,9 @@ future payments such like deposits and rent need to be made by.
 - Open it up to not only students. But also people looking for housing.
 
 
+# Stack
+()[./stack.png]
+
 ### Authors
 - Leon Boehmer
 - Vivek poddar
