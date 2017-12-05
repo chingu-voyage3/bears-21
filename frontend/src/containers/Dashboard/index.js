@@ -1,4 +1,5 @@
 import React from 'react';
+import House from '../../components/House';
 import './style.css';
 
 export default class Dashboard extends React.Component {
@@ -8,12 +9,7 @@ export default class Dashboard extends React.Component {
       <div>
         <h1>Dashboard</h1>
         <div className="wrapper">
-          <div className="house_wrapper">
-            <img src={image_src} alt="noimg" />
-            <div>
-              House
-            </div>
-          </div>
+          <House src={image_src} />
           <div className="column_wrapper">
             <div>
               Open Issues
