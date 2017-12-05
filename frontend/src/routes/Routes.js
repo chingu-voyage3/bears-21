@@ -13,7 +13,6 @@ const Routes = () => {
 			<Route path="/login" component={Dummy} />
 			<Route path="/register" component={Dummy} />
 			<Route path="/forgot" component={Dummy} />
-			<Route path="/signup" component={Dummy} />
 			<AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
 			<AuthRoute path="/dashboard" component={Dummy} pathname={ "/login" } />
 			<AuthRoute path="/newissue" component={Dummy} pathname={ "/login" } />
