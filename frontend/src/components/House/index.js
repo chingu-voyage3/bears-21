@@ -1,3 +1,4 @@
 import House from './House';
+import HouseList from './HouseList';
 
-export {House};
+export {House, HouseList};

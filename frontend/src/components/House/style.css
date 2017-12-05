@@ -1,3 +1,7 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
 
 .wrapper {
   display: flex;
