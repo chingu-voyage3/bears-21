@@ -1,8 +1,8 @@
 import React from 'react';
-import S from './style.css';
+import './style.css';
 
 export default (props) => (
-  <div style={S.column_wrapper}>
+  <div className="column_wrapper">
     <div>
       {props.title}
     </div>

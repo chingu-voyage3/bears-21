@@ -1,5 +1,6 @@
 import React from 'react';
 import IssueList from './IssueList';
+import './style.css';
 
 export default (props) => {
   const {data, filter, title} = props;
