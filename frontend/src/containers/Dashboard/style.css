@@ -5,10 +5,11 @@
 }
 
 .column_wrapper {
+  padding: 1em 0px;
   width: 30%;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  border: 1px solid lightgrey;
 }
 
 .house_image {
