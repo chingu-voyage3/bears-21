@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.column_wrapper {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}
+
+.house_image {
+  width: 200px;
+}
+
+.issue_style {
+  cursor: pointer;
+  text-align: left;
+  list-style: none;
+}
+
+.issue_style:hover {
+  background: lightgrey;
+}
