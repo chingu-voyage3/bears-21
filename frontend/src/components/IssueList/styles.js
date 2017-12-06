@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     ':hover': {
       background: "lightgrey"
     }
+  },
+  title: {
+    textAlign: "center"
   }
 });
 

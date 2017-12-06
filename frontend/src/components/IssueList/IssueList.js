@@ -4,7 +4,7 @@ import S from './styles';
 
 export default (props) => (
   <div className={css(S.column_wrapper)}>
-    <div>
+    <div className={css(S.title)}>
       {props.title}
     </div>
     <ul>

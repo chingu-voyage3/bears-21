@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
   },
   house_image: {
     width: "200px"
+  },
+  title: {
+    textAlign: "center"
   }
 });
 

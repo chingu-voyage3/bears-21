@@ -4,9 +4,9 @@ import S from './styles';
 
 export default (props) => {
   return (
-    <div className={css(S.house_wrapper)}>
+    <div>
       <img src={props.src} alt="noimg" />
-      <div>
+      <div className={css(S.title)}>
         House
       </div>
     </div>
