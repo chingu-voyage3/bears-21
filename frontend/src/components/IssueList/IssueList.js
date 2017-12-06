@@ -3,7 +3,7 @@ import {css} from 'aphrodite';
 import S from './styles';
 
 export default (props) => {
-  const items = props.items .map( (item, i) => (
+  const items = props.items.map( (item, i) => (
     <li className={css(S.issue_style)} key={i}>
       {item.title}
     </li>
