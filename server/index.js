@@ -1,9 +1,10 @@
 'use strict';
 
 const promisify = require('es6-promisify');
+
 const server = require('./server');
 const config = require('./config');
-const http = require('http');
+const logger = require('./logger');
 
 process.on('SIGTERM', async () => {
   const exitCode = await stop();
@@ -16,11 +17,11 @@ async function init () {
   try {
     await initServer(config.port);
   } catch (err) {
-    console.error(`Couldn't init the app: ${err}`);
+    logger.error(`Couldn't init the app: ${err}`);
     // exit code for fatal exception
     process.exit(1);
   }
-  console.log(`App is listening on port ${config.port}`);
+  logger.appStarted(config.host, config.port);
 }
 
 const closeServer = promisify(server.close, server);
@@ -30,7 +31,7 @@ async function stop () {
   try {
     await closeServer();
   } catch (err) {
-    console.error(`Failed to close the server: ${err}`);
+    logger.error(`Failed to close the server: ${err}`);
     exitCode = 1;
   }
   return exitCode;

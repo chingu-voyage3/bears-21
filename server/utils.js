@@ -1,7 +1,9 @@
 'use strict';
 
-const errorHandler = (err, req, res, next) => {
-  console.error(err);
+const logger = require('./logger');
+
+const errorHandler = (err, req, res) => {
+  logger.error(err);
   res.status(500).send('Oops! Internal Server Error.');
 }
 

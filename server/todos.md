@@ -2,8 +2,8 @@ Todos
 ---
 
 - [x] Write boilerplate code
-- [ ] Setup logging
+- [x] Setup logging
+- [x] Setup config
+- [x] Setup linter
 - [ ] Setup validation
-- [ ] Setup config
-- [ ] Setup linter
 - [ ] Setup migrations

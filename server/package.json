@@ -15,6 +15,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.3.0",
     "es6-promisify": "^5.0.0",
     "express": "^4.16.2",
     "http": "0.0.0"

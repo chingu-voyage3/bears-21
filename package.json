@@ -1,0 +1,29 @@
+{
+  "name": "genie",
+  "version": "1.0.0",
+  "description": "The ultimate solution to your housing issues",
+  "main": "index.js",
+  "dependencies": {
+    "cross-env": "^5.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-watch": "^3.1.3",
+    "eslint-plugin-react": "^7.5.1"
+  },
+  "scripts": {
+    "lint": "esw server frontend",
+    "lint:watch": "npm run lint -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyage3/bears-21.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-voyage3/bears-21/issues"
+  },
+  "homepage": "https://github.com/chingu-voyage3/bears-21#readme"
+}
