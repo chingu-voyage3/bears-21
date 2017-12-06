@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import NotFound from '../components/NotFound.js';
-import Dummy from '../components/Dummy.js';
+import NotFound from '../components/NotFound';
+import Dummy from '../components/Dummy';
 
 const auth = false;
 
