@@ -1,3 +1,23 @@
+### App server
+
+#### start
+
+```
+$ npm start
+```
+
+#### lint
+
+```
+$ npm run lint
+```
+
+#### lint watch mode
+
+```
+$ npm run lint:watch
+```
+
 Todos
 ---
 

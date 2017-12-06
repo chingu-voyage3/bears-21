@@ -13,6 +13,7 @@
     "eslint-plugin-react": "^7.5.1"
   },
   "scripts": {
+    "start": "cross-env NODE_ENV=development node index.js",
     "lint": "esw server frontend",
     "lint:watch": "npm run lint -- --watch"
   },
