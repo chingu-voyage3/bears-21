@@ -2,9 +2,12 @@
 
 const logger = require('./logger');
 
-const errorHandler = (err, req, res) => {
-  logger.error(err);
-  res.status(500).send('Oops! Internal Server Error.');
+function errorHandler (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500)
+  res.render('error', { error: err })
 }
 
 module.exports = {

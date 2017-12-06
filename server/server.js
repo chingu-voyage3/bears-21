@@ -10,8 +10,12 @@ const app = express();
 
 app.use(routes);
 
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'build')));
+
+// Always return the main index.html, so react-router render the route in the client
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/public/index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
 });
 
 app.use(errorHandler);

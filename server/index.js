@@ -1,6 +1,7 @@
 'use strict';
 
 const promisify = require('es6-promisify');
+const open = require('open');
 
 const server = require('./server');
 const config = require('./config');
@@ -22,6 +23,7 @@ async function init () {
     process.exit(1);
   }
   logger.appStarted(config.host, config.port);
+  open(`${config.host}:${config.port}`);
 }
 
 const closeServer = promisify(server.close, server);
