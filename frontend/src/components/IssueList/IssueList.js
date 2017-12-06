@@ -1,8 +1,9 @@
 import React from 'react';
-import './style.css';
+import {css} from 'aphrodite';
+import S from './styles';
 
 export default (props) => (
-  <div className="column_wrapper">
+  <div className={css(S.column_wrapper)}>
     <div>
       {props.title}
     </div>
