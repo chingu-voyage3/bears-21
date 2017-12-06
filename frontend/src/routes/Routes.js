@@ -5,7 +5,7 @@ import Dummy from '../components/Dummy';
 
 const auth = false;
 
-const Routes = () => {
+export default () => {
 	return (	
 		<Switch>
 
@@ -39,4 +39,4 @@ const AuthRoute = ({ component: Component, pathname: path, ...rest }) => (
 
 
 );
-export default Routes;
+
