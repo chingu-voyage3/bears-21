@@ -8,7 +8,7 @@ export default (props) => {
                         .filter( item => item.status === filter)
                         .map( (item, i) => (
                           <li className="issue_style" key={i}>
-                            {item.description}
+                            {item.title}
                           </li>
                         ));
   return (
