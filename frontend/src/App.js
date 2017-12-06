@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import Dashboard from './containers/Dashboard';
-import './App.css';
+import Routes from './routes/Routes';
+import { Link } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Dashboard />
-      </div>
-    );
-  }
+export default class App extends Component {
+
+	render() {
+		return (
+			<div>
+				<NavBar />
+
+				<Routes />
+			</div>
+		);
+  	}
 }
-
-export default App;
