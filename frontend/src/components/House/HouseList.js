@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import House from './House';
 import {FilteredIssueList} from '../IssueList';
 import {css} from 'aphrodite';
-import S from './styles';
+import styles from './styles';
 
-export default class HouseList extends React.Component {
+export default class HouseList extends Component {
   render = () => {
     const {data} = this.props;
     const house_list = data.map( (house, ndx) => {
       return (
-        <div className={css(S.wrapper)} key={ndx}>
+        <div className={css(styles.wrapper)} key={ndx}>
           <House src={house.house_image} />
           <FilteredIssueList data={house.issues} filter="open" title="Open Issues" />
           <FilteredIssueList data={house.issues} filter="resolved" title="Resolved Issues" />
@@ -17,7 +17,7 @@ export default class HouseList extends React.Component {
       );
     });
     return (
-      <div className={css(S.list)}>
+      <div className={css(styles.list)}>
         {house_list}
       </div>
     );
