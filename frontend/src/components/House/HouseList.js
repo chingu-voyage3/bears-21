@@ -11,8 +11,8 @@ export default class HouseList extends Component {
       return (
         <div className={css(styles.wrapper)} key={ndx}>
           <House src={house.house_image} />
-          <FilteredIssueList data={house.issues} filter="open" title="Open Issues" />
-          <FilteredIssueList data={house.issues} filter="resolved" title="Resolved Issues" />
+          <FilteredIssueList data={house.issues} statusFilter="open" title="Open Issues" />
+          <FilteredIssueList data={house.issues} statusFilter="resolved" title="Resolved Issues" />
         </div>
       );
     });
