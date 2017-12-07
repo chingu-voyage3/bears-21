@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     display: "flex",
-    flexDirection: "row",
     justifyContent: "space-around"
   },
   house_image: {
