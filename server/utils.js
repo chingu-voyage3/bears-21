@@ -2,6 +2,12 @@
 
 const logger = require('./logger');
 
+function catchAsyncErrors (fn) {
+  return function(req, res, next) {
+    return fn(req, res, next).catch(next);
+  };
+};
+
 function errorHandler (err, req, res, next) {
   if (res.headersSent) {
     return next(err)
@@ -11,5 +17,6 @@ function errorHandler (err, req, res, next) {
 }
 
 module.exports = {
+  catchAsyncErrors,
   errorHandler
 };
