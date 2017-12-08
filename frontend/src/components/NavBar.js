@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 export default class NavBar extends Component {
-	
+
 	constructor() {
 		super();
 		this.state = {
@@ -23,17 +23,18 @@ export default class NavBar extends Component {
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
 					</ul>
-				</div>					
+				</div>
 			);
 		} else { // not authenticated
 			return (
 				<div>
 					<ul className={css(styles.container)}>
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
+						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Sign up</Link></li>
 					</ul>
-				</div>					
+				</div>
 			);
 		}
 	}
@@ -46,7 +47,7 @@ export default class NavBar extends Component {
 	render() {
 
 		return this.getBar();
-	
+
 
 	}
 
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 		float: 'right',
 	},
 	titleelement: {
-		float: 'left',	
+		float: 'left',
 	},
 	links: {
 		display: 'block',
@@ -76,6 +77,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		padding: '14px 16px',
 		textDecoration: 'none',
-		cursor: 'pointer',	
-	},	
+		cursor: 'pointer',
+	},
 });
