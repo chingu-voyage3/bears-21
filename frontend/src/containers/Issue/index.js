@@ -5,7 +5,8 @@ import './style.css';
 
 export default class Issue extends Component {
   state = {
-    issue: {_id:0}
+    issue: {_id:0},
+    uploader_visible: false
   };
   componentWillMount = () => {
     getIssue()
@@ -25,16 +26,26 @@ export default class Issue extends Component {
     issue[e.target.name] = e.target.value;
     this.setState( { issue});
   };
+  toggleUploaderViz = () => {
+    this.setState( { uploader_visible: !this.state.uploader_visible});
+  };
   render() {
     if( this.state.issue._id === 0) return null;
     const {issue} = this.state;
+    const show_uploader = {
+      display: this.state.uploader_visible&&issue._id?"flex":"none"
+    }
     return (
       <div>
         <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
         <div className="wrapper">
-          <IssueForm issue={issue} onFieldChange={this.onFieldChange} onSubmit={this.issueFormSubmit} />
-          <h2>Images</h2>
-          <div className="upload_wrapper">
+          <IssueForm issue={issue}
+            onFieldChange={this.onFieldChange} 
+            onSubmit={this.issueFormSubmit} />
+          <div className="image_title">
+            Images <button onClick={this.toggleUploaderViz} >+</button>
+          </div>
+          <div className="upload_wrapper" style={show_uploader}>
             <input name="myfile" type="file" />
             <input type="submit" value="Submit" />
           </div>
