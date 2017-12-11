@@ -21,7 +21,7 @@ $ npm run lint:watch
 Todos
 ---
 
-- [ ] Create MLab account
-- [ ] Demo house schema
-- [ ] Routes to add and fetch houses
-- [ ] Setup editorconfig
+- [x] Create MLab account
+- [x] Demo house schema
+- [x] Routes to add and fetch houses
+- [x] Setup editorconfig
