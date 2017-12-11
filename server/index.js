@@ -5,31 +5,33 @@ if (parseFloat(process.versions.node) < 7.6) {
   process.exit();
 }
 
+process.on('SIGTERM', async () => {
+  const exitCode = await stop();
+  process.exit(exitCode);
+});
+
 const promisify = require('es6-promisify');
-const mongoose = require('mongoose');
 const open = require('open');
 
 require('dotenv').config();
 
 const config = require('./config');
 const logger = require('./logger');
-
-mongoose.connect(config.database, { useMongoClient: true });
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
-  console.log(`${err.message}`);
-});
-require('./models');
+const models = require('./models');
 const app = require('./app');
 
-process.on('SIGTERM', async () => {
-  const exitCode = await stop();
-  process.exit(exitCode);
-});
-
 // do not init the process if a crucial component can not start up
+const initModels = models.init;
 const initServer = promisify(app.listen, app);
 async function init () {
+  try {
+    await initModels(config.database);
+    logger.info('Connected to database');
+  } catch (err) {
+    logger.error(`Error connecting database: ${err.message}`);
+    process.exit();
+  }
+
   try {
     await initServer(config.port);
   } catch (err) {
@@ -41,10 +43,18 @@ async function init () {
   //open(`${config.host}:${config.port}`);
 }
 
+const closeModels = models.close();
 const closeServer = promisify(app.close, app);
 async function stop () {
   // start with a normal exit code
   let exitCode = 0;
+  try {
+    await closeModels();
+    logger.info(`Closed database connection`);
+  } catch (err) {
+    logger.error(`Failed to close database connection: ${err.message}`);
+  }
+
   try {
     await closeServer();
   } catch (err) {
@@ -53,6 +63,8 @@ async function stop () {
   }
   return exitCode;
 }
+
+init();
 
 module.exports = {
   init,
