@@ -10,10 +10,10 @@ process.on('SIGTERM', async () => {
   process.exit(exitCode);
 });
 
+require('dotenv').config();
+
 const promisify = require('es6-promisify');
 const open = require('open');
-
-require('dotenv').config();
 
 const config = require('./config');
 const logger = require('./logger');
@@ -63,8 +63,6 @@ async function stop () {
   }
   return exitCode;
 }
-
-init();
 
 module.exports = {
   init,

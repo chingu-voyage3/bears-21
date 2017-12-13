@@ -4,22 +4,24 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const http = require('http');
 const path = require('path');
+const morgan = require('morgan');
 
 const routes = require('./routes');
 const { errorHandler } = require('./utils');
 
 const app = express();
-
 app.set('view engine', 'pug');
+
+// Middlewares
+app.use(morgan('tiny'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-app.use(routes);
 
+app.use(routes);
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'build')));
-
 // Always return the main index.html, so react-router render the route in the client
 app.get('/', (req, res) => {
   res.send('Hello world');
