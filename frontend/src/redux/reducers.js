@@ -5,18 +5,16 @@ import {
 
 
 const initialState = {
-	user: null,
+	user: false,
 };
 
 
-
-function app(state = initialState, action) {
+export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case LOGIN:
-			return {user: "in"};
+			return {user: true};
 		case LOGOUT:
-			return {user: null};
-
+			return {user: false};
 		default:
 			return state;
 	}
