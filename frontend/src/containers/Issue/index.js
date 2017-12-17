@@ -1,5 +1,6 @@
 import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import IssueForm from '../../components/IssueForm'; // eslint-disable-line no-unused-vars
+import Uploader from '../../components/Uploader';
 import {getIssue} from './actions';
 import './style.css';
 
@@ -29,6 +30,13 @@ export default class Issue extends Component {
   toggleUploaderViz = () => {
     this.setState( { uploader_visible: !this.state.uploader_visible});
   };
+
+  uploadImage = ( files) => {
+    console.log( "update image:", files[0]);
+    // const data = new FormData();
+    // data.append( 'img', files[0]);
+    // console.log( "your file was (fake) uploaded"); // eslint-disable-line no-console
+  };
   render() {
     if( this.state.issue._id === 0) return null;
     const {issue} = this.state;
@@ -40,21 +48,19 @@ export default class Issue extends Component {
         <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
         <div className="wrapper">
           <IssueForm issue={issue}
-            onFieldChange={this.onFieldChange} 
+            onFieldChange={this.onFieldChange}
             onSubmit={this.issueFormSubmit} />
           <div className="image_title">
             Images <button onClick={this.toggleUploaderViz} >+</button>
           </div>
-          <div className="upload_wrapper" style={show_uploader}>
-            <input name="myfile" type="file" />
-            <input type="submit" value="Submit" />
+          <div className="upload_wrapper" style={show_uploader} >
+            <Uploader onFileDropped={this.uploadImage}/>
           </div>
           <div className="images_wrapper">
             <div id="image_list" >
               {issue.images.map( (img, ndx) => <img key={ndx} src={img} alt="noimg"/>)}
             </div>
           </div>
-
         </div>
       </div>
     );
