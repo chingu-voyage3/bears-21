@@ -5,6 +5,9 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const morgan = require('morgan');
+const expressValidator = require('express-validator');
+const passport = require('passport');
+require('./handlers/passport');
 
 const routes = require('./routes');
 const { errorHandler } = require('./utils');
@@ -14,10 +17,17 @@ app.set('view engine', 'pug');
 
 // Middlewares
 app.use(morgan('tiny'));
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
+
+// Takes the raw requests and turns them into usable properties on req.body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// Exposes a bunch of methods for validating data.
+// Used heavily on userController.validateRegister
+app.use(expressValidator());
+
+// Passport JS is what we use to handle our logins
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(routes);
 // Serve static assets
