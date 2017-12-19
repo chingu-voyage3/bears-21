@@ -5,12 +5,15 @@ import Dummy from '../components/Dummy';
 import Dashboard from '../containers/Dashboard';
 import Login from '../components/Login/Login';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 
 //const auth = false;
 
 class routes extends Component {
+
+
   render() {
-    console.log("AUTH USER: ", this.props.user);
 	return (
 		<Switch>
 
@@ -53,5 +56,4 @@ function mapStateToProps(state) {
   }
 }
 
-const Routes = connect(mapStateToProps)(routes);
-export default Routes;
+export default withRouter(connect(mapStateToProps)(routes));

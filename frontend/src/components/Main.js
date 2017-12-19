@@ -9,7 +9,9 @@ import { withRouter } from 'react-router-dom';
 class app extends Component {
 
 	render() {
-		console.log(this.props);
+		console.log("state: ", this.props);
+    console.log("USER: ", this.props.user);
+    
     return (
 			<div>
 				<NavBar />
