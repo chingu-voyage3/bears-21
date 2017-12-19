@@ -5,6 +5,7 @@ import Dummy from '../components/Dummy';
 import Dashboard from '../containers/Dashboard';
 import { Login } from '../components/Login';
 import { Register } from '../components/Register';
+import { Forgot } from '../components/Forgot';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -21,7 +22,7 @@ class routes extends Component {
 			<Route exact path="/" component={Dummy} />
 			<Route path="/login" component={Login} />
 			<Route path="/register" component={Register} />
-			<Route path="/forgot" component={Dummy} />
+			<Route path="/forgot" component={Forgot} />
 			<Route path="/dashboard" component={Dashboard} />
 			<AuthRoute path="/admin" user={this.props.user} component={Dummy} pathname={ "/login" } />
 			<AuthRoute path="/newissue" user={this.props.user} component={Dummy} pathname={ "/login" } />

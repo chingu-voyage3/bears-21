@@ -7,8 +7,14 @@ export default class Register extends Component {
   render() {
     return (
       <div className={css(styles.centre)}>
-        <div className={css(styles.mainContainer)}>
-        
+        <div className={css(styles.mainContainer, styles.centre)}>
+          <div>Sign up</div>
+          <textarea className={css(styles.textarea)}></textarea>       
+          <textarea className={css(styles.textarea)}></textarea>       
+          <textarea className={css(styles.textarea)}></textarea>       
+          <textarea className={css(styles.textarea)}></textarea>       
+          <textarea className={css(styles.textarea)}></textarea>       
+          <button>Sign up</button>
         </div>    
       </div>
      );
@@ -29,9 +35,12 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     border: "1px black solid",
-    width: "50%",
+    width: 450,
     height: 200,
-    marginTop: 100,
+    marginTop: 150,
+  },
+  textarea: {
+    resize: "none",
   },
   
 

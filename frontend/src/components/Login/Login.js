@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
 
-
-export default class Login extends Component {
+class login extends Component {
 	
 	constructor() {
 		super();
@@ -17,7 +17,15 @@ export default class Login extends Component {
 	login = () => {
 		console.log(this.state.username);
 		console.log(this.state.password);
-		console.log("SPEC");
+    
+    
+    // send XHR request/axios to backend or whatever... then...
+    // but for the meanwhile
+    if (this.state.username === "admin" && this.state.password === "admin") {
+      // update state in redux store...
+      this.props.onLogin();     
+    }
+    
 
 
 		this.setState({username: "", password: ""});
@@ -53,6 +61,19 @@ export default class Login extends Component {
 	}
 
 }
+
+const mapStateToProps = state => {};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: () => dispatch({type: "LOGIN"})
+  }
+  
+
+}
+
+const Login = connect(mapStateToProps, mapDispatchToProps)(login);
+export default Login;
 
 
 const styles = StyleSheet.create({
