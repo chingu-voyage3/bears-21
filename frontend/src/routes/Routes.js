@@ -3,7 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from '../components/NotFound';
 import Dummy from '../components/Dummy';
 import Dashboard from '../containers/Dashboard';
-import Login from '../components/Login/Login';
+import { Login } from '../components/Login';
+import { Register } from '../components/Register';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ class routes extends Component {
 
 			<Route exact path="/" component={Dummy} />
 			<Route path="/login" component={Login} />
-			<Route path="/register" component={Dummy} />
+			<Route path="/register" component={Register} />
 			<Route path="/forgot" component={Dummy} />
 			<Route path="/dashboard" component={Dashboard} />
 			<AuthRoute path="/admin" user={this.props.user} component={Dummy} pathname={ "/login" } />
