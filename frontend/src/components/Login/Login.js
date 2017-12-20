@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
+import { loginAction } from '../../redux/actions';
 
 class login extends Component {
 	
@@ -22,7 +23,7 @@ class login extends Component {
     // send XHR request/axios to backend or whatever... then...
     // but for the meanwhile
     if (this.state.username === "admin" && this.state.password === "admin") {
-      // update state in redux store...
+      localStorage.setItem("user", true);
       this.props.onLogin();     
     }
     
@@ -43,8 +44,8 @@ class login extends Component {
 				<div className={css(styles.box, styles.container)}>
 					<div className={css(styles.title)}>Login</div>
 
-					<textarea value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></textarea>
-					<textarea value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></textarea>
+					<input placeholder="username" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></input>
+					<input placeholder="password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
 					<button onClick={this.login}>Login</button>
 				</div>
@@ -66,7 +67,7 @@ const mapStateToProps = state => {};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: () => dispatch({type: "LOGIN"})
+    onLogin: () => dispatch(loginAction())
   }
   
 

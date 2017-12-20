@@ -12,7 +12,7 @@ class navbar extends Component {
 				<div>
 					<ul className={css(styles.container)}>
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-						<li className={css(styles.navelement)} onClick={() => this.props.logout()}><Link className={css(styles.links)} to="/signout">Sign out</Link></li>
+						<li className={css(styles.navelement)} onClick={() => this.props.logout()}><Link className={css(styles.links)} to="/logout">Sign out</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
 					</ul>

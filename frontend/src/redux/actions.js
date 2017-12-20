@@ -4,13 +4,13 @@ export const LOGOUT = "LOGOUT";
 
 
 // action creators
-export function login() {
+export const loginAction = () => {
 	return {
 		type: LOGIN,
 	};
 }
 
-export function logout() {
+export const logoutAction = () => {
 	return {
 		type: LOGOUT,
 	};
