@@ -8,19 +8,18 @@ const { catchAsyncErrors } = require('../utils');
 
 const router = new Router();
 
-router.get('/api/v1/houses', catchAsyncErrors(houses.list));
-router.post('/api/v1/houses', catchAsyncErrors(houses.create));
+router.get('/api/v1/houses', houses.list);
+router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
+
 // 1. Validate the registration data
-// 2. register the user
-// 3. we need to log them in
+// 2. Register the user
+// 3. Log them in
 router.post('/register',
   users.validateRegister,
-  // we need to know about errors if
-  // validation will be passed, but registration
-  // will be failed in some reasons, e.g. second
-  // registration with same email
   catchAsyncErrors(users.register),
   auth.login
 );
+router.post('/login', auth.login);
+router.get('/logout', auth.logout);
 
 module.exports = router;

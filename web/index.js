@@ -33,7 +33,7 @@ async function init () {
   logger.appStarted(config.host, app.address().port);
 }
 
-const closeDb = db.close();
+const closeDb = db.close;
 const closeServer = promisify(app.close, app);
 async function stop () {
   // start with a normal exit code

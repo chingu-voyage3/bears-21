@@ -1,8 +1,7 @@
 'use strict'
 
-const passport = require('passport');
-
-exports.login = passport.authenticate('local', {
-  failureRedirect: '/login',
-  successRedirect: '/'
-});
+module.exports = {
+  login: require('./login'),
+  logout: require('./logout'),
+  isLoggedIn: require('./isLoggedIn')
+};
