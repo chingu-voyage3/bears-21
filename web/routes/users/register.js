@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const promisify = require('es6-promisify');
-const User = mongoose.model('User');
+'use strict'
+
+const User = require('../../../models/user');
 
 exports.validateRegister = (req, res, next) => {
   // Below methods are added to req object by express-validator module
@@ -32,4 +32,3 @@ exports.register = async (req, res, next) => {
   await register(user, req.body.password);
   next(); // pass to authController.login
 };
-
