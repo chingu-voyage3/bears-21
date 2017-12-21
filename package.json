@@ -37,7 +37,7 @@
     "super-request": "^1.2.0"
   },
   "scripts": {
-    "prepush": "npm lint && npm test",
+    "prepush": "npm run lint && npm run test",
     "start:prod": "concurrently \"npm run server:prod\" \"npm run client\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cross-env NODE_ENV=development node index.js",
