@@ -42,6 +42,9 @@ class login extends Component {
     if (this.state.username === "admin" && this.state.password === "admin") {
       localStorage.setItem("user", true);
       this.props.onLogin();     
+    } else {
+
+      //pass
     }
     
 
@@ -56,26 +59,24 @@ class login extends Component {
 
 		return (
 
-			<div className={css(styles.centered)}>
+			<div className={css(styles.centered, styles.background)}>
 				
+        <div className={css(styles.centered, styles.loginContainer)}>
 
-				<div className={css(styles.box, styles.centered)}>
+          <div className={css(styles.title)}>Login</div>
 
-          <div>Login</div>
+					<input placeholder="your@email.com" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
+					<input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
 
-					<input placeholder="your@email.com" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></input>
-					<input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
-
-          <div>{this.state.currentStatus}</div>
+          <div className={css(styles.boxes)}>{this.state.currentStatus}</div>
         
-        	<button className={css(styles.login)} onClick={this.login}>LOGIN</button>
+        	<button className={css(styles.boxes, styles.login)} onClick={this.login}>LET ME IN</button>
 
-          <div>
-            <Link to="/register">New account</Link>
-            <Link to="/forgot">New password</Link> 
+          <div className={css(styles.accountHolder)}>
+            <Link className={css(styles.account)} to="/register">Create Account</Link>
+            <Link className={css(styles.account)} to="/forgot">Recover Password</Link> 
           </div>
 				
-        
         
         </div>
 
@@ -124,15 +125,55 @@ const styles = StyleSheet.create({
 	textarea: {
 		resize: "none",
 		marginTop: 10,
-		width: "60%",
-    height: 25,
-    paddingLeft: 7,
     border: "none",
     backgroundColor: "#F2F2F2",
+
 	},
   login: {
-    marginTop: 10,
-    width: "60%",
+    width: 286,
+    backgroundColor: "#49CF87",
+    color: "white",
+  }, 
+  boxes: {
+    width: 270,
     height: 25,
-  },  
+    border: "none",
+    paddingLeft: 8,
+    paddingRight: 8,
+  }, 
+  title: {
+    fontSize: 50,
+    marginBottom: 40,
+  },
+  loginContainer: {
+    position: "absolute",
+    margin: "auto",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: 400,
+    height: 300,
+
+
+  },
+  account: {
+    marginRight: 5,
+    marginLeft: 5,
+    textDecoration: "none",
+    ":link": {
+      color: "black",
+    },
+    ":visited": {
+      color: "black",
+    },
+  },
+  accountHolder: {
+    marginTop: 10,
+  },
+  background: {
+    backgroundColor: "#0079BF",
+  },
+
+
 });

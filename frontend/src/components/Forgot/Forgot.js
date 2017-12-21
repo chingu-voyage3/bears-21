@@ -20,7 +20,7 @@ export default class Forgot extends Component {
   render() {
     return (
       <div className={css(styles.centre)}>
-        <div className={css(styles.mainBox, styles.centre)}>
+        <div className={css(styles.forgotContainer, styles.centre)}>
           <div>Forgot Password</div>
           <input placeholder="email" className={css(styles.textarea)} onChange={(e) => this.setState({email: e.target.value})} value={this.state.email}></input>
           <button onClick={this.forgot}>Get new Password</button>
@@ -51,6 +51,16 @@ const styles = StyleSheet.create({
   },
   textarea: {
     resize: "none",
+  },
+  forgotContainer: {
+    position: "absolute",
+    margin: "auto",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: 400,
+    height: 300,
   },
   
   
