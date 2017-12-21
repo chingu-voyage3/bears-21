@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const http = require('http');
 const path = require('path');
+const cors = require('cors');
 const morgan = require('morgan');
 const expressValidator = require('express-validator');
 const passport = require('passport');
@@ -13,6 +14,7 @@ const { errorHandler } = require('./utils');
 
 const app = express();
 
+app.use(cors());
 app.set('view engine', 'pug');
 // Middlewares
 app.use(morgan('tiny'));
