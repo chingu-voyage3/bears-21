@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Routes from '../routes/Routes';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import { connect } from 'react-redux';
 import login from '../redux/actions';
 import { withRouter } from 'react-router-dom';
@@ -17,6 +18,7 @@ class app extends Component {
 				<NavBar />
 			
       	<Routes />
+        <Footer />
 			</div>
 		);
   	}

@@ -3,17 +3,27 @@ import { css, StyleSheet } from 'aphrodite';
 
 
 export default class Forgot extends Component {
+ 
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+    };
+  }
+
+
+  forgot = () => {
+    
+  } 
   
   
   render() {
-
     return (
-    
       <div className={css(styles.centre)}>
         <div className={css(styles.mainBox, styles.centre)}>
           <div>Forgot Password</div>
-          <textarea className={css(styles.textarea)}></textarea>
-
+          <input placeholder="email" className={css(styles.textarea)} onChange={(e) => this.setState({email: e.target.value})} value={this.state.email}></input>
+          <button onClick={this.forgot}>Get new Password</button>
         </div>
 
       </div>

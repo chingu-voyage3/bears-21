@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { css, StyleSheet } from 'aphrodite';
 
 export default class Logout extends Component {
   
@@ -7,10 +8,17 @@ export default class Logout extends Component {
 
     localStorage.removeItem("user");
 
+    return (
+      <div className={css(styles.centered)}>
+        
+        <div className={css(styles.info)}>You have successfully been logged out!</div>
 
 
-    return <div>Logged you nugget out!</div>;
+      </div>  
+    
+    );
 
+    
   }
 
 
@@ -20,3 +28,15 @@ export default class Logout extends Component {
 
 }
 
+const styles = StyleSheet.create({
+  centered: {
+    display: "flex",
+    flexDirections: "column",
+    alignItems: "center",
+    justifyContent: "center",  
+  },
+  info: {
+    textAlignment: "centered",
+  }, 
+  
+});

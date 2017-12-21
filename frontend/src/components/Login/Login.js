@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { loginAction } from '../../redux/actions';
+import { Link } from 'react-router-dom';
 
 class login extends Component {
 	
@@ -13,6 +14,21 @@ class login extends Component {
 		};
 	}
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.keyPressed);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyPressed);
+  }
+
+  keyPressed = e => {
+    if (e.keyCode === 13) {
+      setTimeout(this.login, 500);
+    
+    }
+
+  }
 
 
 	login = () => {
@@ -38,6 +54,7 @@ class login extends Component {
 		
 
 		return (
+
 			<div className={css(styles.container)}>
 				
 
@@ -47,6 +64,7 @@ class login extends Component {
 					<input placeholder="username" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></input>
 					<input placeholder="password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
+          <Link to="/forgot">Forgot your password?</Link> 
 					<button onClick={this.login}>Login</button>
 				</div>
 

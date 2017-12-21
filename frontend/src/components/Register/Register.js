@@ -36,11 +36,13 @@ const styles = StyleSheet.create({
   mainContainer: {
     border: "1px black solid",
     width: 450,
-    height: 200,
+    height: 400,
     marginTop: 150,
   },
   textarea: {
     resize: "none",
+    marginTop: 5,
+    marginBottom: 5,
   },
   
 
