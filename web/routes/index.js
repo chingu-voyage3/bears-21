@@ -11,9 +11,11 @@ const router = new Router();
 router.get('/api/v1/houses', houses.list);
 router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 
-// 1. Validate the registration data
-// 2. Register the user
-// 3. Log them in
+/**
+ * 1. Validate the registration data
+ * 2. Register the user
+ * 3. Log them in
+ */
 router.post('/api/v1/register',
   users.validateRegister,
   catchAsyncErrors(users.register),

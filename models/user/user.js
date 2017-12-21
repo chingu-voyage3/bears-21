@@ -5,9 +5,11 @@ const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-// Passport-Local Mongoose will add a username,
-// hash and salt field to store the username,
-// the hashed password and the salt value.
+/**
+ * Passport-Local Mongoose will add a username,
+ * hash and salt field to store the username,
+ * the hashed password and the salt value.
+ */
 const userSchema = new Schema({
   active: Boolean,
   email: {
