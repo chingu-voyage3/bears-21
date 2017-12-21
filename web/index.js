@@ -23,14 +23,14 @@ const initServer = promisify(app.listen, app);
 async function init () {
   try {
     await initDb();
-    logger.info('Connected to database');
+    logger.info(`Connected to database`);
     await initServer(config.port);
   } catch (err) {
     logger.error(`Couldn't init the app: ${err}`);
     // exit code for fatal exception
     process.exit(1);
   }
-  logger.appStarted(config.host, app.address().port);
+  logger.appStarted(app.address().address, app.address().port);
 }
 
 const closeDb = db.close;
@@ -50,7 +50,7 @@ async function stop () {
     logger.info(`Closed database connection`);
   } catch (err) {
     logger.error(`Failed to close database: ${err.message}`);
-    exitCode = 1
+    exitCode = 1;
   }
   return exitCode;
 }

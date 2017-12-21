@@ -1,5 +1,6 @@
 'use strict'
 
+const promisify = require('es6-promisify');
 const User = require('../../../models/user');
 
 exports.validateRegister = (req, res, next) => {
@@ -19,7 +20,7 @@ exports.validateRegister = (req, res, next) => {
   const errors = req.validationErrors();
   if (errors) {
     // stop the fn from running
-    return res.status(500).json({
+    return res.status(400).json({
       'errors': errors.map(err => err.msg)
     });
   }

@@ -14,12 +14,12 @@ router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 // 1. Validate the registration data
 // 2. Register the user
 // 3. Log them in
-router.post('/register',
+router.post('/api/v1/register',
   users.validateRegister,
   catchAsyncErrors(users.register),
   auth.login
 );
-router.post('/login', auth.login);
-router.get('/logout', auth.logout);
+router.post('/api/v1/login', auth.login);
+router.get('/api/v1/logout', auth.logout);
 
 module.exports = router;
