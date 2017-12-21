@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
 
-export default class NavBar extends Component {
-
-	constructor() {
-		super();
-		this.state = {
-			auth: false,
-		}
-
-	}
+class navbar extends Component {
 
 
 	getBar() {
-		if (this.state.auth) { // authenticated
+		if (this.props.user) { // authenticated
 			return (
 				<div>
 					<ul className={css(styles.container)}>
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/signout">Sign out</Link></li>
+						<li className={css(styles.navelement)} onClick={() => this.props.logout()}><Link className={css(styles.links)} to="/logout">Logout</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
 					</ul>
@@ -30,9 +23,9 @@ export default class NavBar extends Component {
 				<div>
 					<ul className={css(styles.container)}>
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Sign up</Link></li>
+						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
+						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
 					</ul>
 				</div>
 			);
@@ -45,10 +38,7 @@ export default class NavBar extends Component {
 
 
 	render() {
-
 		return this.getBar();
-
-
 	}
 
 
@@ -80,3 +70,20 @@ const styles = StyleSheet.create({
 		cursor: 'pointer',
 	},
 });
+
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  const LOGOUT = "LOGOUT";
+  return {
+    logout: () => {dispatch({type: LOGOUT})},
+  }
+}
+
+const NavBar = connect(mapStateToProps, mapDispatchToProps)(navbar);
+export default NavBar;
