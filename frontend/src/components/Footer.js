@@ -4,11 +4,10 @@ import { css, StyleSheet } from 'aphrodite';
 export default class Footer extends Component {
 
   render() {
-    return <div className={css(styles.footer)}>bears-21 2017<a href="https://www.github.com/chingu-voyage3/bears-21">Github</a>.</div>;
+    return <div className={css(styles.footer)}>Made by bears-21</div>;
   }
 
 }
-
 
 const styles = StyleSheet.create({
   footer: {

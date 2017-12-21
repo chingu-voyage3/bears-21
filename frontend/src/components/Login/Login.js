@@ -11,6 +11,7 @@ class login extends Component {
 		this.state = {
 			username: "",
 			password: "",
+      currentStatus: "",
 		};
 	}
 
@@ -55,19 +56,20 @@ class login extends Component {
 
 		return (
 
-			<div className={css(styles.container)}>
+			<div className={css(styles.centered)}>
 				
 
-				<div className={css(styles.box, styles.container)}>
-					<div className={css(styles.title)}>Login</div>
+				<div className={css(styles.box, styles.centered)}>
 
 					<input placeholder="username" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></input>
 					<input placeholder="password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
+					<button className={css(styles.login)} onClick={this.login}>LOGIN</button>
           <Link to="/forgot">Forgot your password?</Link> 
-					<button onClick={this.login}>Login</button>
-				</div>
+          <div>Not registered?{" "}<Link to="/register">Create an account</Link></div>
 
+          <div>{this.state.currentStatus}</div>
+				</div>
 
 
 			</div>		
@@ -81,7 +83,7 @@ class login extends Component {
 
 }
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -96,7 +98,7 @@ export default Login;
 
 
 const styles = StyleSheet.create({
-	container: {
+	centered: {
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
@@ -113,9 +115,16 @@ const styles = StyleSheet.create({
 	},
 	textarea: {
 		resize: "none",
-		marginTop: 20,
+		marginTop: 10,
 		width: "60%",
-		height: 25,
+    height: 25,
+    paddingLeft: 7,
+    border: "none",
+    backgroundColor: "#F2F2F2",
 	},
-
+  login: {
+    marginTop: 10,
+    width: "60%",
+    height: 25,
+  },  
 });
