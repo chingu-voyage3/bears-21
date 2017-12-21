@@ -4,7 +4,7 @@ import { css, StyleSheet } from 'aphrodite';
 export default class Footer extends Component {
 
   render() {
-    return <div className={css(styles.footer)}>Made by bears-21</div>;
+    return <footer className={css(styles.footer)}>Made by bears-21</footer>;
   }
 
 }
