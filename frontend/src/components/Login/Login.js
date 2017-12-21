@@ -119,9 +119,6 @@ const styles = StyleSheet.create({
 		width: 450,
 		border: "1px solid black",
 	},
-	title: {
-		fontSize: 20,
-	},
 	textarea: {
 		resize: "none",
 		marginTop: 10,
@@ -144,6 +141,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     marginBottom: 40,
+    color: "white",
   },
   loginContainer: {
     position: "absolute",
