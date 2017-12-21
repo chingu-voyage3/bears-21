@@ -61,15 +61,23 @@ class login extends Component {
 
 				<div className={css(styles.box, styles.centered)}>
 
-					<input placeholder="username" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></input>
-					<input placeholder="password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
+          <div>Login</div>
 
-					<button className={css(styles.login)} onClick={this.login}>LOGIN</button>
-          <Link to="/forgot">Forgot your password?</Link> 
-          <div>Not registered?{" "}<Link to="/register">Create an account</Link></div>
+					<input placeholder="your@email.com" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea)}></input>
+					<input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
           <div>{this.state.currentStatus}</div>
-				</div>
+        
+        	<button className={css(styles.login)} onClick={this.login}>LOGIN</button>
+
+          <div>
+            <Link to="/register">New account</Link>
+            <Link to="/forgot">New password</Link> 
+          </div>
+				
+        
+        
+        </div>
 
 
 			</div>		
