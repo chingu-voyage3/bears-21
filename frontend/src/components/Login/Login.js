@@ -3,7 +3,6 @@ import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { loginAction } from '../../redux/actions';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 class login extends Component {
 
@@ -27,7 +26,6 @@ class login extends Component {
   keyPressed = e => {
     if (e.keyCode === 13) {
       setTimeout(this.login, 500);
-
     }
 
   }
@@ -36,19 +34,6 @@ class login extends Component {
 	login = () => {
 		console.log(this.state.username);
 		console.log(this.state.password);
-
-    const { username, password } = this.state;
-    axios.post('http://localhost:3001/api/v1/login', {
-      email: username,
-      password
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
     // send XHR request/axios to backend or whatever... then...
     // but for the meanwhile
     if (this.state.username === "admin" && this.state.password === "admin") {
@@ -65,11 +50,9 @@ class login extends Component {
 
 	render() {
 
-
 		return (
 
 			<div className={css(styles.centered)}>
-
 
 				<div className={css(styles.box, styles.centered)}>
 
@@ -79,7 +62,6 @@ class login extends Component {
 					<input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
           <div>{this.state.currentStatus}</div>
-
         	<button className={css(styles.login)} onClick={this.login}>LOGIN</button>
 
           <div>
@@ -109,7 +91,6 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogin: () => dispatch(loginAction())
   }
-
 
 }
 
