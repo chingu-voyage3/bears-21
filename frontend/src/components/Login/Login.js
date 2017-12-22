@@ -35,8 +35,6 @@ class login extends Component {
 	login = () => {
 		console.log(this.state.username);
 		console.log(this.state.password);
-    // send XHR request/axios to backend or whatever... then...
-    // but for the meanwhile
 		
 		axios.post("http://localhost:3001/api/v1/login", {
 			email: this.state.username,
@@ -48,7 +46,7 @@ class login extends Component {
 				this.props.onLogin();
 			}
 		})
-		.catch(err => this.setState({currentStatus: "ERRRROR!"}));
+		.catch(err => this.setState({currentStatus: "ERROR!!"}));
 	
 
 		this.setState({username: "", password: ""});
