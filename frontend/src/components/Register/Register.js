@@ -26,7 +26,8 @@ export default class Register extends Component {
           <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>       
           <input placeholder="your password" className={css(styles.input)} onChange={e => this.setState({fpassword: e.target.value})}></input>       
           <input placeholder="confirm password" className={css(styles.input)} onChange={e => this.setState({spassword: e.target.value})}></input>       
-          <button>Sign up</button>
+          <div className={css(styles.status)}></div>
+          <button className={css(styles.button)}>Sign up</button>
         </div>    
       </div>
      );
@@ -55,6 +56,10 @@ const styles = StyleSheet.create({
     resize: "none",
     marginTop: 5,
     marginBottom: 5,
+    width: 270,
+    height: 25,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
   title: {
     color: "white",
@@ -71,6 +76,15 @@ const styles = StyleSheet.create({
     width: 400,
     height: 300,
   }, 
-  
-  
+  status: {
+    width: 286,
+    height: 25,
+  },
+  button: {
+    width: 286,
+    height: 25,
+    color: "white",
+    backgroundColor: "#49CF87",
+    border: "none",
+  },
 });
