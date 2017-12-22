@@ -37,12 +37,13 @@
     "super-request": "^1.2.0"
   },
   "scripts": {
-    "prepush": "npm run lint && npm run test",
+    "prepushe": "npm run lint && npm run test",
     "start:prod": "concurrently \"npm run server:prod\" \"npm run client\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cross-env NODE_ENV=development node index.js",
     "server:prod": "cross-env NODE_ENV=production node index.js",
-    "client": "node start-client.js",
+    "cliente": "node start-client.js",
+    "client": "cd frontend && npm start",
     "lint": "esw server frontend",
     "lint:watch": "npm run lint -- --watch",
     "test:unit": "mocha --reporter progress ./test/setup.js ./**/*.unit.spec.js",
