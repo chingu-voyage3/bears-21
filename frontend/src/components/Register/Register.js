@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
+import axios from 'axios';
 
 export default class Register extends Component {
 
@@ -10,10 +11,31 @@ export default class Register extends Component {
       name: "",
       fpassword: "",
       spassword: "",
+			currentStatus: "",
     };
-
-
   }
+
+	register = () => {
+		axios.post("http://localhost:3001/api/v1/register", {
+			email: this.state.email,
+			name: this.state.name,
+			password: this.state.fpassword,
+			"password-confirm": this.state.spassword,
+		})
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err => {
+			console.log(err);
+		
+		});
+
+
+
+		
+	
+		this.setState({email: "", name: "", fpassword: "", spassword: ""});
+	}
 
 
   render() {
@@ -24,10 +46,10 @@ export default class Register extends Component {
           <div className={css(styles.title)}>Sign up</div>
           <input placeholder="your name" className={css(styles.input)} onChange={e => this.setState({name: e.target.value})}></input>       
           <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>       
-          <input placeholder="your password" className={css(styles.input)} onChange={e => this.setState({fpassword: e.target.value})}></input>       
-          <input placeholder="confirm password" className={css(styles.input)} onChange={e => this.setState({spassword: e.target.value})}></input>       
+          <input placeholder="your password" type="password" className={css(styles.input)} onChange={e => this.setState({fpassword: e.target.value})}></input>       
+          <input placeholder="confirm password" type="password" className={css(styles.input)} onChange={e => this.setState({spassword: e.target.value})}></input>       
           <div className={css(styles.status)}></div>
-          <button className={css(styles.button)}>Sign up</button>
+          <button className={css(styles.button)} onClick={this.register}>Sign up</button>
         </div>    
       </div>
      );

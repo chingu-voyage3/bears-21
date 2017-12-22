@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { loginAction } from '../../redux/actions';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class login extends Component {
 
@@ -36,16 +37,19 @@ class login extends Component {
 		console.log(this.state.password);
     // send XHR request/axios to backend or whatever... then...
     // but for the meanwhile
-    if (this.state.username === "admin" && this.state.password === "admin") {
-      localStorage.setItem("user", true);
-      this.props.onLogin();     
-    } else {
-
-      //pass
-
-    }
-
-
+		
+		axios.post("http://localhost:3001/api/v1/login", {
+			email: this.state.username,
+			password: this.state.password,	
+		})
+		.then(res => {
+			if (res.status === 200) {
+				localStorage.setItem("user", true);
+				this.props.onLogin();
+			}
+		})
+		.catch(err => this.setState({currentStatus: "ERRRROR!"}));
+	
 
 		this.setState({username: "", password: ""});
 	}
@@ -66,8 +70,7 @@ class login extends Component {
 					<input placeholder="your@email.com" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
 					<input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
 
-          <div className={css(styles.boxes)}>{this.state.currentStatus}</div>
-        
+			    <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>
         	<button className={css(styles.boxes, styles.login)} onClick={this.login}>LET ME IN</button>
 
           <div className={css(styles.accountHolder)}>
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
     width: 286,
     backgroundColor: "#49CF87",
     color: "white",
-  }, 
+	 }, 
   boxes: {
     width: 270,
     height: 25,
@@ -168,5 +171,9 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: "#0079BF",
   },
+	status: {
+		textAlign: "center",
+		lineHeight: "25px",
+	},
 
 });
