@@ -5,7 +5,7 @@ import { loginAction } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 
 class login extends Component {
-	
+
 	constructor() {
 		super();
 		this.state = {
@@ -26,7 +26,6 @@ class login extends Component {
   keyPressed = e => {
     if (e.keyCode === 13) {
       setTimeout(this.login, 500);
-    
     }
 
   }
@@ -35,8 +34,6 @@ class login extends Component {
 	login = () => {
 		console.log(this.state.username);
 		console.log(this.state.password);
-    
-    
     // send XHR request/axios to backend or whatever... then...
     // but for the meanwhile
     if (this.state.username === "admin" && this.state.password === "admin") {
@@ -45,8 +42,9 @@ class login extends Component {
     } else {
 
       //pass
+
     }
-    
+
 
 
 		this.setState({username: "", password: ""});
@@ -55,9 +53,9 @@ class login extends Component {
 
 
 	render() {
-		
 
 		return (
+
 
 			<div className={css(styles.centered, styles.background)}>
 				
@@ -77,13 +75,12 @@ class login extends Component {
             <Link className={css(styles.account)} to="/forgot">Recover Password</Link> 
           </div>
 				
-        
         </div>
 
 
-			</div>		
-				
-				
+			</div>
+
+
 		);
 
 
@@ -98,7 +95,6 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogin: () => dispatch(loginAction())
   }
-  
 
 }
 
@@ -172,6 +168,5 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: "#0079BF",
   },
-
 
 });
