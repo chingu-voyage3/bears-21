@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
 		padding: 0,
 		overflow: 'hidden',
 		backgroundColor: '#333',
-
 	},
 	navelement: {
 		float: 'right',
