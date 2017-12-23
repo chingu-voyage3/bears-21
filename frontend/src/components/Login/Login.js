@@ -10,7 +10,7 @@ class login extends Component {
 	constructor() {
 		super();
 		this.state = {
-			username: "",
+			email: "",
 			password: "",
       currentStatus: "",
 		};
@@ -31,13 +31,10 @@ class login extends Component {
 
   }
 
-
 	login = () => {
-		console.log(this.state.username);
-		console.log(this.state.password);
 		
-		axios.post("http://localhost:3001/api/v1/login", {
-			email: this.state.username,
+		axios.post("/api/v1/login", {
+			email: this.state.email,
 			password: this.state.password,	
 		})
 		.then(res => {
@@ -49,7 +46,7 @@ class login extends Component {
 		.catch(err => this.setState({currentStatus: "ERROR!!"}));
 	
 
-		this.setState({username: "", password: ""});
+		this.setState({email: "", password: ""});
 	}
 
 
@@ -65,7 +62,7 @@ class login extends Component {
 
           <div className={css(styles.title)}>Login</div>
 
-					<input placeholder="your@email.com" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
+					<input placeholder="your@email.com" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
 					<input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
 
 			    <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>

@@ -38,12 +38,12 @@
     "super-request": "^1.2.0"
   },
   "scripts": {
-    "prepushe": "npm run lint && npm run test",
+    "prepushnojsx": "npm run lint && npm run test",
     "start:prod": "concurrently \"npm run server:prod\" \"npm run client\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cross-env NODE_ENV=development supervisor index.js",
     "server:prod": "cross-env NODE_ENV=production node index.js",
-    "cliente": "node start-client.js",
+    "clientv2": "node start-client.js",
     "client": "cd frontend && npm start",
     "lint": "esw server frontend",
     "lint:watch": "npm run lint -- --watch",

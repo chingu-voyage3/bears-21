@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+	"proxy": "http://localhost:3001/",
   "dependencies": {
     "aphrodite": "^1.2.5",
     "axios": "^0.17.1",
