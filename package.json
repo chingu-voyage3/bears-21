@@ -39,7 +39,7 @@
   },
   "scripts": {
     "prepushnojsx": "npm run lint && npm run test",
-    "start:prod": "concurrently \"npm run server:prod\" \"npm run client\"",
+    "starte:prod": "concurrently \"npm run server:prod\" \"npm run client\"",
 		"start": "node index.js",
     "starte": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cross-env NODE_ENV=development supervisor index.js",
