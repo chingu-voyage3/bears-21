@@ -52,7 +52,7 @@
     "test:unit:dev": "mocha --watch --reporter progress ./test/setup.js ./**/*.unit.spec.js",
     "test:e2e": "mocha --reporter progress ./test/setup.js ./**/*.e2e.spec.js",
     "test": "npm run test:unit && npm run test:e2e",
-		"heroku-prebuild": "cd frontend && npm run build"
+		"heroku-prebuild": "cd frontend && npm install && npm run build"
   },
   "repository": {
     "type": "git",
