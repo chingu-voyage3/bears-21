@@ -1,3 +1,4 @@
 'use strict';
 
-require('./server').init();
+require('dotenv').config();
+require('./web').init();

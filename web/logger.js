@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const chalk = require('chalk');
 
@@ -8,10 +8,10 @@ const divider = chalk.gray('\n-----------------------------------');
 
 module.exports = {
   info: (msg) => {
-    console.log(chalk.green(msg));
+    console.log('\n' + chalk.green(msg));
   },
   error: (err) => {
-    console.log(chalk.red(err));
+    console.log('\n' + chalk.red(err));
   },
   appStarted: (host, port) => {
     console.log(`🌎 Server started ! ${chalk.green('✓')}`);

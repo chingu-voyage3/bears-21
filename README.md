@@ -54,3 +54,23 @@ future payments such like deposits and rent need to be made by.
 
 
 [logo]: stack.png
+
+### App server
+
+#### start
+
+```
+$ npm start
+```
+
+#### lint
+
+```
+$ npm run lint
+```
+
+#### lint watch mode
+
+```
+$ npm run lint:watch
+```
