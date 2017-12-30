@@ -1,16 +1,59 @@
-export const getHouseIssues = () => {
-  return new Promise( (resolve, reject) => {
-    resolve(
-      [
-        {
-          _id: 1,
-          house_image: "//via.placeholder.com/200x200",
-          issues: [
-            {_id: 1, status: "open", title: "test issue", description: "This is a test issue"},
-            {_id: 2, status: "resolved", title: "kitchen tap leaking", description: "can't turn the kitchen tap off!"}
-          ]
-        }
-      ]
-    );
-  });
-};
+export const HOUSE_ISSUES_HAS_ERRORED = "HOUSE_ISSUES_HAS_ERRORED";
+export const HOUSE_ISSUES_IS_LOADING = "HOUSE_ISSUES_IS_LOADING";
+export const HOUSE_ISSUES_FETCH_DATA_SUCCESS = "HOUSE_ISSUES_FETCH_DATA_SUCCESS";
+
+export function houseIssuesHasErrored( bool) {
+  return {
+    type: HOUSE_ISSUES_HAS_ERRORED,
+    hasErrored: bool
+  };
+}
+
+export function houseIssuesIsLoading( bool) {
+  return {
+    type: HOUSE_ISSUES_IS_LOADING,
+    isLoading: bool
+  };
+}
+
+export function houseIssuesFetchDataSuccess( houseIssues) {
+  return {
+    type: HOUSE_ISSUES_FETCH_DATA_SUCCESS,
+    houseIssues
+  };
+}
+
+export function houseIssuesFetchData( url) {
+  return (dispatch) => {
+    dispatch( houseIssuesIsLoading( true));
+    fetch( url)
+    .then( response => {
+      if( !response.ok){
+        throw Error( response.statusText);
+      }
+      dispatch( houseIssuesIsLoading( false));
+      return response;
+    })
+    .then( response => response.json())
+    .then( house_issues => dispatch( houseIssuesFetchDataSuccess( house_issues)))
+    .catch( () => dispatch( houseIssuesHasErrored( true)));
+  };
+}
+
+// FIXME: remove old code
+// export const getHouseIssues = () => {
+//   return new Promise( (resolve, reject) => {
+//     resolve(
+//       [
+//         {
+//           _id: 1,
+//           house_image: "//via.placeholder.com/200x200",
+//           issues: [
+//             {_id: 1, status: "open", title: "test issue", description: "This is a test issue"},
+//             {_id: 2, status: "resolved", title: "kitchen tap leaking", description: "can't turn the kitchen tap off!"}
+//           ]
+//         }
+//       ]
+//     );
+//   });
+// };
