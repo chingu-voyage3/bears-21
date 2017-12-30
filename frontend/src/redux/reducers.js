@@ -1,7 +1,12 @@
+import {combineReducers} from 'redux';
 import {
-	LOGIN,
-	LOGOUT,
-} from './actions.js';
+	houseIssues,
+	houseIssuesIsLoading,
+	houseIssuesHasErrored
+} from '../containers/Dashboard';
+
+// QUESTION: shouldn't this reducer be in login with action?
+import { LOGIN, LOGOUT, } from './actions.js';
 
 
 const initialState = {
@@ -9,7 +14,7 @@ const initialState = {
 };
 
 
-export default function reducer(state = initialState, action) {
+function reducer(state = initialState, action) {
 	switch (action.type) {
 		case LOGIN:
 			return {user: true};
@@ -21,3 +26,10 @@ export default function reducer(state = initialState, action) {
 
 
 }
+
+export default combineReducers({
+	reducer,
+	houseIssues,
+	houseIssuesIsLoading,
+	houseIssuesHasErrored
+});
