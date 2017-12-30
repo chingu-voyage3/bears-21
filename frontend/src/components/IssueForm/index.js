@@ -1,6 +1,6 @@
 import React from 'react';
 import {css} from 'aphrodite';
-import styles from './style.css';
+import styles from './styles.js';
 
 export default class IssueForm extends React.Component {
   render() {
