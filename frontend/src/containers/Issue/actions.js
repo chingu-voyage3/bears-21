@@ -1,4 +1,3 @@
-import {checkStatus, parseJSON} from '../../util';
 
 export const getIssue = () => {
   // eslint-disable-next-line no-undef, no-unused-vars
@@ -21,6 +20,14 @@ export const uploadImage = ( payload) => {
     method: "post",
     body: payload
   })
-  .then( checkStatus)
-  .then( parseJSON);
+  .then( response => {
+    if( !response.ok){
+      throw Error( response.stateText);
+    }
+    return response;
+  })
+  .catch( err => {
+    // eslint-disable-next-line no-console
+    console.error( "update house image failed:", err);
+  });
 };

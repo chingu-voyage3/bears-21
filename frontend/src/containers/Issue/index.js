@@ -11,17 +11,17 @@ export default class Issue extends Component {
   };
   componentWillMount = () => {
     getIssue()
-    .then( (response) => {
+    .then( response => {
       this.setState( { issue: response});
     })
-    .catch( (err) => {
+    .catch( err => {
       console.error( "getIssue failed:", err); // eslint-disable-line no-console
     });
   };
-  issueFormSubmit = (e) => {
+  issueFormSubmit = e => {
     console.log( "issue form submit issue:", this.state.issue);
   };
-  onFieldChange = (e) => {
+  onFieldChange = e => {
     console.log( "field changed:", e.target.name, e.target.value);
     const {issue} = this.state;
     issue[e.target.name] = e.target.value;
@@ -31,7 +31,7 @@ export default class Issue extends Component {
     this.setState( { uploader_visible: !this.state.uploader_visible});
   };
 
-  uploadImage = ( files) => {
+  uploadImage = files => {
     console.log( "update image:", files[0]);
     // const data = new FormData();
     // data.append( 'img', files[0]);

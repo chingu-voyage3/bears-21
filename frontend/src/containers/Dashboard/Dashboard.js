@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { houseIssuesFetchData} from './actions';
-
 import {HouseList} from '../../components/House';
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   componentDidMount = () => {
     this.props.fetchData( '/api/v1/house-issues');
   };
+  
   render = () => {
     const {hasErrored, isLoading, houseIssues} = this.props;
     if( hasErrored) {
