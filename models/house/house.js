@@ -28,7 +28,7 @@ const houseSchema = new Schema({
       required: 'Street is required'
     }
   },
-  issues: [{type: mongoose.Schema.Types.ObjectId, ref: 'Issue'}]
+  issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}]
 });
 
 houseSchema.pre('save', function(next) {
@@ -41,7 +41,7 @@ houseSchema.pre('save', function(next) {
 
 houseSchema.statics.findWithIssues = function findWithIssues() {
   // TODO: find by owner
-  this.find( {})
+  return this.find( {})
   .populate( "issues")
   .exec( function( err, docs) {
     if( err || !docs || docs.length === 0){
@@ -49,7 +49,6 @@ houseSchema.statics.findWithIssues = function findWithIssues() {
       console.error( "house issues findWithIssues failed:", err);
       return [];
     } else {
-      console.log( "house list:", docs);
       return docs;
     }
   });
