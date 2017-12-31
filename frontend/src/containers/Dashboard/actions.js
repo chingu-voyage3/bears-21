@@ -25,6 +25,7 @@ export function houseIssuesFetchDataSuccess( houseIssues) {
 
 export function houseIssuesFetchData( url) {
   return (dispatch) => {
+    dispatch( houseIssuesHasErrored( false));
     dispatch( houseIssuesIsLoading( true));
     fetch( url)
     .then( response => {
@@ -35,7 +36,7 @@ export function houseIssuesFetchData( url) {
       return response;
     })
     .then( response => response.json())
-    .then( house_issues => dispatch( houseIssuesFetchDataSuccess( house_issues)))
+    .then( house_issues => dispatch( houseIssuesFetchDataSuccess( house_issues.houses)))
     .catch( () => dispatch( houseIssuesHasErrored( true)));
   };
 }
