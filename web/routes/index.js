@@ -11,6 +11,9 @@ const router = new Router();
 router.get('/api/v1/houses', houses.list);
 router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 
+// TODO: should be logged in
+router.get( '/api/v1/house-issues', houses.houseIssueList)
+
 /**
  * 1. Validate the registration data
  * 2. Register the user
