@@ -6,7 +6,7 @@ import {HouseList} from '../../components/House';
 
 class Dashboard extends React.Component {
   componentDidMount = () => {
-    this.props.fetchData( '/api/v1/houses');
+    this.props.fetchData( '/api/v1/house-issues');
   };
   render = () => {
     const {hasErrored, isLoading, houseIssues} = this.props;
