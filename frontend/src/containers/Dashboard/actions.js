@@ -27,7 +27,15 @@ export function houseIssuesFetchData( url) {
   return (dispatch) => {
     dispatch( houseIssuesHasErrored( false));
     dispatch( houseIssuesIsLoading( true));
-    fetch( url)
+    fetch( url, {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        // "Cache": "no-cache"
+      },
+      credentials: "same-origin"
+    })
     .then( response => {
       if( !response.ok){
         throw Error( response.statusText);

@@ -39,8 +39,9 @@ houseSchema.pre('save', function(next) {
   next();
 });
 
-houseSchema.statics.findWithIssues = function findWithIssues() {
+houseSchema.statics.findWithIssues = function findWithIssues(req) {
   // TODO: find by owner
+  console.log( "House find issues, owner:", req.user);
   return this.find( {})
   .populate( "issues")
   .exec( function( err, docs) {

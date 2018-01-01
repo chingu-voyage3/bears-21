@@ -27,6 +27,12 @@ app.use(expressValidator());
 // Passport JS is what we use to handle our logins
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use( (req, res, next) => {
+  console.log( "request user:", req.user);
+  return next();
+});
+
 app.use(routes);
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'build')));
