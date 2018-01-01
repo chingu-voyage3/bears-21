@@ -8,18 +8,12 @@ import {
 // QUESTION: shouldn't this reducer be in login with action?
 import { LOGIN, LOGOUT, } from './actions.js';
 
-
-const initialState = {
-	user: false,
-};
-
-
-function reducer(state = initialState, action) {
+function reducer(state = false, action) {
 	switch (action.type) {
 		case LOGIN:
-			return {user: true};
+			return true;
 		case LOGOUT:
-			return {user: false};
+			return false;
 		default:
 			return state;
 	}
@@ -27,8 +21,9 @@ function reducer(state = initialState, action) {
 
 }
 
+// user key has to be user
 export default combineReducers({
-	reducer,
+	user: reducer,
 	houseIssues,
 	houseIssuesIsLoading,
 	houseIssuesHasErrored
