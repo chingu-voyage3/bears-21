@@ -2,41 +2,41 @@ export const HOUSE_ISSUES_HAS_ERRORED = "HOUSE_ISSUES_HAS_ERRORED";
 export const HOUSE_ISSUES_IS_LOADING = "HOUSE_ISSUES_IS_LOADING";
 export const HOUSE_ISSUES_FETCH_DATA_SUCCESS = "HOUSE_ISSUES_FETCH_DATA_SUCCESS";
 
-export function houseIssuesHasErrored( bool) {
+export function houseIssuesHasErrored(bool) {
   return {
     type: HOUSE_ISSUES_HAS_ERRORED,
     hasErrored: bool
   };
 }
 
-export function houseIssuesIsLoading( bool) {
+export function houseIssuesIsLoading(bool) {
   return {
     type: HOUSE_ISSUES_IS_LOADING,
     isLoading: bool
   };
 }
 
-export function houseIssuesFetchDataSuccess( houseIssues) {
+export function houseIssuesFetchDataSuccess(houseIssues) {
   return {
     type: HOUSE_ISSUES_FETCH_DATA_SUCCESS,
     houseIssues
   };
 }
 
-export function houseIssuesFetchData( url) {
+export function houseIssuesFetchData(url) {
   return (dispatch) => {
-    dispatch( houseIssuesHasErrored( false));
-    dispatch( houseIssuesIsLoading( true));
+    dispatch(houseIssuesHasErrored(false));
+    dispatch(houseIssuesIsLoading(true));
     fetch( url)
     .then( response => {
-      if( !response.ok){
-        throw Error( response.statusText);
+      if(!response.ok){
+        throw Error(response.statusText);
       }
-      dispatch( houseIssuesIsLoading( false));
+      dispatch(houseIssuesIsLoading(false));
       return response;
     })
     .then( response => response.json())
-    .then( house_issues => dispatch( houseIssuesFetchDataSuccess( house_issues.houses)))
-    .catch( () => dispatch( houseIssuesHasErrored( true)));
+    .then( house_issues => dispatch(houseIssuesFetchDataSuccess(house_issues.houses)))
+    .catch( () => dispatch(houseIssuesHasErrored(true)));
   };
 }

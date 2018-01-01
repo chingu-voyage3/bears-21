@@ -7,7 +7,7 @@ class Dashboard extends Component {
   componentDidMount = () => {
     this.props.fetchData( '/api/v1/house-issues');
   };
-  
+
   render = () => {
     const {hasErrored, isLoading, houseIssues} = this.props;
     if( hasErrored) {
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
