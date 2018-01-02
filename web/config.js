@@ -1,11 +1,8 @@
 'use strict';
 
-const { PORT: port = '3000' } = process.env;
-
-/*module.exports = {
-  port: parseInt(port, 10)
-};*/
+const { PORT: port = '3001' } = process.env;
 
 module.exports = {
-	port: process.env.PORT || 3001
+  port: parseInt(port, 10)
 };
+
