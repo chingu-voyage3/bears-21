@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import NotFound from '../components/NotFound';
-import Dummy from '../components/Dummy';
-import Dashboard from '../containers/Dashboard';
-import { Login } from '../components/Login';
-import { Logout } from '../components/Logout';
-import { Register } from '../components/Register';
-import { Forgot } from '../components/Forgot';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';  
+import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import NotFound from "../components/NotFound";
+import Dummy from "../components/Dummy";
+import Dashboard from "../containers/Dashboard";
+import { Login } from "../components/Login";
+import { Logout } from "../components/Logout";
+import { Register } from "../components/Register";
+import { Forgot } from "../components/Forgot";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";  
 
 
 //const auth = false;
