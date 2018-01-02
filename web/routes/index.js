@@ -24,6 +24,7 @@ router.post('/api/v1/register',
   catchAsyncErrors(users.register),
   auth.login
 );
+
 router.post('/api/v1/login', auth.login);
 router.get('/api/v1/logout', auth.logout);
 
