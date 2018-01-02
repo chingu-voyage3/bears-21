@@ -3,7 +3,6 @@
 const logger = require('./logger');
 
 function catchAsyncErrors (middleware) {
-  console.error( "caught async error");
   return (req, res, next) => Promise.resolve(middleware(req, res, next)).catch(next);
 }
 

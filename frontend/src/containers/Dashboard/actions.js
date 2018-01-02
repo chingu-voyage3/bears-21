@@ -32,7 +32,6 @@ export function houseIssuesFetchData( url) {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-        // "Cache": "no-cache"
       },
       credentials: "same-origin"
     })

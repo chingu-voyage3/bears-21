@@ -36,6 +36,11 @@ class login extends Component {
 		axios.post("/api/v1/login", {
 			email: this.state.email,
 			password: this.state.password,	
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: "same-origin"
 		})
 		.then(res => {
 			if (res.status === 200) {

@@ -3,7 +3,8 @@
 const passport = require('passport');
 
 function login (req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', { failureRedirect: '/login' }, function(err, user, info) {
+		console.log(req.user);
     if (err) return next(err);
     if (!user) {
       return res.status(401).json({ error: info.message });
