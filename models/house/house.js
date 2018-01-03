@@ -50,6 +50,7 @@ houseSchema.statics.findWithIssues = function findWithIssues(req) {
       console.error( "house issues findWithIssues failed:", err);
       return [];
     } else {
+      console.log( "houses find with issues count:", docs.length);
       return docs;
     }
   });

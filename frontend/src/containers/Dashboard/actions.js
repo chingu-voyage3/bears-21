@@ -39,11 +39,15 @@ export function houseIssuesFetchData( url) {
       if( !response.ok){
         throw Error( response.statusText);
       }
+      console.log( "house issues !json:", response);
       dispatch( houseIssuesIsLoading( false));
       return response;
     })
     .then( response => response.json())
-    .then( house_issues => dispatch( houseIssuesFetchDataSuccess( house_issues.houses)))
+    .then( house_issues => {
+      console.log( "house issues response:", house_issues);
+      dispatch( houseIssuesFetchDataSuccess( house_issues.houses))
+    })
     .catch( () => dispatch( houseIssuesHasErrored( true)));
   };
 }

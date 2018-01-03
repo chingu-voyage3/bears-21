@@ -36,7 +36,7 @@ class routes extends Component {
   			<NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
   			<NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
   			<NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
-  			<AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
+  			<Route path="/dashboard" component={Dashboard} />
   			<Route path="/issue" component={Issue} />
   			<AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
   			<AuthRoute path="/newissue" component={Dummy} pathname={ "/login" } />
