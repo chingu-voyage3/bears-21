@@ -2,9 +2,8 @@
 
 const House = require('../../../models/house');
 
-async function houseIssueList (req, res) {
-  const houses = await House.findWithIssues(req, res);
-  // res.json({ houses });
+function houseIssueList (req, res) {
+  House.findWithIssues(req, res);
 }
 
 module.exports = houseIssueList;
