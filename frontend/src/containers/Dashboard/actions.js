@@ -2,17 +2,17 @@ export const HOUSE_ISSUES_HAS_ERRORED = "HOUSE_ISSUES_HAS_ERRORED";
 export const HOUSE_ISSUES_IS_LOADING = "HOUSE_ISSUES_IS_LOADING";
 export const HOUSE_ISSUES_FETCH_DATA_SUCCESS = "HOUSE_ISSUES_FETCH_DATA_SUCCESS";
 
-export function houseIssuesHasErrored( bool) {
+export function houseIssuesHasErrored( hasErrored) {
   return {
     type: HOUSE_ISSUES_HAS_ERRORED,
-    hasErrored: bool
+    hasErrored
   };
 }
 
-export function houseIssuesIsLoading( bool) {
+export function houseIssuesIsLoading( isLoading) {
   return {
     type: HOUSE_ISSUES_IS_LOADING,
-    isLoading: bool
+    isLoading
   };
 }
 
@@ -39,7 +39,6 @@ export function houseIssuesFetchData( url) {
       if( !response.ok){
         throw Error( response.statusText);
       }
-      console.log( "house issues !json:", response);
       dispatch( houseIssuesIsLoading( false));
       return response;
     })
