@@ -12,7 +12,7 @@ router.get('/api/v1/houses', houses.list);
 router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 
 // TODO: should be logged in
-router.get( '/api/v1/house-issues', houses.houseIssueList)
+router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 
 /**
  * 1. Validate the registration data
@@ -24,6 +24,7 @@ router.post('/api/v1/register',
   catchAsyncErrors(users.register),
   auth.login
 );
+
 router.post('/api/v1/login', auth.login);
 router.get('/api/v1/logout', auth.logout);
 
