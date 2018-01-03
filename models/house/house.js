@@ -28,7 +28,8 @@ const houseSchema = new Schema({
       required: 'Street is required'
     }
   },
-  issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}]
+  issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}],
+  owner: { type: Schema.Types.ObjectId, ref: 'user'}
 });
 
 houseSchema.pre('save', function(next) {
@@ -39,19 +40,21 @@ houseSchema.pre('save', function(next) {
   next();
 });
 
-houseSchema.statics.findWithIssues = function findWithIssues(req) {
+houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
   // TODO: find by owner
   console.log( "House find issues, owner:", req.user);
-  return this.find( {})
+  return this.find( { owner: req.user._id})
   .populate( "issues")
   .exec( function( err, docs) {
     if( err || !docs || docs.length === 0){
       // eslint-disable-next-line no-console
       console.error( "house issues findWithIssues failed:", err);
-      return [];
+      res.json( []);
+      // return [];
     } else {
       console.log( "houses find with issues count:", docs.length);
-      return docs;
+      res.json( docs);
+      // return docs;
     }
   });
 };
