@@ -46,7 +46,7 @@ export function houseIssuesFetchData( url) {
     .then( response => response.json())
     .then( house_issues => {
       console.log( "house issues response:", house_issues);
-      dispatch( houseIssuesFetchDataSuccess( house_issues.houses))
+      dispatch( houseIssuesFetchDataSuccess( house_issues))
     })
     .catch( () => dispatch( houseIssuesHasErrored( true)));
   };
