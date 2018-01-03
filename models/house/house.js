@@ -41,8 +41,6 @@ houseSchema.pre('save', function(next) {
 });
 
 houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
-  // TODO: find by owner
-  console.log( "House find issues, owner:", req.user);
   return this.find( { owner: req.user._id})
   .populate( "issues")
   .exec( function( err, docs) {
@@ -50,11 +48,8 @@ houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
       // eslint-disable-next-line no-console
       console.error( "house issues findWithIssues failed:", err);
       res.json( []);
-      // return [];
     } else {
-      console.log( "houses find with issues count:", docs.length);
       res.json( docs);
-      // return docs;
     }
   });
 };
