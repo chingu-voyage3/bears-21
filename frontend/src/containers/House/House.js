@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
-import HouseForm from '../../components/House';
-import Uploader from '../components/Uploader';
+import {connect} from 'react-redux';
+import {HouseForm} from '../../components/House';
+import {
+  houseUpdated,
+  houseFetchData, houseSaveData
+} from './actions';
 
 class House extends Component {
 
   houseFormSubmit = e => {
-    console.log( "issue form submit issue:", this.state.house);
+    console.log( "house form submit:", this.state.house);
   };
   onFieldChange = e => {
     // console.log( "field changed:", e.target.name, e.target.value);
     const {house} = {...this.state.house};
     house[e.target.name] = e.target.value;
-    dispatch( houseUpdated(house));
+    this.props.houseUpdated(house);
     // this.setState( { issue});
   };
   uploadImage = files => {
@@ -22,11 +26,18 @@ class House extends Component {
   };
 
   render = () => {
+    const {hasErrored, isWorking, house} = this.props;
+    if( hasErrored) {
+      return <p>Sorry something went wrong</p>;
+    }
+    if( isWorking) {
+      return <p>Please wait ...</p>;
+    }
     return (
       <div>
         <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
         <div className="wrapper">
-          <HouseForm house={this.props.house}
+          <HouseForm house={house}
             onFieldChange={this.onFieldChange}
             onSubmit={this.houseFormSubmit}
             uploadImage={this.uploadImage} />
@@ -39,7 +50,7 @@ class House extends Component {
 const mapStateToProps = state => {
   return {
     house: state.house,
-    isWorking: status.houseIsWorking,
+    isWorking: state.houseIsWorking,
     hasErrored: state.houseHasErrored
   };
 };
@@ -47,7 +58,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: (url,house) => dispatch( houseFetchData( url, house)),
-    saveData:  (url,house) => dispatch( houseSaveData( url, house))
+    saveData:  (url,house) => dispatch( houseSaveData( url, house)),
+    houseUpdated: house => dispatch( houseUpdated(house))
   };
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {css} from 'aphrodite';
 import styles from './formStyles';
+import Uploader from '../Uploader';
 
 export default class HouseForm extends React.Component {
   state = {
@@ -26,7 +27,7 @@ export default class HouseForm extends React.Component {
           value={house.description} onChange={onFieldChange} />
 
         <div className="image_title">
-          Images <button onClick={toggleUploaderViz} >+</button>
+          Images <button onClick={this.toggleUploaderViz} >+</button>
         </div>
         <div className="upload_wrapper" style={this.state.uploader_visible} >
           <Uploader onFileDropped={uploadImage}/>
