@@ -7,9 +7,11 @@ import {
 } from './actions';
 
 class House extends Component {
-
+  componentDidMount = () => {
+    console.log( "mounting house container, house:", this.props.house);
+  };
   houseFormSubmit = e => {
-    console.log( "house form submit:", this.state.house);
+    console.log( "house form submit:", this.props.house);
   };
   onFieldChange = e => {
     // console.log( "field changed:", e.target.name, e.target.value);
@@ -35,7 +37,7 @@ class House extends Component {
     }
     return (
       <div>
-        <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
+        <h1 style={{textAlign:"center"}}>House (New/Edit)</h1>
         <div className="wrapper">
           <HouseForm house={house}
             onFieldChange={this.onFieldChange}
