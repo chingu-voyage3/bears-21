@@ -4,6 +4,12 @@ import {
 	houseIssuesIsLoading,
 	houseIssuesHasErrored
 } from '../containers/Dashboard';
+import {
+	house,
+	houseUpdated,
+	houseHasErrored,
+	houseIsWorking
+} from '../containers/House';
 
 // QUESTION: shouldn't this reducer be in login with action?
 import { LOGIN, LOGOUT, } from './actions.js';
@@ -26,5 +32,9 @@ export default combineReducers({
 	user: reducer,
 	houseIssues,
 	houseIssuesIsLoading,
-	houseIssuesHasErrored
+	houseIssuesHasErrored,
+	house,
+	houseUpdated,
+	houseHasErrored,
+	houseIsWorking
 });
