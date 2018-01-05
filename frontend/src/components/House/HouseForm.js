@@ -13,9 +13,17 @@ export default class HouseForm extends React.Component {
 
   render = () => {
     const {
-      house, onFieldChange, onSaveClick,
+      // FIXME: no default?
+      house: house = {
+        title:"No Title", description: "No Description", images:[]
+      },
+      onFieldChange,
+      onSubmit,
       uploadImage
     } = this.props;
+    const show_uploader = {
+      display: this.state.uploader_visible?"flex":"none"
+    }
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Title</label>
@@ -26,10 +34,17 @@ export default class HouseForm extends React.Component {
         <input className={css(styles.right_grid)} name="description" type="text"
           value={house.description} onChange={onFieldChange} />
 
-        <div className="image_title">
-          Images <button onClick={this.toggleUploaderViz} >+</button>
+        <button className={css(styles.right_grid)}
+          onClick={onSubmit}
+          type="button">
+          Save
+        </button>
+
+        <label className={css(styles.left_grid)}>Images</label>
+        <div className={css(styles.right_grid)}>
+          <button type="button" onClick={this.toggleUploaderViz} >+</button>
         </div>
-        <div className="upload_wrapper" style={this.state.uploader_visible} >
+        <div className={css(styles.right_grid)} style={show_uploader} >
           <Uploader onFileDropped={uploadImage}/>
         </div>
         <div className="images_wrapper">
@@ -37,12 +52,6 @@ export default class HouseForm extends React.Component {
             {house.images.map( (img, ndx) => <img key={ndx} src={img} alt="noimg"/>)}
           </div>
         </div>
-
-        <button className={css(styles.right_grid)}
-          onClick={onSaveClick}
-          type="button">
-          Save
-        </button>
       </form>
     );
   };
