@@ -7,17 +7,14 @@ import {
 } from './actions';
 
 class House extends Component {
-  componentDidMount = () => {
-    console.log( "mounting house container, house:", this.props.house);
-  };
   houseFormSubmit = e => {
     console.log( "house form submit:", this.props.house);
   };
   onFieldChange = e => {
     // console.log( "field changed:", e.target.name, e.target.value);
-    const {house} = {...this.state.house};
+    const {house} = {...this.props.house};
     house[e.target.name] = e.target.value;
-    this.props.houseUpdated(house);
+    this.props.updateData(house);
     // this.setState( { issue});
   };
   uploadImage = files => {
@@ -61,7 +58,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchData: (url,house) => dispatch( houseFetchData( url, house)),
     saveData:  (url,house) => dispatch( houseSaveData( url, house)),
-    houseUpdated: house => dispatch( houseUpdated(house))
+    updateData: house => dispatch( houseUpdated(house))
   };
 };
 
