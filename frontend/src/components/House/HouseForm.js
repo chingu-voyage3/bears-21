@@ -5,7 +5,7 @@ import Uploader from '../Uploader';
 
 export default class HouseForm extends React.Component {
   state = {
-    uploader_visible: false
+    uploader_visible: false,
   };
   toggleUploaderViz = () => {
     this.setState( { uploader_visible: !this.state.uploader_visible});
@@ -13,10 +13,7 @@ export default class HouseForm extends React.Component {
 
   render = () => {
     const {
-      // FIXME: no default?
-      house: house = {
-        title:"No Title", description: "No Description", images:[]
-      },
+      house,
       onFieldChange,
       onSubmit,
       uploadImage
@@ -33,6 +30,14 @@ export default class HouseForm extends React.Component {
         <label className={css(styles.left_grid)}>Description</label>
         <input className={css(styles.right_grid)} name="description" type="text"
           value={house.description} onChange={onFieldChange} />
+
+        <label className={css(styles.left_grid)}>Street</label>
+        <input className={css(styles.right_gred)} name="location.street" type="text"
+          value={house.location.street} onChange={onFieldChange} />
+
+        <label className={css(styles.left_gred)}>postcode</label>
+        <input className={css(styles.right_gred)} name="location.postCode" type="text"
+          value={house.location.postCode} onChange={onFieldChange} />
 
         <button className={css(styles.right_grid)}
           onClick={onSubmit}
