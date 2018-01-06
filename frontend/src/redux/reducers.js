@@ -6,7 +6,6 @@ import {
 } from '../containers/Dashboard';
 import {
 	house,
-	houseUpdated,
 	houseHasErrored,
 	houseIsWorking
 } from '../containers/House';
@@ -34,7 +33,6 @@ export default combineReducers({
 	houseIssuesIsLoading,
 	houseIssuesHasErrored,
 	house,
-	houseUpdated,
 	houseHasErrored,
 	houseIsWorking
 });

@@ -2,14 +2,6 @@ export const HOUSE_HAS_ERRORED = "HOUSE_HAS_ERRORED";
 export const HOUSE_IS_WORKING = "HOUSE_IS_WORKING";
 export const HOUSE_FETCH_DATA_SUCCESS = "HOUSE_FETCH_DATA_SUCCESS";
 export const HOUSE_SAVE_DATA_SUCCESS = "HOUSE_SAVE_DATA_SUCCESS";
-export const HOUSE_UPDATED = "HOUSE_UPDATED";
-
-export function houseUpdated(house) {
-  return {
-    type: HOUSE_UPDATED,
-    house
-  };
-}
 
 export function houseHasErrored(hasErrored) {
   return {

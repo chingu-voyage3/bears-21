@@ -1,5 +1,4 @@
 import {
-  HOUSE_UPDATED,
   HOUSE_FETCH_DATA_SUCCESS,
   HOUSE_IS_WORKING,
   HOUSE_HAS_ERRORED
@@ -24,18 +23,14 @@ export function houseIsWorking( state = false, action) {
 }
 
 const defaultHouse = {
-  title: "No Title",
-  description: "No Description",
+  title: "Title",
+  description: "Description",
+  location: {
+    street: "Street",
+    postCode: "postCode"
+  },
   images: []
 };
-export function houseUpdated( state = defaultHouse, action) {
-  switch( action.type) {
-    case HOUSE_UPDATED:
-      return action.house;
-    default:
-      return state;
-  }
-}
 export function house( state = defaultHouse, action) {
   switch( action.type) {
     case HOUSE_FETCH_DATA_SUCCESS:
