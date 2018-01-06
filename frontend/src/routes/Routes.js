@@ -41,7 +41,7 @@ class routes extends Component {
   			<Route path="/issue" component={Issue} />
   			<AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
         <Route path="/newissue" component={Dummy} />
-  			<Route path="/newhouse" component={House} />
+  			<AuthRoute path="/newhouse" user={user} component={House} pathname={"/login"} />
   			<Route path="/logout" component={Logout} />
   			<Route path="*" component={NotFound} />
 
