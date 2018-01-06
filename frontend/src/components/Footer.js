@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-export default class Footer extends Component {
-
-  render() {
-    return <footer className={css(styles.footer)}>Made by bears-21</footer>;
-  }
-
-}
+export default () => (
+  <footer className={css(styles.footer)}>
+    <section>Made by bears-21</section>
+  </footer>
+);
 
 const styles = StyleSheet.create({
   footer: {
-    bottom: 6,
-    position: "absolute",
-    width: "95%",
-    textAlign: "center",
+    display: 'flex',
+    padding: '1em 0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTop: '1px solid #666'
   },
 });

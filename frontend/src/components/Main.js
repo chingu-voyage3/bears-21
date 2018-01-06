@@ -4,23 +4,29 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { StyleSheet, css } from 'aphrodite';
 
 class app extends Component {
-
-	render() {
-		console.log("state: ", this.props);
-    console.log("USER: ", this.props.user);
-    
+  render() {
     return (
-			<div>
-				<NavBar />
-			
-      	<Routes />
+      <div className={css(styles.container)}>
+        <NavBar />
+        <Routes />
         <Footer />
-			</div>
-		);
-  	}
+      </div>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    margin: '0 auto',
+    minHeight: '100vh',
+    overflow: 'hidden',
+    flexDirection: 'column'
+  }
+});
 
 const App = withRouter(connect()(app));
 export default App;

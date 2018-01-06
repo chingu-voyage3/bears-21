@@ -39,7 +39,7 @@
   },
   "scripts": {
     "prepushnojsx": "npm run lint && npm run test",
-		"start": "node index.js",
+    "start": "node index.js",
     "develop": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cross-env NODE_ENV=development supervisor index.js",
     "client": "cd frontend && npm start",
@@ -49,7 +49,8 @@
     "test:unit:dev": "mocha --watch --reporter progress ./test/setup.js ./**/*.unit.spec.js",
     "test:e2e": "mocha --reporter progress ./test/setup.js ./**/*.e2e.spec.js",
     "test": "npm run test:unit && npm run test:e2e",
-		"heroku-prebuild": "cd frontend && npm install && npm run build"
+    "heroku-prebuild": "cd frontend && npm install && npm run build",
+    "postmerge": "./scripts/githooks/post-merge.sh"
   },
   "repository": {
     "type": "git",
