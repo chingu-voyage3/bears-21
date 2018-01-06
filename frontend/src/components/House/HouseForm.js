@@ -5,7 +5,7 @@ import Uploader from '../Uploader';
 
 export default class HouseForm extends React.Component {
   state = {
-    uploader_visible: false,
+    uploader_visible: false
   };
   toggleUploaderViz = () => {
     this.setState( { uploader_visible: !this.state.uploader_visible});
