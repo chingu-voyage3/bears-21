@@ -8,8 +8,8 @@ export default class IssueForm extends React.Component {
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Issue</label>
-        <input className={css(styles.right_grid)} name="name" type="text"
-          value={issue.name} onChange={this.props.onFieldChange} />
+        <input className={css(styles.right_grid)} name="title" type="text"
+          value={issue.title} onChange={this.props.onFieldChange} />
 
         <label className={css(styles.left_grid)}>Type</label>
         <select className={css(styles.right_grid)} name="type"
@@ -23,6 +23,13 @@ export default class IssueForm extends React.Component {
           value={issue.priority} onChange={this.props.onFieldChange}>
           <option value="1">1</option>
           <option value="2">2</option>
+        </select>
+
+        <label className={css(styles.left_grid)}>Status</label>
+        <select className={css(styles.right_grid)} name="status"
+          value={issue.status} onChange={this.props.onFieldChange}>
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
         </select>
 
         <label>Description</label>
