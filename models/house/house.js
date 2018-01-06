@@ -29,7 +29,7 @@ const houseSchema = new Schema({
     }
   },
   issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}],
-  owner: { type: Schema.Types.ObjectId, ref: 'user'}
+  owner: { type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 houseSchema.pre('save', function(next) {
