@@ -2,20 +2,31 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {HouseForm} from '../../components/House';
 import {
-  houseUpdated,
   houseFetchData, houseSaveData
 } from './actions';
 
 class House extends Component {
+  componentWillMount = () => {
+    this.setState( {new_house: this.props.house});
+  };
+  componentWillReceiveProps = (nextProps) => {
+    this.setState( { new_house: nextProps.house});
+  };
   houseFormSubmit = e => {
-    console.log( "house form submit:", this.props.house);
+    console.log( "house form submit:", this.state.new_house);
+    this.props.saveData( this.state.new_house);
   };
   onFieldChange = e => {
-    // console.log( "field changed:", e.target.name, e.target.value);
-    const {house} = {...this.props.house};
-    house[e.target.name] = e.target.value;
-    this.props.updateData(house);
-    // this.setState( { issue});
+    const {new_house} = {...this.state};
+    // check for location
+    const re = /(.*)\.(.*)/;
+    const m = e.target.name.match( re);
+    if( m){
+      new_house[m[1]][m[2]] = e.target.value;
+    } else {
+      new_house[e.target.name] = e.target.value;
+    }
+    this.setState( { new_house});
   };
   uploadImage = files => {
     console.log( "update image:", files[0]);
@@ -25,7 +36,7 @@ class House extends Component {
   };
 
   render = () => {
-    const {hasErrored, isWorking, house} = this.props;
+    const {hasErrored, isWorking} = this.props;
     if( hasErrored) {
       return <p>Sorry something went wrong</p>;
     }
@@ -36,7 +47,7 @@ class House extends Component {
       <div>
         <h1 style={{textAlign:"center"}}>House (New/Edit)</h1>
         <div className="wrapper">
-          <HouseForm house={house}
+          <HouseForm house={this.state.new_house}
             onFieldChange={this.onFieldChange}
             onSubmit={this.houseFormSubmit}
             uploadImage={this.uploadImage} />
@@ -57,8 +68,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: (url,house) => dispatch( houseFetchData( url, house)),
-    saveData:  (url,house) => dispatch( houseSaveData( url, house)),
-    updateData: house => dispatch( houseUpdated(house))
+    saveData:  (url,house) => dispatch( houseSaveData( url, house))
   };
 };
 
