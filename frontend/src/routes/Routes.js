@@ -38,7 +38,7 @@ class routes extends Component {
   );
   }
 
-};
+}
 
 
 const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (

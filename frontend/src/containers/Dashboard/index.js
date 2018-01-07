@@ -3,10 +3,14 @@ import {getHouseIssues} from './actions';
 import {HouseList} from '../../components/House';
 
 export default class Dashboard extends React.Component {
-  state = {
-    issue_list: []
-  };
-  componentWillMount = () => {
+  constructor() {
+    super();
+    this.state = {
+      issue_list: []
+    };
+  }
+
+  componentWillMount() {
     // TODO: pass in user id (as house owner)
     getHouseIssues()
     .then( (response) => {
@@ -16,8 +20,9 @@ export default class Dashboard extends React.Component {
     .catch( (err) => {
       console.error( "getHouseIssues failed:", err);
     });
-  };
-  render = () => {
+  }
+
+  render() {
     const {issue_list} = this.state;
     return (
       <div>
@@ -25,5 +30,5 @@ export default class Dashboard extends React.Component {
         <HouseList data={issue_list} />
       </div>
     );
-  };
-};
+  }
+}
