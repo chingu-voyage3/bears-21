@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import House from './House';
-import {FilteredIssueList} from '../IssueList';
+import {FilteredIssueList} from '../Issue';
 import {css} from 'aphrodite';
 import styles from './styles';
 
