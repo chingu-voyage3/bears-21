@@ -7,11 +7,12 @@ export default class House extends Component {
     this.props.onNewIssue( this.props.data);
   };
   render = () => {
+    const house_image = this.props.data.images[0];
     return (
-      <div>
-        <img src={this.props.data.house_image} alt="noimg" />
+      <div style={{width:"215px",textAlign:"center"}}>
+        <img src={house_image} alt="noimg" />
         <div className={css(styles.title)}>
-          House
+          {this.props.data.title}
           <button type="button" onClick={this.onNewIssue} >+</button>
         </div>
       </div>
