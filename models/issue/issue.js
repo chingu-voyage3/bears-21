@@ -18,6 +18,14 @@ const issueSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  type: String,
+  priority: Number,
+  images: [{type: String}],
+  house: {
+    type: Schema.Types.ObjectId,
+    ref: "House",
+    required: "house is required"
   }
 });
 

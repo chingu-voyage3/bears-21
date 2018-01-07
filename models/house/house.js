@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Issue = mongoose.model('Issue').schema;
 const { Schema } = mongoose;
 const slug = require('slug');
 mongoose.Promise = global.Promise;
@@ -29,7 +30,8 @@ const houseSchema = new Schema({
     }
   },
   issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}],
-  owner: { type: Schema.Types.ObjectId, ref: 'User'}
+  owner: { type: Schema.Types.ObjectId, ref: 'User'},
+  images: [String]
 });
 
 houseSchema.pre('save', function(next) {

@@ -52,7 +52,7 @@ export function houseFetchData( house) {
       return response;
     })
     .then( response => response.json())
-    .then( house => dispatch( houseFetchDataSuccess(house)))
+    .then( json => dispatch( houseFetchDataSuccess(json.house)))
     .catch( () => dispatch( houseHasErrored(true)));
   };
 }
@@ -78,7 +78,7 @@ export function houseSaveData( house) {
       return response;
     })
     .then( response => response.json())
-    .then( house => dispatch( houseSaveDataSuccess(house)))
+    .then( response => dispatch( houseSaveDataSuccess(response.house)))
     .catch( () => dispatch( houseHasErrored( true)));
   };
 }

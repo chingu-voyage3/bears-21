@@ -1,5 +1,6 @@
 import {
   HOUSE_FETCH_DATA_SUCCESS,
+  HOUSE_SAVE_DATA_SUCCESS,
   HOUSE_IS_WORKING,
   HOUSE_HAS_ERRORED
 } from './actions';
@@ -29,11 +30,13 @@ const defaultHouse = {
     street: "Street",
     postCode: "postCode"
   },
-  images: []
+  images: [],
+  issues: []
 };
 export function house( state = defaultHouse, action) {
   switch( action.type) {
     case HOUSE_FETCH_DATA_SUCCESS:
+    case HOUSE_SAVE_DATA_SUCCESS:
       return action.house;
     default:
       return state;
