@@ -21,7 +21,12 @@ const issueSchema = new Schema({
   },
   type: String,
   priority: Number,
-  images: [{type: String}]
+  images: [{type: String}],
+  house: {
+    type: Schema.Types.ObjectId,
+    ref: "House",
+    required: "house is required"
+  }
 });
 
 issueSchema.pre('save', function(next) {
