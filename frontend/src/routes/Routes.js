@@ -12,17 +12,11 @@ import { Forgot } from '../components/Forgot';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-
-//const auth = false;
-
 class routes extends Component {
 
   componentWillMount() {
-    console.log( "this.props.user:", this.props.user);
     if (localStorage.getItem("user")) { // user was logged in....
-
       this.props.login();
-
     }
   }
 
@@ -48,7 +42,6 @@ class routes extends Component {
   }
 }
 
-
 const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
   <Route {...rest} render={ props => (
     auth ? (
@@ -60,7 +53,6 @@ const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }
     ))} />
 );
 
-
 const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
   <Route {...rest} render={ props => (
     !auth ? (
@@ -69,10 +61,7 @@ const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...res
       <Redirect
         to={{ pathname: path }}
       />
-
     ))} />
-
-
 );
 
 const mapStateToProps = state => {
