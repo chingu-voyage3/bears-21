@@ -1,6 +1,6 @@
 import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import {connect} from 'react-redux';
-import IssueForm from '../../components/IssueForm'; // eslint-disable-line no-unused-vars
+import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
 import Uploader from '../../components/Uploader';
 import {issueFetchData, issueSaveData } from './actions';
 import './style.css';
