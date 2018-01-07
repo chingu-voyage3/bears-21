@@ -11,13 +11,16 @@ class Issue extends Component {
   };
   componentWillMount = () => {
     console.log( "issue page props:", this.props);
+    // set default
     if( this.props.location.state.issue) {
-      this.setState( {issue: this.props.location.state.issue});
+      this.setState( {issue: {...this.props.issue, ...this.props.location.state.issue}});
+    } else {
+      console.error( "Issue page: missing issue prop");
     }
   };
   componentWillReceiveProps = (nextProps) => {
     console.log( "component will receive props:", nextProps);
-    this.setState( {issue: nextProps.issue})
+    this.setState( {issue: {...nextProps.issue}})
   };
   issueFormSubmit = e => {
     console.log( "issue form submit issue:", this.state.issue);
