@@ -29,6 +29,7 @@ export default class IssueForm extends React.Component {
         <select className={css(styles.right_grid)} name="status"
           value={issue.status} onChange={this.props.onFieldChange}>
           <option value="open">Open</option>
+          <option value="resolved">Resolved</option>
           <option value="closed">Closed</option>
         </select>
 
