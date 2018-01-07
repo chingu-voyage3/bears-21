@@ -16,23 +16,21 @@ class login extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     document.addEventListener("keydown", this.keyPressed);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     document.removeEventListener("keydown", this.keyPressed);
   }
 
-  keyPressed(e) {
+  keyPressed = (e) => {
     if (e.keyCode === 13) {
       setTimeout(this.login, 500);
     }
-
   }
 
-  login() {
-
+  login= () => {
     axios.post("/api/v1/login", {
       email: this.state.email,
       password: this.state.password,
@@ -48,23 +46,14 @@ class login extends Component {
       this.setState({currentStatus: "ERROR!!"});
     });
 
-
     this.setState({email: "", password: ""});
   }
 
-
-
   render() {
-
     return (
-
-
       <div className={css(styles.centered, styles.background)}>
-
         <div className={css(styles.centered, styles.loginContainer)}>
-
           <div className={css(styles.title)}>Login</div>
-
           <input placeholder="your@email.com" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
           <input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
 
@@ -75,19 +64,10 @@ class login extends Component {
             <Link className={css(styles.account)} to="/register">Create Account</Link>
             <Link className={css(styles.account)} to="/forgot">Recover Password</Link>
           </div>
-
         </div>
-
-
       </div>
-
-
     );
-
-
-
   }
-
 }
 
 const mapStateToProps = state => state;
@@ -96,7 +76,6 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogin: () => dispatch(loginAction())
   }
-
 }
 
 const Login = connect(mapStateToProps, mapDispatchToProps)(login);
@@ -149,8 +128,6 @@ const styles = StyleSheet.create({
     left: 0,
     width: 400,
     height: 300,
-
-
   },
   account: {
     marginRight: 5,
@@ -173,5 +150,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: "25px",
   },
-
 });

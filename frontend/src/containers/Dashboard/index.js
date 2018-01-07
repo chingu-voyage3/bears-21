@@ -10,7 +10,7 @@ export default class Dashboard extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     // TODO: pass in user id (as house owner)
     getHouseIssues()
     .then( (response) => {
@@ -22,7 +22,7 @@ export default class Dashboard extends React.Component {
     });
   }
 
-  render() {
+  render = () => {
     const {issue_list} = this.state;
     return (
       <div>

@@ -12,12 +12,12 @@ export default class Forgot extends Component {
   }
 
 
-  forgot () {
+  forgot = () => {
 
   }
 
 
-  render() {
+  render = () => {
     return (
       <div className={css(styles.centre)}>
         <div className={css(styles.forgotContainer, styles.centre)}>

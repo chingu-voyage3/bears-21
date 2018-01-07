@@ -5,7 +5,7 @@ import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class HouseList extends Component {
-  render() {
+  render = () => {
     const {data} = this.props;
     const house_list = data.map( (house, ndx) => {
       return (
