@@ -57,8 +57,12 @@ export function issueSaveData( issue) {
   return (dispatch) => {
     dispatch( issueHasErrored( false));
     dispatch( issueIsWorking( true));
-    fetch( '/api/v1/issue', {
+    fetch( '/api/v1/issues', {
       method: 'post',
+      headers: {
+        Accept: 'application/json',
+        "Content-Type": 'application/json'
+      },
       credentials: 'same-origin',
       body: JSON.stringify( issue)
     })
@@ -70,7 +74,7 @@ export function issueSaveData( issue) {
       return response;
     })
     .then( response => response.json())
-    .then( issue => dispatch( issueSaveDataSuccess(issue)))
+    .then( response => dispatch( issueSaveDataSuccess(response.issue)))
     .catch( () => dispatch( issueHasErrored( true)));
   };
 }
