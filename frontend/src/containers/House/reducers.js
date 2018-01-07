@@ -30,7 +30,8 @@ const defaultHouse = {
     street: "Street",
     postCode: "postCode"
   },
-  images: []
+  images: [],
+  issues: []
 };
 export function house( state = defaultHouse, action) {
   switch( action.type) {
