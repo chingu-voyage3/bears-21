@@ -22,7 +22,15 @@ export function issueIsWorking( state = false, action) {
   }
 }
 
-const defaultIssue = { title: "Title"};
+const defaultIssue = {
+  title: "Title",
+  status: "open",
+  priority: 2,
+  type: "type a",
+  description: "Description",
+  images:[],
+  house: null
+};
 
 export function issue( state = defaultIssue, action) {
   switch( action.type) {
