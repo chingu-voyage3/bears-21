@@ -1,6 +1,6 @@
 import {StyleSheet} from 'aphrodite';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   wrapper: {
     display: "flex",
     flexDirection: "column",
@@ -31,5 +31,3 @@ const styles = StyleSheet.create({
     gridColumn: "2/3"
   }
 });
-
-export default styles;
