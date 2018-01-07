@@ -52,6 +52,13 @@ class Issue extends Component {
     // console.log( "your file was (fake) uploaded"); // eslint-disable-line no-console
   };
   render() {
+    const {hasErrored, isWorking} = this.props;
+    if( hasErrored) {
+      return <p>Sorry something went wrong</p>;
+    }
+    if( isWorking) {
+      return <p>Please wait ...</p>;
+    }
     const {issue} = this.state;
     const show_uploader = {
       display: this.state.uploader_visible&&issue._id?"flex":"none"
