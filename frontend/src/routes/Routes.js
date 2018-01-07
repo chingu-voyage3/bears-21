@@ -24,49 +24,40 @@ class routes extends Component {
       this.props.login();
 
     }
-
-
   }
 
   render() {
     const {user} = this.props;
-  	return (
-  		<Switch>
+    return (
+      <Switch>
 
-  			<Route exact path="/" component={Dummy} />
-  			<NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
-  			<NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
-  			<NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
-  			<AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
-  			<Route path="/issue" component={Issue} />
-  			<AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
+        <Route exact path="/" component={Dummy} />
+        <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
+        <NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
+        <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
+        <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
+        <Route path="/issue" component={Issue} />
+        <AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
         <Route path="/newissue" component={Dummy} />
-  			<AuthRoute path="/newhouse" user={user} component={House} pathname={"/login"} />
-  			<Route path="/logout" component={Logout} />
-  			<Route path="*" component={NotFound} />
+        <AuthRoute path="/newhouse" user={user} component={House} pathname={"/login"} />
+        <Route path="/logout" component={Logout} />
+        <Route path="*" component={NotFound} />
 
-  		</Switch>
-  	);
+      </Switch>
+    );
   }
-
-};
+}
 
 
 const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
-	<Route {...rest} render={ props => (
-		auth ? (
-			<Component {...props} />
-		) : (
-			<Redirect
-				to={{ pathname: path }}
-			/>
-
-
-		))} />
-
-
-
-
+  <Route {...rest} render={ props => (
+    auth ? (
+      <Component {...props} />
+    ) : (
+      <Redirect
+        to={{ pathname: path }}
+      />
+    ))} />
 );
 
 
@@ -87,13 +78,13 @@ const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...res
 const mapStateToProps = state => {
   return {
     user: state.user,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-   login: () => dispatch({ type: "LOGIN" }),
-  }
-}
+    login: () => dispatch({ type: "LOGIN" }),
+  };
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(routes));
