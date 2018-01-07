@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     margin: '0 auto',
     minHeight: '100vh',
     overflow: 'hidden',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#ddd'
   }
 });
 

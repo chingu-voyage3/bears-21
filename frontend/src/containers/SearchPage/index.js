@@ -38,7 +38,10 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundImage: "url('http://lorempixel.com/1000/600/abstract')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
   },
 });
 
