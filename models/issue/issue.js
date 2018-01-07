@@ -18,7 +18,10 @@ const issueSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
-  }
+  },
+  type: String,
+  priority: Number,
+  images: [{type: String}]
 });
 
 issueSchema.pre('save', function(next) {
