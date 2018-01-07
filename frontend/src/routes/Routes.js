@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import NotFound from '../components/NotFound';
-import Dummy from '../components/Dummy';
-import Dashboard from '../containers/Dashboard';
-import SearchPage from '../containers/SearchPage';
-import { Login } from '../components/Login';
-import { Logout } from '../components/Logout';
-import { Register } from '../components/Register';
-import { Forgot } from '../components/Forgot';
+import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import NotFound from "../components/NotFound";
+import Dummy from "../components/Dummy";
+import Dashboard from "../containers/Dashboard";
+import SearchPage from "../containers/SearchPage";
+import { Login } from "../components/Login";
+import { Logout } from "../components/Logout";
+import { Register } from "../components/Register";
+import { Forgot } from "../components/Forgot";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 
 //const auth = false;
@@ -34,10 +34,8 @@ class routes extends Component {
       <AuthRoute path="/newissue" user={this.props.user} component={Dummy} pathname={ "/login" } />
       <Route path="*" component={NotFound} />
 
-    </Switch>
-  );
+    </Switch>);
   }
-
 }
 
 
@@ -68,8 +66,8 @@ const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...res
 const mapStateToProps = state => {
   return {
     user: state.user,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
