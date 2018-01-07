@@ -13,9 +13,19 @@ class Issue extends Component {
     console.log( "issue page props:", this.props);
     // set default
     if( this.props.location.state.issue) {
-      this.setState( {issue: {...this.props.issue, ...this.props.location.state.issue}});
+      const defaultIssue = {
+        title: "Title",
+        status: "open",
+        priority: 2,
+        type: "type a",
+        description: "Description",
+        images:[],
+        house: null
+      };
+
+      this.setState( {issue: {...defaultIssue, ...this.props.location.state.issue}});
     } else {
-      console.error( "Issue page: missing issue prop");
+      console.error( "Issue page received no route params");
     }
   };
   componentWillReceiveProps = (nextProps) => {
