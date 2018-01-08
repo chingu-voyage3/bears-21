@@ -15,7 +15,7 @@ export default class Uploader extends Component {
     // TODO: add files to images[]
     console.log( "files:", files);
     this.setState( {
-      images: [...files],
+      images: [...this.state.images, ...files],
       show_image: true,
       image_src: URL.createObjectURL(files[0])
     });
@@ -28,7 +28,7 @@ export default class Uploader extends Component {
     this.setState( {
       show_image: true,
       image_src: this.state.url_text,
-      images: [...this.state.url_text]
+      images: this.state.images.concat( [this.state.url_text])
     });
   };
   handleUrlKeyUp = (e) => {
@@ -37,6 +37,7 @@ export default class Uploader extends Component {
     }
   };
   onUploadImage = () => {
+    console.log( "files to upload:", this.state.images);
   };
   onClearPic = () => {
     this.setState( {show_image: false});
