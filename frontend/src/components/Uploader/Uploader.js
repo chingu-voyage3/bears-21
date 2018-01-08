@@ -15,29 +15,26 @@ export default class Uploader extends Component {
     // TODO: add files to images[]
     console.log( "files:", files);
     this.setState( {
-      images: [...this.state.images, ...files],
       show_image: true,
       image_src: URL.createObjectURL(files[0])
     });
+    this.props.addImage( URL.createObjectURL(files[0]));
   };
   onUrlChange = (e) => {
     this.setState( {url_text: e.target.value});
   };
-  onUrlBlur = () => {
+  setPicUrl = () => {
     console.log( "image url:", this.state.url_text);
     this.setState( {
       show_image: true,
       image_src: this.state.url_text,
-      images: this.state.images.concat( [this.state.url_text])
     });
+    this.props.addImage( this.state.url_text);
   };
   handleUrlKeyUp = (e) => {
     if( e.keyCode === 13){
-      this.onUrlBlur();
+      this.setPicUrl();
     }
-  };
-  onUploadImage = () => {
-    console.log( "files to upload:", this.state.images);
   };
   onClearPic = () => {
     this.setState( {show_image: false});
@@ -46,10 +43,11 @@ export default class Uploader extends Component {
     const missing_url = "//via.placeholder.com/200x200?text=No Image";
     const {image_src, url_text} = this.state;
     const reload_symbol = String.fromCharCode( 8635);
+    const cross_symbol = String.fromCharCode( 10799);
     const url = image_src?image_src:missing_url;
 
     return (
-      <div className={css([styles.container,styles.wrapper])} >
+      <div className={css(styles.wrapper)} >
         <div className={css(styles.well)}>
           { this.state.show_image
             ? <ImageDefault className={css( styles.image_style)} src={url}
@@ -63,13 +61,15 @@ export default class Uploader extends Component {
           Url
           <input type="text" value={url_text}
             onChange={this.onUrlChange}
-            onKeyUp={this.handleUrlKeyUp}
-            onBlur={this.onUrlBlur}/>
+            onKeyUp={this.handleUrlKeyUp}/>
         </div>
         <div className={css(styles.btn_wrapper)}>
-          <button type="button" onClick={this.onUrlBlur} >{reload_symbol}</button>
-          <button type="button" onClick={this.onUploadImage} >Upload</button>
-          <button type="button" onClick={this.onClearPic} >X</button>
+          <button type="button" onClick={this.setPicUrl} title="Preview image" >
+            {reload_symbol}
+          </button>
+          <button type="button" onClick={this.onClearPic} title="Clear preview" >
+            {cross_symbol}
+          </button>
         </div>
       </div>
     );

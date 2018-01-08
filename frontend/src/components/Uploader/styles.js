@@ -7,7 +7,8 @@ export default StyleSheet.create({
     borderRadius: "10px",
     boxShadow: "0px 0px 8px 0 #ccc",
     background: "lightgrey",
-    position: "absolute"
+    maxWidth: "220px",
+    // position: "absolute"
   },
   well: {
     padding: "10px",
@@ -17,15 +18,14 @@ export default StyleSheet.create({
   image_style: { maxWidth: "215px", maxHeight: "215px" },
   ip_wrapper: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    margin: "5px auto"
+    justifyContent: "space-around",
+    alignItems: "center"
   },
   btn_wrapper: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     fontSize: "0.8em",
-    marginBottom: "1em"
+    margin: "1em"
   }
 });
