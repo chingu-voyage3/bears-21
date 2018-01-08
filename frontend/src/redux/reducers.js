@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import searchReducer from '../containers/SearchPage/reducer';
+import search from '../containers/SearchPage/reducer';
+
 import {
   LOGIN,
   LOGOUT,
+  CHANGE_POSTCODE
 } from './actions.js';
 
 
@@ -22,7 +24,32 @@ function login(state = initialState, action) {
   }
 }
 
+/*
+function selectedPostCode(state = '', action) {
+  switch (action.type) {
+    case SELECT_POSTCODE:
+      return action.value;
+    default:
+      return state;
+  }
+}*/
+
+function housesByPostCode(
+  state = {
+    isFetching: false,
+    items: []
+  },
+  action
+) {
+  switch (action.type) {
+    case '':
+      return {...state,  postCode: action.value };
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   login,
-  search: searchReducer
+  housesByPostCode
 });

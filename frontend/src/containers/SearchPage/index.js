@@ -1,17 +1,34 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
-import { changePostCode, loadHouses } from './actions';
 import SearchInput from './SearchInput';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
 
-export class MainPage extends PureComponent { // eslint-disable-line react/prefer-stateless-functio
+export default class SearchPage extends Component {
+  getInputValue = () => {
+    return this.refs.input.value;
+  }
+
+  handleSubmit = () => {
+    const postCode = this.getInputValue();
+    this.props.history.push(`houses/${postCode}`);
+  }
+
+  handleKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      this.handleSubmit();
+    }
+  }
+
   render () {
     return (
       <div className={css(styles.container)}>
-        <Form onSubmit={this.props.onSubmitForm}>
-          <SearchInput placeholder="Enter Postcode" onChange={this.props.onChangePostCode} required />
+        <Form onSubmit={this.handleSubmit}>
+          <input type="search"
+                 className={css(styles.input)}
+                 placeholder="Enter Postcode"
+                 ref="input" onKeyUp={this.handleKeyUp} required />
           <SubmitInput />
         </Form>
       </div>
@@ -19,6 +36,7 @@ export class MainPage extends PureComponent { // eslint-disable-line react/prefe
   }
 }
 
+/*
 const mapDispatchToProps = (dispatch) => ({
   onChangePostCode: (evt) => dispatch(changePostCode(evt.target.value)),
   onSubmitForm: (evt) => {
@@ -26,11 +44,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(loadHouses());
   },
 });
+*/
 
+/*
 const mapStateToProps = (state) => ({
   postCode: state.postCode,
   hasError: state.hasError
 });
+*/
 
 const styles = StyleSheet.create({
   container: {
@@ -43,6 +64,14 @@ const styles = StyleSheet.create({
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   },
+  input: {
+    border: '0',
+    padding: '10px',
+    background: 'white',
+    lineHeight: '50px',
+    fontSize: '20px',
+    borderRadius: '0',
+    outline: '0',
+    borderRight: '1px solid rgba(0,0,0,0.2)'
+  }
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

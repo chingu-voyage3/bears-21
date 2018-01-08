@@ -8,6 +8,7 @@ import { Login } from "../components/Login";
 import { Logout } from "../components/Logout";
 import { Register } from "../components/Register";
 import { Forgot } from "../components/Forgot";
+import { HouseList } from "../components/House";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -25,6 +26,7 @@ class routes extends Component {
   return (
     <Switch>
       <Route exact path="/" component={SearchPage} />
+      <Route path="/houses/:postCode" component={HouseList} />
       <NonAuthRoute path="/login" user={this.props.user} component={Login} pathname={ "/dashboard" } />
       <NonAuthRoute path="/register" user={this.props.user} component={Register} pathname={ "/dashboard" } />
       <NonAuthRoute path="/forgot" user={this.props.user} component={Forgot} pathname={ "/dashboard" } />

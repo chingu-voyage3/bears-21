@@ -1,14 +1,19 @@
 import {
   CHANGE_POSTCODE
-} from './constants';
+} from './actions';
 
-function searchReducer(state = {}, action) {
+function search(
+  state = {
+    postCode: ''
+  },
+  action
+) {
   switch (action.type) {
     case CHANGE_POSTCODE:
-      return Object.assign({}, state, { postCode: action.value });
+      return {...state, postCode: action.value};
     default:
       return state;
   }
 }
 
-export default searchReducer;
+export default search;
