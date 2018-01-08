@@ -1,28 +1,32 @@
-import { combineReducers } from 'redux';
-import search from '../containers/SearchPage/reducer';
-
+import {combineReducers} from 'redux';
 import {
-  LOGIN,
-  LOGOUT,
-  CHANGE_POSTCODE
-} from './actions.js';
+  houseIssues,
+  houseIssuesIsLoading,
+  houseIssuesHasErrored
+} from '../containers/Dashboard';
+import {
+  house,
+  houseHasErrored,
+  houseIsWorking
+} from '../containers/House';
+import {
+  issue,
+  issueHasErrored,
+  issueIsWorking
+} from '../containers/Issue';
 
+// QUESTION: shouldn't this reducer be in login with action?
+import { LOGIN, LOGOUT, } from './actions.js';
 
-const initialState = {
-  user: false,
-};
-
-
-function login(state = initialState, action) {
+function reducer(state = false, action) {
   switch (action.type) {
     case LOGIN:
-      return { user: true };
+      return true;
     case LOGOUT:
-      return { user: false };
+      return false;
     default:
       return state;
   }
-}
 
 /*
 function selectedPostCode(state = '', action) {
@@ -49,7 +53,16 @@ function housesByPostCode(
   }
 }
 
+// user key has to be user
 export default combineReducers({
-  login,
-  housesByPostCode
+  user: reducer,
+  houseIssues,
+  houseIssuesIsLoading,
+  houseIssuesHasErrored,
+  house,
+  houseHasErrored,
+  houseIsWorking,
+  issue,
+  issueHasErrored,
+  issueIsWorking
 });
