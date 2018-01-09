@@ -1,5 +1,6 @@
 import React from 'react';
-export class ImageRemovable extends React.Component {
+
+export default class ImageRemovable extends React.Component {
   onRemove = () => {
     this.props.onRemove( this.props.ndx);
   };
