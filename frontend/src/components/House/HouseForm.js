@@ -1,7 +1,7 @@
 import React from 'react';
 import {css} from 'aphrodite';
 import styles from './formStyles';
-import Uploader from '../Uploader';
+import {Uploader} from '../Uploader';
 
 export default class HouseForm extends React.Component {
   state = {
