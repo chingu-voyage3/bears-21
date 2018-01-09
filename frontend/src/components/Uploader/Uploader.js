@@ -18,7 +18,7 @@ export default class Uploader extends Component {
       show_image: true,
       image_src: URL.createObjectURL(files[0])
     });
-    this.props.addImage( URL.createObjectURL(files[0]));
+    this.props.addImage( files[0]);
   };
   onUrlChange = (e) => {
     this.setState( {url_text: e.target.value});
