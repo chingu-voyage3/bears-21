@@ -9,13 +9,12 @@ function upload( req, res) {
   const base_dir = "./frontend/public/images/";
   try {
     // 0744 == 484
-    fs.mkdirSync( `${base_dir}${parent_id}`, 484, (err) => {
-      if( err){
-        console.error( "make directory failed:", err);
-      }
-    });
+    fs.mkdirSync( `${base_dir}${parent_id}`, 484);
   } catch( e) {
-    console.error( "makde directory threw:", e);
+    // can ignore exception if dir already exists
+    if( e.code !== 'EEXIST') {
+      console.error( "makde directory threw:", e);
+    }
   }
   // FIXME: get this from object.images.length
   let parent_image_count = 0;
@@ -28,7 +27,7 @@ function upload( req, res) {
     const np = `${base_dir}${parent_id}/pic${parent_image_count}.${ext}`;
     parent_image_count += 1;
     // console.log( "new file path:", np);
-    console.log( `move ${fd.path} to ${np}`);
+    console.log( `move [${fd.path}] to [${np}]`);
     fs.rename( fd.path, np, err => {
       console.log( "file moved. status:", err);
     });
@@ -38,6 +37,7 @@ function upload( req, res) {
       console.log( `pic[${i}] key[${key}] url[${req.body[key]}]`);
     }
   });
+  console.log( "files uploaded sending response");
   res.json( {success:true});
 }
 
