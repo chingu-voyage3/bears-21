@@ -1,14 +1,12 @@
 import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import {connect} from 'react-redux';
 import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
-import {Uploader} from '../../components/Uploader';
+import {UploadImages} from '../../components/Uploader';
+import {ImageBlock} from '../../components/Image';
 import {issueFetchData, issueSaveData } from './actions';
 import './style.css';
 
 class Issue extends Component {
-  state = {
-    uploader_visible: false
-  };
   componentWillMount = () => {
     console.log( "issue page props:", this.props);
     // set default
@@ -41,15 +39,25 @@ class Issue extends Component {
     issue[e.target.name] = e.target.value;
     this.setState( { issue});
   };
-  toggleUploaderViz = () => {
-    this.setState( { uploader_visible: !this.state.uploader_visible});
+  addImage = ( image) => {
+    const {issue} = this.state;
+    this.setState( {issue: {...issue, images: issue.images.concat([image])}});
   };
-
-  uploadImage = files => {
-    console.log( "update image:", files[0]);
-    // const data = new FormData();
-    // data.append( 'img', files[0]);
-    // console.log( "your file was (fake) uploaded"); // eslint-disable-line no-console
+  onRemoveImage = (ndx) => {
+    console.log( "remove image index:", ndx);
+    const new_image_list = this.state.issue.images.filter( (img,i) => {
+      return ndx !== i;
+    });
+    const issue = {...this.state.issue};
+    issue.images = new_image_list;
+    this.setState( {issue});
+  };
+  onUploadImages = () => {
+    console.log( "files to upload:", this.state.images);
+    this.state.issue.images.forEach( (img, i) => {
+      console.log( `file [${i}] is a ${typeof img}`);
+    });
+    UploadImages( this.props.parent_id, this.state.issue.images);
   };
   render() {
     const {hasErrored, isWorking} = this.props;
@@ -60,9 +68,6 @@ class Issue extends Component {
       return <p>Please wait ...</p>;
     }
     const {issue} = this.state;
-    const show_uploader = {
-      display: this.state.uploader_visible&&issue._id?"flex":"none"
-    }
     return (
       <div>
         <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
@@ -70,17 +75,10 @@ class Issue extends Component {
           <IssueForm issue={issue}
             onFieldChange={this.onFieldChange}
             onSubmit={this.issueFormSubmit} />
-          <div className="image_title">
-            Images <button onClick={this.toggleUploaderViz} >+</button>
-          </div>
-          <div className="upload_wrapper" style={show_uploader} >
-            <Uploader onFileDropped={this.uploadImage}/>
-          </div>
-          <div className="images_wrapper">
-            <div id="image_list" >
-              {issue.images.map( (img, ndx) => <img key={ndx} src={img} alt="noimg"/>)}
-            </div>
-          </div>
+          <ImageBlock images={issue.images}
+            addImage={this.addImage}
+            removeImage={this.removeImage}
+          />
         </div>
       </div>
     );

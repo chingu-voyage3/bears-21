@@ -1,7 +1,6 @@
 import React from 'react';
 import {css} from 'aphrodite';
 import styles from './formStyles';
-import {Uploader} from '../Uploader';
 
 export default class HouseForm extends React.Component {
   state = {
@@ -15,12 +14,8 @@ export default class HouseForm extends React.Component {
     const {
       house,
       onFieldChange,
-      onSubmit,
-      uploadImage
+      onSubmit
     } = this.props;
-    const show_uploader = {
-      display: this.state.uploader_visible?"flex":"none"
-    }
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Title</label>
@@ -44,19 +39,6 @@ export default class HouseForm extends React.Component {
           type="button">
           Save
         </button>
-
-        <label className={css(styles.left_grid)}>Images</label>
-        <div className={css(styles.right_grid)}>
-          <button type="button" onClick={this.toggleUploaderViz} >+</button>
-        </div>
-        <div className={css(styles.right_grid)} style={show_uploader} >
-          <Uploader onFileDropped={uploadImage}/>
-        </div>
-        <div className="images_wrapper">
-          <div id="image_list" >
-            {house.images.map( (img, ndx) => <img key={ndx} src={img} alt="noimg"/>)}
-          </div>
-        </div>
       </form>
     );
   };

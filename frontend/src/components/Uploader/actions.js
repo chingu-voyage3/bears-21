@@ -1,8 +1,9 @@
 
-export default ( parent_id, data) => {
+export default ( type, parent_id, data) => {
   console.log( "UploadImages data:", data);
   let payload = new FormData();
-  payload.append( "parent", parent_id);
+  payload.append( "parent_id", parent_id);
+  payload.append( "type", type);
   data.forEach( ( img, i) => {
     if( typeof img === "string") {
       console.log( "upload url string:", img);
@@ -12,15 +13,9 @@ export default ( parent_id, data) => {
       payload.append( `pic`, img);
     }
   });
-  console.log( "upload data:", payload);
-  fetch( '/api/v1/images', {
+  return fetch( '/api/v1/images', {
     method: 'post',
+    credentials: 'same-origin',
     body: payload
-  })
-  .then( response => {
-    console.log( "image upload response:", response);
-  })
-  .catch( err => {
-    console.log( "image upload failed:", err);
   });
 };
