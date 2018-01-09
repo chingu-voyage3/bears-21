@@ -1,17 +1,26 @@
 
-export const uploadImage = ( payload) => {
-  return fetch( "/api/v1/upload", {
-    method: "post",
+export default ( parent_id, data) => {
+  console.log( "UploadImages data:", data);
+  let payload = new FormData();
+  payload.append( "parent", parent_id);
+  data.forEach( ( img, i) => {
+    if( typeof img === "string") {
+      console.log( "upload url string:", img);
+      payload.append( `url${i}`, img);
+    } else {
+      console.log( "upload is file:", img);
+      payload.append( `pic`, img);
+    }
+  });
+  console.log( "upload data:", payload);
+  fetch( '/api/v1/images', {
+    method: 'post',
     body: payload
   })
   .then( response => {
-    if( !response.ok){
-      throw Error( response.stateText);
-    }
-    return response;
+    console.log( "image upload response:", response);
   })
   .catch( err => {
-    // eslint-disable-next-line no-console
-    console.error( "update house image failed:", err);
+    console.log( "image upload failed:", err);
   });
 };
