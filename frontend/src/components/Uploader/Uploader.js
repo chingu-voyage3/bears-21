@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
-import ImageDefault from './ImageDefault';
+import {ImageDefault} from '../Image';
 import {css} from 'aphrodite';
 import styles from './styles';
 
@@ -8,11 +8,9 @@ export default class Uploader extends Component {
   state = {
     show_image: false,
     url_text: "",
-    image_src: "",
-    images: []
+    image_src: ""
   };
   onFileDropped = (files) => {
-    // TODO: add files to images[]
     console.log( "files:", files);
     this.setState( {
       show_image: true,

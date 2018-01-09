@@ -1,3 +1,6 @@
 import Uploader from './Uploader';
 
-export default Uploader;
+// FIXME: this belongs in parent container
+import UploadImages from './actions';
+
+export {Uploader, UploadImages};
