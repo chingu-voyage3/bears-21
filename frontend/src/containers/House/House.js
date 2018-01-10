@@ -49,12 +49,12 @@ class House extends Component {
     this.setState( { house});
   };
   addImage = ( image) => {
-    const house = {...this.state.house};
+    const {house} = this.state;
     this.setState( {house: {...house, images: house.images.concat([image])}});
   };
   removeImage = (ndx) => {
     console.log( "remove image index:", ndx);
-    const ni = this.state.images.filter( (img,i) => {
+    const ni = this.state.house.images.filter( (img,i) => {
       return ndx !== i;
     });
     console.log( "updated image count:", ni.length);
