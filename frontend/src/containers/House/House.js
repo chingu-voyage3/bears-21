@@ -38,7 +38,7 @@ class House extends Component {
   };
   onFieldChange = e => {
     const {house} = {...this.state};
-    // check for location
+    // check for location and handle sub objects {street,postCode}
     const re = /(.*)\.(.*)/;
     const m = e.target.name.match( re);
     if( m){

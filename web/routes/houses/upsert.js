@@ -19,6 +19,7 @@ async function upsert( req, res) {
   const {street, postCode} = req.body;
   // we can save image urls with the basic object info
   house.location = {street, postCode};
+  // issues and images can be undefined, string or array, turn in an array
   house.issues = util.makeArrayFromBody( req.body.issues);
   house.images = util.makeArrayFromBody( req.body.url);
   // save the text info to get the _id so we can link blob pics to house dir
