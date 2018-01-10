@@ -5,8 +5,12 @@ const House = require('../../../models/house');
 
 async function upsert( req, res) {
   const new_issue = req.body._id?false:true;
-  const issue = new Issue();
-  issue.isNew = new_issue;
+  let issue;
+  if( new_issue) {
+    issue = new Issue();
+  } else {
+    issue = await Issue.findById( req.body._id);
+  }
   issue.title = req.body.title;
   issue.description = req.body.description;
   issue.type = req.body.type;
