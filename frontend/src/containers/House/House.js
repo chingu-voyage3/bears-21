@@ -68,9 +68,10 @@ class House extends Component {
     if( isWorking) {
       return <p>Please wait ...</p>;
     }
+    const op_type = (typeof this.state.house._id === "undefined")?"New":"Edit";
     return (
       <div>
-        <h1 style={{textAlign:"center"}}>House (New/Edit)</h1>
+        <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
         <div className="wrapper">
           <HouseForm house={this.state.house}
             onFieldChange={this.onFieldChange}
