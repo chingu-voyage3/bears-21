@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ImageBlock} from '../../components/Image';
+import {ImageBlock, ImageList} from '../../components/Image';
 import {HouseForm} from '../../components/House';
 import { houseHasErrored, houseFetchData, houseSaveData } from './actions';
 
@@ -51,7 +51,7 @@ class House extends Component {
       return ndx !== i;
     });
     console.log( "updated image count:", ni.length);
-    this.setState( {images: ni});
+    this.setState( {house: {...this.state.house, images: ni}});
   };
   render = () => {
     const {hasErrored, isWorking} = this.props;
@@ -67,12 +67,11 @@ class House extends Component {
         <div className="wrapper">
           <HouseForm house={this.state.house}
             onFieldChange={this.onFieldChange}
-            onSubmit={this.houseFormSubmit}
-            uploadImage={this.uploadImage} />
-          <ImageBlock images={this.state.house.images}
-            addImage={this.addImage}
-            removeImage={this.removeImage}
-          />
+            onSubmit={this.houseFormSubmit} />
+          <ImageBlock addImage={this.addImage} />
+          <div className="images_wrapper">
+            <ImageList images={this.state.house.images} removeImage={this.removeImage} />
+          </div>
         </div>
       </div>
     );
