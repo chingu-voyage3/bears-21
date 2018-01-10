@@ -9,7 +9,6 @@ export default class IssueList extends Component {
     this.props.onIssueClick( issue);
   };
   render = () => {
-    console.log( "IssueList props:", this.props);
     const items = this.props.items.map( (item, i) => (
       <Issue issue={item} key={i} onIssueClick={this.onIssueClick} />
     ));

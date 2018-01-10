@@ -11,7 +11,6 @@ export default class FilteredIssueList extends Component {
     this.setState( {redirect: issue});
   };
   render = () => {
-    console.log( "filter issue list props:", this.props);
     const {data, statusFilter, title} = this.props;
     if( this.state.redirect) {
       console.log( "filtered issue list issue:", this.state.redirect);
