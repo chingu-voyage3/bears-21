@@ -19,7 +19,8 @@ class House extends Component {
   };
   componentWillMount = () => {
     this.props.setHasErrored( false);
-    if( this.props.location.state.house) {
+    const {location} = this.props;
+    if( location.state && location.state.house) {
       this.setState( {house: {
         ...this.state.house,
         ...this.props.location.state.house
