@@ -7,13 +7,15 @@ export default class House extends Component {
     this.props.onNewIssue( this.props.data);
   };
   render = () => {
-    const house_image = this.props.data.images[0];
+    // FIXME: this won't work in prod
+    const house_image = "http://localhost:3001"+this.props.data.images[0];
+    console.log( "house image src:", house_image);
     return (
-      <div style={{width:"215px",textAlign:"center"}}>
-        <img src={house_image} alt="noimg" />
+      <div style={{maxWidth:"215px",textAlign:"center"}}>
+        <img src={house_image} style={{maxWidth:"200px"}} alt="noimg" />
         <div className={css(styles.title)}>
           {this.props.data.title}
-          <button type="button" onClick={this.onNewIssue} >+</button>
+          <button type="button" onClick={this.onNewIssue} title="Add Issue" >+</button>
         </div>
       </div>
     );

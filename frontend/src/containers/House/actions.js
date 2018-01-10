@@ -61,14 +61,44 @@ export function houseSaveData( house) {
   return (dispatch) => {
     dispatch( houseHasErrored( false));
     dispatch( houseIsWorking( true));
-    fetch( '/api/v1/houses', {
+    let payload = new FormData();
+    let url_images = [];
+    let blob_images = [];
+    house.images.forEach( (img) => {
+      if( typeof img === "string") {
+        url_images.push( img);
+      } else {
+        blob_images.push( img);
+      }
+    });
+    Object.keys( house).forEach( (key) => {
+      switch( key) {
+      case "images":
+        url_images.forEach( (url, i) => {
+          payload.append( "url", url);
+        });
+        blob_images.forEach( (blob, i) => {
+          payload.append( 'blobs', blob);
+        });
+        break;
+      case "issues":
+        house.issues.forEach( (i) => {
+          payload.append( 'issues', i);
+        });
+        break;
+      case "location":
+        payload.append( 'street', house.location.street);
+        payload.append( 'postCode', house.location.postCode);
+        break;
+      default:
+        payload.append( [key], house[key]);
+        break;
+      }
+    });
+    fetch( '/api/v1/house', {
       method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       credentials: 'same-origin',
-      body: JSON.stringify( house)
+      body: payload
     })
     .then( response => {
       if( !response.ok) {
