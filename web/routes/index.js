@@ -18,10 +18,9 @@ router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 
 router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 
-router.post('/api/v1/issues', auth.isLoggedIn, catchAsyncErrors( issues.upsert));
-
 // NOTE: this is singular, house
 router.post('/api/v1/house', upload.array('blobs', 3), catchAsyncErrors( houses.upsert));
+router.post('/api/v1/issue', upload.array('blobs', 3), catchAsyncErrors( issues.upsert));
 
 // FIXME: serve with  express static
 router.get('/images/:parent/:name', ( req, res) => {
