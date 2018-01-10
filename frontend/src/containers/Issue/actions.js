@@ -57,14 +57,35 @@ export function issueSaveData( issue) {
   return (dispatch) => {
     dispatch( issueHasErrored( false));
     dispatch( issueIsWorking( true));
-    fetch( '/api/v1/issues', {
+    let payload = new FormData();
+    const url_images = [];
+    const blob_images = [];
+    issue.images.forEach( (img) => {
+      if( typeof img === "string") {
+        url_images.push( img);
+      } else {
+        blob_images.push( img);
+      }
+    });
+    Object.keys( issue).forEach( key => {
+      switch( key) {
+      case "images":
+        url_images.forEach( url => {
+          payload.append( "url", url);
+        });
+        blob_images.forEach( blob => {
+          payload.append( "blobs", blob);
+        });
+        break;
+      default:
+        payload.append( [key], issue[key]);
+        break;
+      }
+    });
+    fetch( '/api/v1/issue', {
       method: 'post',
-      headers: {
-        Accept: 'application/json',
-        "Content-Type": 'application/json'
-      },
       credentials: 'same-origin',
-      body: JSON.stringify( issue)
+      body: payload
     })
     .then( response => {
       if( !response.ok) {
