@@ -21,15 +21,10 @@ router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 
 router.post('/api/v1/issues', auth.isLoggedIn, catchAsyncErrors( issues.upsert));
 
-// const mixedUpload = upload.fields([
-//   { name: 'issues'},
-//   { name: 'urls'},
-//   { name: 'blobs', maxCount: 3 }
-// ]);
-
 // NOTE: this is singular, house
 router.post('/api/v1/house', upload.array('blobs', 3), catchAsyncErrors( houses.upsert));
 
+// FIXME: serve with  express static
 router.get('/images/:parent/:name', ( req, res) => {
   console.log( "image request:", req.params);
   const image_file = path.resolve( __dirname, '..', 'images', req.params.parent, req.params.name);
