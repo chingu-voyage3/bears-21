@@ -15,7 +15,14 @@ class navbar extends Component {
 						<li className={css(styles.navelement)} onClick={() => this.props.logout()}><Link className={css(styles.links)} to="/logout">Logout</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/house">New House</Link></li>
+						<li className={css(styles.navelement)}>
+							<Link className={css(styles.links)} to={{
+								pathname: "/house",
+								state: { new_house: true}
+							}}>
+								New House
+							</Link>
+						</li>
 					</ul>
 				</div>
 			);

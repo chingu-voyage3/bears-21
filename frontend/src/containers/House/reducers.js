@@ -1,4 +1,5 @@
 import {
+  HOUSE_RESET,
   HOUSE_FETCH_DATA_SUCCESS,
   HOUSE_SAVE_DATA_SUCCESS,
   HOUSE_IS_WORKING,
@@ -38,6 +39,8 @@ export function house( state = defaultHouse, action) {
     case HOUSE_FETCH_DATA_SUCCESS:
     case HOUSE_SAVE_DATA_SUCCESS:
       return action.house;
+    case HOUSE_RESET:
+      return defaultHouse;
     default:
       return state;
   }

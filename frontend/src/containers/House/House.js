@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ImageBlock, ImageList} from '../../components/Image';
 import {HouseForm} from '../../components/House';
-import { houseHasErrored, houseFetchData, houseSaveData } from './actions';
+import { houseHasErrored, houseFetchData, houseSaveData, resetHouse } from './actions';
 
 class House extends Component {
   state = {
@@ -18,13 +18,19 @@ class House extends Component {
     }
   };
   componentWillMount = () => {
+    console.log( "mounting house props:", this.props);
     this.props.setHasErrored( false);
     const {location} = this.props;
-    if( location.state && location.state.house) {
-      this.setState( {house: {
-        ...this.state.house,
-        ...this.props.location.state.house
-      }});
+    if( location.state) {
+      if( location.state.new_house) {
+        console.log( "mounting house reset");
+        this.props.resetHouse();
+      } else if( location.state.house) {
+        this.setState( {house: {
+          ...this.state.house,
+          ...this.props.location.state.house
+        }});
+      }
     }
   };
   componentWillReceiveProps = (nextProps) => {
@@ -96,6 +102,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    resetHouse: () => dispatch( resetHouse()),
     setHasErrored: (err) => dispatch( houseHasErrored(err)),
     fetchData: (url,house) => dispatch( houseFetchData( url, house)),
     saveData:  (url,house) => dispatch( houseSaveData( url, house))
