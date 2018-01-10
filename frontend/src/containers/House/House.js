@@ -19,6 +19,12 @@ class House extends Component {
   };
   componentWillMount = () => {
     this.props.setHasErrored( false);
+    if( this.props.location.state.house) {
+      this.setState( {house: {
+        ...this.state.house,
+        ...this.props.location.state.house
+      }});
+    }
   };
   componentWillReceiveProps = (nextProps) => {
     console.log( "receive props:", nextProps);
