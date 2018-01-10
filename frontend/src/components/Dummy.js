@@ -42,9 +42,5 @@ const styles = StyleSheet.create({
 
 export default () => (
   <div className={css(styles.container)}>
-    <form onSubmit={this.props.onSubmitForm} className={css(styles.form)} noValidate>
-      <input type="search" placeholder="Enter Postcode" className={css(styles.formInput)} />
-      <input type="submit" value="Search" className={css(styles.formSubmit)} />
-    </form>
   </div>
 );

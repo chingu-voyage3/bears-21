@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
-import SearchInput from './SearchInput';
+//import SearchInput from './SearchInput';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
 
@@ -12,7 +12,7 @@ export default class SearchPage extends Component {
 
   handleSubmit = () => {
     const postCode = this.getInputValue();
-    this.props.history.push(`houses/${postCode}`);
+    this.props.history.push(`search?postCode=${postCode}`);
   }
 
   handleKeyUp = (e) => {
@@ -35,23 +35,6 @@ export default class SearchPage extends Component {
     );
   }
 }
-
-/*
-const mapDispatchToProps = (dispatch) => ({
-  onChangePostCode: (evt) => dispatch(changePostCode(evt.target.value)),
-  onSubmitForm: (evt) => {
-    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-    dispatch(loadHouses());
-  },
-});
-*/
-
-/*
-const mapStateToProps = (state) => ({
-  postCode: state.postCode,
-  hasError: state.hasError
-});
-*/
 
 const styles = StyleSheet.create({
   container: {

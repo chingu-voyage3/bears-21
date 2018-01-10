@@ -27,6 +27,7 @@ function reducer(state = false, action) {
     default:
       return state;
   }
+}
 
 /*
 function selectedPostCode(state = '', action) {
@@ -37,21 +38,6 @@ function selectedPostCode(state = '', action) {
       return state;
   }
 }*/
-
-function housesByPostCode(
-  state = {
-    isFetching: false,
-    items: []
-  },
-  action
-) {
-  switch (action.type) {
-    case '':
-      return {...state,  postCode: action.value };
-    default:
-      return state;
-  }
-}
 
 // user key has to be user
 export default combineReducers({

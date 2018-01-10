@@ -9,13 +9,16 @@ class House extends Component {
   componentWillMount = () => {
     this.setState( {new_house: this.props.house});
   };
+
   componentWillReceiveProps = (nextProps) => {
     this.setState( { new_house: nextProps.house});
   };
+
   houseFormSubmit = e => {
     console.log( "house form submit:", this.state.new_house);
     this.props.saveData( this.state.new_house);
   };
+
   onFieldChange = e => {
     const {new_house} = {...this.state};
     // check for location
@@ -28,6 +31,7 @@ class House extends Component {
     }
     this.setState( { new_house});
   };
+
   uploadImage = files => {
     console.log( "update image:", files[0]);
     // const data = new FormData();

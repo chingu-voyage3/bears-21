@@ -9,19 +9,21 @@ export default class HouseList extends Component {
   state = {
     redirect: null
   };
+
   onNewIssue = (house) => {
     this.setState( {redirect: house});
   }
+
   render = () => {
-    if( this.state.redirect){
+    if(this.state.redirect) {
       return <Redirect to={{
           pathname: "/issue",
           state: { issue: {house: this.state.redirect._id}}
         }}
       />;
     }
-    const {data} = this.props;
-    const house_list = data.map( (house, ndx) => {
+    const { data } = this.props;
+    const house_list = data.map((house, ndx) => {
       return (
         <div className={css(styles.wrapper)} key={ndx}>
           <House data={house} onNewIssue={this.onNewIssue} />
