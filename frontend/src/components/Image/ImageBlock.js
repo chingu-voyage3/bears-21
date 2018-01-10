@@ -1,6 +1,5 @@
 import React from 'react';
 import {Uploader} from '../Uploader';
-import ImageList from './ImageList';
 
 export default class ImageBlock extends React.Component {
   state = {
@@ -20,9 +19,6 @@ export default class ImageBlock extends React.Component {
         </div>
         <div className="upload_wrapper" style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>
-        </div>
-        <div className="images_wrapper">
-          <ImageList images={this.props.images} removeImage={this.props.removeImage} />
         </div>
       </div>
     );
