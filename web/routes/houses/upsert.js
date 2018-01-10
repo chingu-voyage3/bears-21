@@ -45,7 +45,7 @@ async function upsert( req, res) {
   const house_dir = `${process.env.IMAGE_BASE_DIR}/${house._id}`;
   let image_count = await util.getDirPicCount( house_dir);
   if( image_count === -1) {
-    res.json( {success:false, message: "Image count failed"});
+    res.json( {success:false, message: "House image count failed"});
     return;
   }
   const new_image_urls = util.makeUrlsFromBlobs( house._id, image_count, req.files);
