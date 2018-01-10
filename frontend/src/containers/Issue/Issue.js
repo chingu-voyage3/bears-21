@@ -1,29 +1,28 @@
 import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import {connect} from 'react-redux';
 import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
-import {UploadImages} from '../../components/Uploader';
-import {ImageBlock} from '../../components/Image';
-import {issueFetchData, issueSaveData } from './actions';
+import {ImageBlock, ImageList} from '../../components/Image';
+import {issueFetchData, issueSaveData, issueHasErrored } from './actions';
 import './style.css';
 
 class Issue extends Component {
+  state = {
+    issue: {
+      title: "Title",
+      status: "open",
+      priority: 2,
+      type: "type a",
+      description: "Description",
+      images:[],
+      house: null
+    }
+  };
   componentWillMount = () => {
-    console.log( "issue page props:", this.props);
-    // set default
+    this.props.setHasErrored( false);
     if( this.props.location.state.issue) {
-      const defaultIssue = {
-        title: "Title",
-        status: "open",
-        priority: 2,
-        type: "type a",
-        description: "Description",
-        images:[],
-        house: null
-      };
-
-      this.setState( {issue: {...defaultIssue, ...this.props.location.state.issue}});
+      this.setState( {issue: {...this.state.issue, ...this.props.location.state.issue}});
     } else {
-      console.error( "Issue page received no route params");
+      console.error( "Issue page received no params");
     }
   };
   componentWillReceiveProps = (nextProps) => {
@@ -43,21 +42,12 @@ class Issue extends Component {
     const {issue} = this.state;
     this.setState( {issue: {...issue, images: issue.images.concat([image])}});
   };
-  onRemoveImage = (ndx) => {
+  removeImage = (ndx) => {
     console.log( "remove image index:", ndx);
     const new_image_list = this.state.issue.images.filter( (img,i) => {
       return ndx !== i;
     });
-    const issue = {...this.state.issue};
-    issue.images = new_image_list;
-    this.setState( {issue});
-  };
-  onUploadImages = () => {
-    console.log( "files to upload:", this.state.images);
-    this.state.issue.images.forEach( (img, i) => {
-      console.log( `file [${i}] is a ${typeof img}`);
-    });
-    UploadImages( this.props.parent_id, this.state.issue.images);
+    this.setState( {issue: {...this.state.issue, images: new_image_list}});
   };
   render() {
     const {hasErrored, isWorking} = this.props;
@@ -75,10 +65,10 @@ class Issue extends Component {
           <IssueForm issue={issue}
             onFieldChange={this.onFieldChange}
             onSubmit={this.issueFormSubmit} />
-          <ImageBlock images={issue.images}
-            addImage={this.addImage}
-            removeImage={this.removeImage}
-          />
+          <ImageBlock addImage={this.addImage} />
+          <div className="images_wrapper">
+            <ImageList images={issue.images} removeImage={this.removeImage} />
+          </div>
         </div>
       </div>
     );
@@ -95,6 +85,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    setHasErrored: (err) => dispatch( issueHasErrored(err)),
     fetchData: issue => dispatch( issueFetchData(issue)),
     saveData: issue => dispatch( issueSaveData(issue))
   }
