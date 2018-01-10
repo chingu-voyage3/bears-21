@@ -10,7 +10,6 @@ const houses = require('./houses');
 const users = require('./users');
 const issues = require('./issues');
 const { catchAsyncErrors } = require('../utils');
-const images = require('./images');
 
 const router = new Router();
 

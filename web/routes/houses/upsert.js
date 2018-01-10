@@ -1,18 +1,6 @@
 'use strict'
-const fs = require( 'fs');
+const util = require( '../util');
 const House = require( '../../../models/house');
-
-const readDirectory = ( dir) => {
-  return new Promise( (resolve, reject) => {
-    fs.readdir( dir, (err, res) => {
-      if( err){
-        reject( err);
-      } else {
-        resolve( res);
-      }
-    })
-  });
-};
 
 async function upsert( req, res) {
   console.log( "text fields:", req.body);
@@ -43,7 +31,7 @@ async function upsert( req, res) {
       house.images = [];
       break;
   }
-  // save the text info to get the _id so we can link pics to object dir
+  // save the text info to get the _id so we can link blob pics to house dir
   try {
     await house.save();
   } catch(e) {
@@ -54,42 +42,14 @@ async function upsert( req, res) {
 
   // now we have house _id sort the blob objects
   // we need the number of pics in the directory
-  let image_count = 0
   const house_dir = `${process.env.IMAGE_BASE_DIR}/${house._id}`;
-  try {
-    const listing = await readDirectory( house_dir);
-    image_count = listing.length;
-  } catch( e) {
-    console.log( "failed to read directory:", e);
-    if( e.code === "ENOENT") {
-      console.log( "creating missing directory:", house_dir)
-      // create missing directory
-      try {
-        fs.mkdirSync( house_dir, 484);
-      } catch( e) {
-        // we can't get error EEXIST here so bail
-        console.error( "mkdirSync failed:", e);
-        res.json( {success:false, message: e});
-        return;
-      }
-    } else {
-      console.error( "directory count failed:", e);
-      res.json( {success:false, message: e});
-      return;
-    }
+  let image_count = await util.getDirPicCount( house_dir);
+  if( image_count === -1) {
+    res.json( {success:false, message: "Image count failed"});
+    return;
   }
-  const new_image_urls = [];
-  req.files.forEach( (fd) => {
-    const bits = fd.originalname.match( /.*\.(.*)/);
-    const ext = bits[bits.length-1];
-    const np = `${process.env.IMAGE_BASE_DIR}/${house._id}/pic${image_count}.${ext}`;
-    fs.rename( fd.path, np, err => {
-      console.log( `move [${fd.path}] to [${np}] status:`, err);
-    });
-    const url = `/images/${house._id}/pic${image_count}.${ext}`;
-    house.images.push( url);
-    image_count += 1;
-  });
+  const new_image_urls = util.makeUrlsFromBlobs( house._id, image_count, req.files);
+  house.images = house.images.concat( new_image_urls);
   // save house with urls to uploaded blob images
   await house.save();
   res.json( {success:true, house})
