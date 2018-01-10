@@ -83,7 +83,7 @@ export function houseSaveData( house) {
         break;
       case "issues":
         house.issues.forEach( (i) => {
-          payload.append( 'issues', i);
+          payload.append( 'issues', i._id);
         });
         break;
       case "location":
