@@ -14,16 +14,7 @@ async function upsert( req, res) {
   issue.priority = req.body.priority;
   issue.house = req.body.house;
   // ok to save image url with basic issue detail
-  switch( typeof req.body.url) {
-    case "string":
-      issue.images = [req.body.url];
-      break;
-    case "object":
-      issue.images = req.body.url;
-      break;
-    default:
-      issue.images = [];
-  }
+  issue.images = util.makeArrayFromBody( req.body.url);
   try {
     await issue.save();
   } catch( e) {

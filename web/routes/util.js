@@ -51,5 +51,18 @@ module.exports = {
       image_count += 1;
     });
     return new_image_urls;
+  },
+  // return an array for a string, array or undefined
+  makeArrayFromBody: function( value) {
+    let ret = [];
+    switch( typeof value) {
+      case "string":
+        ret = [value];
+        break;
+      case "object":
+        ret = value;
+        break;
+    }
+    return ret;
   }
 };

@@ -5,7 +5,7 @@ const House = require( '../../../models/house');
 async function upsert( req, res) {
   console.log( "text fields:", req.body);
   console.log( "files:", req.files);
-  const new_house = req.body._id?fase:true;
+  const new_house = req.body._id?false:true;
   let house;
   if( new_house) {
     house = new House();
@@ -17,20 +17,10 @@ async function upsert( req, res) {
   house.title = req.body.title;
   house.description = req.body.description;
   const {street, postCode} = req.body;
-  house.location = {street, postCode};
-  house.issues = req.body.issues;
   // we can save image urls with the basic object info
-  switch( typeof req.body.url) {
-    case "string":
-      house.images = [req.body.url];
-      break;
-    case "object":
-      house.images = req.body.url;
-      break;
-    default:
-      house.images = [];
-      break;
-  }
+  house.location = {street, postCode};
+  house.issues = util.makeArrayFromBody( req.body.issues);
+  house.images = util.makeArrayFromBody( req.body.url);
   // save the text info to get the _id so we can link blob pics to house dir
   try {
     await house.save();
