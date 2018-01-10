@@ -11,7 +11,12 @@ export default class House extends Component {
   };
   render = () => {
     // FIXME: this won't work in prod
-    const house_image = "http://localhost:3001"+this.props.data.images[0];
+    let house_image;
+    if( this.props.data.images.length) {
+      house_image = "http://localhost:3001"+this.props.data.images[0];
+    } else {
+      house_image = "//via.placeholder.com/200x100?text=No Image";
+    }
     console.log( "house image src:", house_image);
     const style = {
       cursor: "pointer",
