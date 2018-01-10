@@ -20,7 +20,6 @@ module.exports = {
       const listing = await readDirectory( dir);
       image_count = listing.length;
     } catch( e) {
-      console.log( "failed to read directory:", e);
       if( e.code === "ENOENT") {
         console.log( "creating missing directory:", dir)
         // create missing directory
