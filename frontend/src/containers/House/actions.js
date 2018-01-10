@@ -74,10 +74,10 @@ export function houseSaveData( house) {
     Object.keys( house).forEach( (key) => {
       switch( key) {
       case "images":
-        url_images.forEach( (url, i) => {
+        url_images.forEach( (url) => {
           payload.append( "url", url);
         });
-        blob_images.forEach( (blob, i) => {
+        blob_images.forEach( (blob) => {
           payload.append( 'blobs', blob);
         });
         break;
