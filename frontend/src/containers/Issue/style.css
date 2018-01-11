@@ -6,10 +6,6 @@
 .images_wrapper {
   margin-top: 1em;
 }
-.upload_wrapper {
-  display: flex;
-  flex-direction: row;
-}
 img {
   padding: 5px;
 }
