@@ -42,6 +42,18 @@ module.exports = {
   },
   makeUrlsFromBlobs: function( parent_id, current_image_count, blobs) {
     const new_image_urls = [];
+    if( typeof parent_id !== "string") {
+      console.error( "makeUrlsFromBlobs parent_id missing");
+      return new_image_urls;
+    }
+    if( typeof current_image_count !== "number") {
+      console.error( "makeUrlsFromBlobs current_image_count missing");
+      return new_image_urls;
+    }
+    if( !Array.isArray( blobs)) {
+      console.error( "makeUrlsFromBlobs blobs param invalid");
+      return new_image_urls;
+    }
     let image_count = current_image_count;
     blobs.forEach( (fd) => {
       const bits = fd.originalname.match( /.*\.(.*)/);
