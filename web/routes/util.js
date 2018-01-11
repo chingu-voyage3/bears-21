@@ -13,6 +13,11 @@ const readDirectory = ( dir) => {
   });
 };
 
+function createMissingDir( dir) {
+  // 484 == 0744
+  fs.mkdirSync( dir, 484);
+}
+
 module.exports = {
   getDirPicCount: async function( dir) {
     let image_count = -1;
@@ -22,10 +27,8 @@ module.exports = {
     } catch( e) {
       if( e.code === "ENOENT") {
         console.log( "creating missing directory:", dir)
-        // create missing directory
         try {
-          // 484 == 0744
-          fs.mkdirSync( dir, 484);
+          createMissingDir( dir);
           image_count = 0;
         } catch( e) {
           // we can't get error EEXIST here so bail
