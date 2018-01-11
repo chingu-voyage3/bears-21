@@ -24,6 +24,7 @@ module.exports = {
         console.log( "creating missing directory:", dir)
         // create missing directory
         try {
+          // 484 == 0744
           fs.mkdirSync( dir, 484);
           image_count = 0;
         } catch( e) {
