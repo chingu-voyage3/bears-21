@@ -1,5 +1,6 @@
 'use strict'
 const fs = require( 'fs');
+const Image = require( '../../models/image');
 
 const readDirectory = ( dir) => {
   return new Promise( (resolve, reject) => {
@@ -76,6 +77,21 @@ module.exports = {
     } else if( typeof value === "string") {
       ret = [value];
     }
+    return ret;
+  },
+  saveBlobs: async function( blobs) {
+    let ret = []; // blobs.map( async (fd) => {
+    for( let i=0; i<blobs.length; i++){
+      const fd = blobs[i];
+      const data = fs.readFileSync(fd.path);
+      const image = new Image( {
+        data, contentType: fd.mimetype
+      });
+      await image.save();
+      console.log( "pushing blob id:", image._id);
+      ret.push( image._id);
+    }
+    console.log( "save blobs returning images ids:", ret);
     return ret;
   }
 };
