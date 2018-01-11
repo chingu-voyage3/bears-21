@@ -71,13 +71,10 @@ module.exports = {
   // return an array for a string, array or undefined
   makeArrayFromBody: function( value) {
     let ret = [];
-    switch( typeof value) {
-      case "string":
-        ret = [value];
-        break;
-      case "object":
-        ret = value;
-        break;
+    if( Array.isArray( value)) {
+      ret = value;
+    } else if( typeof value === "string") {
+      ret = [value];
     }
     return ret;
   }
