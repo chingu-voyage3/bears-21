@@ -66,6 +66,9 @@ class House extends Component {
     console.log( "updated image count:", ni.length);
     this.setState( {house: {...this.state.house, images: ni}});
   };
+  onNewHouse = () => {
+    this.props.resetHouse();
+  };
   render = () => {
     const {hasErrored, isWorking} = this.props;
     if( hasErrored) {
@@ -78,6 +81,7 @@ class House extends Component {
     return (
       <div>
         <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
+        <button type="button" onClick={this.onNewHouse} >New House</button>
         <div className="wrapper">
           <HouseForm house={this.state.house}
             onFieldChange={this.onFieldChange}
