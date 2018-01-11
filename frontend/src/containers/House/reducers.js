@@ -40,8 +40,12 @@ export function house( state = defaultHouse, action) {
     case HOUSE_SAVE_DATA_SUCCESS:
       return action.house;
     case HOUSE_RESET:
-      return defaultHouse;
+      return JSON.parse( JSON.stringify(defaultHouse));
     default:
-      return state;
+      if( state === defaultHouse) {
+        return JSON.parse( JSON.stringify(state));
+      } else {
+        return state;
+      }
   }
 }
