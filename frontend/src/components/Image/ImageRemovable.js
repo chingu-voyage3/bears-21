@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageDefault from './ImageDefault';
 
 export default class ImageRemovable extends React.Component {
   onRemove = () => {
@@ -23,7 +24,7 @@ export default class ImageRemovable extends React.Component {
         <div style={close_button}>
           <button type="button" onClick={this.onRemove} >X</button>
         </div>
-        <img src={src} style={img_style} alt="" />;
+        <ImageDefault src={src} missing_url="//via.placeholder.com/200x200?No Image" />
       </div>
     );
   };
