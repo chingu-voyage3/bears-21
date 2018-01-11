@@ -2,7 +2,7 @@ import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import {connect} from 'react-redux';
 import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
 import {ImageBlock, ImageList} from '../../components/Image';
-import {issueFetchData, issueSaveData, issueHasErrored } from './actions';
+import {issueFetchData, issueSaveData, issueHasErrored, issueReset } from './actions';
 import './style.css';
 
 class Issue extends Component {
@@ -18,6 +18,7 @@ class Issue extends Component {
     }
   };
   componentWillMount = () => {
+    console.log( "mounting issue props:", this.props);
     this.props.setHasErrored( false);
     if( this.props.location.state.issue) {
       this.setState( {issue: {...this.state.issue, ...this.props.location.state.issue}});
@@ -49,6 +50,9 @@ class Issue extends Component {
     });
     this.setState( {issue: {...this.state.issue, images: new_image_list}});
   };
+  onNewIssue = () => {
+    this.props.resetIssue( this.state.issue.house);
+  };
   render() {
     const {hasErrored, isWorking} = this.props;
     if( hasErrored) {
@@ -58,9 +62,12 @@ class Issue extends Component {
       return <p>Please wait ...</p>;
     }
     const {issue} = this.state;
+    const op_type = (typeof this.state.issue._id === "undefined")?"New":"Edit";
+
     return (
       <div>
-        <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
+        <h1 style={{textAlign:"center"}}>Issue ({op_type})</h1>
+        <button type="button" onClick={this.onNewIssue} >New Issue</button>
         <div className="wrapper">
           <IssueForm issue={issue}
             onFieldChange={this.onFieldChange}
@@ -85,6 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    resetIssue: (house_id) => dispatch( issueReset(house_id)),
     setHasErrored: (err) => dispatch( issueHasErrored(err)),
     fetchData: issue => dispatch( issueFetchData(issue)),
     saveData: issue => dispatch( issueSaveData(issue))

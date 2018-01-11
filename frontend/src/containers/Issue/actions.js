@@ -2,6 +2,14 @@ export const ISSUE_HAS_ERRORED = "ISSUE_HAS_ERRORED";
 export const ISSUE_IS_WORKING = "ISSUE_IS_WORKING";
 export const ISSUE_FETCH_DATA_SUCCESS = "ISSUE_FETCH_DATA_SUCCESS";
 export const ISSUE_SAVE_DATA_SUCCESS = "ISSUE_SAVE_DATA_SUCCESS";
+export const ISSUE_RESET = "ISSUES_RESET";
+
+export function issueReset( house_id) {
+  return {
+    type: ISSUE_RESET,
+    house: house_id
+  };
+}
 
 export function issueHasErrored( hasErrored) {
   return {
@@ -78,6 +86,7 @@ export function issueSaveData( issue) {
         });
         break;
       default:
+        console.log( `issue save key[${key}] value[${issue[key]}]`);
         payload.append( [key], issue[key]);
         break;
       }
