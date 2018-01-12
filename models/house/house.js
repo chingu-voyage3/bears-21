@@ -31,7 +31,8 @@ const houseSchema = new Schema({
   },
   issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}],
   owner: { type: Schema.Types.ObjectId, ref: 'User'},
-  images: [String]
+  images: [String],
+  active: {type: Boolean, default: true}
 });
 
 houseSchema.pre('save', function(next) {
@@ -43,7 +44,7 @@ houseSchema.pre('save', function(next) {
 });
 
 houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
-  return this.find( { owner: req.user._id})
+  return this.find( { owner: req.user._id, active: true})
   .populate( "issues")
   .exec( function( err, docs) {
     if( err || !docs || docs.length === 0){
