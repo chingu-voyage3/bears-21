@@ -13,13 +13,13 @@ class SearchResults extends Component {
   }
 
   render() {
-    const { houses=[], isFetching=true } = this.props;
+    const { houses=[], isFetching=true, postCode } = this.props;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
     return (
       <div className={css(styles.container)}>
-        <h3>Search Results</h3>
+        <h1 className={css(styles.heading)}>Search results for post code {postCode}</h1>
         <HouseList>
           {houses.map((house, i) =>
             <HouseItem key={i} house={house} />)
@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     flex: '1',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  heading: {
+    fontWeight: '500',
+    fontSize: '22px',
+    color: '#262637'
   }
 });
 
@@ -59,7 +64,8 @@ function mapStateToProps(state, ownProps) {
   const { postCode } = parse(getSearchParams(ownProps));
   return {
     houses: getHousesByPostCode(state, postCode),
-    isFetching: getIsFetching(state, postCode)
+    isFetching: getIsFetching(state, postCode),
+    postCode: postCode.toUpperCase()
   };
 }
 
