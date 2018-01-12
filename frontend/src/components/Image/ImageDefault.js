@@ -37,10 +37,13 @@ export default class ImageDefault extends React.Component {
     const {image_error, image_src} = this.state;
     return (
       <div>
-        {image_error?
-          <img className={css(styles.image_box)} src={missing_url} alt="noimage"/>
-          :
-          <img className={css(styles.image_box)} src={image_src} alt="noimage" onError={this.onImageError} />
+        { image_error
+          ? <img className={css(styles.image_box)} src={missing_url} alt="noimage"/>
+          : <img className={css(styles.image_box)}
+              src={image_src}
+              alt="noimage"
+              onError={this.onImageError}
+            />
         }
       </div>
     );
