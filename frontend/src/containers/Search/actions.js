@@ -11,7 +11,8 @@ export function searchHousesSuccess(postCode, json) {
   return {
     type: SEARCH_HOUSES_SUCCESS,
     postCode,
-    houses: json.houses || []
+    houses: (json.houses || [])
+      .filter(house => house.location.postCode.toLowerCase().includes(postCode.toLowerCase()))
   };
 }
 
