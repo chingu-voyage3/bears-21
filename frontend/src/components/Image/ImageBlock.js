@@ -7,7 +7,7 @@ export default class ImageBlock extends React.Component {
   state = {
     uploader_visible: false
   };
-  toggleUploaderViz = () => {
+  toggleUploaderVisibility = () => {
     this.setState( { uploader_visible: !this.state.uploader_visible});
   };
   render = () => {
@@ -17,7 +17,7 @@ export default class ImageBlock extends React.Component {
     return (
       <div>
         <div className={css(styles.image_title)}>
-          Images <button onClick={this.toggleUploaderViz} >+</button>
+          Images <button onClick={this.toggleUploaderVisibility} >+</button>
         </div>
         <div style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>
