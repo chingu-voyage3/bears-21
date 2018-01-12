@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { houseIssuesFetchData} from './actions';
+import { houseIssuesFetchData, houseDelete} from './actions';
 import {HouseList} from '../../components/House';
 
 class Dashboard extends Component {
@@ -13,6 +13,10 @@ class Dashboard extends Component {
   };
   onNewHouse = () => {
     this.setState( {redirect_new_house:true})
+  };
+  onDeleteHouse = (house_id) => {
+    console.log( "delete house:", house_id);
+    this.props.deleteHouse( house_id);
   };
   render = () => {
     if( this.state.redirect_new_house) {
@@ -34,7 +38,7 @@ class Dashboard extends Component {
       <div>
         <h1>Dashboard</h1>
         <button type="button" onClick={this.onNewHouse} >New House</button>
-        <HouseList data={houseIssues} />
+        <HouseList data={houseIssues} onDeleteHouse={this.onDeleteHouse} />
       </div>
     );
   };
@@ -50,6 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    deleteHouse: (houseIssues, house_id) => dispatch( houseDelete(houseIssues, house_id)),
     fetchData: (url) => dispatch( houseIssuesFetchData(url))
   };
 };
