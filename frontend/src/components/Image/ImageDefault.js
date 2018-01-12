@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class ImageDefault extends React.Component {
+  static propTypes = {
+    src: PropTypes.string.isRequired,
+    missing_url: PropTypes.string.isRequired
+  };
   state = {
     image_error: false,
     image_src: this.props.missing_url
