@@ -19,23 +19,10 @@ async function upsert( req, res) {
   issue.house = req.body.house;
   // ok to save image url with basic issue detail
   issue.images = util.makeArrayFromBody( req.body.url);
-  try {
-    await issue.save();
-  } catch( e) {
-    console.error( "issue upsert save failed:", e);
-    res.json( {success:false, message: e});
-    return;
-  }
-  // now we have the issue id sort the blob images
-  // get current number of picture in directory first
-  const issue_dir = `${process.env.IMAGE_BASE_DIR}/${issue._id}`;
-  let image_count = await util.getDirPicCount( issue_dir);
-  if( image_count === -1) {
-    res.json( {success: false, message: "Issue image count failed"});
-    return;
-  }
-  const new_image_urls = util.makeUrlsFromBlobs( issue._id, image_count, req.files);
-  issue.images = issue.images.concat( new_image_urls);
+  // save blobs
+  const image_ids = await util.saveBlobs( req.files);
+  issue.images = issue.images.concat( image_ids);
+
   try {
     await issue.save();
   } catch( e) {

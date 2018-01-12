@@ -9,6 +9,7 @@ const auth = require('./auth');
 const houses = require('./houses');
 const users = require('./users');
 const issues = require('./issues');
+const images = require('./images');
 const { catchAsyncErrors } = require('../utils');
 
 const router = new Router();
@@ -22,12 +23,8 @@ router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 router.post('/api/v1/house', upload.array('blobs', 3), catchAsyncErrors( houses.upsert));
 router.post('/api/v1/issue', upload.array('blobs', 3), catchAsyncErrors( issues.upsert));
 
-// FIXME: serve with  express static
-router.get('/images/:parent/:name', ( req, res) => {
-  console.log( "image request:", req.params);
-  const image_file = path.resolve( __dirname, '..', 'images', req.params.parent, req.params.name);
-  res.sendFile( image_file);
-});
+// NOTE: no auth required
+router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
 
 /**
  * 1. Validate the registration data

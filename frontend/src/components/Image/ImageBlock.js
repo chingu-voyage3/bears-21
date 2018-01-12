@@ -1,5 +1,7 @@
 import React from 'react';
 import {Uploader} from '../Uploader';
+import {css} from 'aphrodite';
+import styles from './styles';
 
 export default class ImageBlock extends React.Component {
   state = {
@@ -14,10 +16,10 @@ export default class ImageBlock extends React.Component {
     };
     return (
       <div>
-        <div className="image_title">
+        <div className={css(styles.image_title)}>
           Images <button onClick={this.toggleUploaderViz} >+</button>
         </div>
-        <div className="upload_wrapper" style={show_uploader} >
+        <div style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>
         </div>
       </div>

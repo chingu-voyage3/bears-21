@@ -1,33 +1,28 @@
 import React, {Component} from 'react';
+import {ImageDefault} from '../Image';
 import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class House extends Component {
-  onNewIssue = () => {
+  onNewIssue = (e) => {
+    console.log( "new issue");
+    e.stopPropagation();
     this.props.onNewIssue( this.props.data);
   };
-  onEditHouse = () => {
+  onEditHouse = (e) => {
+    console.log( "edit house");
     this.props.onEditHouse( this.props.data);
   };
   render = () => {
-    // FIXME: this won't work in prod
-    let house_image;
-    if( this.props.data.images.length) {
-      house_image = "http://localhost:3001"+this.props.data.images[0];
-    } else {
-      house_image = "//via.placeholder.com/200x100?text=No Image";
-    }
-    console.log( "house image src:", house_image);
+    const house_image = this.props.data.images[0];
     const style = {
       cursor: "pointer",
       maxWidth:"215px",
       textAlign:"center"
     };
     return (
-      <div style={style}>
-        <img src={house_image} style={{maxWidth:"200px"}}
-          onClick={this.onEditHouse}
-          alt="noimg" />
+      <div style={style} onClick={this.onEditHouse} >
+        <ImageDefault src={house_image} missing_url="//via.placeholder.com/200x200?No Image"/>
         <div className={css(styles.title)}>
           {this.props.data.title}
           <button type="button" onClick={this.onNewIssue} title="Add Issue" >+</button>

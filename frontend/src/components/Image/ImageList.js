@@ -1,17 +1,13 @@
 import React from 'react';
 import ImageRemovable from './ImageRemovable';
+import {css} from 'aphrodite';
+import styles from './styles';
 
 export default class ImageList extends React.Component {
   removeImage = (ndx) => {
     this.props.removeImage( ndx);
   };
   render = () => {
-    const image_style = {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      flexWrap: "wrap"
-    }
     const image_list = this.props.images.map( (img, i) => {
       let src;
       if( typeof img === "string"){
@@ -24,7 +20,7 @@ export default class ImageList extends React.Component {
       );
     });
     return (
-      <div style={image_style} >
+      <div className={css(styles.image_box)} >
         {image_list}
       </div>
     );

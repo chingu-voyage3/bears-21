@@ -1,6 +1,6 @@
 import React from 'react';
 import {css} from 'aphrodite';
-import styles from './formStyles';
+import styles from './styles';
 
 export default class HouseForm extends React.Component {
   state = {

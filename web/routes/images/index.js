@@ -1,5 +1,5 @@
 'use strict'
 
 module.exports = {
-  upsert: require('./upsert')
+  grab: require( './grab')
 };
