@@ -94,10 +94,12 @@ class House extends Component {
     }
     const op_type = (typeof house._id === "undefined")?"New":"Edit";
     return (
-      <div>
+      <div className="container_vertical">
         <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
-        <button type="button" onClick={this.onNewHouse} >New House</button>
-        <button type="button" onClick={this.onNewIssue} >New Issue</button>
+        <div className="container_horizontal">
+          <button type="button" onClick={this.onNewHouse} >New House</button>
+          <button type="button" onClick={this.onNewIssue} >New Issue</button>
+        </div>
         <div className="wrapper">
           <HouseForm house={house}
             onFieldChange={this.onFieldChange}

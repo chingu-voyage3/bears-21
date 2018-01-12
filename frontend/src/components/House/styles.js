@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   form: {
+    margin: "10px auto",
     maxWidth: "600px",
     display: "grid",
     gridTemplateColumns: "100px 1fr",

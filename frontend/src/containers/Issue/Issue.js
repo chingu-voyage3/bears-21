@@ -65,7 +65,7 @@ class Issue extends Component {
     const op_type = (typeof this.state.issue._id === "undefined")?"New":"Edit";
 
     return (
-      <div>
+      <div className="wrapper">
         <h1 style={{textAlign:"center"}}>Issue ({op_type})</h1>
         <button type="button" onClick={this.onNewIssue} >New Issue</button>
         <div className="wrapper">
