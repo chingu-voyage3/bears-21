@@ -26,3 +26,8 @@ input {
 input:focus {
   border-color: rgba( 127, 127, 255, 0.5);
 }
+
+textarea {
+  padding: 5px;
+  border-radius: 10px;
+}
