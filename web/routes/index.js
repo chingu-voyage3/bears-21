@@ -20,6 +20,8 @@ router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 
 // NOTE: this is singular, house
+router.delete('/api/v1/house', auth.isLoggedIn, catchAsyncErrors(houses.delete));
+// FIXME: should be authed
 router.post('/api/v1/house', upload.array('blobs', 3), catchAsyncErrors( houses.upsert));
 router.post('/api/v1/issue', upload.array('blobs', 3), catchAsyncErrors( issues.upsert));
 
