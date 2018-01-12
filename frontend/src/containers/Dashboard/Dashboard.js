@@ -18,7 +18,7 @@ class Dashboard extends Component {
     if( this.state.redirect_new_house) {
       return (
         <Redirect to={{
-            pathname: "house",
+            pathname: "/house",
             state: {new_house: true}
           }} />
       );

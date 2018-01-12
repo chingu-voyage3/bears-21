@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ImageBlock, ImageList} from '../../components/Image';
 import {HouseForm} from '../../components/House';
@@ -15,7 +16,8 @@ class House extends Component {
       },
       images: [],
       issue: []
-    }
+    },
+    redirect_issue: null
   };
   componentWillMount = () => {
     console.log( "mounting house props:", this.props);
@@ -69,7 +71,20 @@ class House extends Component {
   onNewHouse = () => {
     this.props.resetHouse();
   };
+  onNewIssue = () => {
+    this.setState( { redirect_issue: true});
+  };
   render = () => {
+    const {redirect_issue, house} = this.state;
+    if( redirect_issue) {
+      return (
+        <Redirect to={{
+            pathname: "/issue",
+            state: { issue: {house: house._id}}
+          }}
+        />
+      );
+    }
     const {hasErrored, isWorking} = this.props;
     if( hasErrored) {
       return <p>Sorry something went wrong</p>;
@@ -77,18 +92,19 @@ class House extends Component {
     if( isWorking) {
       return <p>Please wait ...</p>;
     }
-    const op_type = (typeof this.state.house._id === "undefined")?"New":"Edit";
+    const op_type = (typeof house._id === "undefined")?"New":"Edit";
     return (
       <div>
         <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
         <button type="button" onClick={this.onNewHouse} >New House</button>
+        <button type="button" onClick={this.onNewIssue} >New Issue</button>
         <div className="wrapper">
-          <HouseForm house={this.state.house}
+          <HouseForm house={house}
             onFieldChange={this.onFieldChange}
             onSubmit={this.houseFormSubmit} />
           <ImageBlock addImage={this.addImage} />
           <div className="images_wrapper">
-            <ImageList images={this.state.house.images} removeImage={this.removeImage} />
+            <ImageList images={house.images} removeImage={this.removeImage} />
           </div>
         </div>
       </div>
