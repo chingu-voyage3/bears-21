@@ -10,24 +10,19 @@ export default class House extends Component {
     onNewIssue: PropTypes.func.isRequired,
     onEditHouse: PropTypes.func.isRequired
   };
-  onNewIssue = (e) => {
+  onNewIssue = e => {
     console.log( "new issue");
     e.stopPropagation();
-    this.props.onNewIssue( this.props.house);
+    this.props.onNewIssue(this.props.house);
   };
-  onEditHouse = (e) => {
+  onEditHouse = e => {
     console.log( "edit house");
-    this.props.onEditHouse( this.props.house);
+    this.props.onEditHouse(this.props.data);
   };
   render = () => {
-    const house_image = this.props.house.images[0];
-    const style = {
-      cursor: "pointer",
-      maxWidth:"215px",
-      textAlign:"center"
-    };
+    const house_image = this.props.data.images[0];
     return (
-      <div style={style} onClick={this.onEditHouse} >
+      <div className={css(styles.house_wrapper)} onClick={this.onEditHouse} >
         <ImageDefault src={house_image} missing_url="//via.placeholder.com/200x200?No Image"/>
         <div className={css(styles.title)}>
           {this.props.house.title}

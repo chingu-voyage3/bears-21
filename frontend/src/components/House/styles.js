@@ -5,6 +5,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-around"
   },
+  house_wrapper: {
+    cursor: "pointer",
+    maxWidth:"215px",
+    textAlign:"center"
+  },
   list: {
     display: "flex",
     flexDirection: "column"
