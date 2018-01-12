@@ -5,7 +5,7 @@ import styles from './styles';
 
 export default class ImageDefault extends React.Component {
   static propTypes = {
-    src: PropTypes.string.isRequired,
+    src: PropTypes.string,
     missing_url: PropTypes.string.isRequired
   };
   state = {

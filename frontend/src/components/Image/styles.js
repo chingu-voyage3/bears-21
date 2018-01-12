@@ -11,8 +11,8 @@ export default StyleSheet.create({
     flexWrap: "wrap"
   },
   image_box: {
-    maxWidth: "200px",
-    maxHeight: "200px"
+    maxWidth: "180px",
+    maxHeight: "180px"
   },
   close_button: {
     position: "absolute",
