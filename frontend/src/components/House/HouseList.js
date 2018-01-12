@@ -11,20 +11,20 @@ export default class HouseList extends Component {
     data: PropTypes.array.isRequired, // array of houses with issues
   };
   state = {
-    redirect: null,
+    new_issue: null,
     edit_house: null
   };
   onNewIssue = house => {
-    this.setState({redirect: house});
+    this.setState({new_issue: house});
   };
   onEditHouse = house => {
     this.setState({edit_house: house});
   };
   render = () => {
-    if( this.state.redirect){
+    if( this.state.new_issue){
       return <Redirect to={{
           pathname: "/issue",
-          state: { issue: {house: this.state.redirect._id}}
+          state: { issue: {house: this.state.new_issue._id}}
         }}
       />;
     }
