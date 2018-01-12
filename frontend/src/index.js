@@ -5,6 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import './styles.css';
 
 
 ReactDOM.render(
@@ -12,7 +13,7 @@ ReactDOM.render(
   	<Router>
 	  	<Main />
   	</Router>
-  </Provider>, 
+  </Provider>,
 	document.getElementById('root')
 );
 registerServiceWorker();
