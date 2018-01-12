@@ -92,8 +92,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetIssue: (house_id) => dispatch( issueReset(house_id)),
-    setHasErrored: (err) => dispatch( issueHasErrored(err)),
+    resetIssue: house_id => dispatch( issueReset(house_id)),
+    setHasErrored: err => dispatch( issueHasErrored(err)),
     fetchData: issue => dispatch( issueFetchData(issue)),
     saveData: issue => dispatch( issueSaveData(issue))
   }

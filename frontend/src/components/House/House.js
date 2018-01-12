@@ -11,14 +11,14 @@ export default class House extends Component {
     onEditHouse: PropTypes.func.isRequired,
     onDeleteHouse: PropTypes.func.isRequired
   };
-  onNewIssue = (e) => {
+  onNewIssue = e => {
     console.log( "new issue");
     e.stopPropagation();
-    this.props.onNewIssue( this.props.house);
+    this.props.onNewIssue(this.props.house);
   };
-  onEditHouse = (e) => {
+  onEditHouse = e => {
     console.log( "edit house");
-    this.props.onEditHouse( this.props.house._id);
+    this.props.onEditHouse(this.props.house);
   };
   onDeleteHouse = (e) => {
     e.stopPropagation();

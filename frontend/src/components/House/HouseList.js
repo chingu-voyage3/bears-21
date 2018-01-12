@@ -14,12 +14,12 @@ export default class HouseList extends Component {
     redirect: null,
     edit_house: null
   };
-  onNewIssue = (house) => {
-    this.setState( {redirect: house});
-  }
-  onEditHouse = (house) => {
-    this.setState( {edit_house: house});
-  }
+  onNewIssue = house => {
+    this.setState({redirect: house});
+  };
+  onEditHouse = house => {
+    this.setState({edit_house: house});
+  };
   render = () => {
     if( this.state.redirect){
       return <Redirect to={{
@@ -36,7 +36,7 @@ export default class HouseList extends Component {
       />;
     }
     const {data} = this.props;
-    const house_list = data.map( (house, ndx) => {
+    const house_list = data.map((house, ndx) => {
       return (
         <div className={css(styles.wrapper)} key={ndx}>
           <House house={house}

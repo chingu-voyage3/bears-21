@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-around"
   },
+  house_wrapper: {
+    cursor: "pointer",
+    maxWidth:"215px",
+    textAlign:"center"
+  },
   card_wrapper: {
     display: "flex",
     flexDirection: "column",
