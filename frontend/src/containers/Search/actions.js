@@ -1,8 +1,35 @@
-
-export const CHANGE_POSTCODE = 'CHANGE_POSTCODE';
-export default function changePostCode(value = '') {
+export const SEARCH_HOUSES_REQUEST = 'SEARCH_HOUSES';
+export function searchHouses(postCode='') {
   return {
-    type: CHANGE_POSTCODE,
-    value
+    type: SEARCH_HOUSES_REQUEST,
+    postCode
   };
+}
+
+export const SEARCH_HOUSES_SUCCESS = 'SEARCH_HOUSES_SUCCESS';
+export function searchHousesSuccess(postCode, json) {
+  return {
+    type: SEARCH_HOUSES_SUCCESS,
+    postCode,
+    houses: json.houses || []
+  };
+}
+
+export const SEARCH_HOUSES_FAILURE = 'SEARCH_HOUSES_FAILURE';
+export function searchHousesFailed(postCode='') {
+  return {
+    type: SEARCH_HOUSES_FAILURE,
+    postCode
+  };
+}
+
+export function fetchHouses(postCode) {
+  return dispatch => {
+    dispatch(searchHouses(postCode));
+
+    return fetch('api/v1/houses')
+      .then(response => response.json())
+      .then(json => dispatch(searchHousesSuccess(postCode, json)))
+      .catch(err => dispatch(searchHousesFailed(postCode)));
+  }
 }

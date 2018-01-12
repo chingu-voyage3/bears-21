@@ -10,20 +10,20 @@ export default class SearchPage extends Component {
     return this.refs.input.value;
   }
 
-  handleSubmit = () => {
-    const postCode = this.getInputValue();
-    this.props.history.push(`search?postCode=${postCode}`);
-  }
-
   handleKeyUp = (e) => {
     if (e.keyCode === 13) {
       this.handleSubmit();
     }
   }
 
+  handleSubmit = () => {
+    const postCode = this.getInputValue();
+    this.props.history.push(`search?postCode=${postCode}`);
+  }
+
   render () {
     return (
-      <div className={css(styles.container)}>
+      <div className={css(styles.container)} style={{ overflow: 'scroll' }}>
         <Form onSubmit={this.handleSubmit}>
           <input type="search"
                  className={css(styles.input)}
@@ -45,7 +45,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundImage: "url('http://lorempixel.com/1000/600/abstract')",
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    overflow: 'scroll',
+    marginTop: '0'
   },
   input: {
     border: '0',

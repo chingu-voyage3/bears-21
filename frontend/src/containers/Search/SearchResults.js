@@ -1,46 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import 'url-search-params-polyfill';
-import HouseList from '../../components/House/HouseList';
+import HouseList from './HouseList';
+import HouseItem from './HouseItem';
+import { fetchHouses } from './actions';
+import { getHouses } from './reducers';
 
-export default class SearchResults extends Component {
+class SearchResults extends Component {
   componentWillMount() {
-    this.fetchHouses(this.props.location.search);
-  }
-
-  fetchHouses = (search) => {
-    const { postCode = '' } = parse(search);
-    /*
-    HouseAPI.get(postCode).then(data => {
-      console.log(data);
-    });*/
-    fetch( 'api/v1/houses', {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'same-origin'
-    })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      return response;
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch((err) => console.log(err));
+    loadData(this.props)
   }
 
   render() {
-    const houses = [{issues: []}, {issues: []}];
+    const { houses, isFetching } = this.props;
+    if (isFetching) {
+      return <h3>Loading...</h3>
+    }
     return (
-      <div>
-        <h1>Search Results</h1>
-        <HouseList data={houses}/>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h3>Search Results</h3>
+        <HouseList>
+          {houses.map(house => <HouseItem key={house.id} house={house} />)}
+        </HouseList>
       </div>
     );
   }
+}
+
+function loadData(props) {
+  props.fetchHouses(parse(getSearchParams(props)).postCode);
 }
 
 function parse(queryString) {
@@ -49,3 +37,18 @@ function parse(queryString) {
     postCode: query.get('postCode')
   };
 }
+
+function getSearchParams({ location }) {
+  return location.search;
+}
+
+function mapStateToProps(state, ownProps) {
+  const { postCode } = parse(getSearchParams(ownProps));
+  return {
+    houses: getHouses(state, postCode)
+  };
+}
+
+export default connect(mapStateToProps, {
+  fetchHouses
+})(SearchResults);

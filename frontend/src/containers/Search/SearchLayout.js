@@ -1,0 +1,29 @@
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { StyleSheet, css } from 'aphrodite';
+import SearchPage from './SearchPage';
+import SearchResults from './SearchResults';
+
+const Search = (props) => (
+  <div>
+    <Switch>
+      <Route path="/" exact component={SearchPage} />
+      <Route path="/search" component={SearchResults} />
+      <Redirect to="/" />
+    </Switch>
+  </div>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    height: '80vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '20px',
+    padding: '10px'
+  }
+});
+
+export default Search;

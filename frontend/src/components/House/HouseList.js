@@ -22,13 +22,17 @@ export default class HouseList extends Component {
         }}
       />;
     }
-    const { data } = this.props;
+    const { data, isLoggedIn=false } = this.props;
     const house_list = data.map((house, ndx) => {
       return (
         <div className={css(styles.wrapper)} key={ndx}>
-          <House data={house} onNewIssue={this.onNewIssue} />
-          <FilteredIssueList data={house.issues} statusFilter="open" title="Open Issues" />
-          <FilteredIssueList data={house.issues} statusFilter="resolved" title="Resolved Issues" />
+          <House data={house} onNewIssue={this.onNewIssue} isLoggedIn={isLoggedIn} />
+          { isLoggedIn &&
+            <span>
+              <FilteredIssueList data={house.issues} statusFilter="open" title="Open Issues" />
+              <FilteredIssueList data={house.issues} statusFilter="resolved" title="Resolved Issues" />
+            </span>
+          }
         </div>
       );
     });

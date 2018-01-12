@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from '../components/NotFound';
 import Dummy from '../components/Dummy';
 import Dashboard from '../containers/Dashboard';
-import Search from "../containers/Search";
+import SearchLayout from "../containers/Search";
 import Issue from '../containers/Issue';
 import House from '../containers/House';
 import { Login } from '../components/Login';
@@ -25,7 +25,7 @@ class routes extends Component {
     const {user} = this.props;
     return (
       <Switch>
-        <Route path="/" component={Search} />
+        <Route path="/" component={SearchLayout} />
         <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
         <NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
         <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />

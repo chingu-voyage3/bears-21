@@ -14,9 +14,10 @@ import {
   issueHasErrored,
   issueIsWorking
 } from '../containers/Issue';
+import search from '../containers/Search/reducers';
 
 // QUESTION: shouldn't this reducer be in login with action?
-import { LOGIN, LOGOUT, } from './actions.js';
+import { LOGIN, LOGOUT } from './actions.js';
 
 function reducer(state = false, action) {
   switch (action.type) {
@@ -29,16 +30,6 @@ function reducer(state = false, action) {
   }
 }
 
-/*
-function selectedPostCode(state = '', action) {
-  switch (action.type) {
-    case SELECT_POSTCODE:
-      return action.value;
-    default:
-      return state;
-  }
-}*/
-
 // user key has to be user
 export default combineReducers({
   user: reducer,
@@ -50,5 +41,6 @@ export default combineReducers({
   houseIsWorking,
   issue,
   issueHasErrored,
-  issueIsWorking
+  issueIsWorking,
+  search
 });
