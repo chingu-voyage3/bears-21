@@ -1,4 +1,15 @@
 
+.container_vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container_horizontal {
+  display: flex;
+  justify-content: center;
+}
+
 button {
   cursor: pointer;
   margin: 5px;
