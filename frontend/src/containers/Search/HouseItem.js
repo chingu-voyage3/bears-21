@@ -4,8 +4,8 @@ import { css, StyleSheet } from 'aphrodite';
 const HouseItem = ({ house }) => (
   <div className={css(styles.container)}>
     { house.images.length > 0 ?
-        <img className={css(styles.image)} src={house.images[0]} alt="noimg" /> :
-        <img className={css(styles.image)} src="http://via.placeholder.com/350x150" alt="noimg" />
+      <img className={css(styles.image)} src={house.images[0]} alt="noimg" /> :
+      <img className={css(styles.image)} src="http://via.placeholder.com/350x150" alt="noimg" />
     }
     <span className={css(styles.title)}>
       <h4 style={{margin: '0', padding: '0 3.5%', lineHeight: '1.2'}}>{house.title}</h4>

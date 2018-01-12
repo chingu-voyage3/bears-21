@@ -18,11 +18,11 @@ export default class House extends Component {
         }
         <div className={css(styles.title)}>
           <span>{title}</span>
-          { isLoggedIn && 
+          { isLoggedIn &&
             <button type="button" onClick={this.onNewIssue} >+</button>
           }
         </div>
       </div>
     );
   };
-};
+}

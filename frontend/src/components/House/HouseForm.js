@@ -60,4 +60,4 @@ export default class HouseForm extends React.Component {
       </form>
     );
   };
-};
+}

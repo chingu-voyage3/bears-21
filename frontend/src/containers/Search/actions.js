@@ -17,10 +17,11 @@ export function searchHousesSuccess(postCode, json) {
 }
 
 export const SEARCH_HOUSES_FAILURE = 'SEARCH_HOUSES_FAILURE';
-export function searchHousesFailed(postCode='') {
+export function searchHousesFailed(postCode='', err) {
   return {
     type: SEARCH_HOUSES_FAILURE,
-    postCode
+    postCode,
+    err
   };
 }
 
@@ -31,6 +32,6 @@ export function fetchHouses(postCode) {
     return fetch('api/v1/houses')
       .then(response => response.json())
       .then(json => dispatch(searchHousesSuccess(postCode, json)))
-      .catch(err => dispatch(searchHousesFailed(postCode)));
+      .catch(err => dispatch(searchHousesFailed(postCode, err)));
   }
 }

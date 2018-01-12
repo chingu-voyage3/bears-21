@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 //import SearchInput from './SearchInput';
 import SubmitInput from './SubmitInput';
@@ -7,7 +6,7 @@ import Form from './Form';
 
 export default class SearchPage extends Component {
   getInputValue = () => {
-    return this.refs.input.value;
+    return this.input.value;
   }
 
   handleKeyUp = (e) => {
@@ -28,7 +27,8 @@ export default class SearchPage extends Component {
           <input type="search"
                  className={css(styles.input)}
                  placeholder="Enter Postcode"
-                 ref="input" onKeyUp={this.handleKeyUp} required />
+                 ref={(c) => { this.input = c; }}
+                 onKeyUp={this.handleKeyUp} required />
           <SubmitInput />
         </Form>
       </div>

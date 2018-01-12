@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import SearchPage from './SearchPage';
 import SearchResults from './SearchResults';
 
-const Search = (props) => (
+const Search = () => (
   <div className={css(styles.container)}>
     <Switch>
       <Route path="/" exact component={SearchPage} />

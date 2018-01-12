@@ -28,4 +28,4 @@ export default class FilteredIssueList extends Component {
         onIssueClick={this.onIssueClick} />
     );
   };
-};
+}

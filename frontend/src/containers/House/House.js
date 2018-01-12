@@ -14,7 +14,7 @@ class House extends Component {
     this.setState( { new_house: nextProps.house});
   };
 
-  houseFormSubmit = e => {
+  houseFormSubmit = e => { // eslint-disable-line no-unused-vars
     console.log( "house form submit:", this.state.new_house);
     this.props.saveData( this.state.new_house);
   };
@@ -59,7 +59,7 @@ class House extends Component {
       </div>
     );
   };
-};
+}
 
 const mapStateToProps = state => {
   return {

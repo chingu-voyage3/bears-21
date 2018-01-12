@@ -32,7 +32,7 @@ class Issue extends Component {
     console.log( "component will receive props:", nextProps);
     this.setState( {issue: {...nextProps.issue}})
   };
-  issueFormSubmit = e => {
+  issueFormSubmit = e => { // eslint-disable-line no-unused-vars
     console.log( "issue form submit issue:", this.state.issue);
     this.props.saveData( this.state.issue);
   };

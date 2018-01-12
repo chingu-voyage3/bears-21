@@ -49,11 +49,11 @@ function houses(
 ) {
   switch (action.type) {
     case SEARCH_HOUSES_REQUEST:
-      return {...state, isFetching: true}
+      return {...state, isFetching: true};
     case SEARCH_HOUSES_SUCCESS:
-      return {...state, isFetching: false, items: action.houses}
+      return {...state, isFetching: false, items: action.houses};
     case SEARCH_HOUSES_FAILURE:
-      return {...state, isFetching: false, errorMessage: ''}
+      return {...state, isFetching: false, errorMessage: ''};
     default:
       return state;
   }
@@ -66,7 +66,7 @@ function housesByPostCode(state = {}, action) {
     case SEARCH_HOUSES_FAILURE:
       return {...state,
         [action.postCode]: houses(state[action.postCode], action)
-      }
+      };
     default:
       return state;
   }
