@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import {Uploader} from '../Uploader';
 import {css} from 'aphrodite';
 import styles from './styles';

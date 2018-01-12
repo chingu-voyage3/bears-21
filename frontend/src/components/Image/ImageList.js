@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import ImageRemovable from './ImageRemovable';
 import {css} from 'aphrodite';
 import styles from './styles';
