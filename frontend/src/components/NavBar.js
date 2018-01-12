@@ -33,7 +33,6 @@ class navbar extends Component {
 					<ul className={css(styles.container)}>
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
 					</ul>
 				</div>
