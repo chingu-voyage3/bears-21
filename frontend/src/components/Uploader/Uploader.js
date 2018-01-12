@@ -52,7 +52,8 @@ export default class Uploader extends Component {
                 missing_url="//via.placeholder.com/200x200?text=noimage"/>
             : <Dropzone onDrop={this.onFileDropped} >
                 Drop files here or click to select.
-                Alternatively specify url to an online image in the url box below and click preview button
+                Alternatively specify url to an online image in the url box
+                below and click preview button {reload_symbol}
               </Dropzone>
           }
         </div>
