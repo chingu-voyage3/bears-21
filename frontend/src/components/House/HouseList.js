@@ -41,7 +41,8 @@ export default class HouseList extends Component {
         <div className={css(styles.wrapper)} key={ndx}>
           <House house={house}
             onNewIssue={this.onNewIssue}
-            onEditHouse={this.onEditHouse} />
+            onEditHouse={this.onEditHouse}
+            onDeleteHouse={this.props.onDeleteHouse} />
           <FilteredIssueList data={house.issues} statusFilter="open" title="Open Issues" />
           <FilteredIssueList data={house.issues} statusFilter="resolved" title="Resolved Issues" />
         </div>
