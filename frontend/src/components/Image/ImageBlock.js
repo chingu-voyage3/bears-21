@@ -19,7 +19,7 @@ export default class ImageBlock extends React.Component {
         <div className={css(styles.image_title)}>
           Images <button onClick={this.toggleUploaderViz} >+</button>
         </div>
-        <div className={css(styles.upload_wrapper)} style={show_uploader} >
+        <div style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>
         </div>
       </div>

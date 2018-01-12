@@ -1,12 +1,8 @@
 import {StyleSheet} from 'aphrodite';
 
 export default StyleSheet.create({
-  upload_wrapper: {
-    display: "flex",
-    flexDirection: "row"
-  },
   cross_box_colour: {
-    background: "linear-gradient( to top, #49CF87, #40C080)"
+    background: "tomato" // "linear-gradient( to top, #49CF87, #40C080)"
   },
   image_wrapper: {
     display: "flex",
