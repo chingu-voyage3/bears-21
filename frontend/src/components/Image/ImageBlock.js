@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Uploader} from '../Uploader';
 import {css} from 'aphrodite';
 import styles from './styles';
 
-export default class ImageBlock extends React.Component {
+export default class ImageBlock extends Component {
   state = {
     uploader_visible: false
   };

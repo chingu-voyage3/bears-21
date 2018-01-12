@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {css} from 'aphrodite';
 import styles from './styles';
 
-export default class HouseForm extends React.Component {
+export default class HouseForm extends Component {
   state = {
     uploader_visible: false
   };
