@@ -1,4 +1,6 @@
 import React from 'react';
+import {css} from 'aphrodite';
+import styles from './styles';
 
 export default class ImageDefault extends React.Component {
   state = {
@@ -33,13 +35,12 @@ export default class ImageDefault extends React.Component {
   render = () => {
     const {missing_url} = this.props;
     const {image_error, image_src} = this.state;
-    const style={ maxWidth: "200px", maxHeight: "200px"};
     return (
       <div>
         {image_error?
-          <img style={style} src={missing_url} alt="noimage"/>
+          <img className={css(styles.image_box)} src={missing_url} alt="noimage"/>
           :
-          <img style={style} src={image_src} alt="noimage" onError={this.onImageError} />
+          <img className={css(styles.image_box)} src={image_src} alt="noimage" onError={this.onImageError} />
         }
       </div>
     );
