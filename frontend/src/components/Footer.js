@@ -9,10 +9,11 @@ export default () => (
 
 const styles = StyleSheet.create({
   footer: {
+    color: 'white',
     display: 'flex',
     padding: '1em 0',
     justifyContent: 'center',
     alignItems: 'center',
-    borderTop: '1px solid #666'
+    backgroundColor: '#333'
   },
 });

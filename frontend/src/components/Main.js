@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     minHeight: '100vh',
     overflow: 'hidden',
     flexDirection: 'column',
-    backgroundColor: '#ddd'
+    backgroundColor: '#f0f0f0'
   }
 });
 

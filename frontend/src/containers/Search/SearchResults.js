@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { css, StyleSheet } from 'aphrodite';
 import 'url-search-params-polyfill';
 import HouseList from './HouseList';
 import HouseItem from './HouseItem';
 import { fetchHouses } from './actions';
-import { getHouses } from './reducers';
+import { getHousesByPostCode, getIsFetching } from './reducers';
 
 class SearchResults extends Component {
   componentWillMount() {
@@ -12,20 +13,32 @@ class SearchResults extends Component {
   }
 
   render() {
-    const { houses, isFetching } = this.props;
+    const { houses=[], isFetching=true } = this.props;
     if (isFetching) {
-      return <h3>Loading...</h3>
+      return <h3>Loading...</h3>;
     }
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className={css(styles.container)}>
         <h3>Search Results</h3>
         <HouseList>
-          {houses.map(house => <HouseItem key={house.id} house={house} />)}
+          {houses.map((house, i) =>
+            <HouseItem key={i} house={house} />)
+          }
         </HouseList>
       </div>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flex: '1',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
+});
+
 
 function loadData(props) {
   props.fetchHouses(parse(getSearchParams(props)).postCode);
@@ -45,7 +58,8 @@ function getSearchParams({ location }) {
 function mapStateToProps(state, ownProps) {
   const { postCode } = parse(getSearchParams(ownProps));
   return {
-    houses: getHouses(state, postCode)
+    houses: getHousesByPostCode(state, postCode),
+    isFetching: getIsFetching(state, postCode)
   };
 }
 

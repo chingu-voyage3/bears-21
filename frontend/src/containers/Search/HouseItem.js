@@ -1,22 +1,45 @@
 import React from 'react';
+import { css, StyleSheet } from 'aphrodite';
 
 const HouseItem = ({ house }) => (
-  <div style={{
-       display: "flex",
-       flexDirection: "column",
-       maxWidth: '200px',
-       border: '1px solid black',
-       borderRadius: '5px',
-       background: '#fff',
-       margin: '10px'
-  }}>
-    <h4 style={{padding: '6px', margin: '0'}}>{ house.title }</h4>
+  <div className={css(styles.container)}>
     { house.images.length > 0 ?
-        <img src={house.images[0]} alt="noimg" /> :
-        <img src="http://via.placeholder.com/350x150" alt="noimg" />
+        <img className={css(styles.image)} src={house.images[0]} alt="noimg" /> :
+        <img className={css(styles.image)} src="http://via.placeholder.com/350x150" alt="noimg" />
     }
-    <p style={{padding: '6px'}}>{ house.description }</p>
+    <span className={css(styles.title)}>
+      <h4 style={{margin: '0', padding: '0 3.5%', lineHeight: '1.2'}}>{house.title}</h4>
+    </span>
+    <p className={css(styles.content)}>{house.description}</p>
   </div>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    background: '#fefff9',
+    boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0',
+    borderRadius: '4px',
+    color: '#363636',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '10px',
+    maxWidth: '320px'
+  },
+  image: {
+    borderRadius: '4px 4px 0 0',
+    width: '100%',
+    padding: '0'
+  },
+  title: {
+    background: 'rgba(157, 187, 63, .85)',
+    color: 'white',
+    bottom: '0',
+    width: '100%',
+    padding: '3.5% 0 2.5% 0'
+  },
+  content: {
+    padding: '5% 5% 3% 5%'
+  }
+});
 
 export default HouseItem;

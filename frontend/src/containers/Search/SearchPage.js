@@ -23,7 +23,7 @@ export default class SearchPage extends Component {
 
   render () {
     return (
-      <div className={css(styles.container)} style={{ overflow: 'scroll' }}>
+      <div className={css(styles.container)}>
         <Form onSubmit={this.handleSubmit}>
           <input type="search"
                  className={css(styles.input)}

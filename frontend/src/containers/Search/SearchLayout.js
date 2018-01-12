@@ -5,7 +5,7 @@ import SearchPage from './SearchPage';
 import SearchResults from './SearchResults';
 
 const Search = (props) => (
-  <div>
+  <div className={css(styles.container)}>
     <Switch>
       <Route path="/" exact component={SearchPage} />
       <Route path="/search" component={SearchResults} />
@@ -16,13 +16,10 @@ const Search = (props) => (
 
 const styles = StyleSheet.create({
   container: {
-    height: '80vh',
-    width: '100%',
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '20px',
-    padding: '10px'
+    flex: '1',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 });
 

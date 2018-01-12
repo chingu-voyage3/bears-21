@@ -78,7 +78,12 @@ export default combineReducers({
 })
 
 // Selectors
-export const getHouses = (state, postCode) => {
+export const getHousesByPostCode = (state, postCode) => {
   return state.search.housesByPostCode[postCode] ?
     state.search.housesByPostCode[postCode].items : [];
+};
+
+export const getIsFetching = (state, postCode) => {
+  return state.search.housesByPostCode[postCode] ?
+    state.search.housesByPostCode[postCode].isFetching : [];
 };
