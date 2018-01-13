@@ -14,18 +14,25 @@ class navbar extends Component {
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
 						<li className={css(styles.navelement)} onClick={() => this.props.logout()}><Link className={css(styles.links)} to="/logout">Logout</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newhouse">New House</Link></li>
 					</ul>
 				</div>
 			);
+			// can't get these to work with redux. problem is inital state on new page
+			// <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
+			// <li className={css(styles.navelement)}>
+			// 	<Link className={css(styles.links)} to={{
+			// 			pathname: "/house",
+			// 			state: { new_house: true}
+			// 		}}>
+			// 		New House
+			// 	</Link>
+			// </li>
 		} else { // not authenticated
 			return (
 				<div>
 					<ul className={css(styles.container)}>
 						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
 					</ul>
 				</div>

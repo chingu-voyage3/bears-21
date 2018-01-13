@@ -1,4 +1,5 @@
 import {
+  ISSUE_RESET,
   ISSUE_FETCH_DATA_SUCCESS,
   ISSUE_SAVE_DATA_SUCCESS,
   ISSUE_IS_WORKING,
@@ -33,11 +34,22 @@ const defaultIssue = {
 };
 
 export function issue( state = defaultIssue, action) {
+  let ret;
   switch( action.type) {
-    case ISSUE_FETCH_DATA_SUCCESS:
-    case ISSUE_SAVE_DATA_SUCCESS:
-      return action.issue;
-    default:
+  case ISSUE_FETCH_DATA_SUCCESS:
+  case ISSUE_SAVE_DATA_SUCCESS:
+    return action.issue;
+  case ISSUE_RESET:
+    ret = JSON.parse( JSON.stringify(defaultIssue));
+    ret.house = action.house;
+    return ret;
+  default:
+    if( state === defaultIssue) {
+      ret = JSON.parse( JSON.stringify( defaultIssue));
+      ret.house = action.house;
+      return ret;
+    } else {
       return state;
+    }
   }
 }

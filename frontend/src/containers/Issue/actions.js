@@ -2,6 +2,14 @@ export const ISSUE_HAS_ERRORED = "ISSUE_HAS_ERRORED";
 export const ISSUE_IS_WORKING = "ISSUE_IS_WORKING";
 export const ISSUE_FETCH_DATA_SUCCESS = "ISSUE_FETCH_DATA_SUCCESS";
 export const ISSUE_SAVE_DATA_SUCCESS = "ISSUE_SAVE_DATA_SUCCESS";
+export const ISSUE_RESET = "ISSUES_RESET";
+
+export function issueReset( house_id) {
+  return {
+    type: ISSUE_RESET,
+    house: house_id
+  };
+}
 
 export function issueHasErrored( hasErrored) {
   return {
@@ -57,14 +65,36 @@ export function issueSaveData( issue) {
   return (dispatch) => {
     dispatch( issueHasErrored( false));
     dispatch( issueIsWorking( true));
-    fetch( '/api/v1/issues', {
+    let payload = new FormData();
+    const url_images = [];
+    const blob_images = [];
+    issue.images.forEach( (img) => {
+      if( typeof img === "string") {
+        url_images.push( img);
+      } else {
+        blob_images.push( img);
+      }
+    });
+    Object.keys( issue).forEach( key => {
+      switch( key) {
+      case "images":
+        url_images.forEach( url => {
+          payload.append( "url", url);
+        });
+        blob_images.forEach( blob => {
+          payload.append( "blobs", blob);
+        });
+        break;
+      default:
+        console.log( `issue save key[${key}] value[${issue[key]}]`);
+        payload.append( [key], issue[key]);
+        break;
+      }
+    });
+    fetch( '/api/v1/issue', {
       method: 'post',
-      headers: {
-        Accept: 'application/json',
-        "Content-Type": 'application/json'
-      },
       credentials: 'same-origin',
-      body: JSON.stringify( issue)
+      body: payload
     })
     .then( response => {
       if( !response.ok) {

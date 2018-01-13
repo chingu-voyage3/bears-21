@@ -1,10 +1,15 @@
 'use strict'
 
 const { Router } = require('express');
+const path = require('path');
+const multer = require('multer');
+const upload = multer({ dest: process.env.IMAGE_UPLOAD_DIR});
+
 const auth = require('./auth');
 const houses = require('./houses');
 const users = require('./users');
 const issues = require('./issues');
+const images = require('./images');
 const { catchAsyncErrors } = require('../utils');
 
 const router = new Router();
@@ -14,7 +19,12 @@ router.post('/api/v1/houses', auth.isLoggedIn, catchAsyncErrors(houses.create));
 
 router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 
-router.post('/api/v1/issues', auth.isLoggedIn, catchAsyncErrors( issues.upsert));
+// NOTE: this is singular, house
+router.post('/api/v1/house', upload.array('blobs', 3), catchAsyncErrors( houses.upsert));
+router.post('/api/v1/issue', upload.array('blobs', 3), catchAsyncErrors( issues.upsert));
+
+// NOTE: no auth required
+router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
 
 /**
  * 1. Validate the registration data
