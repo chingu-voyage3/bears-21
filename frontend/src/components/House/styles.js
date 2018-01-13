@@ -9,6 +9,15 @@ const styles = StyleSheet.create({
     top: "0px",
     right: "0px"
   },
+  add_issue_style: {
+    position: "absolute",
+    top: "30px",
+    right: "0px"
+  },
+  add_button: {
+    fontSize: "1.1em",
+    lineHeight: "1em"
+  },
   wrapper: {
     cursor: "pointer",
     display: "flex",

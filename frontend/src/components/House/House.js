@@ -27,21 +27,13 @@ export default class House extends Component {
   render = () => {
     const {house} = this.props;
     const relative = { position: "relative"};
-    const add_issue_style = {
-      position: "absolute",
-      top: "30px",
-      right: "0px"
-    };
-    const add_button = {
-      fontSize: "1.1em",
-      lineHeight: "1em"
-    };
     const cross_symbol = String.fromCharCode( 10799);
     return (
       <div className={css(styles.wrapper)} style={relative} onClick={this.onEditHouse} >
         <Card house={house} />
-        <div style={add_issue_style} >
-          <button type="button" title="Add Issue" style={add_button}
+        <div className={css(styles.add_issue_style)} >
+          <button type="button" title="Add Issue"
+            className={css(styles.add_button)}
             onClick={this.onNewIssue} >
             +
           </button>
