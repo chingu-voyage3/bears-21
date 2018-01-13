@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     overflow: 'scroll',
-    marginTop: '0'
+    marginTop: 0
   },
   input: {
     border: '0',

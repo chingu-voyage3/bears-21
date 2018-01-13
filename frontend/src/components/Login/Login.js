@@ -30,7 +30,7 @@ class login extends Component {
     }
   }
 
-  login= () => {
+  login = () => {
     axios.post("/api/v1/login", {
       email: this.state.email,
       password: this.state.password,
