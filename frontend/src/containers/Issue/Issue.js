@@ -1,31 +1,29 @@
 import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import {connect} from 'react-redux';
 import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
-import Uploader from '../../components/Uploader';
-import {issueFetchData, issueSaveData } from './actions';
+import {ImageBlock, ImageList} from '../../components/Image';
+import {issueFetchData, issueSaveData, issueHasErrored, issueReset } from './actions';
 import './style.css';
 
 class Issue extends Component {
   state = {
-    uploader_visible: false
+    issue: {
+      title: "Title",
+      status: "open",
+      priority: 2,
+      type: "type a",
+      description: "Description",
+      images:[],
+      house: null
+    }
   };
   componentWillMount = () => {
-    console.log( "issue page props:", this.props);
-    // set default
+    console.log( "mounting issue props:", this.props);
+    this.props.setHasErrored( false);
     if( this.props.location.state.issue) {
-      const defaultIssue = {
-        title: "Title",
-        status: "open",
-        priority: 2,
-        type: "type a",
-        description: "Description",
-        images:[],
-        house: null
-      };
-
-      this.setState( {issue: {...defaultIssue, ...this.props.location.state.issue}});
+      this.setState( {issue: {...this.state.issue, ...this.props.location.state.issue}});
     } else {
-      console.error( "Issue page received no route params");
+      console.error( "Issue page received no params");
     }
   };
   componentWillReceiveProps = (nextProps) => {
@@ -41,15 +39,19 @@ class Issue extends Component {
     issue[e.target.name] = e.target.value;
     this.setState( { issue});
   };
-  toggleUploaderViz = () => {
-    this.setState( { uploader_visible: !this.state.uploader_visible});
+  addImage = ( image) => {
+    const {issue} = this.state;
+    this.setState( {issue: {...issue, images: issue.images.concat([image])}});
   };
-
-  uploadImage = files => {
-    console.log( "update image:", files[0]);
-    // const data = new FormData();
-    // data.append( 'img', files[0]);
-    // console.log( "your file was (fake) uploaded"); // eslint-disable-line no-console
+  removeImage = (ndx) => {
+    console.log( "remove image index:", ndx);
+    const new_image_list = this.state.issue.images.filter( (img,i) => {
+      return ndx !== i;
+    });
+    this.setState( {issue: {...this.state.issue, images: new_image_list}});
+  };
+  onNewIssue = () => {
+    this.props.resetIssue( this.state.issue.house);
   };
   render() {
     const {hasErrored, isWorking} = this.props;
@@ -60,26 +62,19 @@ class Issue extends Component {
       return <p>Please wait ...</p>;
     }
     const {issue} = this.state;
-    const show_uploader = {
-      display: this.state.uploader_visible&&issue._id?"flex":"none"
-    }
+    const op_type = (typeof this.state.issue._id === "undefined")?"New":"Edit";
+
     return (
-      <div>
-        <h1 style={{textAlign:"center"}}>Issue (view/edit/create)</h1>
+      <div className="wrapper">
+        <h1 style={{textAlign:"center"}}>Issue ({op_type})</h1>
+        <button type="button" onClick={this.onNewIssue} >New Issue</button>
         <div className="wrapper">
           <IssueForm issue={issue}
             onFieldChange={this.onFieldChange}
             onSubmit={this.issueFormSubmit} />
-          <div className="image_title">
-            Images <button onClick={this.toggleUploaderViz} >+</button>
-          </div>
-          <div className="upload_wrapper" style={show_uploader} >
-            <Uploader onFileDropped={this.uploadImage}/>
-          </div>
+          <ImageBlock addImage={this.addImage} />
           <div className="images_wrapper">
-            <div id="image_list" >
-              {issue.images.map( (img, ndx) => <img key={ndx} src={img} alt="noimg"/>)}
-            </div>
+            <ImageList images={issue.images} removeImage={this.removeImage} />
           </div>
         </div>
       </div>
@@ -97,6 +92,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    resetIssue: house_id => dispatch( issueReset(house_id)),
+    setHasErrored: err => dispatch( issueHasErrored(err)),
     fetchData: issue => dispatch( issueFetchData(issue)),
     saveData: issue => dispatch( issueSaveData(issue))
   }

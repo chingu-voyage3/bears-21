@@ -2,6 +2,13 @@ export const HOUSE_HAS_ERRORED = "HOUSE_HAS_ERRORED";
 export const HOUSE_IS_WORKING = "HOUSE_IS_WORKING";
 export const HOUSE_FETCH_DATA_SUCCESS = "HOUSE_FETCH_DATA_SUCCESS";
 export const HOUSE_SAVE_DATA_SUCCESS = "HOUSE_SAVE_DATA_SUCCESS";
+export const HOUSE_RESET = "HOUSE_RESET";
+
+export function resetHouse() {
+  return {
+    type: HOUSE_RESET
+  };
+}
 
 export function houseHasErrored(hasErrored) {
   return {
@@ -61,14 +68,44 @@ export function houseSaveData( house) {
   return (dispatch) => {
     dispatch( houseHasErrored( false));
     dispatch( houseIsWorking( true));
-    fetch( '/api/v1/houses', {
+    let payload = new FormData();
+    let url_images = [];
+    let blob_images = [];
+    house.images.forEach( (img) => {
+      if( typeof img === "string") {
+        url_images.push( img);
+      } else {
+        blob_images.push( img);
+      }
+    });
+    Object.keys( house).forEach( (key) => {
+      switch( key) {
+      case "images":
+        url_images.forEach( (url) => {
+          payload.append( "url", url);
+        });
+        blob_images.forEach( (blob) => {
+          payload.append( 'blobs', blob);
+        });
+        break;
+      case "issues":
+        house.issues.forEach( (i) => {
+          payload.append( 'issues', i._id);
+        });
+        break;
+      case "location":
+        payload.append( 'street', house.location.street);
+        payload.append( 'postCode', house.location.postCode);
+        break;
+      default:
+        payload.append( [key], house[key]);
+        break;
+      }
+    });
+    fetch( '/api/v1/house', {
       method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       credentials: 'same-origin',
-      body: JSON.stringify( house)
+      body: payload
     })
     .then( response => {
       if( !response.ok) {

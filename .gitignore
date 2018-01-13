@@ -1,4 +1,3 @@
-.env
 
 # Don't check auto-generated stuff into git
 coverage
@@ -6,11 +5,14 @@ build
 node_modules
 stats.json
 
-.env
-
 # Cruft
 .DS_Store
 npm-debug.log
 .idea
 .env
 .env.test
+
+# uploads
+uploads/
+frontend/public/images/
+web/images/

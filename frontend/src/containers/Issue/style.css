@@ -6,16 +6,6 @@
 .images_wrapper {
   margin-top: 1em;
 }
-.upload_wrapper {
-  display: flex;
-  flex-direction: row;
-}
-#image_list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 img {
   padding: 5px;
 }

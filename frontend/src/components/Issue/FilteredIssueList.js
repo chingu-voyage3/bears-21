@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types'
 import {Redirect} from 'react-router-dom';
 import IssueList from './IssueList';
 
 export default class FilteredIssueList extends Component {
+  static propTypes = {
+    data: PropTypes.array.isRequired, // array of issues
+    statusFilter: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+  };
   state = {
     redirect: null
   };
@@ -11,7 +17,6 @@ export default class FilteredIssueList extends Component {
     this.setState( {redirect: issue});
   };
   render = () => {
-    console.log( "filter issue list props:", this.props);
     const {data, statusFilter, title} = this.props;
     if( this.state.redirect) {
       console.log( "filtered issue list issue:", this.state.redirect);
