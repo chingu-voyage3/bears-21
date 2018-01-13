@@ -17,10 +17,10 @@ export default class House extends Component {
   };
   onEditHouse = e => {
     console.log( "edit house");
-    this.props.onEditHouse(this.props.data);
+    this.props.onEditHouse(this.props.house);
   };
   render = () => {
-    const house_image = this.props.data.images[0];
+    const house_image = this.props.house.images[0];
     return (
       <div className={css(styles.house_wrapper)} onClick={this.onEditHouse} >
         <ImageDefault src={house_image} missing_url="//via.placeholder.com/200x200?No Image"/>
