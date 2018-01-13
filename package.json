@@ -57,6 +57,7 @@
     "test:e2e": "mocha --reporter progress ./test/setup.js ./**/*.e2e.spec.js",
     "test": "npm run test:unit && npm run test:e2e",
     "heroku-prebuild": "cd frontend && npm install && npm run build",
+    "postmerge": "./scripts/githooks/post-merge.sh",
     "prepush": "npm run lint && npm run test"
   },
   "repository": {

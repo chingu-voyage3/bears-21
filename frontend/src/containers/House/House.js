@@ -58,14 +58,6 @@ class House extends Component {
     }
     this.setState( { house});
   };
-<<<<<<< HEAD
-
-  uploadImage = files => {
-    console.log( "update image:", files[0]);
-    // const data = new FormData();
-    // data.append( 'img', files[0]);
-    // console.log( "your file was (fake) uploaded"); // eslint-disable-line no-console
-=======
   addImage = ( image) => {
     const {house} = this.state;
     this.setState( {house: {...house, images: house.images.concat([image])}});
@@ -83,7 +75,6 @@ class House extends Component {
   };
   onNewIssue = () => {
     this.setState( { redirect_issue: true});
->>>>>>> develop
   };
   render = () => {
     const {redirect_issue, house} = this.state;

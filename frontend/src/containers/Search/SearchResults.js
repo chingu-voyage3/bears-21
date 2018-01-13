@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
 
 
 function loadData(props) {
+  console.log('Loading data');
   props.fetchHouses(parse(getSearchParams(props)).postCode);
 }
 

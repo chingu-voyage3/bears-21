@@ -25,7 +25,6 @@ class routes extends Component {
     const {user} = this.props;
     return (
       <Switch>
-        <Route exact path="/" component={SearchLayout} />
         <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
         <NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
         <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
@@ -35,6 +34,7 @@ class routes extends Component {
         <Route path="/newissue" component={Dummy} />
         <AuthRoute path="/house" user={user} component={House} pathname={"/login"} />
         <Route path="/logout" component={Logout} />
+        <Route path="/" component={SearchLayout} />
         <Route path="*" component={NotFound} />
       </Switch>
     );

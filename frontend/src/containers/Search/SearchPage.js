@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   input: {
-    border: '0',
+    border: 0,
+    margin: 0,
     padding: '10px',
     background: 'white',
     lineHeight: '50px',
     fontSize: '20px',
-    borderRadius: '0',
-    outline: '0',
+    borderRadius: 0,
+    outline: 0,
     borderRight: '1px solid rgba(0,0,0,0.2)'
   }
 });
