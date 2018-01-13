@@ -31,7 +31,7 @@ class Dashboard extends Component {
       return <p>Loading ...</p>;
     }
     return (
-      <div>
+      <div style={{flex: '1'}}>
         <h1>Dashboard</h1>
         <button type="button" onClick={this.onNewHouse} >New House</button>
         <HouseList data={houseIssues} />
