@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class HouseForm extends Component {
+  static propTypes = {
+    house: PropTypes.object.isRequired,
+    onFieldChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
+  };
   state = {
     uploader_visible: false
   };

@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ImageRemovable from './ImageRemovable';
 import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class ImageList extends React.Component {
+  static propTypes = {
+    images: PropTypes.array.isRequired,
+    removeImage: PropTypes.func.isRequired
+  };
   removeImage = (ndx) => {
     this.props.removeImage( ndx);
   };

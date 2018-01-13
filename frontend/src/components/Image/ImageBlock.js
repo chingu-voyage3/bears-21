@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Uploader} from '../Uploader';
 import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class ImageBlock extends Component {
+  static propTypes = {
+    addImage: PropTypes.func.isRequired
+  };
   state = {
     uploader_visible: false
   };

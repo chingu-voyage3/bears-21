@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import {ImageDefault} from '../Image';
 import {css} from 'aphrodite';
 import styles from './styles';
 
 export default class Uploader extends Component {
+  static propTypes = {
+    addImage: PropTypes.func.isRequired
+  };
   state = {
     show_image: false,
     url_text: "",
