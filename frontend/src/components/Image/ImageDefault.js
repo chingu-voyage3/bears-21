@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
-export default class ImageDefault extends React.Component {
+class ImageDefault extends React.Component {
   static propTypes = {
     src: PropTypes.string,
     missing_url: PropTypes.string.isRequired
@@ -42,8 +41,8 @@ export default class ImageDefault extends React.Component {
     return (
       <div>
         { image_error
-          ? <img className={css(styles.image_box)} src={missing_url} alt="noimage"/>
-          : <img className={css(styles.image_box)}
+          ? <img className={css(styles.image)} src={missing_url} alt="noimage"/>
+          : <img className={css(styles.image)}
               src={image_src}
               alt="noimage"
               onError={this.onImageError}
@@ -53,3 +52,13 @@ export default class ImageDefault extends React.Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  image: {
+    borderRadius: '4px 4px 0 0',
+    width: '100%',
+    padding: '0'
+  }
+});
+
+export default ImageDefault;
