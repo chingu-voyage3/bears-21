@@ -51,15 +51,11 @@ export function houseFetchData( house) {
       credentials: 'same-origin',
       body: JSON.stringify( house._id)
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( houseIsWorking(false));
-      return response;
-    })
     .then( response => response.json())
-    .then( json => dispatch( houseFetchDataSuccess(json.house)))
+    .then( json => {
+      dispatch( houseFetchDataSuccess(json.house))
+      dispatch( houseIsWorking(false));
+    })
     .catch( () => dispatch( houseHasErrored(true)));
   };
 }
@@ -107,15 +103,11 @@ export function houseSaveData( house) {
       credentials: 'same-origin',
       body: payload
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( houseIsWorking( false));
-      return response;
-    })
     .then( response => response.json())
-    .then( response => dispatch( houseSaveDataSuccess(response.house)))
+    .then( response => {
+      dispatch( houseSaveDataSuccess(response.house))
+      dispatch( houseIsWorking(false));
+    })
     .catch( () => dispatch( houseHasErrored( true)));
   };
 }

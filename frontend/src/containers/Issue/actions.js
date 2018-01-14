@@ -48,15 +48,11 @@ export function issueFetchData( issue) {
       credentials: 'same-origin',
       body: JSON.stringify( issue._id)
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( issueIsWorking( false));
-      return response;
-    })
     .then( response => response.json())
-    .then( issue => dispatch( issueFetchDataSuccess(issue)))
+    .then( issue => {
+      dispatch(issueFetchDataSuccess(issue))
+      dispatch(issueIsWorking(false));
+    })
     .catch( () => dispatch( issueHasErrored(true)));
   };
 }

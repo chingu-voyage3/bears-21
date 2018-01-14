@@ -44,15 +44,11 @@ export function houseIssuesFetchData(url) {
       },
       credentials: "same-origin"
     })
-    .then( response => {
-      if(!response.ok){
-        throw Error(response.statusText);
-      }
-      dispatch(houseIssuesIsLoading(false));
-      return response;
-    })
     .then( response => response.json())
-    .then( house_issues => dispatch( houseIssuesFetchDataSuccess( house_issues)))
+    .then( house_issues => {
+      dispatch( houseIssuesFetchDataSuccess( house_issues))
+      dispatch( houseIssuesIsLoading(false));
+    })
     .catch( () => dispatch( houseIssuesHasErrored( true)));
   };
 }
@@ -69,12 +65,6 @@ export function houseDelete( house_id) {
       },
       credentials: "same-origin",
       body: JSON.stringify( {house_id})
-    })
-    .then( response => {
-      if( !response.ok){
-        throw Error( response.statusText);
-      }
-      return response;
     })
     .then( response => response.json())
     .then( json => {
