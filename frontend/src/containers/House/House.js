@@ -35,15 +35,17 @@ class House extends Component {
       }
     }
   };
+
   componentWillReceiveProps = (nextProps) => {
     console.log( "receive props:", nextProps);
     this.setState( { house: nextProps.house});
   };
-  // submit text data and pull out images that need uploading
-  houseFormSubmit = e => {
-    console.log( "house form submit:", this.state.house);
-    this.props.saveData( this.state.house);
+
+  houseFormSubmit = e => { // eslint-disable-line no-unused-vars
+    console.log( "house form submit:", this.state.new_house);
+    this.props.saveData( this.state.new_house);
   };
+
   onFieldChange = e => {
     const {house} = {...this.state};
     // check for location and handle sub objects {street,postCode}
@@ -112,7 +114,7 @@ class House extends Component {
       </div>
     );
   };
-};
+}
 
 const mapStateToProps = state => {
   return {

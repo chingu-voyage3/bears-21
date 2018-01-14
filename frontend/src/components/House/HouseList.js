@@ -21,7 +21,7 @@ export default class HouseList extends Component {
     this.setState({edit_house: house});
   };
   render = () => {
-    if( this.state.redirect){
+    if(this.state.redirect) {
       return <Redirect to={{
           pathname: "/issue",
           state: { issue: {house: this.state.redirect._id}}
@@ -52,5 +52,5 @@ export default class HouseList extends Component {
         {house_list}
       </div>
     );
-  };
-};
+  }
+}

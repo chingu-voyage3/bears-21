@@ -19,6 +19,7 @@ export default class House extends Component {
     console.log( "edit house");
     this.props.onEditHouse(this.props.house);
   };
+
   render = () => {
     const house_image = this.props.house.images[0];
     return (
@@ -31,4 +32,4 @@ export default class House extends Component {
       </div>
     );
   };
-};
+}

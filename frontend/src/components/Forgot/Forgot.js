@@ -3,7 +3,7 @@ import { css, StyleSheet } from 'aphrodite';
 
 
 export default class Forgot extends Component {
- 
+
   constructor() {
     super();
     this.state = {
@@ -13,11 +13,11 @@ export default class Forgot extends Component {
 
 
   forgot = () => {
-    
-  } 
-  
-  
-  render() {
+
+  }
+
+
+  render = () => {
     return (
       <div className={css(styles.centre)}>
         <div className={css(styles.forgotContainer, styles.centre)}>
@@ -28,8 +28,8 @@ export default class Forgot extends Component {
         </div>
 
       </div>
-    
-    
+
+
     );
 
 
