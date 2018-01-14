@@ -48,4 +48,4 @@ export default class HouseForm extends Component {
       </form>
     );
   };
-};
+}

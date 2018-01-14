@@ -9,6 +9,7 @@ import styles from './styles';
 export default class HouseList extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired, // array of houses with issues
+    onDeleteHouse: PropTypes.func.isRequired
   };
   state = {
     new_issue: null,
@@ -53,5 +54,5 @@ export default class HouseList extends Component {
         {house_list}
       </div>
     );
-  };
-};
+  }
+}

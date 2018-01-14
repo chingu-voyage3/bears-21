@@ -30,7 +30,7 @@ describe('Issue', () => {
   });
 
 
-  describe('.insert', () => {
+  xdescribe('.insert', () => {
     it('should insert a new issue', async () => {
       const issue = new Issue(issueToInsert);
       await issue.save();

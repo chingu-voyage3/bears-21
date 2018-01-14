@@ -29,4 +29,4 @@ export default class IssueList extends Component {
       </div>
     );
   };
-};
+}

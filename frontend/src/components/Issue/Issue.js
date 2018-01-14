@@ -18,4 +18,4 @@ export default class Issue extends Component {
       </li>
     );
   };
-};
+}

@@ -12,12 +12,10 @@ export default class House extends Component {
     onDeleteHouse: PropTypes.func.isRequired
   };
   onNewIssue = e => {
-    console.log( "new issue");
     e.stopPropagation();
     this.props.onNewIssue(this.props.house);
   };
-  onEditHouse = e => {
-    console.log( "edit house");
+  onEditHouse = () => {
     this.props.onEditHouse(this.props.house);
   };
   onDeleteHouse = (e) => {
@@ -48,4 +46,4 @@ export default class House extends Component {
       </div>
     );
   };
-};
+}
