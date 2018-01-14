@@ -1,4 +1,5 @@
-import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
 import {ImageBlock, ImageList} from '../../components/Image';
@@ -6,6 +7,15 @@ import {issueFetchData, issueSaveData, issueHasErrored, issueReset } from './act
 import './style.css';
 
 class Issue extends Component {
+  static propTypes = {
+    issue: PropTypes.object,
+    isWorking: PropTypes.bool,
+    hasErrored: PropTypes.bool,
+    location: PropTypes.object,
+    resetIssue: PropTypes.func.isRequired,
+    saveData: PropTypes.func.isRequired,
+    setHasErrored: PropTypes.func.isRequired
+  };
   state = {
     issue: {
       title: "Title",
@@ -18,7 +28,6 @@ class Issue extends Component {
     }
   };
   componentWillMount = () => {
-    console.log( "mounting issue props:", this.props);
     this.props.setHasErrored( false);
     if( this.props.location.state.issue) {
       this.setState( {issue: {...this.state.issue, ...this.props.location.state.issue}});
@@ -27,11 +36,9 @@ class Issue extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
-    console.log( "component will receive props:", nextProps);
     this.setState( {issue: {...nextProps.issue}})
   };
   issueFormSubmit = e => { // eslint-disable-line no-unused-vars
-    console.log( "issue form submit issue:", this.state.issue);
     this.props.saveData( this.state.issue);
   };
   onFieldChange = e => {
@@ -44,7 +51,6 @@ class Issue extends Component {
     this.setState( {issue: {...issue, images: issue.images.concat([image])}});
   };
   removeImage = (ndx) => {
-    console.log( "remove image index:", ndx);
     const new_image_list = this.state.issue.images.filter( (img,i) => {
       return ndx !== i;
     });

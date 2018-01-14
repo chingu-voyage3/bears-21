@@ -6,6 +6,7 @@ import styles from './styles';
 
 export default class ImageRemovable extends React.Component {
   static propTypes = {
+    ndx: PropTypes.number.isRequired,
     src: PropTypes.string.isRequired,
     removeImage: PropTypes.func.isRequired
   };
@@ -28,4 +29,4 @@ export default class ImageRemovable extends React.Component {
       </div>
     );
   };
-};
+}

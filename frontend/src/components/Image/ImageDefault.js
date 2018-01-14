@@ -33,8 +33,7 @@ export default class ImageDefault extends React.Component {
       this.setState( {image_error: false});
     }
   };
-  onImageError = (e) => {
-    console.log( "image error for url:", e.target.src);
+  onImageError = () => {
     this.setState( {image_error: true, image_src: this.props.missing_url});
   };
   render = () => {
@@ -53,4 +52,4 @@ export default class ImageDefault extends React.Component {
       </div>
     );
   };
-};
+}

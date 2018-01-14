@@ -24,7 +24,6 @@ export function houseIssuesIsLoading( state = false, action) {
 }
 
 export function houseIssues( state = [], action) {
-  console.log( "house issues reducer state:", state);
   switch( action.type) {
     case HOUSE_ISSUES_FETCH_DATA_SUCCESS:
       return action.houseIssues;

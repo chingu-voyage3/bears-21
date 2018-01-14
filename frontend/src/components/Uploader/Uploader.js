@@ -15,7 +15,6 @@ export default class Uploader extends Component {
     image_src: ""
   };
   onFileDropped = (files) => {
-    console.log( "files:", files);
     this.setState( {
       show_image: true,
       image_src: URL.createObjectURL(files[0])
@@ -26,7 +25,6 @@ export default class Uploader extends Component {
     this.setState( {url_text: e.target.value});
   };
   setPicUrl = () => {
-    console.log( "image url:", this.state.url_text);
     this.setState( {
       show_image: true,
       image_src: this.state.url_text,
@@ -78,4 +76,4 @@ export default class Uploader extends Component {
       </div>
     );
   };
-};
+}

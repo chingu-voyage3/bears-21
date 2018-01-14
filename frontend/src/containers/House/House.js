@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ImageBlock, ImageList} from '../../components/Image';
@@ -6,6 +7,15 @@ import {HouseForm} from '../../components/House';
 import { houseHasErrored, houseFetchData, houseSaveData, resetHouse } from './actions';
 
 class House extends Component {
+  static propTypes = {
+    house: PropTypes.object,
+    location: PropTypes.object,
+    isWorking: PropTypes.bool,
+    hasErrored: PropTypes.bool,
+    resetHouse: PropTypes.func.isRequired,
+    saveData: PropTypes.func.isRequired,
+    setHasErrored: PropTypes.func.isRequired
+  };
   state = {
     house: {
       title: "Title",
@@ -20,12 +30,10 @@ class House extends Component {
     redirect_issue: null
   };
   componentWillMount = () => {
-    console.log( "mounting house props:", this.props);
     this.props.setHasErrored( false);
     const {location} = this.props;
     if( location.state) {
       if( location.state.new_house) {
-        console.log( "mounting house reset");
         this.props.resetHouse();
       } else if( location.state.house) {
         this.setState( {house: {
@@ -37,12 +45,10 @@ class House extends Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    console.log( "receive props:", nextProps);
     this.setState( { house: nextProps.house});
   };
 
   houseFormSubmit = e => { // eslint-disable-line no-unused-vars
-    console.log( "house form submit:", this.state.new_house);
     this.props.saveData( this.state.new_house);
   };
 
@@ -63,11 +69,9 @@ class House extends Component {
     this.setState( {house: {...house, images: house.images.concat([image])}});
   };
   removeImage = (ndx) => {
-    console.log( "remove image index:", ndx);
     const ni = this.state.house.images.filter( (img,i) => {
       return ndx !== i;
     });
-    console.log( "updated image count:", ni.length);
     this.setState( {house: {...this.state.house, images: ni}});
   };
   onNewHouse = () => {

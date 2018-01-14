@@ -86,7 +86,6 @@ export function issueSaveData( issue) {
         });
         break;
       default:
-        console.log( `issue save key[${key}] value[${issue[key]}]`);
         payload.append( [key], issue[key]);
         break;
       }

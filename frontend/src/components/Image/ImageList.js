@@ -30,4 +30,4 @@ export default class ImageList extends React.Component {
       </div>
     );
   };
-};
+}

@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { houseIssuesFetchData, houseDelete} from './actions';
 import {HouseList} from '../../components/House';
 
 class Dashboard extends Component {
+  static propTypes = {
+    houseIssues: PropTypes.arrayOf( PropTypes.object),
+    isLoading: PropTypes.bool,
+    hasErrored: PropTypes.bool,
+    fetchData: PropTypes.func.isRequired,
+    deleteHouse: PropTypes.func.isRequired
+  };
   state = {
     redirect_new_house: false
   };
@@ -15,7 +23,6 @@ class Dashboard extends Component {
     this.setState( {redirect_new_house:true})
   };
   onDeleteHouse = (house_id) => {
-    console.log( "delete house:", house_id);
     this.props.deleteHouse( house_id);
   };
   render = () => {

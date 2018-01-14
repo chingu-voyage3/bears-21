@@ -13,13 +13,11 @@ export default class FilteredIssueList extends Component {
     redirect: null
   };
   onIssueClick = (issue) => {
-    console.log( "filtered issue list redirect to issue:", issue);
     this.setState( {redirect: issue});
   };
   render = () => {
     const {data, statusFilter, title} = this.props;
     if( this.state.redirect) {
-      console.log( "filtered issue list issue:", this.state.redirect);
       return <Redirect to={{
         pathname: "/Issue",
         state: { issue: this.state.redirect }
