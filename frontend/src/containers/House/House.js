@@ -122,9 +122,9 @@ class House extends Component {
 
 const mapStateToProps = state => {
   return {
-    house: state.house,
-    isWorking: state.houseIsWorking,
-    hasErrored: state.houseHasErrored
+    house: state.house.house,
+    isWorking: state.house.houseIsWorking,
+    hasErrored: state.house.houseHasErrored
   };
 };
 

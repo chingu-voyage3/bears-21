@@ -1,19 +1,7 @@
 import {combineReducers} from 'redux';
-import {
-  houseIssues,
-  houseIssuesIsLoading,
-  houseIssuesHasErrored
-} from '../containers/Dashboard';
-import {
-  house,
-  houseHasErrored,
-  houseIsWorking
-} from '../containers/House';
-import {
-  issue,
-  issueHasErrored,
-  issueIsWorking
-} from '../containers/Issue';
+import houseIssues from '../containers/Dashboard/reducers';
+import house from '../containers/House/reducers';
+import issue from '../containers/Issue/reducers';
 import search from '../containers/Search/reducers';
 
 // QUESTION: shouldn't this reducer be in login with action?
@@ -34,13 +22,7 @@ function reducer(state = false, action) {
 export default combineReducers({
   user: reducer,
   houseIssues,
-  houseIssuesIsLoading,
-  houseIssuesHasErrored,
   house,
-  houseHasErrored,
-  houseIsWorking,
   issue,
-  issueHasErrored,
-  issueIsWorking,
   search
 });

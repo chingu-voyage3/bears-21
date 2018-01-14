@@ -1,3 +1,4 @@
+import {combineReducers} from 'redux';
 import {
   ISSUE_RESET,
   ISSUE_FETCH_DATA_SUCCESS,
@@ -6,7 +7,7 @@ import {
   ISSUE_HAS_ERRORED
 } from './actions';
 
-export function issueHasErrored( state = false, action) {
+function issueHasErrored( state = false, action) {
   switch( action.type) {
     case ISSUE_HAS_ERRORED:
       return action.hasErrored;
@@ -14,7 +15,7 @@ export function issueHasErrored( state = false, action) {
       return state;
   }
 }
-export function issueIsWorking( state = false, action) {
+function issueIsWorking( state = false, action) {
   switch( action.type) {
     case ISSUE_IS_WORKING:
       return action.isWorking;
@@ -33,7 +34,7 @@ const defaultIssue = {
   house: null
 };
 
-export function issue( state = defaultIssue, action) {
+function issue( state = defaultIssue, action) {
   let ret;
   switch( action.type) {
   case ISSUE_FETCH_DATA_SUCCESS:
@@ -53,3 +54,9 @@ export function issue( state = defaultIssue, action) {
     }
   }
 }
+
+export default combineReducers({
+  issue,
+  issueIsWorking,
+  issueHasErrored
+});

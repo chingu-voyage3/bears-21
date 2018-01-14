@@ -1,3 +1,4 @@
+import {combineReducers} from 'redux';
 import {
   HOUSE_DELETE_SUCCESS,
   HOUSE_ISSUES_FETCH_DATA_SUCCESS,
@@ -5,7 +6,7 @@ import {
   HOUSE_ISSUES_HAS_ERRORED
 } from './actions';
 
-export function houseIssuesHasErrored( state = false, action) {
+function houseIssuesHasErrored( state = false, action) {
   switch( action.type) {
     case HOUSE_ISSUES_HAS_ERRORED:
       return action.hasErrored;
@@ -14,7 +15,7 @@ export function houseIssuesHasErrored( state = false, action) {
   }
 }
 
-export function houseIssuesIsLoading( state = false, action) {
+function houseIssuesIsLoading( state = false, action) {
   switch( action.type) {
     case HOUSE_ISSUES_IS_LOADING:
       return action.isLoading;
@@ -23,7 +24,7 @@ export function houseIssuesIsLoading( state = false, action) {
   }
 }
 
-export function houseIssues( state = [], action) {
+function houseIssues( state = [], action) {
   switch( action.type) {
     case HOUSE_ISSUES_FETCH_DATA_SUCCESS:
       return action.houseIssues;
@@ -33,3 +34,9 @@ export function houseIssues( state = [], action) {
       return state;
   }
 }
+
+export default combineReducers({
+  houseIssues,
+  houseIssuesIsLoading,
+  houseIssuesHasErrored
+});

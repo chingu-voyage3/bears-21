@@ -1,3 +1,4 @@
+import {combineReducers} from 'redux';
 import {
   HOUSE_RESET,
   HOUSE_FETCH_DATA_SUCCESS,
@@ -6,7 +7,7 @@ import {
   HOUSE_HAS_ERRORED
 } from './actions';
 
-export function houseHasErrored( state = false, action) {
+function houseHasErrored( state = false, action) {
   switch( action.type) {
     case HOUSE_HAS_ERRORED:
       return action.hasErrored;
@@ -15,7 +16,7 @@ export function houseHasErrored( state = false, action) {
   }
 }
 
-export function houseIsWorking( state = false, action) {
+function houseIsWorking( state = false, action) {
   switch( action.type) {
     case HOUSE_IS_WORKING:
       return action.isWorking;
@@ -34,7 +35,7 @@ const defaultHouse = {
   images: [],
   issues: []
 };
-export function house( state = defaultHouse, action) {
+function house( state = defaultHouse, action) {
   switch( action.type) {
     case HOUSE_FETCH_DATA_SUCCESS:
     case HOUSE_SAVE_DATA_SUCCESS:
@@ -49,3 +50,9 @@ export function house( state = defaultHouse, action) {
       }
   }
 }
+
+export default combineReducers({
+  house,
+  houseIsWorking,
+  houseHasErrored
+});

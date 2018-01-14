@@ -53,15 +53,15 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    houseIssues: state.houseIssues,
-    isLoading: state.houseIssuesIsLoading,
-    hasErrored: state.houseIssuesHasErrored
+    houseIssues: state.houseIssues.houseIssues,
+    isLoading: state.houseIssues.houseIssuesIsLoading,
+    hasErrored: state.houseIssues.houseIssuesHasErrored
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteHouse: (houseIssues, house_id) => dispatch( houseDelete(houseIssues, house_id)),
+    deleteHouse: (house_id) => dispatch( houseDelete(house_id)),
     fetchData: (url) => dispatch( houseIssuesFetchData(url))
   };
 };

@@ -90,9 +90,9 @@ class Issue extends Component {
 
 const mapStateToProps = state => {
   return {
-    issue: state.issue,
-    hasErrored: state.issueHasErrored,
-    isWorking: state.issueIsWorking
+    issue: state.issue.issue,
+    hasErrored: state.issue.issueHasErrored,
+    isWorking: state.issue.issueIsWorking
   };
 };
 
