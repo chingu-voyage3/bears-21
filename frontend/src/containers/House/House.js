@@ -45,7 +45,7 @@ class House extends Component {
     }
   };
 
-  houseFormSubmit = e => { // eslint-disable-line no-unused-vars
+  houseFormSubmit = () => {
     this.props.saveData( this.state.house);
   };
 
