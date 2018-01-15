@@ -1,4 +1,3 @@
-import {combineReducers} from 'redux';
 import {
   HOUSE_RESET,
   HOUSE_FETCH_DATA_SUCCESS,
@@ -6,24 +5,6 @@ import {
   HOUSE_IS_WORKING,
   HOUSE_HAS_ERRORED
 } from './actions';
-
-function houseHasErrored( state = false, action) {
-  switch( action.type) {
-    case HOUSE_HAS_ERRORED:
-      return action.hasErrored;
-    default:
-      return state;
-  }
-}
-
-function houseIsWorking( state = false, action) {
-  switch( action.type) {
-    case HOUSE_IS_WORKING:
-      return action.isWorking;
-    default:
-      return state;
-  }
-}
 
 const defaultHouse = {
   title: "",
@@ -35,24 +16,38 @@ const defaultHouse = {
   images: [],
   issues: []
 };
-function house( state = defaultHouse, action) {
+
+const initialState = {
+  house: Object.assign( {}, defaultHouse),
+  houseIsWorking: false,
+  houseError: {
+    hasErrored: false,
+    errorMessage: ""
+  },
+  houseIsSaved: false,
+};
+
+function house( state = Object.assign({}, initialState), action ) {
   switch( action.type) {
+    case HOUSE_HAS_ERRORED:
+      return {...state,
+        houseError: {
+          hasErrored: action.hasErrored,
+          errorMessage: action.errorMessage||""
+        },
+        houseIsSaved: false
+      };
+    case HOUSE_IS_WORKING:
+      return {...state, houseIsWorking: action.isWorking};
     case HOUSE_FETCH_DATA_SUCCESS:
+      return {...state, house: action.house};
     case HOUSE_SAVE_DATA_SUCCESS:
-      return action.house;
+      return {...state, house: action.house, houseIsSaved: action.houseIsSaved};
     case HOUSE_RESET:
-      return JSON.parse( JSON.stringify(defaultHouse));
+      return Object.assign({}, initialState);
     default:
-      if( state === defaultHouse) {
-        return JSON.parse( JSON.stringify(state));
-      } else {
-        return state;
-      }
+      return state;
   }
 }
 
-export default combineReducers({
-  house,
-  houseIsWorking,
-  houseHasErrored
-});
+export default house;

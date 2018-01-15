@@ -29,12 +29,12 @@ class Dashboard extends Component {
     if( this.state.redirect_new_house) {
       return (
         <Redirect to={{
-            pathname: "/house",
+            pathname: "/house/new",
             state: {new_house: true}
           }} />
       );
     }
-    const {hasErrored, isLoading, houseIssues} = this.props;
+    const {hasErrored = false, isLoading = true, houseIssues = []} = this.props;
     if( hasErrored) {
       return <p>Sorry data fetch failed</p>;
     }

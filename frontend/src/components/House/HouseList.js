@@ -31,7 +31,7 @@ export default class HouseList extends Component {
     }
     if( this.state.edit_house) {
       return <Redirect to={{
-          pathname: "/house",
+          pathname: "/house/"+this.state.edit_house._id,
           state: {house: this.state.edit_house}
         }}
       />;
