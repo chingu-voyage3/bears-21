@@ -15,6 +15,7 @@ class House extends Component {
     match: PropTypes.object,
     history: PropTypes.object,
     errorMessage: PropTypes.string,
+    resetData: PropTypes.func.isRequired,
     saveData: PropTypes.func.isRequired
   };
   state = {
