@@ -32,6 +32,7 @@ export default class ImageRemovable extends React.Component {
 
 const styles = StyleSheet.create({
   wrapper: {
+    position: "relative",
     padding: "0px 20px",
     border: "2px solid darkgrey",
     borderRadius: "10px",
@@ -50,11 +51,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center"
   },
-  btn_wrapper: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    fontSize: "0.8em",
-    margin: "1em"
+  close_button: {
+    position: "absolute",
+    top: "0px",
+    right: "0px"
   }
 });
