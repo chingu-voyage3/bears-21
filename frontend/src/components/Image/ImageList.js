@@ -21,7 +21,7 @@ export default class ImageList extends React.Component {
         src = img.preview;
       }
       return (
-        <ImageRemovable src={src} key={i} ndx={i} removeImage={this.removeImage} />
+        <ImageRemovable src={src} key={i} image_id={i} removeImage={this.removeImage} />
       );
     });
     return (
