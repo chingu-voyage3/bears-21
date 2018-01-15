@@ -9,13 +9,14 @@ class ImageDefault extends React.Component {
   };
   state = {
     image_error: false,
-    image_src: this.props.missing_url
+    image_src: null
   };
   componentWillMount = () => {
     // data:image/jpeg;base64,data
-    const {src} = this.props;
+    const {src, missing_url} = this.props;
     if( src) {
       if( src.indexOf( '/') === -1){
+        this.setState( {image_src: missing_url});
         fetch( `/api/v1/image/${src}`).then( response => {
           response.blob().then( blob => {
             const url = URL.createObjectURL(blob);
@@ -25,6 +26,8 @@ class ImageDefault extends React.Component {
       } else {
         this.setState( {image_src: src});
       }
+    } else {
+      this.setState( {image_src: missing_url})
     }
   };
   componentWillReceiveProps = (props) => {
