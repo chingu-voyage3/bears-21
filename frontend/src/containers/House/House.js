@@ -18,11 +18,11 @@ class House extends Component {
   };
   state = {
     house: {
-      title: "Title",
-      description: "Description",
+      title: "",
+      description: "",
       location: {
-        street: "street",
-        postCode: "post code"
+        street: "",
+        postCode: ""
       },
       images: [],
       issue: []

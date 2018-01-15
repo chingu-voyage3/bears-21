@@ -26,11 +26,11 @@ function houseIsWorking( state = false, action) {
 }
 
 const defaultHouse = {
-  title: "Title",
-  description: "Description",
+  title: "",
+  description: "",
   location: {
-    street: "Street",
-    postCode: "postCode"
+    street: "",
+    postCode: ""
   },
   images: [],
   issues: []

@@ -18,11 +18,11 @@ class Issue extends Component {
   };
   state = {
     issue: {
-      title: "Title",
+      title: "",
       status: "open",
       priority: 2,
       type: "type a",
-      description: "Description",
+      description: "",
       images:[],
       house: null
     }
