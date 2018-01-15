@@ -14,7 +14,7 @@ const HouseItem = ({ house }) => (
 );
 
 HouseItem.propTypes = {
-  house: PropTypes.house.isRequired
+  house: PropTypes.object.isRequired
 };
 
 const styles = StyleSheet.create({
