@@ -49,7 +49,7 @@ class House extends Component {
   };
 
   houseFormSubmit = e => { // eslint-disable-line no-unused-vars
-    this.props.saveData( this.state.new_house);
+    this.props.saveData( this.state.house);
   };
 
   onFieldChange = e => {
