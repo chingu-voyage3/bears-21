@@ -6,8 +6,8 @@ import styles from './styles';
 
 export default class ImageRemovable extends React.Component {
   static propTypes = {
-    image_id: PropTypes.number.isRequired,
-    src: PropTypes.string.isRequired,
+    image_id: PropTypes.number, // new images don't have ids before save
+    src: PropTypes.string,
     removeImage: PropTypes.func.isRequired
   };
   onRemove = () => {
