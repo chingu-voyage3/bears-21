@@ -18,7 +18,7 @@ const defaultHouse = {
 };
 
 const initialState = {
-  house: Object.assign( {}, defaultHouse),
+  house: JSON.parse( JSON.stringify(defaultHouse)),
   houseIsWorking: false,
   houseError: {
     hasErrored: false,
@@ -27,7 +27,10 @@ const initialState = {
   houseIsSaved: false,
 };
 
-function house( state = Object.assign({}, initialState), action ) {
+function house( state, action ) {
+  if( typeof state === "undefined") {
+    state = JSON.parse( JSON.stringify( initialState))
+  }
   switch( action.type) {
     case HOUSE_HAS_ERRORED:
       return {...state,
