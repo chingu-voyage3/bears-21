@@ -11,26 +11,25 @@ export default class Register extends Component {
       name: "",
       password: "",
       confirmedPassword: "",
-			currentStatus: "",
+      currentStatus: "",
     };
   }
 
-	register = () => {
-		axios.post("/api/v1/register", {
-			email: this.state.email,
-			name: this.state.name,
-			password: this.state.password,
-			"password-confirm": this.state.confirmedPassword,
-		})
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		});
-	
-		this.setState({email: "", name: "", password: "", confirmedPassword: ""});
-	}
+  register() {
+    axios.post("/api/v1/register", {
+      email: this.state.email,
+      name: this.state.name,
+      password: this.state.password,
+      "password-confirm": this.state.confirmedPassword,
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    this.setState({email: "", name: "", password: "", confirmedPassword: ""});
+  }
 
 
   render() {
@@ -39,13 +38,13 @@ export default class Register extends Component {
       <div className={css(styles.centre)}>
         <div className={css(styles.registerContainer, styles.centre)}>
           <div className={css(styles.title)}>Sign up</div>
-          <input placeholder="your name" className={css(styles.input)} onChange={e => this.setState({name: e.target.value})}></input>       
-          <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>       
-          <input placeholder="your password" type="password" className={css(styles.input)} onChange={e => this.setState({password: e.target.value})}></input>       
-          <input placeholder="confirm password" type="password" className={css(styles.input)} onChange={e => this.setState({confirmedPassword: e.target.value})}></input>       
+          <input placeholder="your name" className={css(styles.input)} onChange={e => this.setState({name: e.target.value})}></input>
+          <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>
+          <input placeholder="your password" type="password" className={css(styles.input)} onChange={e => this.setState({password: e.target.value})}></input>
+          <input placeholder="confirm password" type="password" className={css(styles.input)} onChange={e => this.setState({confirmedPassword: e.target.value})}></input>
           <div className={css(styles.status)}></div>
           <button className={css(styles.button)} onClick={this.register}>Sign up</button>
-        </div>    
+        </div>
       </div>
      );
   }
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: 400,
     height: 300,
-  }, 
+  },
   status: {
     width: 286,
     height: 25,
