@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import { css, StyleSheet } from 'aphrodite';
 import {ImageBlock, ImageList} from '../../components/Image';
 import {HouseForm} from '../../components/House';
 import { houseFetchData, houseSaveData, houseReset } from './actions';
@@ -83,8 +84,8 @@ class House extends Component {
       display: hasErrored?"block":"none"
     };
     return (
-      <div className="container_vertical">
-        <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
+      <div className={css(styles.centered)}>
+        <h1>House ({op_type})</h1>
         <div style={show_error} >
           {errorMessage}
         </div>
@@ -101,6 +102,16 @@ class House extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  centered: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  }
+});
 
 const mapStateToProps = state => {
   return {

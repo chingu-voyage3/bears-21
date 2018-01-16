@@ -38,8 +38,8 @@ export default class SearchPage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: '80vh',
     width: '100%',
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
