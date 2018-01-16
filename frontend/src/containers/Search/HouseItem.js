@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css, StyleSheet } from 'aphrodite';
 
 const HouseItem = ({ house }) => (
@@ -13,6 +14,9 @@ const HouseItem = ({ house }) => (
     <p className={css(styles.content)}>{house.description}</p>
   </div>
 );
+HouseItem.propTypes = {
+  house: PropTypes.object
+};
 
 const styles = StyleSheet.create({
   container: {

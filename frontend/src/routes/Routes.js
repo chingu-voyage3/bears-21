@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from '../components/NotFound';
 import Dummy from '../components/Dummy';
@@ -14,7 +15,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 class routes extends Component {
-
+  static propTypes = {
+    user: PropTypes.bool,
+    login: PropTypes.func.isRequired
+  };
   componentWillMount() {
     if (localStorage.getItem("user")) { // user was logged in....
       this.props.login();
@@ -51,6 +55,11 @@ const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }
       />
     ))} />
 );
+AuthRoute.propTypes = {
+  user: PropTypes.bool,
+  component: PropTypes.object,
+  pathname: PropTypes.string
+};
 
 const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
   <Route {...rest} render={ props => (
@@ -62,6 +71,11 @@ const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...res
       />
     ))} />
 );
+NonAuthRoute.propTypes = {
+  user: PropTypes.bool,
+  component: PropTypes.object,
+  pathname: PropTypes.string
+};
 
 const mapStateToProps = state => {
   return {

@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 
 class navbar extends Component {
-
+	static propTypes = {
+		user: PropTypes.bool,
+		logout: PropTypes.func.isRequired
+	};
 
 	getBar() {
 		if (this.props.user) { // authenticated
 			return (
 				<div>
 					<ul className={css(styles.container)}>
-						<li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-						<li className={css(styles.navelement)} onClick={() => this.props.logout()}><Link className={css(styles.links)} to="/logout">Logout</Link></li>
-						<li className={css(styles.navelement)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
+						<li className={css(styles.titleelement)}>
+							<Link className={css(styles.links)} to="/">Hissues</Link>
+						</li>
+						<li className={css(styles.navelement)}
+								onClick={() => this.props.logout()}>
+							<Link className={css(styles.links)} to="/logout">
+								Logout
+							</Link>
+						</li>
+						<li className={css(styles.navelement)}>
+							<Link className={css(styles.links)} to="/dashboard">
+								Dashboard
+							</Link>
+						</li>
 					</ul>
 				</div>
 			);

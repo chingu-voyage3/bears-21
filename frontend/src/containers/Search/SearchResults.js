@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 import 'url-search-params-polyfill';
@@ -8,6 +9,11 @@ import { fetchHouses } from './actions';
 import { getHousesByPostCode, getIsFetching } from './reducers';
 
 class SearchResults extends Component {
+  static propTypes = {
+    houses: PropTypes.array,
+    isFetching: PropTypes.bool,
+    postCode: PropTypes.string
+  };
   componentWillMount() {
     loadData(this.props)
   }
@@ -46,7 +52,6 @@ const styles = StyleSheet.create({
 
 
 function loadData(props) {
-  console.log('Loading data');
   props.fetchHouses(parse(getSearchParams(props)).postCode);
 }
 
