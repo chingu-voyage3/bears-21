@@ -29,11 +29,6 @@ export default class HouseForm extends Component {
           className={css(styles.right_grid)}
           value={house.title} onChange={onFieldChange} />
 
-        <label className={css(styles.left_grid)}>Description</label>
-        <input name="description" type="text" placeholder="Description"
-          className={css(styles.right_grid)}
-          value={house.description} onChange={onFieldChange} />
-
         <label className={css(styles.left_grid)}>Street</label>
         <input name="location.street" type="text" placeholder="Street"
           className={css(styles.right_gred)}
@@ -43,6 +38,11 @@ export default class HouseForm extends Component {
         <input name="location.postCode" type="text" placeholder="Post Code"
           className={css(styles.right_gred)}
           value={house.location.postCode} onChange={onFieldChange} />
+
+        <label className={css(styles.left_grid)}>Description</label>
+        <textarea name="description" rows="6" cols="32" placeholder="Description"
+          className={css(styles.right_grid)}
+          value={house.description} onChange={onFieldChange} />
 
         <button className={css(styles.right_grid)}
           onClick={onSubmit}
