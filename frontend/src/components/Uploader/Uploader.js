@@ -92,7 +92,10 @@ const styles = StyleSheet.create({
     // paddingBottom: "10px",
     // marginBottom: "0px"
   },
-  image_style: { maxWidth: "215px", maxHeight: "215px" },
+  image_style: {
+    maxWidth: "215px",
+    maxHeight: "215px"
+  },
   ip_wrapper: {
     display: "flex",
     justifyContent: "space-around",

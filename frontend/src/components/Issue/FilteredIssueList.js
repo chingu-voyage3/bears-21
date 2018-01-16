@@ -19,7 +19,7 @@ export default class FilteredIssueList extends Component {
     const {data, statusFilter, title} = this.props;
     if( this.state.redirect) {
       return <Redirect to={{
-        pathname: "/issue/"+this.state.redirect._id,
+        pathname: `/issue/${this.state.redirect._id}`,
         state: { issue: this.state.redirect }
       }} />;
     }
