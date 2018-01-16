@@ -8,7 +8,7 @@ export default (props) => (
 const styles = StyleSheet.create({
   form: {
     display: 'flex',
-    border: '20px solid rgba(0,0,0,0.3)',
+    border: '10px solid rgba(0,0,0,0.3)',
     borderRadius: '5px',
     zIndex: '10'
   },
