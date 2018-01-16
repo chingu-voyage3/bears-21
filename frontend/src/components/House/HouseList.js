@@ -24,8 +24,8 @@ export default class HouseList extends Component {
   render = () => {
     if( this.state.new_issue){
       return <Redirect to={{
-          pathname: "/issue",
-          state: { issue: {house: this.state.new_issue._id}}
+          pathname: "/issue/new",
+          state: { house_id: this.state.new_issue._id}
         }}
       />;
     }

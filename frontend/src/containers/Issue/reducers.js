@@ -1,4 +1,3 @@
-import {combineReducers} from 'redux';
 import {
   ISSUE_RESET,
   ISSUE_FETCH_DATA_SUCCESS,
@@ -6,23 +5,6 @@ import {
   ISSUE_IS_WORKING,
   ISSUE_HAS_ERRORED
 } from './actions';
-
-function issueHasErrored( state = false, action) {
-  switch( action.type) {
-    case ISSUE_HAS_ERRORED:
-      return action.hasErrored;
-    default:
-      return state;
-  }
-}
-function issueIsWorking( state = false, action) {
-  switch( action.type) {
-    case ISSUE_IS_WORKING:
-      return action.isWorking;
-    default:
-      return state;
-  }
-}
 
 const defaultIssue = {
   title: "",
@@ -33,30 +15,44 @@ const defaultIssue = {
   images:[],
   house: null
 };
+const initialState = {
+  issue: JSON.parse( JSON.stringify( defaultIssue)),
+  isWorking: false,
+  isSaved: false,
+  issueError: {
+    hasErrored: false,
+    errorMessage: "Unknown Error"
+  }
+};
 
-function issue( state = defaultIssue, action) {
+function issue( state , action) {
+  if( typeof state === "undefined") {
+    state = JSON.parse( JSON.stringify( initialState))
+  }
   let ret;
   switch( action.type) {
-  case ISSUE_FETCH_DATA_SUCCESS:
-  case ISSUE_SAVE_DATA_SUCCESS:
-    return action.issue;
-  case ISSUE_RESET:
-    ret = JSON.parse( JSON.stringify(defaultIssue));
-    ret.house = action.house;
-    return ret;
-  default:
-    if( state === defaultIssue) {
-      ret = JSON.parse( JSON.stringify( defaultIssue));
-      ret.house = action.house;
+    case ISSUE_IS_WORKING:
+      return {...state, isWorking: action.isWorking};
+    case ISSUE_HAS_ERRORED:
+      return {...state,
+        issueError:{
+          hasErrored: action.hasErrored,
+          errorMessage: action.errorMessage
+        }
+      };
+    case ISSUE_FETCH_DATA_SUCCESS:
+    case ISSUE_SAVE_DATA_SUCCESS:
+      return {...state,
+        issue: action.issue,
+        isSaved: true
+      };
+    case ISSUE_RESET:
+      ret = JSON.parse( JSON.stringify(initialState));
+      ret.issue.house = action.house;
       return ret;
-    } else {
+    default:
       return state;
-    }
   }
 }
 
-export default combineReducers({
-  issue,
-  issueIsWorking,
-  issueHasErrored
-});
+export default issue;

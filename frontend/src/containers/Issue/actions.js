@@ -11,10 +11,11 @@ export function issueReset( house_id) {
   };
 }
 
-export function issueHasErrored( hasErrored) {
+export function issueHasErrored( hasErrored, errorMessage = "Unknown Error") {
   return {
     type: ISSUE_HAS_ERRORED,
-    hasErrored
+    hasErrored,
+    errorMessage
   };
 }
 
@@ -91,15 +92,15 @@ export function issueSaveData( issue) {
       credentials: 'same-origin',
       body: payload
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( issueIsWorking(false));
-      return response;
-    })
     .then( response => response.json())
-    .then( response => dispatch( issueSaveDataSuccess(response.issue)))
-    .catch( () => dispatch( issueHasErrored( true)));
+    .then( json => {
+      dispatch( issueIsWorking(false));
+      if( json.message) {
+        dispatch( issueHasErrored( true, json.message.message));
+      } else {
+        dispatch( issueSaveDataSuccess(json.issue));
+      }
+    })
+    .catch( () => dispatch( issueHasErrored( true, "Unknown Error")));
   };
 }
