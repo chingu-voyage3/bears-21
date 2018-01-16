@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { css, StyleSheet } from 'aphrodite';
 import {ImageBlock, ImageList} from '../../components/Image';
 import {HouseForm} from '../../components/House';
 import { houseHasErrored, houseFetchData, houseSaveData, resetHouse } from './actions';
@@ -96,9 +97,9 @@ class House extends Component {
     }
     const op_type = (typeof house._id === "undefined")?"New":"Edit";
     return (
-      <div className="container_vertical">
-        <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
-        <div className="container_horizontal">
+      <div className={css(styles.centered)}>
+        <h1>House ({op_type})</h1>
+        <div>
           <button type="button" onClick={this.onNewHouse} >New House</button>
           <button type="button" onClick={this.onNewIssue} >New Issue</button>
         </div>
@@ -115,6 +116,16 @@ class House extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  centered: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  }
+});
 
 const mapStateToProps = state => {
   return {

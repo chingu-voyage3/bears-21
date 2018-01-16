@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     padding: "1em 0px",
     width: "30%",
     display: "flex",
+    flex: 1,
     flexDirection: "column",
     border: "1px solid lightgrey"
   },
