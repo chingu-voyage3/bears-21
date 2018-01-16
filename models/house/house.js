@@ -29,9 +29,16 @@ const houseSchema = new Schema({
       required: 'Street is required'
     }
   },
-  issues: [{type: Schema.Types.ObjectId, ref: 'Issue'}],
+  issues: {
+    type: [{type: Schema.Types.ObjectId, ref:'Issue'}],
+    default: []
+    // [{type: Schema.Types.ObjectId, ref: 'Issue'}],
+  },
   owner: { type: Schema.Types.ObjectId, ref: 'User'},
-  images: [String],
+  images: {
+    type: [String],
+    default: []
+  },
   active: {type: Boolean, default: true}
 });
 
