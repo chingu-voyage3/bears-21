@@ -1,11 +1,12 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-export default () => (
+const Footer = () => (
   <footer className={css(styles.footer)}>
     <section>Made by bears-21</section>
   </footer>
 );
+export default Footer;
 
 const styles = StyleSheet.create({
   footer: {
