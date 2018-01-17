@@ -5,12 +5,11 @@ import {StyleSheet, css} from 'aphrodite';
 
 export default class ImageRemovable extends React.Component {
   static propTypes = {
-    image_id: PropTypes.number, // new images don't have ids before save
     src: PropTypes.string,
     removeImage: PropTypes.func.isRequired
   };
   onRemove = () => {
-    this.props.removeImage( this.props.image_id);
+    this.props.removeImage( this.props.src);
   };
   render = () => {
     const {src} = this.props;
