@@ -21,9 +21,9 @@ class app extends Component {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    margin: '0 auto',
+    height: '100%',
     minHeight: '100vh',
-    overflow: 'hidden',
+    //overflow: 'hidden',
     flexDirection: 'column',
     backgroundColor: '#f0f0f0'
   }

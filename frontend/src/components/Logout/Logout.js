@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   centered: {
     display: "flex",
     flex: 1,
-    flexDirections: "column",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
   }
