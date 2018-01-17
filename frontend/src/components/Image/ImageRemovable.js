@@ -5,12 +5,11 @@ import {StyleSheet, css} from 'aphrodite';
 
 export default class ImageRemovable extends React.Component {
   static propTypes = {
-    image_id: PropTypes.number, // new images don't have ids before save
     src: PropTypes.string,
     removeImage: PropTypes.func.isRequired
   };
   onRemove = () => {
-    this.props.removeImage( this.props.image_id);
+    this.props.removeImage( this.props.src);
   };
   render = () => {
     const {src} = this.props;
@@ -45,7 +44,10 @@ const styles = StyleSheet.create({
     paddingBottom: "10px",
     marginBottom: "0px"
   },
-  image_style: { maxWidth: "215px", maxHeight: "215px" },
+  image_style: {
+    maxWidth: "215px",
+    maxHeight: "215px"
+  },
   ip_wrapper: {
     display: "flex",
     justifyContent: "space-around",

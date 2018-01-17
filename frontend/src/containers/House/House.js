@@ -62,13 +62,19 @@ class House extends Component {
     }
     this.setState( { house});
   };
-  addImage = ( image) => {
+  addImage = image => {
     const {house} = this.state;
     this.setState( {house: {...house, images: house.images.concat([image])}});
   };
-  removeImage = (ndx) => {
-    const ni = this.state.house.images.filter( (img,i) => {
-      return ndx !== i;
+  removeImage = src => {
+    const ni = this.state.house.images.filter( (img) => {
+      let ret = true;
+      if( typeof img === "string") {
+        if( img === src) ret = false;
+      } else {
+        if( img.preview === src) ret = false;
+      }
+      return ret;
     });
     this.setState( {house: {...this.state.house, images: ni}});
   };
