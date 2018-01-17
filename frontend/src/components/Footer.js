@@ -3,7 +3,7 @@ import { css, StyleSheet } from 'aphrodite';
 
 export default () => (
   <footer className={css(styles.footer)}>
-    <section className={css(styles.section)}>Made by bears-21</section>
+    <section className={css(styles.section)}>Made by bears-21 with ❤️</section>
   </footer>
 );
 

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '400',
     fontSize: '2rem',
-    color: '#d77158'
+    color: '#ff5a5f'
   },
   h3: {
     display: 'flex',
@@ -96,8 +96,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    backgroundImage: "url('http://lorempixel.com/1000/600/abstract')",
-    padding: '5rem 2rem',
+    backgroundImage: "url('https://images.unsplash.com/photo-1451934403379-ffeff84932da?auto=format&fit=crop&w=1284&q=80')",
+    backgroundPosition: 'center',
+    padding: '8rem 2rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

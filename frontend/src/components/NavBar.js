@@ -47,9 +47,11 @@ const styles = StyleSheet.create({
   container: {
     listStyleType: 'none',
     margin: 0,
-    padding: '1rem 1rem',
+    fontSize: '1.1rem',
+    padding: '0.8rem 1rem',
     overflow: 'hidden',
     backgroundColor: '#333',
+    background: 'linear-gradient(to right, rgba(107,183,86,0.95), #008f68)'
   },
   navelement: {
     float: 'right',
