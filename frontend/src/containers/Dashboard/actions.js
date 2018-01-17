@@ -46,8 +46,8 @@ export function houseIssuesFetchData(url) {
     })
     .then( response => response.json())
     .then( house_issues => {
-      dispatch( houseIssuesFetchDataSuccess( house_issues))
       dispatch( houseIssuesIsLoading(false));
+      dispatch( houseIssuesFetchDataSuccess( house_issues))
     })
     .catch( () => dispatch( houseIssuesHasErrored( true)));
   };
@@ -68,8 +68,8 @@ export function houseDelete( house_id) {
     })
     .then( response => response.json())
     .then( json => {
-        dispatch( houseDeleteSuccess( json.house_id));
-        dispatch( houseIssuesIsLoading( false));
+      dispatch( houseIssuesIsLoading( false));
+      dispatch( houseDeleteSuccess( json.house_id));
     })
     .catch( () => dispatch( houseIssuesHasErrored( true)));
   };
