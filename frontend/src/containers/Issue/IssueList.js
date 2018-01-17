@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Issue from './Issue';
+import IssueItem from './IssueItem';
 import {css} from 'aphrodite';
 import styles from './styles';
 
@@ -16,7 +16,7 @@ export default class IssueList extends Component {
   };
   render = () => {
     const items = this.props.items.map( (item, i) => (
-      <Issue issue={item} key={i} onIssueClick={this.onIssueClick} />
+      <IssueItem issue={item} key={i} onIssueClick={this.onIssueClick} />
     ));
     return (
       <div className={css(styles.column_wrapper)}>

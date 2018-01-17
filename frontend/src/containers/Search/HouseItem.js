@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ImageDefault} from '../../components/Image';
+import {ImageDefault} from '../Image';
 import { css, StyleSheet } from 'aphrodite';
 
 const HouseItem = ({ house }) => (

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
-import House from './House';
+import HouseCard from './HouseCard';
 import {FilteredIssueList} from '../Issue';
 import {css} from 'aphrodite';
 import styles from './styles';
@@ -40,7 +40,7 @@ export default class HouseList extends Component {
     const house_list = data.map((house, ndx) => {
       return (
         <div className={css(styles.wrapper)} key={ndx}>
-          <House house={house}
+          <HouseCard house={house}
             onNewIssue={this.onNewIssue}
             onEditHouse={this.onEditHouse}
             onDeleteHouse={this.props.onDeleteHouse} />

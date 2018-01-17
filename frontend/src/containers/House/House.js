@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
-import {ImageBlock, ImageList} from '../../components/Image';
-import {HouseForm} from '../../components/House';
+import {ImageBlock, ImageList} from '../Image';
+import HouseForm from './HouseForm';
 import { houseFetchData, houseSaveData, houseReset } from './actions';
 
 class House extends Component {

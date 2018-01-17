@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
-import {ImageBlock, ImageList} from '../../components/Image';
+import IssueForm from './Issue'; // eslint-disable-line no-unused-vars
+import {ImageBlock, ImageList} from '../Image';
 import {issueFetchData, issueSaveData, issueReset } from './actions';
 import './style.css';
 
@@ -31,6 +31,7 @@ class Issue extends Component {
     }
   };
   componentWillMount = () => {
+    console.log( "mounting issue props:", this.props);
     const {match, location} = this.props;
     if( match.params.id === "new") {
       this.props.resetIssue( location.state.house_id);

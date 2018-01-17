@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { houseIssuesFetchData, houseDelete} from './actions';
-import {HouseList} from '../../components/House';
+import {HouseList} from '../House';
 
 class Dashboard extends Component {
   static propTypes = {
