@@ -1,7 +1,25 @@
 import {StyleSheet} from 'aphrodite';
 
 const styles = StyleSheet.create({
+  cross_box_colour: {
+    background: "tomato" // "linear-gradient( to top, #49CF87, #40C080)"
+  },
+  close_button: {
+    position: "absolute",
+    top: "0px",
+    right: "0px"
+  },
+  add_issue_style: {
+    position: "absolute",
+    top: "30px",
+    right: "0px"
+  },
+  add_button: {
+    fontSize: "1.1em",
+    lineHeight: "1em"
+  },
   wrapper: {
+    cursor: "pointer",
     display: "flex",
     justifyContent: "space-around"
   },
@@ -10,12 +28,27 @@ const styles = StyleSheet.create({
     maxWidth:"215px",
     textAlign:"center"
   },
+  card_wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "200px",
+    border: "1px solid black",
+    borderRadius: "5px",
+    background: "#fff",
+    margin: "10px"
+  },
   list: {
     display: "flex",
     flexDirection: "column"
   },
   title: {
-    textAlign: "center"
+    textAlign: "center",
+    padding: "6px",
+    margin: "0"
+  },
+  sub_title: {
+    maxWidth: "178px",
+    padding: "6px"
   },
   form: {
     margin: "10px auto",

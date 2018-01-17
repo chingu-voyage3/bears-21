@@ -34,9 +34,9 @@ class routes extends Component {
         <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
         <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
         <AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
-        <AuthRoute path="/issue" user={user} component={Issue} pathname={"/login"} />
+        <AuthRoute path="/issue/:id" user={user} component={Issue} pathname={"/login"} />
         <Route path="/newissue" component={Dummy} />
-        <AuthRoute path="/house" user={user} component={House} pathname={"/login"} />
+        <AuthRoute path="/house/:id" user={user} component={House} pathname={"/login"} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={SearchLayout} />
         <Route path="*" component={NotFound} />
@@ -57,7 +57,7 @@ const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }
 );
 AuthRoute.propTypes = {
   user: PropTypes.bool,
-  component: PropTypes.object,
+  component: PropTypes.func,
   pathname: PropTypes.string
 };
 
@@ -73,7 +73,7 @@ const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...res
 );
 NonAuthRoute.propTypes = {
   user: PropTypes.bool,
-  component: PropTypes.object,
+  component: PropTypes.func,
   pathname: PropTypes.string
 };
 

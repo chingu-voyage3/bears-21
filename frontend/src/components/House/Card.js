@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ImageDefault} from '../../components/Image';
-import { css, StyleSheet } from 'aphrodite';
+import {ImageDefault} from '../Image';
+import {StyleSheet, css} from 'aphrodite';
 
-const HouseItem = ({ house }) => (
+const Card = (props) => (
   <div className={css(styles.container)}>
-    <ImageDefault src={house.images[0]} missing_url="http://via.placeholder.com/350x150" />
+    <ImageDefault src={props.house.images[0]} missing_url="//via.placeholder.com/350x150?No Image"/>
     <span className={css(styles.title)}>
-      <h4 style={{margin: '0', padding: '0 3.5%', lineHeight: '1.2'}}>{house.title}</h4>
+      <h4 className={css(styles.title_heading)}>{ props.house.title }</h4>
     </span>
-    <p className={css(styles.content)}>{house.description}</p>
+    <p className={css(styles.content)} >{ props.house.description }</p>
   </div>
 );
-HouseItem.propTypes = {
-  house: PropTypes.object
-};
 
-HouseItem.propTypes = {
-  house: PropTypes.object.isRequired
+Card.propTypes = {
+  house: PropTypes.object
 };
 
 const styles = StyleSheet.create({
@@ -31,11 +28,6 @@ const styles = StyleSheet.create({
     margin: '10px',
     maxWidth: '320px'
   },
-  image: {
-    borderRadius: '4px 4px 0 0',
-    width: '100%',
-    padding: '0'
-  },
   title: {
     background: 'rgba(157, 187, 63, .85)',
     color: 'white',
@@ -43,9 +35,14 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: '3.5% 0 2.5% 0'
   },
+  title_heading: {
+    margin: '0',
+    padding: '0 3.5%',
+    lineHeight: '1.2'
+  },
   content: {
     padding: '5% 5% 3% 5%'
   }
 });
 
-export default HouseItem;
+export default Card;

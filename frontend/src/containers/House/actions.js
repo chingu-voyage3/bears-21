@@ -1,19 +1,20 @@
+export const HOUSE_RESET = "HOUSE_RESET";
 export const HOUSE_HAS_ERRORED = "HOUSE_HAS_ERRORED";
 export const HOUSE_IS_WORKING = "HOUSE_IS_WORKING";
 export const HOUSE_FETCH_DATA_SUCCESS = "HOUSE_FETCH_DATA_SUCCESS";
 export const HOUSE_SAVE_DATA_SUCCESS = "HOUSE_SAVE_DATA_SUCCESS";
-export const HOUSE_RESET = "HOUSE_RESET";
 
-export function resetHouse() {
+export function houseReset() {
   return {
-    type: HOUSE_RESET
+    type: HOUSE_RESET,
   };
 }
 
-export function houseHasErrored(hasErrored) {
+export function houseHasErrored(hasErrored, errorMessage = "Unknown Error") {
   return {
     type: HOUSE_HAS_ERRORED,
-    hasErrored
+    hasErrored,
+    errorMessage
   };
 }
 
@@ -34,7 +35,8 @@ export function houseFetchDataSuccess(house) {
 export function houseSaveDataSuccess(house) {
   return {
     type: HOUSE_SAVE_DATA_SUCCESS,
-    house
+    house,
+    houseIsSaved: true
   };
 }
 
@@ -51,16 +53,16 @@ export function houseFetchData( house) {
       credentials: 'same-origin',
       body: JSON.stringify( house._id)
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
+    .then( response => response.json())
+    .then( json => {
+      if( json.message) {
+        dispatch( houseHasErrored(true, json.message))
+      } else {
+        dispatch( houseFetchDataSuccess(json.house))
       }
       dispatch( houseIsWorking(false));
-      return response;
     })
-    .then( response => response.json())
-    .then( json => dispatch( houseFetchDataSuccess(json.house)))
-    .catch( () => dispatch( houseHasErrored(true)));
+    .catch( () => dispatch( houseHasErrored(true, "Unknown Error")));
   };
 }
 
@@ -107,15 +109,18 @@ export function houseSaveData( house) {
       credentials: 'same-origin',
       body: payload
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( houseIsWorking( false));
-      return response;
-    })
     .then( response => response.json())
-    .then( response => dispatch( houseSaveDataSuccess(response.house)))
-    .catch( () => dispatch( houseHasErrored( true)));
+    .then( json => {
+      dispatch( houseIsWorking(false));
+      if( json.message) {
+        dispatch( houseHasErrored(true, json.message));
+      } else {
+        dispatch( houseSaveDataSuccess(json.house));
+      }
+    })
+    .catch( () => {
+      dispatch( houseIsWorking(false));
+      dispatch( houseHasErrored( true, "unknown error"));
+    });
   };
 }

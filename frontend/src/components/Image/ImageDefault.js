@@ -1,40 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
-export default class ImageDefault extends React.Component {
+class ImageDefault extends React.Component {
   static propTypes = {
-    src: PropTypes.string.isRequired,
+    src: PropTypes.string,
     missing_url: PropTypes.string.isRequired
   };
   state = {
     image_error: false,
-    image_src: this.props.missing_url
+    image_src: null
   };
-  componentWillMount = () => {
+  component_unmounted = false;
+  componentDidMount = () => {
     // data:image/jpeg;base64,data
-    const {src} = this.props;
+    this.component_unmounted = false;
+    const {src, missing_url} = this.props;
     if( src) {
       if( src.indexOf( '/') === -1){
+        this.setState( {image_src: missing_url});
+        // FIXME: we have to do this in a parent or re-render may cause
+        // this component to be replaced by another before fetch returns
         fetch( `/api/v1/image/${src}`).then( response => {
           response.blob().then( blob => {
-            const url = URL.createObjectURL(blob);
-            this.setState( {image_src: url});
+            if( !this.component_unmounted) {
+              const url = URL.createObjectURL(blob);
+              this.setState( {image_src: url});
+            }
           });
         });
       } else {
         this.setState( {image_src: src});
       }
+    } else {
+      this.setState( {image_src: missing_url})
     }
   };
-  componentWillReceiveProps = (props) => {
-    if( props.src !== this.props.src){
-      this.setState( {image_error: false});
-    }
+  componentWillUnmount = () => {
+    this.component_unmounted = true;
   };
-  onImageError = (e) => {
-    console.log( "image error for url:", e.target.src);
+  onImageError = () => {
     this.setState( {image_error: true, image_src: this.props.missing_url});
   };
   render = () => {
@@ -43,8 +48,8 @@ export default class ImageDefault extends React.Component {
     return (
       <div>
         { image_error
-          ? <img className={css(styles.image_box)} src={missing_url} alt="noimage"/>
-          : <img className={css(styles.image_box)}
+          ? <img className={css(styles.image)} src={missing_url} alt="noimage"/>
+          : <img className={css(styles.image)}
               src={image_src}
               alt="noimage"
               onError={this.onImageError}
@@ -53,4 +58,14 @@ export default class ImageDefault extends React.Component {
       </div>
     );
   };
-};
+}
+
+const styles = StyleSheet.create({
+  image: {
+    borderRadius: '4px 4px 0 0',
+    width: '100%',
+    padding: '0'
+  }
+});
+
+export default ImageDefault;

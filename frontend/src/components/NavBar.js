@@ -18,15 +18,15 @@ class navbar extends Component {
 						<li className={css(styles.titleelement)}>
 							<Link className={css(styles.links)} to="/">Hissues</Link>
 						</li>
+						<li className={css(styles.titleelement)}>
+							<Link className={css(styles.links)} to="/dashboard">
+								Dashboard
+							</Link>
+						</li>
 						<li className={css(styles.navelement)}
 								onClick={() => this.props.logout()}>
 							<Link className={css(styles.links)} to="/logout">
 								Logout
-							</Link>
-						</li>
-						<li className={css(styles.navelement)}>
-							<Link className={css(styles.links)} to="/dashboard">
-								Dashboard
 							</Link>
 						</li>
 					</ul>
