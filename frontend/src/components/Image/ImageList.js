@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageRemovable from './ImageRemovable';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class ImageList extends React.Component {
   static propTypes = {
@@ -21,13 +20,23 @@ export default class ImageList extends React.Component {
         src = img.preview;
       }
       return (
-        <ImageRemovable src={src} key={i} ndx={i} removeImage={this.removeImage} />
+        <ImageRemovable src={src} key={i} image_id={i} removeImage={this.removeImage} />
       );
     });
     return (
-      <div className={css(styles.image_box)} >
+      <div className={css(styles.wrapper)} >
         {image_list}
       </div>
     );
   };
-};
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    marginBottom: "10px"
+  }
+});

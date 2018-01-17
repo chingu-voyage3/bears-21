@@ -1,17 +1,19 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-export default () => (
+const Footer = () => (
   <footer className={css(styles.footer)}>
-    <section className={css(styles.section)}>Made by bears-21 with ❤️</section>
+    <section className={css(styles.section)}>
+      Made by bears-21 with <span role="img" aria-label="heart">❤️ </span>
+    </section>
   </footer>
 );
+export default Footer;
 
 const styles = StyleSheet.create({
   footer: {
     color: '#715c57',
     padding: '2rem',
-    marginTop: '3rem',
     backgroundColor: '#dae6f1'
   },
   section: {

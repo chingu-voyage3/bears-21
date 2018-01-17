@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
 
 export default class SearchPage extends Component {
+  static propTypes = {
+    history: PropTypes.object
+  };
   getInputValue = () => {
     return this.input.value;
   }

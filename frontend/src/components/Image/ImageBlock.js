@@ -29,4 +29,4 @@ export default class ImageBlock extends Component {
       </div>
     );
   };
-};
+}

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 
 class navbar extends Component {
+  static propTypes = {
+    user: PropTypes.bool,
+    logout: PropTypes.func.isRequired
+  };
+
+  render() {
+    return this.getBar();
+  }
+
   getBar() {
     if (this.props.user) { // authenticated
       return (
@@ -38,9 +48,6 @@ class navbar extends Component {
     }
   }
 
-  render() {
-    return this.getBar();
-  }
 }
 
 const styles = StyleSheet.create({

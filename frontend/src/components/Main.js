@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     height: '100%',
-    //minHeight: '100vh',
+    minHeight: '100vh',
     //overflow: 'hidden',
     flexDirection: 'column',
     backgroundColor: '#f0f0f0'

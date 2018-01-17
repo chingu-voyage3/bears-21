@@ -6,46 +6,51 @@ import {
   HOUSE_HAS_ERRORED
 } from './actions';
 
-export function houseHasErrored( state = false, action) {
-  switch( action.type) {
-    case HOUSE_HAS_ERRORED:
-      return action.hasErrored;
-    default:
-      return state;
-  }
-}
-
-export function houseIsWorking( state = false, action) {
-  switch( action.type) {
-    case HOUSE_IS_WORKING:
-      return action.isWorking;
-    default:
-      return state;
-  }
-}
-
 const defaultHouse = {
-  title: "Title",
-  description: "Description",
+  title: "",
+  description: "",
   location: {
-    street: "Street",
-    postCode: "postCode"
+    street: "",
+    postCode: ""
   },
   images: [],
   issues: []
 };
-export function house( state = defaultHouse, action) {
+
+const initialState = {
+  house: JSON.parse( JSON.stringify(defaultHouse)),
+  houseIsWorking: false,
+  houseError: {
+    hasErrored: false,
+    errorMessage: ""
+  },
+  houseIsSaved: false,
+};
+
+function house( state, action ) {
+  if( typeof state === "undefined") {
+    state = JSON.parse( JSON.stringify( initialState))
+  }
   switch( action.type) {
+    case HOUSE_HAS_ERRORED:
+      return {...state,
+        houseError: {
+          hasErrored: action.hasErrored,
+          errorMessage: action.errorMessage||""
+        },
+        houseIsSaved: false
+      };
+    case HOUSE_IS_WORKING:
+      return {...state, houseIsWorking: action.isWorking};
     case HOUSE_FETCH_DATA_SUCCESS:
+      return {...state, house: action.house};
     case HOUSE_SAVE_DATA_SUCCESS:
-      return action.house;
+      return {...state, house: action.house, houseIsSaved: action.houseIsSaved};
     case HOUSE_RESET:
-      return JSON.parse( JSON.stringify(defaultHouse));
+      return Object.assign({}, initialState);
     default:
-      if( state === defaultHouse) {
-        return JSON.parse( JSON.stringify(state));
-      } else {
-        return state;
-      }
+      return state;
   }
 }
+
+export default house;

@@ -25,20 +25,24 @@ export default class HouseForm extends Component {
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Title</label>
-        <input className={css(styles.right_grid)} name="title" type="text"
+        <input name="title" type="text" placeholder="Title"
+          className={css(styles.right_grid)}
           value={house.title} onChange={onFieldChange} />
 
-        <label className={css(styles.left_grid)}>Description</label>
-        <input className={css(styles.right_grid)} name="description" type="text"
-          value={house.description} onChange={onFieldChange} />
-
         <label className={css(styles.left_grid)}>Street</label>
-        <input className={css(styles.right_gred)} name="location.street" type="text"
+        <input name="location.street" type="text" placeholder="Street"
+          className={css(styles.right_gred)}
           value={house.location.street} onChange={onFieldChange} />
 
         <label className={css(styles.left_gred)}>postcode</label>
-        <input className={css(styles.right_gred)} name="location.postCode" type="text"
+        <input name="location.postCode" type="text" placeholder="Post Code"
+          className={css(styles.right_gred)}
           value={house.location.postCode} onChange={onFieldChange} />
+
+        <label className={css(styles.left_grid)}>Description</label>
+        <textarea name="description" rows="6" cols="32" placeholder="Description"
+          className={css(styles.right_grid)}
+          value={house.description} onChange={onFieldChange} />
 
         <button className={css(styles.right_grid)}
           onClick={onSubmit}

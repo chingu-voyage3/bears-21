@@ -21,7 +21,10 @@ const issueSchema = new Schema({
   },
   type: String,
   priority: Number,
-  images: [{type: String}],
+  images: {
+    type: [String],
+    default: []
+  },
   house: {
     type: Schema.Types.ObjectId,
     ref: "House",

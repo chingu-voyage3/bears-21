@@ -4,5 +4,6 @@ module.exports = {
   houseIssueList: require( './houseIssueList'),
   list: require('./list'),
   create: require('./create'),
-  upsert: require('./upsert')
+  upsert: require('./upsert'),
+  delete: require('./delete')
 }

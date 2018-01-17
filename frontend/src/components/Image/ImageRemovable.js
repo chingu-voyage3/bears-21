@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageDefault from './ImageDefault';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class ImageRemovable extends React.Component {
   static propTypes = {
-    src: PropTypes.string.isRequired,
+    image_id: PropTypes.number, // new images don't have ids before save
+    src: PropTypes.string,
     removeImage: PropTypes.func.isRequired
   };
   onRemove = () => {
-    this.props.removeImage( this.props.ndx);
+    this.props.removeImage( this.props.image_id);
   };
   render = () => {
     const {src} = this.props;
@@ -28,4 +28,32 @@ export default class ImageRemovable extends React.Component {
       </div>
     );
   };
-};
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    position: "relative",
+    padding: "0px 20px",
+    border: "2px solid darkgrey",
+    borderRadius: "10px",
+    boxShadow: "0px 0px 8px 0 #ccc",
+    background: "lightgrey",
+    maxWidth: "220px"
+  },
+  well: {
+    padding: "10px",
+    paddingBottom: "10px",
+    marginBottom: "0px"
+  },
+  image_style: { maxWidth: "215px", maxHeight: "215px" },
+  ip_wrapper: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  close_button: {
+    position: "absolute",
+    top: "0px",
+    right: "0px"
+  }
+});
