@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import IssueForm from './Issue'; // eslint-disable-line no-unused-vars
+import IssueForm from './IssueForm';
 import {ImageBlock, ImageList} from '../Image';
 import {issueFetchData, issueSaveData, issueReset } from './actions';
 import './style.css';
