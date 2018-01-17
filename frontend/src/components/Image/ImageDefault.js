@@ -11,16 +11,22 @@ class ImageDefault extends React.Component {
     image_error: false,
     image_src: null
   };
-  componentWillMount = () => {
+  component_unmounted = false;
+  componentDidMount = () => {
     // data:image/jpeg;base64,data
+    this.component_unmounted = false;
     const {src, missing_url} = this.props;
     if( src) {
       if( src.indexOf( '/') === -1){
         this.setState( {image_src: missing_url});
+        // FIXME: we have to do this in a parent or re-render may cause
+        // this component to be replaced by another before fetch returns
         fetch( `/api/v1/image/${src}`).then( response => {
           response.blob().then( blob => {
-            const url = URL.createObjectURL(blob);
-            this.setState( {image_src: url});
+            if( !this.component_unmounted) {
+              const url = URL.createObjectURL(blob);
+              this.setState( {image_src: url});
+            }
           });
         });
       } else {
@@ -30,10 +36,8 @@ class ImageDefault extends React.Component {
       this.setState( {image_src: missing_url})
     }
   };
-  componentWillReceiveProps = (props) => {
-    if( props.src !== this.props.src){
-      this.setState( {image_error: false});
-    }
+  componentWillUnmount = () => {
+    this.component_unmounted = true;
   };
   onImageError = () => {
     this.setState( {image_error: true, image_src: this.props.missing_url});
