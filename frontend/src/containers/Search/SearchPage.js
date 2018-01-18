@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
 class SearchPage extends Component {
   static propTypes = {
     history: PropTypes.object,
+    suggestions: PropTypes.array,
     onChangePostCode: PropTypes.func.isRequired
   };
 
