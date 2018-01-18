@@ -1,3 +1,4 @@
+export const UPDATE_POST_CODE = 'UPDATE_POST_CODE';
 export const SEARCH_HOUSES_REQUEST = 'SEARCH_HOUSES';
 export function searchHouses(postCode='') {
   return {

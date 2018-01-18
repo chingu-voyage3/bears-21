@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import {
   SEARCH_HOUSES_REQUEST,
   SEARCH_HOUSES_SUCCESS,
-  SEARCH_HOUSES_FAILURE
+  SEARCH_HOUSES_FAILURE,
+  UPDATE_POST_CODE
 } from './actions';
 
 
@@ -34,6 +35,7 @@ import {
 function searchedPostCode(state='', action) {
   switch (action.type) {
     case SEARCH_HOUSES_REQUEST:
+    case UPDATE_POST_CODE:
       return action.postCode;
     default:
       return state;

@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
+import { UPDATE_POST_CODE } from './actions';
 
-export default class SearchPage extends Component {
+class SearchPage extends Component {
   static propTypes = {
-    history: PropTypes.object
+    history: PropTypes.object,
+    onChangePostCode: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    const { onChangePostCode } = props;
+    this.changePostCode = e => onChangePostCode(e.target.value)
+  }
+
   getInputValue = () => {
     return this.input.value;
   }
 
   handleKeyUp = (e) => {
     if (e.keyCode === 13) {
-      this.handleSubmit();
+      this.handleSubmit(e);
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     const postCode = this.getInputValue();
     this.props.history.push(`search?postCode=${postCode}`);
   }
@@ -32,6 +43,7 @@ export default class SearchPage extends Component {
                    className={css(styles.input)}
                    placeholder="Enter Postcode"
                    ref={(c) => { this.input = c; }}
+                   onChange={this.changePostCode}
                    onKeyUp={this.handleKeyUp} required />
             <SubmitInput />
           </Form>
@@ -121,3 +133,11 @@ const styles = StyleSheet.create({
     borderRight: '1px solid rgba(0,0,0,0.2)'
   }
 });
+
+
+const mapDispatchToProps = dispatch => ({
+  onChangePostCode: postCode =>
+    dispatch({ type: UPDATE_POST_CODE, postCode }),
+});
+
+export default connect(state => state, mapDispatchToProps)(SearchPage);
