@@ -1,29 +1,56 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
+import AutoCompleteList from './AutoCompleteList';
+import { searchPostCodes } from './actions';
+import { getSuggestions, getIsFetchingSuggestions } from './reducers';
 
-export default class SearchPage extends Component {
+const mapStateToProps = (state) => ({
+  suggestions: getSuggestions(state),
+  isFetching: getIsFetchingSuggestions(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChangePostCode: postCode => {
+    dispatch(searchPostCodes(postCode));
+  }
+});
+
+class SearchPage extends Component {
   static propTypes = {
-    history: PropTypes.object
+    history: PropTypes.object,
+    suggestions: PropTypes.array,
+    onChangePostCode: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    const { onChangePostCode } = props;
+    this.changePostCode = e => onChangePostCode(e.target.value)
+  }
+
   getInputValue = () => {
     return this.input.value;
   }
 
   handleKeyUp = (e) => {
     if (e.keyCode === 13) {
-      this.handleSubmit();
+      this.handleSubmit(e);
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     const postCode = this.getInputValue();
     this.props.history.push(`search?postCode=${postCode}`);
   }
 
-  render () {
+  render = () => {
+    const { suggestions=[] } = this.props;
+
     return (
       <div className={css(styles.container)}>
         <header className={css(styles.header)}>
@@ -32,9 +59,12 @@ export default class SearchPage extends Component {
                    className={css(styles.input)}
                    placeholder="Enter Postcode"
                    ref={(c) => { this.input = c; }}
+                   onChange={this.changePostCode}
                    onKeyUp={this.handleKeyUp} required />
             <SubmitInput />
           </Form>
+          <AutoCompleteList items={
+            suggestions.map(s => ({link: `/search?postCode=${s.postCode}`, text: s.text}))} />
         </header>
         <article className={css(styles.article)}>
           <h2 className={css(styles.h2)}>Features</h2>
@@ -121,3 +151,5 @@ const styles = StyleSheet.create({
     borderRight: '1px solid rgba(0,0,0,0.2)'
   }
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
