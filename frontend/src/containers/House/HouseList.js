@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import HouseCard from './HouseCard';
 import {FilteredIssueList} from '../Issue';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class HouseList extends Component {
   static propTypes = {
@@ -56,3 +55,11 @@ export default class HouseList extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "space-around"
+  }
+});
