@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
+import AutoCompleteList from './AutoCompleteList';
 import { UPDATE_POST_CODE } from './actions';
+import { Search, SearchMock } from '../../core/service';
 
 class SearchPage extends Component {
   static propTypes = {
@@ -34,7 +36,11 @@ class SearchPage extends Component {
     this.props.history.push(`search?postCode=${postCode}`);
   }
 
-  render () {
+  render = () => {
+    const options = [
+      { link: 'CB10', text: 'CB10'},
+      { link: 'CB10', text: 'CB10'}
+    ];
     return (
       <div className={css(styles.container)}>
         <header className={css(styles.header)}>
@@ -47,6 +53,7 @@ class SearchPage extends Component {
                    onKeyUp={this.handleKeyUp} required />
             <SubmitInput />
           </Form>
+          <AutoCompleteList items={options} />
         </header>
         <article className={css(styles.article)}>
           <h2 className={css(styles.h2)}>Features</h2>
@@ -136,8 +143,10 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = dispatch => ({
-  onChangePostCode: postCode =>
-    dispatch({ type: UPDATE_POST_CODE, postCode }),
+  onChangePostCode: postCode => {
+    const response = SearchMock.getAll();
+    dispatch({ type: UPDATE_POST_CODE, postCode });
+  }
 });
 
 export default connect(state => state, mapDispatchToProps)(SearchPage);

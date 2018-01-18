@@ -32,11 +32,17 @@ import {
  * }
  */
 
-function searchedPostCode(state='', action) {
+function searchedPostCode(
+  state = {
+    postCode: '',
+    isfetching: false
+  },
+  action
+) {
   switch (action.type) {
     case SEARCH_HOUSES_REQUEST:
     case UPDATE_POST_CODE:
-      return action.postCode;
+      return { ...state, postCode: action.postCode };
     default:
       return state;
   }
