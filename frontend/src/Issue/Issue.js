@@ -31,7 +31,6 @@ class Issue extends Component {
     }
   };
   componentWillMount = () => {
-    console.log( "mounting issue props:", this.props);
     const {match, location} = this.props;
     if( match.params.id === "new") {
       this.props.resetIssue( location.state.house_id);

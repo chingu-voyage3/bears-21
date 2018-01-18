@@ -16,24 +16,8 @@ class Dashboard extends Component {
   state = {
     redirect_new_house: false
   };
-  componentWillMount = () => {
-    console.log( "dashboard will mount:", this.props);
-  };
   componentDidMount = () => {
     this.props.fetchData( '/api/v1/house-issues');
-  };
-  componentWillReceiveProps = (newProps) => {
-    console.log( "dashboard will receive props:", newProps);
-    if( this.props.houseIssues.length && newProps.houseIssues.length) {
-      if( newProps.houseIssues[0].images[0] === this.props.houseIssues[0].images[0]) {
-        console.log( "image zero is the same");
-      } else {
-        console.log( "image zero has changed");
-      }
-    } else {
-      console.log( `props houseIssues[${this.props.houseIssues.length}] \
-        new props houseIssues[${newProps.houseIssues.length}]`);
-    }
   };
   onNewHouse = () => {
     this.setState( {redirect_new_house:true})
