@@ -18,7 +18,6 @@ export default class FilteredIssueList extends Component {
   render = () => {
     const {data, statusFilter, title} = this.props;
     if( this.state.redirect) {
-      console.log( "redirect to Issue page")
       return <Redirect to={{
         pathname: `/issue/${this.state.redirect._id}`,
         state: { issue: this.state.redirect }

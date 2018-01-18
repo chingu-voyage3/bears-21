@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import IssueItem from './IssueItem';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class IssueList extends Component {
   static propTypes = {
@@ -30,3 +29,17 @@ export default class IssueList extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  column_wrapper: {
+    padding: "1em 0px",
+    width: "30%",
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    border: "1px solid lightgrey"
+  },
+  title: {
+    textAlign: "center"
+  },
+});
