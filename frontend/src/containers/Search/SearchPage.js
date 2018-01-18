@@ -49,6 +49,7 @@ class SearchPage extends Component {
 
   render = () => {
     const { suggestions=[] } = this.props;
+
     return (
       <div className={css(styles.container)}>
         <header className={css(styles.header)}>
@@ -61,7 +62,8 @@ class SearchPage extends Component {
                    onKeyUp={this.handleKeyUp} required />
             <SubmitInput />
           </Form>
-          <AutoCompleteList items={suggestions} />
+          <AutoCompleteList items={
+            suggestions.map(s => ({link: `/search?postCode=${s.postCode}`, text: s.text}))} />
         </header>
         <article className={css(styles.article)}>
           <h2 className={css(styles.h2)}>Features</h2>

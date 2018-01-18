@@ -7,7 +7,7 @@ const endPoint = 'https://raw.githubusercontent.com/Gibbs/uk-postcodes/master/da
 export const SearchMock = {
   getAll: (query) => fetch(endPoint)
     .then(response => response.json())
-    .then(data => data.map(d => ({ link: d.postcode, text: d.postcode })))
+    .then(data => data.map(d => ({ postCode: d.postcode, text: d.postcode })))
 };
 
 export const Search = {
