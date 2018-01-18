@@ -5,8 +5,19 @@ import { StyleSheet, css } from 'aphrodite';
 import SubmitInput from './SubmitInput';
 import Form from './Form';
 import AutoCompleteList from './AutoCompleteList';
-import { UPDATE_POST_CODE } from './actions';
-import { Search, SearchMock } from '../../core/service';
+import { searchPostCodes } from './actions';
+import { getSuggestions, getIsFetchingSuggestions } from './reducers';
+
+const mapStateToProps = (state, ownProps) => ({
+  suggestions: getSuggestions(state),
+  isFetching: getIsFetchingSuggestions(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChangePostCode: postCode => {
+    dispatch(searchPostCodes(postCode));
+  }
+});
 
 class SearchPage extends Component {
   static propTypes = {
@@ -37,10 +48,7 @@ class SearchPage extends Component {
   }
 
   render = () => {
-    const options = [
-      { link: 'CB10', text: 'CB10'},
-      { link: 'CB10', text: 'CB10'}
-    ];
+    const { suggestions=[] } = this.props;
     return (
       <div className={css(styles.container)}>
         <header className={css(styles.header)}>
@@ -53,7 +61,7 @@ class SearchPage extends Component {
                    onKeyUp={this.handleKeyUp} required />
             <SubmitInput />
           </Form>
-          <AutoCompleteList items={options} />
+          <AutoCompleteList items={suggestions} />
         </header>
         <article className={css(styles.article)}>
           <h2 className={css(styles.h2)}>Features</h2>
@@ -141,12 +149,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const mapDispatchToProps = dispatch => ({
-  onChangePostCode: postCode => {
-    const response = SearchMock.getAll();
-    dispatch({ type: UPDATE_POST_CODE, postCode });
-  }
-});
-
-export default connect(state => state, mapDispatchToProps)(SearchPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
