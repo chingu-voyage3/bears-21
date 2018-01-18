@@ -14,6 +14,7 @@ class SearchResults extends Component {
     isFetching: PropTypes.bool,
     postCode: PropTypes.string
   };
+
   componentWillMount() {
     loadData(this.props)
   }

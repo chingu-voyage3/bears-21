@@ -2,13 +2,19 @@ import { combineReducers } from 'redux';
 import {
   SEARCH_HOUSES_REQUEST,
   SEARCH_HOUSES_SUCCESS,
-  SEARCH_HOUSES_FAILURE
+  SEARCH_HOUSES_FAILURE,
+  UPDATE_POST_CODE,
+  SEARCH_POST_CODE_START,
+  SEARCH_POST_CODE_SUCCESS,
+  SEARCH_POST_CODE_FAILED
 } from './actions';
 
 
 /**
  * {
  *    searchedPostCode: '',
+ *    isFetching: false,
+ *    suggestions: []
  *    housesByPostCode: {
  *      'CB21MW': {
  *        isFetching: true,
@@ -31,9 +37,31 @@ import {
  * }
  */
 
-function searchedPostCode(state='', action) {
+function isFetching(state = '', action) {
+  switch (action.type) {
+    case SEARCH_POST_CODE_START:
+      return true;
+    case SEARCH_POST_CODE_SUCCESS:
+    case SEARCH_POST_CODE_FAILED:
+      return false;
+    default:
+      return state;
+  }
+}
+
+function suggestions(state = [], action) {
+  switch (action.type) {
+    case SEARCH_POST_CODE_SUCCESS:
+      return action.suggestions;
+    default:
+      return state;
+  }
+}
+
+function searchedPostCode(state = '', action) {
   switch (action.type) {
     case SEARCH_HOUSES_REQUEST:
+    case UPDATE_POST_CODE:
       return action.postCode;
     default:
       return state;
@@ -74,7 +102,9 @@ function housesByPostCode(state = {}, action) {
 
 export default combineReducers({
   housesByPostCode,
-  searchedPostCode
+  searchedPostCode,
+  suggestions,
+  isFetching
 })
 
 // Selectors
@@ -85,5 +115,13 @@ export const getHousesByPostCode = (state, postCode) => {
 
 export const getIsFetching = (state, postCode) => {
   return state.search.housesByPostCode[postCode] ?
-    state.search.housesByPostCode[postCode].isFetching : [];
+    state.search.housesByPostCode[postCode].isFetching : false;
+};
+
+export const getSuggestions = (state) => {
+  return state.search.suggestions;
+};
+
+export const getIsFetchingSuggestions = (state) => {
+  return state.search.isFetching;
 };
