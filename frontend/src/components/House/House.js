@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class House extends Component {
   static propTypes = {
@@ -24,10 +23,9 @@ export default class House extends Component {
   }
   render = () => {
     const {house} = this.props;
-    const relative = { position: "relative"};
     const cross_symbol = String.fromCharCode( 10799);
     return (
-      <div className={css(styles.wrapper)} style={relative} onClick={this.onEditHouse} >
+      <div className={css(styles.wrapper)} onClick={this.onEditHouse} >
         <Card house={house} />
         <div className={css(styles.add_issue_style)} >
           <button type="button" title="Add Issue"
@@ -47,3 +45,29 @@ export default class House extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    position: "relative",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "space-around"
+  },
+  cross_box_colour: {
+    background: "tomato" // "linear-gradient( to top, #49CF87, #40C080)"
+  },
+  close_button: {
+    position: "absolute",
+    top: "0px",
+    right: "0px"
+  },
+  add_issue_style: {
+    position: "absolute",
+    top: "30px",
+    right: 0
+  },
+  add_button: {
+    fontSize: "1.1em",
+    lineHeight: "1em"
+  },
+});

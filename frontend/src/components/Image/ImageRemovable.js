@@ -39,19 +39,8 @@ const styles = StyleSheet.create({
     background: "lightgrey",
     maxWidth: "220px"
   },
-  well: {
-    padding: "10px",
-    paddingBottom: "10px",
-    marginBottom: "0px"
-  },
-  image_style: {
-    maxWidth: "215px",
-    maxHeight: "215px"
-  },
-  ip_wrapper: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center"
+  cross_box_colour: {
+    background: "tomato" // "linear-gradient( to top, #49CF87, #40C080)"
   },
   close_button: {
     position: "absolute",
