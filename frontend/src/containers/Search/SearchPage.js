@@ -8,7 +8,7 @@ import AutoCompleteList from './AutoCompleteList';
 import { searchPostCodes } from './actions';
 import { getSuggestions, getIsFetchingSuggestions } from './reducers';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   suggestions: getSuggestions(state),
   isFetching: getIsFetchingSuggestions(state)
 });
