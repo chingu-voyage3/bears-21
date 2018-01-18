@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Uploader} from '../Uploader';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class ImageBlock extends Component {
   static propTypes = {
@@ -18,7 +19,9 @@ export default class ImageBlock extends Component {
     };
     return (
       <div>
-        Images <button onClick={this.toggleUploaderVisibility} >+</button>
+        <div className={css(styles.header)} >
+          Images <button onClick={this.toggleUploaderVisibility} >+</button>
+        </div>
         <div style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>
         </div>
@@ -26,3 +29,12 @@ export default class ImageBlock extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  header: {
+    display: 'flex',
+    flex: '1',
+    justifyContent: 'center',
+    alignItems: 'baseline'
+  }
+});

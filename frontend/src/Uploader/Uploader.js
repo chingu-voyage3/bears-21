@@ -75,8 +75,7 @@ const styles = StyleSheet.create({
   btn_wrapper: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    fontSize: "0.8em",
-    margin: "1em"
+    justifyContent: "space-around",
+    fontSize: "0.8em"
   }
 });
