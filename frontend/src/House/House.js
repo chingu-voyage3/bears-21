@@ -95,15 +95,11 @@ class House extends Component {
         <div style={show_error} >
           {errorMessage}
         </div>
-        <div className="wrapper">
-          <HouseForm house={house}
-            onFieldChange={this.onFieldChange}
-            onSubmit={this.houseFormSubmit} />
-          <ImageBlock addImage={this.addImage} />
-          <div className="images_wrapper">
-            <ImageList images={house.images} removeImage={this.removeImage} />
-          </div>
-        </div>
+        <HouseForm house={house}
+          onFieldChange={this.onFieldChange}
+          onSubmit={this.houseFormSubmit} />
+        <ImageBlock addImage={this.addImage} />
+        <ImageList images={house.images} removeImage={this.removeImage} />
       </div>
     );
   };
