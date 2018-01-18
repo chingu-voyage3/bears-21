@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Uploader} from '../Uploader';
-import {css} from 'aphrodite';
-import styles from './styles';
 
 export default class ImageBlock extends Component {
   static propTypes = {
@@ -20,13 +18,11 @@ export default class ImageBlock extends Component {
     };
     return (
       <div>
-        <div className={css(styles.image_title)}>
-          Images <button onClick={this.toggleUploaderVisibility} >+</button>
-        </div>
+        Images <button onClick={this.toggleUploaderVisibility} >+</button>
         <div style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>
         </div>
       </div>
     );
   };
-};
+}

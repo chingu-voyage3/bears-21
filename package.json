@@ -46,7 +46,7 @@
     "prepushnojsx": "npm run lint && npm run test",
     "start": "node index.js",
     "develop": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cross-env NODE_ENV=development supervisor index.js",
+    "server": "cross-env NODE_ENV=development supervisor -w web index.js",
     "server:prod": "cross-env NODE_ENV=production node index.js",
     "client": "node start-client.js",
     "clientv2": "cd frontend && npm start",

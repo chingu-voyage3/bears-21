@@ -1,9 +1,10 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-export default (props) => (
+const SubmitInput = (props) => (
   <input type="submit" value="search" {...props} className={css(styles.input)} />
 );
+export default SubmitInput;
 
 const styles = StyleSheet.create({
   input: {
@@ -22,4 +23,3 @@ const styles = StyleSheet.create({
     flexBasis: '500px'
   }
 });
-

@@ -22,21 +22,21 @@ export default class Register extends Component {
       password: this.state.password,
       "password-confirm": this.state.confirmedPassword,
     })
-    .then(res => {
-      console.log(res);
+    .then(() => {
+      // console.log(res);
     })
-    .catch(err => {
-      console.log(err);
+    .catch(() => {
+      // console.log(err);
     });
     this.setState({email: "", name: "", password: "", confirmedPassword: ""});
   }
 
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
-      <div className={css(styles.centre)}>
-        <div className={css(styles.registerContainer, styles.centre)}>
+      <div className={css(styles.centered, styles.background)}>
+        <div className={css(styles.registerContainer, styles.centered)}>
           <div className={css(styles.title)}>Sign up</div>
           <input placeholder="your name" className={css(styles.input)} onChange={e => this.setState({name: e.target.value})}></input>
           <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>
@@ -56,8 +56,9 @@ export default class Register extends Component {
 
 
 const styles = StyleSheet.create({
-  centre: {
+  centered: {
     display: "flex",
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
     justifyContext: "center",
@@ -83,12 +84,6 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   registerContainer: {
-    position: "absolute",
-    margin: "auto",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
     width: 400,
     height: 300,
   },
@@ -102,5 +97,8 @@ const styles = StyleSheet.create({
     color: "white",
     backgroundColor: "#49CF87",
     border: "none",
+  },
+  background: {
+    backgroundColor: "#0079BF",
   },
 });

@@ -14,7 +14,8 @@ export default class IssueForm extends React.Component {
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Issue</label>
-        <input className={css(styles.right_grid)} name="title" type="text"
+        <input name="title" type="text" placeholder="Title"
+          className={css(styles.right_grid)}
           value={issue.title} onChange={onFieldChange} />
 
         <label className={css(styles.left_grid)}>Type</label>
@@ -40,7 +41,7 @@ export default class IssueForm extends React.Component {
         </select>
 
         <label>Description</label>
-        <textarea name="description" rows="6" cols="32"
+        <textarea name="description" rows="6" cols="32" placeholder="Description"
           value={issue.description} onChange={onFieldChange} />
 
         <button className={css(styles.right_grid)}

@@ -11,10 +11,11 @@ export function issueReset( house_id) {
   };
 }
 
-export function issueHasErrored( hasErrored) {
+export function issueHasErrored( hasErrored, errorMessage = "Unknown Error") {
   return {
     type: ISSUE_HAS_ERRORED,
-    hasErrored
+    hasErrored,
+    errorMessage
   };
 }
 
@@ -48,15 +49,11 @@ export function issueFetchData( issue) {
       credentials: 'same-origin',
       body: JSON.stringify( issue._id)
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( issueIsWorking( false));
-      return response;
-    })
     .then( response => response.json())
-    .then( issue => dispatch( issueFetchDataSuccess(issue)))
+    .then( issue => {
+      dispatch(issueFetchDataSuccess(issue))
+      dispatch(issueIsWorking(false));
+    })
     .catch( () => dispatch( issueHasErrored(true)));
   };
 }
@@ -86,7 +83,6 @@ export function issueSaveData( issue) {
         });
         break;
       default:
-        console.log( `issue save key[${key}] value[${issue[key]}]`);
         payload.append( [key], issue[key]);
         break;
       }
@@ -96,15 +92,15 @@ export function issueSaveData( issue) {
       credentials: 'same-origin',
       body: payload
     })
-    .then( response => {
-      if( !response.ok) {
-        throw Error( response.statusText);
-      }
-      dispatch( issueIsWorking(false));
-      return response;
-    })
     .then( response => response.json())
-    .then( response => dispatch( issueSaveDataSuccess(response.issue)))
-    .catch( () => dispatch( issueHasErrored( true)));
+    .then( json => {
+      dispatch( issueIsWorking(false));
+      if( json.message) {
+        dispatch( issueHasErrored( true, json.message.message));
+      } else {
+        dispatch( issueSaveDataSuccess(json.issue));
+      }
+    })
+    .catch( () => dispatch( issueHasErrored( true, "Unknown Error")));
   };
 }

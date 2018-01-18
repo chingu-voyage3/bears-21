@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import {ImageDefault} from '../Image';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class Uploader extends Component {
   static propTypes = {
@@ -15,7 +14,6 @@ export default class Uploader extends Component {
     image_src: ""
   };
   onFileDropped = (files) => {
-    console.log( "files:", files);
     this.setState( {
       show_image: true,
       image_src: URL.createObjectURL(files[0])
@@ -26,7 +24,6 @@ export default class Uploader extends Component {
     this.setState( {url_text: e.target.value});
   };
   setPicUrl = () => {
-    console.log( "image url:", this.state.url_text);
     this.setState( {
       show_image: true,
       image_src: this.state.url_text,
@@ -78,4 +75,37 @@ export default class Uploader extends Component {
       </div>
     );
   };
-};
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    padding: "0px 20px",
+    border: "2px solid darkgrey",
+    borderRadius: "10px",
+    boxShadow: "0px 0px 8px 0 #ccc",
+    background: "lightgrey",
+    maxWidth: "240px"
+  },
+  well: {
+    margin: "5px auto",
+    // padding: "10px",
+    // paddingBottom: "10px",
+    // marginBottom: "0px"
+  },
+  image_style: {
+    maxWidth: "215px",
+    maxHeight: "215px"
+  },
+  ip_wrapper: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  btn_wrapper: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    fontSize: "0.8em",
+    margin: "1em"
+  }
+});

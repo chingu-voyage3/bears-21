@@ -3,34 +3,34 @@ import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import House from './House';
 import {FilteredIssueList} from '../Issue';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class HouseList extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired, // array of houses with issues
+    onDeleteHouse: PropTypes.func.isRequired
   };
   state = {
-    redirect: null,
+    new_issue: null,
     edit_house: null
   };
   onNewIssue = house => {
-    this.setState({redirect: house});
+    this.setState({new_issue: house});
   };
   onEditHouse = house => {
     this.setState({edit_house: house});
   };
   render = () => {
-    if(this.state.redirect) {
+    if( this.state.new_issue){
       return <Redirect to={{
-          pathname: "/issue",
-          state: { issue: {house: this.state.redirect._id}}
+          pathname: "/issue/new",
+          state: { house_id: this.state.new_issue._id}
         }}
       />;
     }
     if( this.state.edit_house) {
       return <Redirect to={{
-          pathname: "/house",
+          pathname: "/house/"+this.state.edit_house._id,
           state: {house: this.state.edit_house}
         }}
       />;
@@ -41,7 +41,8 @@ export default class HouseList extends Component {
         <div className={css(styles.wrapper)} key={ndx}>
           <House house={house}
             onNewIssue={this.onNewIssue}
-            onEditHouse={this.onEditHouse} />
+            onEditHouse={this.onEditHouse}
+            onDeleteHouse={this.props.onDeleteHouse} />
           <FilteredIssueList data={house.issues} statusFilter="open" title="Open Issues" />
           <FilteredIssueList data={house.issues} statusFilter="resolved" title="Resolved Issues" />
         </div>
@@ -54,3 +55,11 @@ export default class HouseList extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "space-around"
+  }
+});

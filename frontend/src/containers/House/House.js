@@ -1,18 +1,31 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import { css, StyleSheet } from 'aphrodite';
 import {ImageBlock, ImageList} from '../../components/Image';
 import {HouseForm} from '../../components/House';
-import { houseHasErrored, houseFetchData, houseSaveData, resetHouse } from './actions';
+import { houseFetchData, houseSaveData, houseReset } from './actions';
 
 class House extends Component {
+  static propTypes = {
+    house: PropTypes.object,
+    isWorking: PropTypes.bool,
+    isSaved: PropTypes.bool,
+    hasErrored: PropTypes.bool,
+    location: PropTypes.object,
+    match: PropTypes.object,
+    history: PropTypes.object,
+    errorMessage: PropTypes.string,
+    resetData: PropTypes.func.isRequired,
+    saveData: PropTypes.func.isRequired
+  };
   state = {
     house: {
-      title: "Title",
-      description: "Description",
+      title: "",
+      description: "",
       location: {
-        street: "street",
-        postCode: "post code"
+        street: "",
+        postCode: ""
       },
       images: [],
       issue: []
@@ -20,30 +33,21 @@ class House extends Component {
     redirect_issue: null
   };
   componentWillMount = () => {
-    console.log( "mounting house props:", this.props);
-    this.props.setHasErrored( false);
-    const {location} = this.props;
-    if( location.state) {
-      if( location.state.new_house) {
-        console.log( "mounting house reset");
-        this.props.resetHouse();
-      } else if( location.state.house) {
-        this.setState( {house: {
-          ...this.state.house,
-          ...this.props.location.state.house
-        }});
-      }
+    const {match, location} = this.props;
+    this.props.resetData();
+    if( match.params.id !== "new") {
+      this.setState( {house: location.state.house})
     }
   };
 
   componentWillReceiveProps = (nextProps) => {
-    console.log( "receive props:", nextProps);
-    this.setState( { house: nextProps.house});
+    if( nextProps.isSaved) {
+      this.props.history.push("/dashboard");
+    }
   };
 
-  houseFormSubmit = e => { // eslint-disable-line no-unused-vars
-    console.log( "house form submit:", this.state.new_house);
-    this.props.saveData( this.state.new_house);
+  houseFormSubmit = () => {
+    this.props.saveData( this.state.house);
   };
 
   onFieldChange = e => {
@@ -58,49 +62,38 @@ class House extends Component {
     }
     this.setState( { house});
   };
-  addImage = ( image) => {
+  addImage = image => {
     const {house} = this.state;
     this.setState( {house: {...house, images: house.images.concat([image])}});
   };
-  removeImage = (ndx) => {
-    console.log( "remove image index:", ndx);
-    const ni = this.state.house.images.filter( (img,i) => {
-      return ndx !== i;
+  removeImage = src => {
+    const ni = this.state.house.images.filter( (img) => {
+      let ret = true;
+      if( typeof img === "string") {
+        if( img === src) ret = false;
+      } else {
+        if( img.preview === src) ret = false;
+      }
+      return ret;
     });
-    console.log( "updated image count:", ni.length);
     this.setState( {house: {...this.state.house, images: ni}});
   };
-  onNewHouse = () => {
-    this.props.resetHouse();
-  };
-  onNewIssue = () => {
-    this.setState( { redirect_issue: true});
-  };
   render = () => {
-    const {redirect_issue, house} = this.state;
-    if( redirect_issue) {
-      return (
-        <Redirect to={{
-            pathname: "/issue",
-            state: { issue: {house: house._id}}
-          }}
-        />
-      );
-    }
-    const {hasErrored, isWorking} = this.props;
-    if( hasErrored) {
-      return <p>Sorry something went wrong</p>;
-    }
+    const {house} = this.state;
+    const {isWorking = true, hasErrored = false, errorMessage = ""} = this.props;
     if( isWorking) {
       return <p>Please wait ...</p>;
     }
     const op_type = (typeof house._id === "undefined")?"New":"Edit";
+    const show_error = {
+      color: "tomato",
+      display: hasErrored?"block":"none"
+    };
     return (
-      <div className="container_vertical">
-        <h1 style={{textAlign:"center"}}>House ({op_type})</h1>
-        <div className="container_horizontal">
-          <button type="button" onClick={this.onNewHouse} >New House</button>
-          <button type="button" onClick={this.onNewIssue} >New Issue</button>
+      <div className={css(styles.centered)}>
+        <h1>House ({op_type})</h1>
+        <div style={show_error} >
+          {errorMessage}
         </div>
         <div className="wrapper">
           <HouseForm house={house}
@@ -116,18 +109,29 @@ class House extends Component {
   };
 }
 
+const styles = StyleSheet.create({
+  centered: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  }
+});
+
 const mapStateToProps = state => {
   return {
-    house: state.house,
-    isWorking: state.houseIsWorking,
-    hasErrored: state.houseHasErrored
+    house: state.house.house,
+    isSaved: state.house.houseIsSaved,
+    isWorking: state.house.houseIsWorking,
+    hasErrored: state.house.houseError.hasErrored,
+    errorMessage: state.house.houseError.errorMessage
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetHouse: () => dispatch( resetHouse()),
-    setHasErrored: (err) => dispatch( houseHasErrored(err)),
+    resetData: () => dispatch( houseReset()),
     fetchData: (url,house) => dispatch( houseFetchData( url, house)),
     saveData:  (url,house) => dispatch( houseSaveData( url, house))
   };

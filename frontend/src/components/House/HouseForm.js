@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class HouseForm extends Component {
   static propTypes = {
@@ -25,20 +24,24 @@ export default class HouseForm extends Component {
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Title</label>
-        <input className={css(styles.right_grid)} name="title" type="text"
+        <input name="title" type="text" placeholder="Title"
+          className={css(styles.right_grid)}
           value={house.title} onChange={onFieldChange} />
 
-        <label className={css(styles.left_grid)}>Description</label>
-        <input className={css(styles.right_grid)} name="description" type="text"
-          value={house.description} onChange={onFieldChange} />
-
         <label className={css(styles.left_grid)}>Street</label>
-        <input className={css(styles.right_gred)} name="location.street" type="text"
+        <input name="location.street" type="text" placeholder="Street"
+          className={css(styles.right_grid)}
           value={house.location.street} onChange={onFieldChange} />
 
-        <label className={css(styles.left_gred)}>postcode</label>
-        <input className={css(styles.right_gred)} name="location.postCode" type="text"
+        <label className={css(styles.left_grid)}>Post Code</label>
+        <input name="location.postCode" type="text" placeholder="Post Code"
+          className={css(styles.right_grid)}
           value={house.location.postCode} onChange={onFieldChange} />
+
+        <label className={css(styles.left_grid)}>Description</label>
+        <textarea name="description" rows="6" cols="32" placeholder="Description"
+          className={css(styles.right_grid)}
+          value={house.description} onChange={onFieldChange} />
 
         <button className={css(styles.right_grid)}
           onClick={onSubmit}
@@ -49,3 +52,22 @@ export default class HouseForm extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  form: {
+    margin: "10px auto",
+    maxWidth: "600px",
+    display: "grid",
+    alignItems: "baseline",
+    gridTemplateColumns: "100px 1fr",
+    gridGap: "8px"
+  },
+  left_grid: {
+    lineHeight: "1.5em",
+    textAlign: "right",
+    gridColumn: "1 / 2"
+  },
+  right_grid: {
+    gridColumn: "2/3"
+  }
+});
