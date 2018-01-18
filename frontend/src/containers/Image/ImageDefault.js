@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 import loadImage from './actions';
 
-let ndx = 0;
-
 class ImageDefault extends React.Component {
   static propTypes = {
     src: PropTypes.string,
@@ -15,28 +13,22 @@ class ImageDefault extends React.Component {
     image_src: null
   };
   component_unmounted = false;
-  componentWillMount = () => {
-    this.component_unmounted = false;
-  };
+
   componentDidMount = () => {
-    this.myndx = ndx++;
     // data:image/jpeg;base64,data
+    this.component_unmounted = false;
     const {src, missing_url} = this.props;
     if( src) {
       if( src.indexOf( '/') === -1){
         this.setState( {image_src: missing_url});
-        console.log( `loading image ndx[${this.myndx}] src[${src}]`);
+        // FIXME: we have to do this in a parent or re-render may cause
+        // this component to be replaced by another before fetch returns
         loadImage( src)
         .then( url => {
-          console.log( `image [${this.myndx}] loaded src[${src}] url[${url}]`);
-          if( this.component_unmounted) {
-            console.error( `unmounted image [${this.myndx}] loaded
-              src[${src}], url[${url}]`);
-          } else {
-            this.setState( {image_src: url})
+          if( !this.component_unmounted) {
+            this.setState( {image_src: url});
           }
-        })
-        .catch( () => {/*no op*/});
+        });
       } else {
         this.setState( {image_src: src});
       }
@@ -48,7 +40,6 @@ class ImageDefault extends React.Component {
     this.component_unmounted = true;
   };
   onImageError = () => {
-    console.log( "ImageDefault on image error");
     this.setState( {image_error: true, image_src: this.props.missing_url});
   };
   render = () => {

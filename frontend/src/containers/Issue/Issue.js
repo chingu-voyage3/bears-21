@@ -57,9 +57,15 @@ class Issue extends Component {
     const {issue} = this.state;
     this.setState( {issue: {...issue, images: issue.images.concat([image])}});
   };
-  removeImage = (ndx) => {
-    const new_image_list = this.state.issue.images.filter( (img,i) => {
-      return ndx !== i;
+  removeImage = (src) => {
+    const new_image_list = this.state.issue.images.filter( img => {
+      let ret = true;
+      if( typeof img === "string") {
+        if( img === src) ret = false;
+      } else {
+        if( img.preview === src) ret = false;
+      }
+      return ret;
     });
     this.setState( {issue: {...this.state.issue, images: new_image_list}});
   };

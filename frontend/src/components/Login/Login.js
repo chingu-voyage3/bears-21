@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { loginAction } from '../../redux/actions';
@@ -6,6 +7,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class login extends Component {
+  static propTypes = {
+    onLogin: PropTypes.func.isRequired
+  };
 
   constructor() {
     super();
@@ -41,8 +45,7 @@ class login extends Component {
         this.props.onLogin();
       }
     })
-    .catch(err => {
-      console.log(err);
+    .catch(() => {
       this.setState({currentStatus: "ERROR!!"});
     });
 

@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
   }
 });
 
-export default () => (
+const Dummy = () => (
   <div className={css(styles.container)}>
   </div>
 );
+
+export default Dummy;

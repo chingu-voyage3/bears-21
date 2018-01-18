@@ -8,11 +8,11 @@ export default class ImageList extends React.Component {
     images: PropTypes.array.isRequired,
     removeImage: PropTypes.func.isRequired
   };
-  removeImage = (ndx) => {
-    this.props.removeImage( ndx);
+  removeImage = (src) => {
+    this.props.removeImage( src);
   };
   render = () => {
-    const image_list = this.props.images.map( (img, i) => {
+    const image_list = this.props.images.map( img => {
       let src;
       if( typeof img === "string"){
         src = img;
@@ -20,7 +20,7 @@ export default class ImageList extends React.Component {
         src = img.preview;
       }
       return (
-        <ImageRemovable src={src} key={i} image_id={i} removeImage={this.removeImage} />
+        <ImageRemovable src={src} key={src} removeImage={this.removeImage} />
       );
     });
     return (
