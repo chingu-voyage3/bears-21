@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import NotFound from '../components/NotFound';
-import Dummy from '../components/Dummy';
-import Dashboard from '../containers/Dashboard';
-import SearchLayout from "../containers/Search";
-import Issue from '../containers/Issue';
-import House from '../containers/House';
-import { Login } from '../components/Login';
-import { Logout } from '../components/Logout';
-import { Register } from '../components/Register';
-import { Forgot } from '../components/Forgot';
+import NotFound from '../App/NotFound';
+import Dummy from '../App/Dummy';
+import Dashboard from '../Dashboard';
+import SearchLayout from "../Search";
+import Issue from '../Issue';
+import House from '../House';
+import { Login } from '../App/Login';
+import { Logout } from '../App/Logout';
+import { Register } from '../App/Register';
+import { Forgot } from '../App/Forgot';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 

@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import houseIssues from '../containers/Dashboard/reducers';
-import house from '../containers/House/reducers';
-import issue from '../containers/Issue/reducers';
-import search from '../containers/Search/reducers';
+import houseIssues from '../Dashboard/reducers';
+import house from '../House/reducers';
+import issue from '../Issue/reducers';
+import search from '../Search/reducers';
 
 // QUESTION: shouldn't this reducer be in login with action?
 import { LOGIN, LOGOUT } from './actions.js';
