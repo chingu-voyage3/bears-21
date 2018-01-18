@@ -17,6 +17,13 @@ const styles = StyleSheet.create({
       background: "lightgrey"
     }
   },
+  select_style: {
+    width: '120px',
+    height: '2em',
+    borderRadius: '3px',
+    overflow: 'hidden',
+    background: 'white'
+  },
   title: {
     textAlign: "center"
   },
@@ -24,6 +31,7 @@ const styles = StyleSheet.create({
     margin: "10px auto",
     maxWidth: "600px",
     display: "grid",
+    alignItems: "baseline",
     gridTemplateColumns: "100px 1fr",
     gridGap: "8px"
   },

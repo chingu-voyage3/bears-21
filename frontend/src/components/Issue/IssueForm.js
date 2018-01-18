@@ -19,21 +19,21 @@ export default class IssueForm extends React.Component {
           value={issue.title} onChange={onFieldChange} />
 
         <label className={css(styles.left_grid)}>Type</label>
-        <select className={css(styles.right_grid)} name="type"
+        <select className={css([styles.right_grid, styles.select_style])} name="type"
           value={issue.type} onChange={onFieldChange}>
           <option value="a">type a</option>
           <option value="b">type b</option>
         </select>
 
         <label className={css(styles.left_grid)}>Priority</label>
-        <select className={css(styles.right_grid)} name="priority"
+        <select className={css([styles.right_grid, styles.select_style])} name="priority"
           value={issue.priority} onChange={onFieldChange}>
           <option value="1">1</option>
           <option value="2">2</option>
         </select>
 
         <label className={css(styles.left_grid)}>Status</label>
-        <select className={css(styles.right_grid)} name="status"
+        <select className={css([styles.right_grid, styles.select_style])} name="status"
           value={issue.status} onChange={onFieldChange}>
           <option value="open">Open</option>
           <option value="resolved">Resolved</option>
