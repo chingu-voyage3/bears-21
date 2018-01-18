@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'aphrodite';
-import styles from './styles';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class Issue extends Component {
   static propTypes = {
@@ -19,3 +18,14 @@ export default class Issue extends Component {
     );
   };
 }
+
+const styles = StyleSheet.create({
+  issue_style: {
+    cursor: "pointer",
+    textAlign: "left",
+    listStyle: "none",
+    ":hover": {
+      background: "lightgrey"
+    }
+  }
+});

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'aphrodite';
-import styles from './styles.js';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class IssueForm extends React.Component {
   static propTypes = {
@@ -40,7 +39,7 @@ export default class IssueForm extends React.Component {
           <option value="closed">Closed</option>
         </select>
 
-        <label>Description</label>
+        <label className={css(styles.left_grid)}>Description</label>
         <textarea name="description" rows="6" cols="32" placeholder="Description"
           value={issue.description} onChange={onFieldChange} />
 
@@ -54,3 +53,32 @@ export default class IssueForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  select_style: {
+    width: '120px',
+    height: '2em',
+    borderRadius: '3px',
+    overflow: 'hidden',
+    background: 'white'
+  },
+  title: {
+    textAlign: "center"
+  },
+  form: {
+    margin: "10px auto",
+    maxWidth: "600px",
+    display: "grid",
+    alignItems: "baseline",
+    gridTemplateColumns: "100px 1fr",
+    gridGap: "8px"
+  },
+  left_grid: {
+    lineHeight: "1.5em",
+    textAlign: "right",
+    gridColumn: "1 / 2"
+  },
+  right_grid: {
+    gridColumn: "2/3"
+  }
+});

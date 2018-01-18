@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {IssueForm} from '../../components/Issue'; // eslint-disable-line no-unused-vars
 import {ImageBlock, ImageList} from '../../components/Image';
 import {issueFetchData, issueSaveData, issueReset } from './actions';
-import './style.css';
+import {StyleSheet, css} from 'aphrodite';
 
 class Issue extends Component {
   static propTypes = {
@@ -80,20 +80,16 @@ class Issue extends Component {
       display: hasErrored?"block":"none"
     };
     return (
-      <div className="wrapper">
-        <h1 style={{textAlign:"center"}}>Issue ({op_type})</h1>
+      <div className={css(styles.wrapper)}>
+        <h1>Issue ({op_type})</h1>
         <div style={show_error} >
           {errorMessage}
         </div>
-        <div className="wrapper">
-          <IssueForm issue={issue}
-            onFieldChange={this.onFieldChange}
-            onSubmit={this.issueFormSubmit} />
-          <ImageBlock addImage={this.addImage} />
-          <div className="images_wrapper">
-            <ImageList images={issue.images||[]} removeImage={this.removeImage} />
-          </div>
-        </div>
+        <IssueForm issue={issue}
+          onFieldChange={this.onFieldChange}
+          onSubmit={this.issueFormSubmit} />
+        <ImageBlock addImage={this.addImage} />
+        <ImageList images={issue.images||[]} removeImage={this.removeImage} />
       </div>
     );
   }
@@ -118,3 +114,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect( mapStateToProps, mapDispatchToProps)(Issue);
+
+const styles = StyleSheet.create({
+  wrapper: {
+    display: 'flex',
+    flex: '1',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
+});
