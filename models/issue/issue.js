@@ -4,7 +4,11 @@ const slug = require('slug');
 mongoose.Promise = global.Promise;
 
 const issueSchema = new Schema({
-  status: String,
+  status: {
+    type: String,
+    enum: ['open', 'resolved', 'closed'],
+    required: 'status is required'
+  },
   title: {
     type: String,
     trim: true,
@@ -19,8 +23,16 @@ const issueSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  type: String,
-  priority: Number,
+  type: {
+    type: String,
+    enum: ['type a', 'type b'],
+    required: 'type is required'
+  },
+  priority: {
+    type: Number,
+    min: 1,
+    max: 2
+  },
   images: {
     type: [String],
     default: []

@@ -2,7 +2,6 @@
 
 const { expect } = require('chai');
 const mongoose = require('mongoose');
-const db = require('../db');
 const House = require('./house');
 
 describe('House', () => {
