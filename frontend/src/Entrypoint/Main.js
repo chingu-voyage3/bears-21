@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Routes from '../routes/Routes';
-import NavBar from './NavBar';
-import Footer from './Footer';
+import Routes from '../Routes/Routes';
+import { Navbar } from '../Navbar';
+import { Footer } from '../Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
@@ -10,7 +10,7 @@ class app extends Component {
   render() {
     return (
       <div className={css(styles.container)}>
-        <NavBar />
+        <Navbar />
         <Routes />
         <Footer />
       </div>

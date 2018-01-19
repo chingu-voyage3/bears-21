@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import NotFound from '../App/NotFound';
-import Dummy from '../App/Dummy';
+import Notfound from '../Errors/Notfound';
+import { Dummy } from '../Dummy';
 import Dashboard from '../Dashboard';
 import SearchLayout from "../Search";
 import Issue from '../Issue';
@@ -39,7 +39,7 @@ class routes extends Component {
         <AuthRoute path="/house/:id" user={user} component={House} pathname={"/login"} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={SearchLayout} />
-        <Route path="*" component={NotFound} />
+        <Route path="*" component={Notfound} />
       </Switch>
     );
   }
