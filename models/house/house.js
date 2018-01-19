@@ -30,11 +30,16 @@ const houseSchema = new Schema({
     }
   },
   issues: {
-    type: [{type: Schema.Types.ObjectId, ref:'Issue'}],
+    type: [{
+      type: Schema.Types.ObjectId,
+      ref:'Issue'
+    }],
     default: []
-    // [{type: Schema.Types.ObjectId, ref: 'Issue'}],
   },
-  owner: { type: Schema.Types.ObjectId, ref: 'User'},
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   images: {
     type: [String],
     default: []

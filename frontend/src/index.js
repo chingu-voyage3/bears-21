@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import Main from './components/Main';
+import store from "./Redux/store";
+import { Main } from './Entrypoint';
 import './styles.css';
 
 ReactDOM.render(
