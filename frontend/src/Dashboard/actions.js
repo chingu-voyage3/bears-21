@@ -36,7 +36,7 @@ export function houseIssuesFetchData(url) {
   return (dispatch) => {
     dispatch( houseIssuesHasErrored( false));
     dispatch( houseIssuesIsLoading( true));
-    fetch( url, {
+    return fetch( url, {
       method: 'get',
       headers: {
         'Accept': 'application/json',
@@ -57,7 +57,7 @@ export function houseDelete( house_id) {
   return (dispatch) => {
     dispatch( houseIssuesHasErrored( false));
     dispatch( houseIssuesIsLoading( true));
-    fetch( '/api/v1/house', {
+    return fetch( '/api/v1/house', {
       method: 'delete',
       headers: {
         'Accept': 'application/json',
