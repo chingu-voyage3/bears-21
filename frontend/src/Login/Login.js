@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import { loginAction } from '../../redux/actions';
+import { loginAction } from '../redux/actions';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 

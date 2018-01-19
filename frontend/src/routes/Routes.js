@@ -7,10 +7,10 @@ import Dashboard from '../Dashboard';
 import SearchLayout from "../Search";
 import Issue from '../Issue';
 import House from '../House';
-import { Login } from '../App/Login';
-import { Logout } from '../App/Logout';
-import { Register } from '../App/Register';
-import { Forgot } from '../App/Forgot';
+import { Login } from '../Login';
+import { Logout } from '../Logout';
+import { Register } from '../Register';
+import { Forgot } from '../Forgot';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
