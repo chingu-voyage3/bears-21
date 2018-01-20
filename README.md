@@ -60,6 +60,14 @@ $ npm run lint
 $ npm run lint:watch
 ```
 
+### Stack
+We used a completed JavaScript ecosystem for the development of our fullstack application, more often referred to the MERN stack.
+- MongoDB - As our go to database
+- ExpressJS - Handling our backend routing
+- ReactJS with React Router & React Redux -Handling all of our frontend routing and UI
+- NodeJS - Backend logic and authentication
+
+
 ### Authors
 - [Leon Boehmer - Project Manager](https://github.com/mortuie)
 - [Vivek Poddar - Fullstack Developer](https://github.com/vivekimsit)
