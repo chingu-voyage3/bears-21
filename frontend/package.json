@@ -22,6 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test:batch": "CI=true npm test",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
