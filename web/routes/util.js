@@ -83,6 +83,7 @@ module.exports = {
     let ret = []; // blobs.map( async (fd) => {
     for( let i=0; i<blobs.length; i++){
       const fd = blobs[i];
+      console.log( "blob file path:", fd.path);
       const data = fs.readFileSync(fd.path);
       const image = new Image( {
         data, contentType: fd.mimetype
