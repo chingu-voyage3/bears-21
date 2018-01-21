@@ -94,12 +94,12 @@ export function issueSaveData( issue) {
     })
     .then( response => response.json())
     .then( json => {
-      dispatch( issueIsWorking(false));
       if( json.message) {
         dispatch( issueHasErrored( true, json.message.message));
       } else {
         dispatch( issueSaveDataSuccess(json.issue));
       }
+      dispatch( issueIsWorking(false));
     })
     .catch( () => dispatch( issueHasErrored( true, "Unknown Error")));
   };
