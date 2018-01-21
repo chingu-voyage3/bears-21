@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { houseIssuesFetchData, houseDelete} from './actions';
 import {HouseList} from '../House';
+import {StyleSheet, css} from 'aphrodite';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -36,13 +37,21 @@ class Dashboard extends Component {
     }
     const {hasErrored = false, isLoading = true, houseIssues = []} = this.props;
     if( hasErrored) {
-      return <p>Sorry data fetch failed</p>;
+      return (
+        <div className={css(styles.wrapper)}>
+          <p>Sorry data fetch failed</p>
+        </div>
+      );
     }
     if( isLoading) {
-      return <p>Loading ...</p>;
+      return (
+        <div className={css(styles.wrapper)}>
+          <p>Loading ...</p>
+        </div>
+      );
     }
     return (
-      <div style={{flex: '1'}}>
+      <div className={css(styles.wrapper)}>
         <h1>Dashboard</h1>
         <button type="button" onClick={this.onNewHouse} >New House</button>
         <HouseList data={houseIssues} onDeleteHouse={this.onDeleteHouse} />
@@ -67,3 +76,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: '1'
+  }
+});
