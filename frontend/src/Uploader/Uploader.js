@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ImageDropper from './ImageDropper';
 import UrlInput from './UrlInput';
-import ReloadButton from '../Common/Buttons/ReloadButton';
-import CrossButton from '../Common/Buttons/CrossButton';
+import {ReloadButton} from '../Common/Buttons';
+import {CrossButton} from '../Common/Buttons';
 import {StyleSheet, css} from 'aphrodite';
 
 export default class Uploader extends Component {
