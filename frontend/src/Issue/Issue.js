@@ -39,10 +39,10 @@ class Issue extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
+    this.setState( {issue: {...nextProps.issue}});
     if( nextProps.isSaved) {
       this.props.history.push( "/dashboard");
     }
-    this.setState( {issue: {...nextProps.issue}});
   };
   issueFormSubmit = () => {
     this.props.saveData( this.state.issue);
@@ -71,7 +71,11 @@ class Issue extends Component {
   render() {
     const {hasErrored = false, isWorking = false, errorMessage = ""} = this.props;
     if( isWorking) {
-      return <p>Please wait ...</p>;
+      return (
+        <div className={css(styles.wrapper)} >
+          <p>Please wait ...</p>;
+        </div>
+      );
     }
     const {issue} = this.state;
     const op_type = (typeof this.state.issue._id === "undefined")?"New":"Edit";
@@ -98,7 +102,7 @@ class Issue extends Component {
 const mapStateToProps = state => {
   return {
     issue: state.issue.issue,
-    isWorking: state.issue.issueIsWorking,
+    isWorking: state.issue.isWorking,
     isSaved: state.issue.isSaved,
     hasErrored: state.issue.issueError.hasErrored,
     errorMessage: state.issue.issueError.errorMessage
@@ -120,6 +124,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: '1',
     flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center'
   }
 });
