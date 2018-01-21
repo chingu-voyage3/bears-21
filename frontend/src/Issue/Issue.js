@@ -73,7 +73,7 @@ class Issue extends Component {
     if( isWorking) {
       return (
         <div className={css(styles.wrapper)} >
-          <p>Please wait ...</p>;
+          <p>Please wait ...</p>
         </div>
       );
     }
