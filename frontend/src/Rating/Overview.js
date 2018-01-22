@@ -4,14 +4,19 @@ import {StyleSheet, css} from 'aphrodite';
 
 const filled_star = String.fromCharCode(9733);
 
+const clicked = e => {
+  e.stopPropagation();
+};
+
 const Overview = (props) => (
   <div title={`Overall:${props.value}`}
     className={css(styles.stars)}
+    onClick={clicked}
     onMouseEnter={props.onEnter}
     onMouseLeave={props.onLeave} >
     {filled_star}
     <div className={css(styles.rating_value)} >
-      {props.value}
+      {Math.round( props.value)}
     </div>
   </div>
 );
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
   },
   rating_value: {
     position: "absolute",
-    color: 'black',
+    color: 'rgba( 5,5,5, 0.5)',
     top: '0.55rem',
     left: '0.6rem',
     fontSize: '1rem',
