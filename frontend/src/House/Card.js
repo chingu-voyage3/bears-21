@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ImageDefault} from '../Image';
+import Rating from '../Rating';
 import {StyleSheet, css} from 'aphrodite';
 
 const Card = (props) => (
   <div className={css(styles.container)}>
     <ImageDefault src={props.house.images[0]} missing_url="//via.placeholder.com/350x150?No Image"/>
     <span className={css(styles.title)}>
-      <h4 className={css(styles.title_heading)}>{ props.house.title }</h4>
+      {props.house.title}
+      <Rating currentRating={props.house.rating} />
     </span>
     <p className={css(styles.content)} >{ props.house.description }</p>
   </div>
@@ -29,11 +31,19 @@ const styles = StyleSheet.create({
     maxWidth: '320px'
   },
   title: {
+    display: 'flex',
+    alignItems: 'center',
+    fontWeight: 'bold',
+
+    margin: '0',
+    // padding: '0 3.5%',
+    padding: '3.5% 3.5% 2.5% 3.5%',
+    lineHeight: '1.2',
+
     background: 'rgba(157, 187, 63, .85)',
     color: 'white',
     bottom: '0',
-    width: '100%',
-    padding: '3.5% 0 2.5% 0'
+    width: '100%'
   },
   title_heading: {
     margin: '0',
