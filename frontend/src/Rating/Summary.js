@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   rating_value: {
     position: "absolute",
-    color: 'black',
+    color: 'rgba( 5,5,5, 0.5)',
     fontSize: '1rem',
     top: '0.75rem',
     left: '0.75rem',
