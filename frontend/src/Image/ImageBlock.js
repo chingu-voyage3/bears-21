@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Uploader} from '../Uploader';
 import {StyleSheet, css} from 'aphrodite';
+import {PlusButton} from '../Common/Buttons';
 
 export default class ImageBlock extends Component {
   static propTypes = {
@@ -20,7 +21,8 @@ export default class ImageBlock extends Component {
     return (
       <div>
         <div className={css(styles.header)} >
-          Images <button onClick={this.toggleUploaderVisibility} >+</button>
+          Images
+          <PlusButton onClick={this.toggleUploaderVisibility} title="Toggle Image Uploader" />
         </div>
         <div style={show_uploader} >
           <Uploader addImage={this.props.addImage}/>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import {StyleSheet, css} from 'aphrodite';
+import {CrossButton, PlusButton} from '../Common/Buttons';
 
 export default class House extends Component {
   static propTypes = {
@@ -23,23 +24,14 @@ export default class House extends Component {
   }
   render = () => {
     const {house} = this.props;
-    const cross_symbol = String.fromCharCode( 10799);
     return (
       <div className={css(styles.wrapper)} onClick={this.onEditHouse} >
         <Card house={house} />
         <div className={css(styles.add_issue_style)} >
-          <button type="button" title="Add Issue"
-            className={css(styles.add_button)}
-            onClick={this.onNewIssue} >
-            +
-          </button>
+          <PlusButton title="Add Issue" onClick={this.onNewIssue} />
         </div>
         <div className={css(styles.close_button)} >
-          <button type="button" title="Delete House"
-            className={css(styles.cross_box_colour)}
-            onClick={this.onDeleteHouse} >
-            {cross_symbol}
-          </button>
+          <CrossButton title="Delete House" onClick={this.onDeleteHouse} />
         </div>
       </div>
     );
@@ -53,9 +45,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-around"
   },
-  cross_box_colour: {
-    background: "tomato" // "linear-gradient( to top, #49CF87, #40C080)"
-  },
   close_button: {
     position: "absolute",
     top: "0px",
@@ -65,9 +54,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "30px",
     right: 0
-  },
-  add_button: {
-    fontSize: "1.1em",
-    lineHeight: "1em"
-  },
+  }
 });

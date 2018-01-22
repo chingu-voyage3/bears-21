@@ -17,10 +17,12 @@ describe('Issue', () => {
       _id,
       //             {_id: 1,
       status: "open",
+      type: "type a",
       title: "test issue",
       slug: "test-issue",
       description: "This is a test issue",
-      created
+      created,
+      house: mongoose.Types.ObjectId()
     }
   });
 
@@ -29,7 +31,7 @@ describe('Issue', () => {
   });
 
 
-  xdescribe('.insert', () => {
+  describe('.insert', () => {
     it('should insert a new issue', async () => {
       const issue = new Issue(issueToInsert);
       await issue.save();
