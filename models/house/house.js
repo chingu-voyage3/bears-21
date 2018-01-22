@@ -44,6 +44,21 @@ const houseSchema = new Schema({
     type: [String],
     default: []
   },
+  ratings: {
+    type: [{
+      user: { type: Schema.Types.ObjectId, ref: 'User'},
+      value: {
+        type: Number,
+        min: 1,
+        max: 5,
+        validate: {
+          validator: Number.isInteger,
+          message: '{VALUE} must be integer one to five'
+        }
+      }
+    }],
+    default: []
+  },
   active: {type: Boolean, default: true}
 });
 
@@ -53,6 +68,18 @@ houseSchema.pre('save', function(next) {
   }
   this.slug = slug(this.title);
   next();
+});
+
+houseSchema.virtual('rating').get( function(){
+  const total = this.ratings.reduce( (acc,cur) => {
+    acc[cur.value-1] += 1;
+    return acc;
+  }, [0,0,0,0,0])
+  .reduce( (acc, cur, ndx) => {
+    return acc + cur * (ndx+1);
+  }, 0);
+
+  return total/this.ratings.length;
 });
 
 houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
