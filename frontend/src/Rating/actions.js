@@ -8,7 +8,7 @@ export function postRating( type, parent_id, value) {
     body: JSON.stringify( payload)
   })
   .then(response => response.json())
-  .catch( e => {
-    console.error( "post rating failed:", e);
+  .catch( () => {
+    // TODO: pass a message back to user to let them know rating failed
   })
 }
