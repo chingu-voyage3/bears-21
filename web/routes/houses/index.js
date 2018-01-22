@@ -5,5 +5,6 @@ module.exports = {
   list: require('./list'),
   create: require('./create'),
   upsert: require('./upsert'),
-  delete: require('./delete')
+  delete: require('./delete'),
+  rate: require('./rate')
 }
