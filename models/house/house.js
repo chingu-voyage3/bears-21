@@ -72,10 +72,10 @@ houseSchema.pre('save', function(next) {
 
 houseSchema.virtual( 'rating')
 .get( function(){
-  return calculateRating( this.ratings);
+  return houseSchema.statics.calculateRating( this.ratings);
 });
 
-const calculateRating = (ratings) => {
+houseSchema.statics.calculateRating = (ratings) => {
     if( ratings.length === 0) return 0;
 
     const total = ratings.reduce( (acc,cur) => {
@@ -85,7 +85,6 @@ const calculateRating = (ratings) => {
     .reduce( (acc, cur, ndx) => {
       return acc + cur * (ndx+1);
     }, 0);
-
     return total/ratings.length;
 };
 
@@ -99,11 +98,11 @@ houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
       res.json( []);
     } else {
       const ret = docs.map( doc => {
-        const {title, slug, description, created,
+        const { _id, title, slug, description, created,
           location, issues, owner, images} = doc;
-        const r = { title, slug, description, created,
+        const r = { _id, title, slug, description, created,
           location, issues, owner, images};
-        r.rating = calculateRating( doc.ratings);
+        r.rating = houseSchema.statics.calculateRating( doc.ratings);
         return r;
       });
       res.json( ret);
