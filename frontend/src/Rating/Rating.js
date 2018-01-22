@@ -8,7 +8,7 @@ import Bar from './Bar';
 export default class Rating extends React.Component {
   static propTypes = {
     currentRating: PropTypes.number.isRequired,
-    ratingSelected: PropTypes.func.isRequired
+    ratingSelected: PropTypes.func
   };
   state = {
     show_rating_bar: false
@@ -20,7 +20,9 @@ export default class Rating extends React.Component {
     this.setState( {show_rating_bar: false})
   };
   ratingSelected = value => {
-    this.props.ratingSelected(value);
+    if( this.props.ratingSelected) {
+      this.props.ratingSelected(value);
+    }
   };
   render = () => {
     const {show_rating_bar} = this.state;
@@ -46,6 +48,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: '1',
-    fontSize: '3rem'
+    fontSize: '2rem'
   }
 });
