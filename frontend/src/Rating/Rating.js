@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   wrapper: {
     cursor: "pointer",
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     flex: '1',
     fontSize: '2rem'

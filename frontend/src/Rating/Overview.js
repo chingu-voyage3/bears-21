@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
     position: 'relative',
     color: 'gold',
     backgroundColor: 'skyblue',
-    borderRadius: '0px 10px 10px 0px'
+    borderRadius: '0px 10px 10px 0px',
+    fontSize: '1.5rem'
   },
   rating_value: {
     position: "absolute",
     color: 'rgba( 5,5,5, 0.5)',
-    top: '0.55rem',
-    left: '0.6rem',
+    top: '0.35rem',
+    left: '0.35rem',
     fontSize: '1rem',
     fontWeight: 'normal'
   }
