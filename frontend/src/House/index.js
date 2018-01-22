@@ -1,5 +1,5 @@
-import House from './House';
+import HouseDetail from './HouseDetail';
 import HouseList from './HouseList';
 
-export default House;
+export default HouseDetail;
 export {HouseList};
