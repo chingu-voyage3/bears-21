@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
   rating_value: {
     position: 'absolute',
     color: 'rgba( 5,5,5, 0.5)',
-    fontSize: '1rem',
-    top: '0.9rem',
+    fontSize: '0.8rem',
+    top: '1rem',
     left: '0.8rem',
-    fontWeight: 'normal'
+    fontWeight: 'bold'
   }
 });
 
