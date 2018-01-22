@@ -17,10 +17,10 @@ export default class House extends Component {
   onEditHouse = () => {
     this.props.onEditHouse(this.props.house);
   };
-  onDeleteHouse = (e) => {
+  onDeleteHouse = e => {
     e.stopPropagation();
     this.props.onDeleteHouse( this.props.house);
-  }
+  };
   render = () => {
     const {house} = this.props;
     const cross_symbol = String.fromCharCode( 10799);
