@@ -11,7 +11,8 @@ export default class Star extends React.Component {
   onEnter = () => {
     this.props.onEnter(this.props.ratingValue);
   };
-  selected = () => {
+  selected = e => {
+    e.stopPropagation();
     this.props.selected(this.props.ratingValue);
   };
   render = () => {
