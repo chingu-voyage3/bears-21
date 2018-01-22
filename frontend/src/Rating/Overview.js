@@ -10,21 +10,14 @@ const Overview = (props) => (
     onMouseEnter={props.onEnter}
     onMouseLeave={props.onLeave} >
     {filled_star}
+    <div className={css(styles.rating_value)} >
+      {props.value}
+    </div>
   </div>
 );
-// TODO: put value in middle of star
-// <div className={css(styles.rating_value)}
-//   style={{
-//     fontSize: `${props.fontSize/3}rem`,
-//     top: `${props.fontSize*7/16}rem`,
-//     left: `${props.fontSize*11/32}rem`
-//   }}>
-//   {props.value}
-// </div>
 
 Overview.propTypes = {
   value: PropTypes.number.isRequired,
-  // fontSize: PropTypes.number.isRequired,
   onEnter: PropTypes.func.isRequired,
   onLeave: PropTypes.func.isRequired
 };
@@ -38,7 +31,11 @@ const styles = StyleSheet.create({
   },
   rating_value: {
     position: "absolute",
-    color: 'black'
+    color: 'black',
+    top: '0.55rem',
+    left: '0.6rem',
+    fontSize: '1rem',
+    fontWeight: 'normal'
   }
 });
 
