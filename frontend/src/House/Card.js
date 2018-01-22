@@ -9,14 +9,16 @@ const Card = (props) => (
     <ImageDefault src={props.house.images[0]} missing_url="//via.placeholder.com/350x150?No Image"/>
     <span className={css(styles.title)}>
       {props.house.title}
-      <Rating currentRating={props.house.rating} />
+      <Rating currentRating={props.house.rating}
+              type="house"
+              parent_id={props.house._id} />
     </span>
     <p className={css(styles.content)} >{ props.house.description }</p>
   </div>
 );
 
 Card.propTypes = {
-  house: PropTypes.object
+  house: PropTypes.object.isRequired
 };
 
 const styles = StyleSheet.create({

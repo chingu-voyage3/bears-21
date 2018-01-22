@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
+import {postRating} from './actions';
 
 import Overview from './Overview';
 import Bar from './Bar';
 
 export default class Rating extends React.Component {
   static propTypes = {
+    type: PropTypes.string.isRequired,
+    parent_id: PropTypes.string.isRequired,
     currentRating: PropTypes.number.isRequired,
-    ratingSelected: PropTypes.func
   };
   state = {
-    show_rating_bar: false
+    show_rating_bar: false,
+    currentRating: 0
+  };
+  componentWillMount = () => {
+    this.setState( {currentRating: this.props.currentRating});
   };
   showRatingBar = () => {
     this.setState( {show_rating_bar: true});
@@ -20,13 +26,14 @@ export default class Rating extends React.Component {
     this.setState( {show_rating_bar: false})
   };
   ratingSelected = value => {
-    if( this.props.ratingSelected) {
-      this.props.ratingSelected(value);
-    }
+    const {type, parent_id} = this.props;
+    postRating( type, parent_id, value)
+    .then( response => {
+      this.setState( {currentRating: response.rating});
+    });
   };
   render = () => {
-    const {show_rating_bar} = this.state;
-    const {currentRating} = this.props;
+    const {show_rating_bar, currentRating} = this.state;
     return (
       <div className={css(styles.wrapper)}>
         <Bar visible={show_rating_bar}
