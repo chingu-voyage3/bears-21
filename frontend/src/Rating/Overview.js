@@ -31,15 +31,15 @@ const styles = StyleSheet.create({
   stars: {
     position: 'relative',
     color: 'gold',
-    backgroundColor: 'skyblue',
+    background: 'transparent',
     borderRadius: '0px 10px 10px 0px',
-    fontSize: '1.5rem'
+    fontSize: '2rem'
   },
   rating_value: {
     position: "absolute",
     color: 'rgba( 5,5,5, 0.5)',
-    top: '0.35rem',
-    left: '0.35rem',
+    top: '0.6rem',
+    left: '0.6rem',
     fontSize: '1rem',
     fontWeight: 'normal'
   }

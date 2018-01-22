@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 
-const circled_white_star = String.fromCharCode(10026);
+const filled_star = String.fromCharCode(9733);
 
 const Summary = (props) => (
   <div className={css(styles.stars)} >
-    {circled_white_star}
+    {filled_star}
     <div className={css(styles.rating_value)} >
       {props.value}
     </div>
@@ -22,14 +22,15 @@ const styles = StyleSheet.create({
     position: 'relative',
     color: 'gold',
     borderRadius: '10px',
-    fontSize: "2.5rem"
+    fontSize: '2.5rem',
+    fontWeight: 'normal'
   },
   rating_value: {
-    position: "absolute",
+    position: 'absolute',
     color: 'rgba( 5,5,5, 0.5)',
     fontSize: '1rem',
-    top: '0.75rem',
-    left: '0.75rem',
+    top: '0.9rem',
+    left: '0.8rem',
     fontWeight: 'normal'
   }
 });

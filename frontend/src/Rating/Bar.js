@@ -45,7 +45,7 @@ export default class Bar extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'skyblue',
+    background: 'transparent',
     borderRadius: '10px 0px 0px 10px',
     fontSize: "1.5rem"
   }

@@ -20,7 +20,8 @@ export default class Star extends React.Component {
     const line_star = String.fromCharCode(9734);
     const {lit} = this.props;
     const star = {
-      color: lit?'gold':'black'
+      color: lit?'gold':'black',
+      fontWeight: 'normal'
     };
     return (
       <span style={star}
