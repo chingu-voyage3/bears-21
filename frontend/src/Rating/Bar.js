@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     zIndex: '100',
     top: '0.2rem',
     right: '1.8rem',
-    // background: 'transparent',
     backgroundColor: 'rgba( 171, 197, 90, 0.85)',
     borderRadius: '10px 0px 0px 10px',
     fontSize: "1.5rem"
