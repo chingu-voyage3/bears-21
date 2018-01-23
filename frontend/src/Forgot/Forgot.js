@@ -21,7 +21,7 @@ export default class Forgot extends Component {
         <div className={css(styles.forgotContainer)}>
           <input placeholder="your@example.com" className={css(styles.textarea)} onChange={(e) => this.setState({email: e.target.value})} value={this.state.email}></input>
           <div className={css(styles.status)}></div>
-          <button className={css(styles.button)} onClick={this.forgot}>GET NEW PASSWORD</button>
+          <button className={css(styles.button)} onClick={this.forgot}>Get New Password</button>
         </div>
       </div>
     );
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 16,
     fontWeight: 400,
-    backgroundColor: "#FF5A5F",
+    background: "#FF5A5F",
     border: 0,
     borderRadius: 0,
     lineHeight: '20px',

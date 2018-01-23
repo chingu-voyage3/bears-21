@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justiftyContext: "center"
+    justifyContent: "center"
   },
   box: {
     marginTop: 150,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 16,
     fontWeight: 400,
-    backgroundColor: "#FF5A5F",
+    background: "#FF5A5F",
     border: 0,
     borderRadius: 0,
     lineHeight: '20px',
@@ -136,9 +136,10 @@ const styles = StyleSheet.create({
   loginContainer: {
     background: '#fafafa',
     border: '1px solid #ebebeb',
-    padding: '3em 2em 2em 2em',
+    padding: '1em 2em',
     position: 'relative',
     width: 400,
+    maxHeight: 300
   },
   account: {
     marginRight: 5,
