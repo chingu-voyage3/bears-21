@@ -2,7 +2,7 @@
 const util = require( '../util');
 const Issue = require('../../../models/issue');
 const House = require('../../../models/house');
-const logger = require('../logger');
+const logger = require('../../logger');
 
 async function upsert( req, res) {
   const new_issue = req.body._id?false:true;
