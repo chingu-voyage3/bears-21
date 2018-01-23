@@ -41,7 +41,7 @@ async function init () {
     logger.info(`Connected to database`);
     await initServer(config.port);
   } catch (err) {
-    logger.error(`Couldn't init the app: ${err}`);
+    logger.error(`Couldn't init the app: ${err.message}`);
     // exit code for fatal exception
     process.exit(1);
   }
@@ -56,7 +56,7 @@ async function stop () {
   try {
     await closeServer();
   } catch (err) {
-    logger.error(`Failed to close the app: ${err}`);
+    logger.error(`Failed to close the app: ${err.message}`);
     exitCode = 1;
   }
 
