@@ -50,7 +50,7 @@
     "server:prod": "cross-env NODE_ENV=production node index.js",
     "client": "node start-client.js",
     "clientv2": "cd frontend && npm start",
-    "lint": "esw server frontend",
+    "lint": "esw web frontend",
     "lint:watch": "npm run lint -- --watch",
     "test:unit:fe": "cd frontend && npm run test:batch",
     "test:unit:models": "mocha --reporter progress ./test/setup.js ./models/**/*.unit.spec.js",

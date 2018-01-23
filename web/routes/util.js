@@ -1,6 +1,7 @@
 'use strict'
-const fs = require( 'fs');
-const Image = require( '../../models/image');
+const fs = require('fs');
+const Image = require('../../models/image');
+const logger = require('../logger');
 
 const readDirectory = ( dir) => {
   return new Promise( (resolve, reject) => {
@@ -27,16 +28,16 @@ module.exports = {
       image_count = listing.length;
     } catch( e) {
       if( e.code === "ENOENT") {
-        console.log( "creating missing directory:", dir)
+        logger.info( `creating missing directory:${dir}`)
         try {
           createMissingDir( dir);
           image_count = 0;
         } catch( e) {
           // we can't get error EEXIST here so bail
-          console.error( "mkdirSync failed:", e);
+          logger.error( `mkdirSync failed:${e}`);
         }
       } else {
-        console.error( "directory count failed:", e);
+        logger.error( `directory count failed:${e}`);
       }
     }
     return image_count;
@@ -44,15 +45,15 @@ module.exports = {
   makeUrlsFromBlobs: function( parent_id, current_image_count, blobs) {
     const new_image_urls = [];
     if( typeof parent_id !== "string") {
-      console.error( "makeUrlsFromBlobs parent_id missing");
+      logger.error( "makeUrlsFromBlobs parent_id missing");
       return new_image_urls;
     }
     if( typeof current_image_count !== "number") {
-      console.error( "makeUrlsFromBlobs current_image_count missing");
+      logger.error( "makeUrlsFromBlobs current_image_count missing");
       return new_image_urls;
     }
     if( !Array.isArray( blobs)) {
-      console.error( "makeUrlsFromBlobs blobs param invalid");
+      logger.error( "makeUrlsFromBlobs blobs param invalid");
       return new_image_urls;
     }
     let image_count = current_image_count;
@@ -61,7 +62,7 @@ module.exports = {
       const ext = bits[bits.length-1];
       const np = `${process.env.IMAGE_BASE_DIR}/${parent_id}/pic${image_count}.${ext}`;
       fs.rename( fd.path, np, err => {
-        console.log( `move [${fd.path}] to [${np}] status:`, err);
+        logger.info( `moved [${fd.path}] to [${np}] status:${err}`);
       });
       const url = `/images/${parent_id}/pic${image_count}.${ext}`;
       new_image_urls.push( url);
@@ -88,10 +89,9 @@ module.exports = {
         data, contentType: fd.mimetype
       });
       await image.save();
-      console.log( "pushing blob id:", image._id);
       ret.push( image._id);
     }
-    console.log( "save blobs returning images ids:", ret);
+    logger.info( `save blobs returning images ids:${ret}`);
     return ret;
   }
 };
