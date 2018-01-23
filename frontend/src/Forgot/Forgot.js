@@ -13,26 +13,18 @@ export default class Forgot extends Component {
 
 
   forgot = () => {
-
   }
-
 
   render = () => {
     return (
       <div className={css(styles.centre)}>
-        <div className={css(styles.forgotContainer, styles.centre)}>
-          <div className={css(styles.title)}>Forgot Password</div>
+        <div className={css(styles.forgotContainer)}>
           <input placeholder="your@example.com" className={css(styles.textarea)} onChange={(e) => this.setState({email: e.target.value})} value={this.state.email}></input>
           <div className={css(styles.status)}></div>
           <button className={css(styles.button)} onClick={this.forgot}>GET NEW PASSWORD</button>
         </div>
-
       </div>
-
-
     );
-
-
   }
 
 }
@@ -40,9 +32,11 @@ export default class Forgot extends Component {
 const styles = StyleSheet.create({
   centre: {
     display: "flex",
+    flex: 1,
     flexDirection: "column",
-    justifyContext: "center",
+    justifyContent: "center",
     alignItems: "center",
+    padding: '5em 1em'
   },
   title: {
     fontSize: 50,
@@ -51,33 +45,38 @@ const styles = StyleSheet.create({
   },
   textarea: {
     resize: "none",
+    fontSize: 16,
+    fontWeight: 400,
+    padding: '10px 10px 10px 5px',
+    marginTop: 10,
     border: "none",
-    backgroundColor: "#F2F2F2",
-    width: 270,
-    paddingRight: 8,
-    paddingLeft: 8,
-    height: 25,
+    background: '#fafafa',
+    borderRadius: 0,
+    width: '100%',
+    borderBottom: '1px solid #757575'
   },
   button: {
-    width: 286,
-    height: 25,
+    padding: '12px 24px',
+    margin: '.3em 0 1em 0',
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 400,
+    backgroundColor: "#FF5A5F",
+    border: 0,
+    borderRadius: 0,
+    lineHeight: '20px',
     color: "white",
-    backgroundColor: "#49CF87",
-    border: "none",
   },
   status: {
     width: 286,
     height: 25,
-
   },
   forgotContainer: {
-    position: "absolute",
-    margin: "auto",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    background: '#fafafa',
+    border: '1px solid #ebebeb',
+    position: 'relative',
+    padding: '1em 1em',
     width: 400,
-    height: 300,
+    maxHeight: 200
   },
 });
