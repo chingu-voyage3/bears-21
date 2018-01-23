@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
     color: 'gold',
     background: 'transparent',
     borderRadius: '0px 10px 10px 0px',
-    fontSize: '2rem'
+    fontSize: '2.5rem'
   },
   rating_value: {
     position: "absolute",
     color: 'rgba( 5,5,5, 0.5)',
-    top: '0.7rem',
-    left: '0.7rem',
+    top: '1rem',
+    left: '0.9rem',
     fontSize: '0.8rem',
     fontWeight: 'bold'
   }

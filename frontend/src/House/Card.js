@@ -34,16 +34,11 @@ const styles = StyleSheet.create({
   },
   title: {
     display: 'flex',
-    // flex: '1',
-    // justifyContent: 'flex-end',
     alignItems: 'center',
     fontWeight: 'bold',
-
     margin: '0',
-    // padding: '0 3.5%',
-    padding: '3.5% 3.5% 2.5% 3.5%',
+    padding: '1% 2.5%',
     lineHeight: '1.2',
-
     background: 'rgba(157, 187, 63, .85)',
     color: 'white',
     bottom: '0',

@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
     zIndex: '100',
-    top: '0.2rem',
-    right: '1.8rem',
+    top: '0.6rem',
+    right: '2.1rem',
     backgroundColor: 'rgba( 171, 197, 90, 0.85)',
     borderRadius: '10px 0px 0px 10px',
     fontSize: "1.5rem"
