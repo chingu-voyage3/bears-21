@@ -34,10 +34,10 @@ module.exports = {
           image_count = 0;
         } catch( e) {
           // we can't get error EEXIST here so bail
-          logger.error( `mkdirSync failed:${e}`);
+          logger.error( `mkdirSync failed:${JSON.stringify(e)}`);
         }
       } else {
-        logger.error( `directory count failed:${e}`);
+        logger.error( `directory count failed:${JSON.stringify(e)}`);
       }
     }
     return image_count;
@@ -62,7 +62,7 @@ module.exports = {
       const ext = bits[bits.length-1];
       const np = `${process.env.IMAGE_BASE_DIR}/${parent_id}/pic${image_count}.${ext}`;
       fs.rename( fd.path, np, err => {
-        logger.info( `moved [${fd.path}] to [${np}] status:${err}`);
+        logger.info( `moved [${fd.path}] to [${np}] status:${JSON.stringify(err)}`);
       });
       const url = `/images/${parent_id}/pic${image_count}.${ext}`;
       new_image_urls.push( url);
@@ -91,7 +91,6 @@ module.exports = {
       await image.save();
       ret.push( image._id);
     }
-    logger.info( `save blobs returning images ids:${ret}`);
     return ret;
   }
 };
