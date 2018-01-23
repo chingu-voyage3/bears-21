@@ -30,7 +30,7 @@ export default class Bar extends Component {
     const {visible, onEnter, onSelected} = this.props;
     return (
       <div className={css(styles.wrapper)}
-        style={{visibility: visible?'visible':'hidden'}}
+        style={{display: visible?'block':'none'}}
         onMouseEnter={onEnter}
         onMouseLeave={this.onLeaveBar}>
         <Star selected={onSelected} lit={stars[0]} ratingValue={1} onEnter={this.onEnter} />
@@ -45,7 +45,12 @@ export default class Bar extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    background: 'transparent',
+    position: 'absolute',
+    zIndex: '100',
+    top: '0.2rem',
+    right: '1.8rem',
+    // background: 'transparent',
+    backgroundColor: 'rgba( 171, 197, 90, 0.85)',
     borderRadius: '10px 0px 0px 10px',
     fontSize: "1.5rem"
   }

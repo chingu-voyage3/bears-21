@@ -50,6 +50,7 @@ export default class Rating extends React.Component {
 
 const styles = StyleSheet.create({
   wrapper: {
+    position: 'relative',
     cursor: "pointer",
     display: 'flex',
     justifyContent: 'flex-end',
