@@ -60,7 +60,7 @@ class login extends Component {
           <input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
           <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>
-          <button className={css(styles.login)} onClick={this.login}>LET ME IN</button>
+          <button className={css(styles.login)} onClick={this.login}>Log in</button>
 
           <div className={css(styles.accountHolder)}>
             <Link className={css(styles.account)} to="/register">Create Account</Link>
@@ -113,6 +113,8 @@ const styles = StyleSheet.create({
     padding: '12px 24px',
     margin: '.3em 0 1em 0',
     width: '100%',
+    fontSize: 16,
+    fontWeight: 400,
     backgroundColor: "#FF5A5F",
     border: 0,
     borderRadius: 0,
