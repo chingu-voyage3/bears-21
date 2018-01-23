@@ -1,7 +1,6 @@
 'use strict'
 
 const { Router } = require('express');
-const path = require('path');
 const multer = require('multer');
 const upload = multer({ dest: process.env.IMAGE_UPLOAD_DIR});
 
