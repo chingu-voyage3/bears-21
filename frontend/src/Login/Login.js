@@ -56,12 +56,11 @@ class login extends Component {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.centered, styles.loginContainer)}>
-          <div className={css(styles.title)}>Login</div>
-          <input placeholder="your@email.com" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
-          <input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
+          <input placeholder="your@email.com" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} className={css(styles.textarea)}></input>
+          <input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
 
           <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>
-          <button className={css(styles.boxes, styles.login)} onClick={this.login}>LET ME IN</button>
+          <button className={css(styles.login)} onClick={this.login}>LET ME IN</button>
 
           <div className={css(styles.accountHolder)}>
             <Link className={css(styles.account)} to="/register">Create Account</Link>
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justiftyContext: "center",
+    justiftyContext: "center"
   },
   box: {
     marginTop: 150,
@@ -101,14 +100,23 @@ const styles = StyleSheet.create({
   },
   textarea: {
     resize: "none",
+    fontSize: 18,
+    padding: '10px 10px 10px 5px',
     marginTop: 10,
     border: "none",
-    backgroundColor: "#F2F2F2",
-
+    background: '#fafafa',
+    borderRadius: 0,
+    width: '100%',
+    borderBottom: '1px solid #757575'
   },
   login: {
-    width: 286,
-    backgroundColor: "#49CF87",
+    padding: '12px 24px',
+    margin: '.3em 0 1em 0',
+    width: '100%',
+    backgroundColor: "#FF5A5F",
+    border: 0,
+    borderRadius: 0,
+    lineHeight: '20px',
     color: "white",
    },
   boxes: {
@@ -124,8 +132,11 @@ const styles = StyleSheet.create({
     color: "white",
   },
   loginContainer: {
+    background: '#fafafa',
+    border: '1px solid #ebebeb',
+    padding: '3em 2em 2em 2em',
+    position: 'relative',
     width: 400,
-    height: 300,
   },
   account: {
     marginRight: 5,
@@ -142,7 +153,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   background: {
-    backgroundColor: "#0079BF",
+    backgroundColor: "#f0f0f0",
+    padding: '5em 0'
   },
   status: {
     textAlign: "center",
