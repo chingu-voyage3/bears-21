@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImageDefault from './ImageDefault';
 import {StyleSheet, css} from 'aphrodite';
+import {CrossButton} from '../Common/Buttons';
 
 export default class ImageRemovable extends React.Component {
   static propTypes = {
@@ -13,15 +14,10 @@ export default class ImageRemovable extends React.Component {
   };
   render = () => {
     const {src} = this.props;
-    const cross_symbol = String.fromCharCode( 10799);
     return (
       <div className={css(styles.wrapper)} >
         <div className={css(styles.close_button)} >
-          <button type="button"
-            className={css(styles.cross_box_colour)}
-            onClick={this.onRemove} >
-            {cross_symbol}
-          </button>
+          <CrossButton onClick={this.onRemove} title="Remove Image" />
         </div>
         <ImageDefault src={src} missing_url="//via.placeholder.com/200x200?No Image" />
       </div>
