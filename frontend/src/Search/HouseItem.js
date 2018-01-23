@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
 
     margin: '0',
-    // padding: '0 3.5%',
-    padding: '3.5% 3.5% 2.5% 3.5%',
+    padding: '0 2.5%',
     lineHeight: '1.2',
 
     background: 'rgba(157, 187, 63, .85)',

@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
     position: 'relative',
     color: 'gold',
     borderRadius: '10px',
-    fontSize: '2.5rem',
+    fontSize: '3rem',
     fontWeight: 'normal'
   },
   rating_value: {
     position: 'absolute',
     color: 'rgba( 5,5,5, 0.5)',
     fontSize: '0.8rem',
-    top: '1rem',
-    left: '0.8rem',
+    top: '1.4rem',
+    left: '1.1rem',
     fontWeight: 'bold'
   }
 });
