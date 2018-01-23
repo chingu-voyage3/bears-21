@@ -27,7 +27,7 @@ async function upsert( req, res) {
   try {
     await issue.save();
   } catch( e) {
-    logger.error( `issue upsert resave failed:${e}`);
+    logger.error( `issue upsert resave failed:${JSON.stringify(e)}`);
     res.json( {success: false, message: e});
     return;
   }
@@ -38,7 +38,7 @@ async function upsert( req, res) {
     try {
       await house.save();
     } catch( e) {
-      logger.error( `issue house id save failed:${e}`);
+      logger.error( `issue house id save failed:${JSON.stringify(e)}`);
       res.json( {success: false, message: e});
       return;
     }

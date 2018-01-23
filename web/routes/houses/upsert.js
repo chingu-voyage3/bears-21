@@ -4,8 +4,8 @@ const House = require( '../../../models/house');
 const logger = require( '../../logger');
 
 async function upsert( req, res) {
-  logger.info( `text fields:${req.body}` );
-  logger.info( `files:${req.files}` );
+  logger.info( `text fields:${JSON.stringify(req.body)}` );
+  logger.info( `files:${JSON.stringify(req.files)}` );
   const new_house = req.body._id?false:true;
   let house;
   if( new_house) {
