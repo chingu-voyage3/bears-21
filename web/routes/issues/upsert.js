@@ -2,6 +2,7 @@
 const util = require( '../util');
 const Issue = require('../../../models/issue');
 const House = require('../../../models/house');
+const logger = require('../../logger');
 
 async function upsert( req, res) {
   const new_issue = req.body._id?false:true;
@@ -26,7 +27,7 @@ async function upsert( req, res) {
   try {
     await issue.save();
   } catch( e) {
-    console.error( "issue upsert resave failed:", e);
+    logger.error( `issue upsert resave failed:${JSON.stringify(e)}`);
     res.json( {success: false, message: e});
     return;
   }
@@ -37,7 +38,7 @@ async function upsert( req, res) {
     try {
       await house.save();
     } catch( e) {
-      console.error( "issue house id save failed:", e);
+      logger.error( `issue house id save failed:${JSON.stringify(e)}`);
       res.json( {success: false, message: e});
       return;
     }
