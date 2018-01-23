@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ImageDropper from './ImageDropper';
 import UrlInput from './UrlInput';
-import ReloadButton from './ReloadButton';
-import CloseButton from './CloseButton';
+import {ReloadButton} from '../Common/Buttons';
+import {CrossButton} from '../Common/Buttons';
 import {StyleSheet, css} from 'aphrodite';
 
 export default class Uploader extends Component {
@@ -55,8 +55,8 @@ export default class Uploader extends Component {
           onUrlChange={this.onUrlChange}
           handleUrlKeyUp={this.handleUrlKeyUp}/>
         <div className={css(styles.btn_wrapper)}>
-          <ReloadButton setPicUrl={this.setPicUrl} title="Preview image" />
-          <CloseButton onClearPic={this.onClearPic} title="Clear preview" />
+          <ReloadButton onClick={this.setPicUrl} title="Preview image" />
+          <CrossButton onClick={this.onClearPic} title="Clear preview" />
         </div>
       </div>
     );

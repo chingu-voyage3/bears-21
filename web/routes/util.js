@@ -1,6 +1,7 @@
 'use strict'
-const fs = require( 'fs');
-const Image = require( '../../models/image');
+const fs = require('fs');
+const Image = require('../../models/image');
+const logger = require('../logger');
 
 module.exports = {
   // return an array for a string, array or undefined
@@ -24,6 +25,7 @@ module.exports = {
       await image.save();
       ret.push( image._id);
     }
+    logger.info( `save blobs returning images ids:${ret}`);
     return ret;
   }
 };

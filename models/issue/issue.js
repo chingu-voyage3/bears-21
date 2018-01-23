@@ -31,7 +31,11 @@ const issueSchema = new Schema({
   priority: {
     type: Number,
     min: 1,
-    max: 2
+    max: 2,
+    validate: {
+      validator: Number.isInteger,
+      message: '{VALUE} must be integer one or two'
+    }
   },
   images: {
     type: [String],
