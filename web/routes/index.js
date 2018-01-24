@@ -20,12 +20,14 @@ router.get( '/api/v1/house-issues', auth.isLoggedIn, houses.houseIssueList);
 
 // NOTE: this is singular, house
 router.delete('/api/v1/house', auth.isLoggedIn, catchAsyncErrors(houses.delete));
+router.post('/api/v1/house/rating', auth.isLoggedIn, catchAsyncErrors( houses.rate));
 
 router.post('/api/v1/house', auth.isLoggedIn, upload.array('blobs', 3), catchAsyncErrors( houses.upsert));
 router.post('/api/v1/issue', auth.isLoggedIn, upload.array('blobs', 3), catchAsyncErrors( issues.upsert));
 
 // NOTE: no auth required
 router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
+
 
 /**
  * 1. Validate the registration data
