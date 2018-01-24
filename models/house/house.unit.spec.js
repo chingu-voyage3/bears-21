@@ -22,14 +22,20 @@ describe('House', () => {
       location: {
         postCode: 'CB21NS',
         street: 'Some street'
-      }
+      },
+      ratings: [
+        { user: mongoose.Types.ObjectId(), value: 1},
+        { user: mongoose.Types.ObjectId(), value: 2},
+        { user: mongoose.Types.ObjectId(), value: 3},
+        { user: mongoose.Types.ObjectId(), value: 4},
+        { user: mongoose.Types.ObjectId(), value: 5},
+      ]
     }
   });
 
   afterEach(async () => {
     await House.remove({ _id });
   });
-
 
   describe('.insert', () => {
     it('should insert a new house', async () => {
@@ -40,6 +46,15 @@ describe('House', () => {
       expect(houseInDB._id).to.eql(houseToInsert._id);
       expect(houseInDB.title).to.eql(houseToInsert.title);
       expect(houseInDB.slug).to.eql(houseToInsert.slug);
-    })
+    });
+  });
+  describe( '.rating', () => {
+    it( 'should return rating 3', async () => {
+      const house = new House(houseToInsert);
+      await house.save();
+      const houseInDB = await House.findById(_id);
+
+      expect( houseInDB.rating).to.equal( 3);
+    });
   });
 });
