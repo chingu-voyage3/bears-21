@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     margin: '10px',
-    maxWidth: '320px'
+    width: '320px'
   },
   title: {
     display: 'flex',
