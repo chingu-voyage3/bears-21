@@ -17,7 +17,7 @@ const defaultIssue = {
 };
 const initialState = {
   issue: JSON.parse( JSON.stringify( defaultIssue)),
-  isWorking: false,
+  isWorking: true,
   isSaved: false,
   issueError: {
     hasErrored: false,
