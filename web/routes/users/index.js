@@ -1,3 +1,6 @@
 'use strict'
 
-module.exports = require('./register');
+module.exports = {
+  register: require('./register'),
+  getDetail: require('./getDetail')
+};

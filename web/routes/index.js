@@ -28,6 +28,7 @@ router.post('/api/v1/issue', auth.isLoggedIn, upload.array('blobs', 3), catchAsy
 // NOTE: no auth required
 router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
 
+router.get('/api/v1/user', auth.isLoggedIn, catchAsyncErrors( users.getDetail));
 
 /**
  * 1. Validate the registration data
@@ -35,8 +36,8 @@ router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
  * 3. Log them in
  */
 router.post('/api/v1/register',
-  users.validateRegister,
-  catchAsyncErrors(users.register),
+  users.register.validateRegister,
+  catchAsyncErrors(users.register.register),
   auth.login
 );
 

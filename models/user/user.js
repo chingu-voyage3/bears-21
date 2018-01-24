@@ -24,7 +24,8 @@ const userSchema = new Schema({
     type: String,
     required: 'Please supply a name',
     trim: true
-  }
+  },
+  avatar: String
 });
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
