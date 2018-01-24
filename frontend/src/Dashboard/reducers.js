@@ -15,7 +15,7 @@ function houseIssuesHasErrored( state = false, action) {
   }
 }
 
-function houseIssuesIsLoading( state = false, action) {
+function houseIssuesIsLoading( state = true, action) {
   switch( action.type) {
     case HOUSE_ISSUES_IS_LOADING:
       return action.isLoading;
