@@ -82,7 +82,11 @@ class House extends Component {
     const {house} = this.state;
     const {isWorking = true, hasErrored = false, errorMessage = ""} = this.props;
     if( isWorking) {
-      return <p>Please wait ...</p>;
+      return (
+        <div className={css(styles.wrapper)} >
+          <p>Please wait ...</p>
+        </div>
+      );
     }
     const op_type = (typeof house._id === "undefined")?"New":"Edit";
     const show_error = {
@@ -90,7 +94,7 @@ class House extends Component {
       display: hasErrored?"block":"none"
     };
     return (
-      <div className={css(styles.centered)}>
+      <div className={css(styles.wrapper)}>
         <h1>House ({op_type})</h1>
         <div style={show_error} >
           {errorMessage}
@@ -106,7 +110,7 @@ class House extends Component {
 }
 
 const styles = StyleSheet.create({
-  centered: {
+  wrapper: {
     display: "flex",
     flex: 1,
     flexDirection: "column",
