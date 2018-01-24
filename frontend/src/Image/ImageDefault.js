@@ -39,6 +39,11 @@ class ImageDefault extends React.Component {
   componentWillUnmount = () => {
     this.component_unmounted = true;
   };
+  componentWillReceiveProps = newProps => {
+    if( newProps.src !== this.state.image_src){
+      this.setState( {image_src: newProps.src, image_error: false});
+    }
+  };
   onImageError = () => {
     this.setState( {image_error: true, image_src: this.props.missing_url});
   };
