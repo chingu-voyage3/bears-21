@@ -40,7 +40,9 @@ app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
 app.use(session({
   secret: 'anything',
-  keys: ['secretkey']
+  keys: ['secretkey'],
+  // at some point?
+  // cookie: { maxAge: 1000 }
 }));
 
 // Passport JS is what we use to handle our logins
