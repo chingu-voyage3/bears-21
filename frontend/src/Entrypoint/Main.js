@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Routes from '../Routes/Routes';
 import { Navbar } from '../Navbar';
 import { Footer } from '../Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
+import {autoLogin} from '../Redux/actions';
 
 class app extends Component {
+  static propTypes = {
+    autoLogin: PropTypes.func.isRequired
+  };
+  componentWillMount = () => {
+    this.props.autoLogin();
+  };
+  componentWillReceiveProps = newProps => {
+    if( newProps.user) {
+      localStorage.setItem( 'user', JSON.stringify(newProps.user));
+    }
+  };
   render() {
     return (
       <div className={css(styles.container)}>
@@ -29,5 +42,16 @@ const styles = StyleSheet.create({
   }
 });
 
-const App = withRouter(connect()(app));
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    autoLogin: () => dispatch( autoLogin())
+  };
+};
+
+const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(app));
 export default App;
