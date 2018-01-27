@@ -6,7 +6,7 @@ describe( 'dashbaord reducer', () => {
   it( 'should initialise state', () => {
     const op = reducer( undefined, {});
     expect( op.houseIssues).to.deep.equal([]);
-    expect( op.houseIssuesIsLoading).to.equal(false);
+    expect( op.houseIssuesIsLoading).to.equal(true);
     expect( op.houseIssuesHasErrored).to.equal(false);
   });
   it( 'should flag loading', () => {
