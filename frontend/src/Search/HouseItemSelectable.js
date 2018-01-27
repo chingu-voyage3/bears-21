@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import HouseItem from './HouseItem';
 
 class  HouseItemSelectable extends Component {
+  static propTypes = {
+    house: PropTypes.object.isRequired,
+    onClick: PropTypes.func.isRequired
+  };
   onClick = () => {
-    console.log( "HouseItemSelectable click, ouse:", this.props.house);
     this.props.onClick( this.props.house);
   };
   render = () => {
