@@ -80,7 +80,7 @@ class House extends Component {
   };
   render = () => {
     const {house} = this.state;
-    const {isWorking = true, hasErrored = false, errorMessage = ""} = this.props;
+    const {isWorking = false, hasErrored = false, errorMessage = ""} = this.props;
     if( isWorking) {
       return <p>Please wait ...</p>;
     }
