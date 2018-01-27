@@ -12,7 +12,7 @@ const Avatar = ({name, image}) => (
 
 Avatar.propTypes = {
   name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired
+  image: PropTypes.string
 };
 
 const styles = StyleSheet.create({
