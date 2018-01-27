@@ -7,12 +7,16 @@ exports.validateRegister = (req, res, next) => {
   // Below methods are added to req object by express-validator module
   req.sanitizeBody('name');
   req.checkBody('name', 'You must supply a name!').notEmpty();
-  req.checkBody('email', 'That Email is not valid!').isEmail();
-  req.sanitizeBody('email').normalizeEmail({
-    gmail_remove_dots: false,
-    remove_extension: false,
-    gmail_remove_subaddress: false
-  });
+  if (process.env.NODE_ENV === "development") {
+    req.sanitizeBody('email');
+  } else {
+    req.checkBody('email', 'That Email is not valid!').isEmail();
+    req.sanitizeBody('email').normalizeEmail({
+      gmail_remove_dots: false,
+      remove_extension: false,
+      gmail_remove_subaddress: false
+    });
+  }
   req.checkBody('password', 'Password Cannot be Blank!').notEmpty();
   req.checkBody('password-confirm', 'Confirmed Password cannot be blank!').notEmpty();
   req.checkBody('password-confirm', 'Oops! Your passwords do not match').equals(req.body.password);
