@@ -1,18 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
 import {getDetail} from './actions';
 
 export default class Profile extends React.Component {
+  static propTypes = {
+    match: PropTypes.object.isRequired
+  };
   state = {
     user: null
   };
   componentWillMount = () => {
-    getDetail()
-    .then( user => {
-      this.setState({user})
-    });
+    const {match} = this.props;
+    if (match.params.id) {
+      getDetail(match.params.id)
+      .then( user => {
+        this.setState({user})
+      });
+    } else {
+      this.setState( {user: JSON.parse(localStorage.getItem('user'))});
+    }
   };
   render = () => {
     const {user} = this.state;
