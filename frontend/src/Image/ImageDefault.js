@@ -40,7 +40,7 @@ class ImageDefault extends React.Component {
     this.component_unmounted = true;
   };
   componentWillReceiveProps = newProps => {
-    if( newProps.src !== this.state.image_src){
+    if( newProps.src && newProps.src !== this.props.src){
       this.setState( {image_src: newProps.src, image_error: false});
     }
   };
