@@ -5,14 +5,22 @@ import issue from '../Issue/reducers';
 import search from '../Search/reducers';
 
 // QUESTION: shouldn't this reducer be in login with action?
-import { LOGIN, LOGOUT } from './actions.js';
+import { LOGOUT, CLEAR_LOGIN_ERROR,
+  REQUEST_LOGIN_FAILED, REQUEST_LOGIN_SUCCESS,
+  AUTO_LOGIN_FAILED, AUTO_LOGIN_SUCCESS
+} from './actions.js';
 
-function reducer(state = false, action) {
+function reducer(state = {}, action) {
   switch (action.type) {
-    case LOGIN:
-      return true;
+    case AUTO_LOGIN_SUCCESS:
+    case REQUEST_LOGIN_SUCCESS:
+      return action.user;
+    case AUTO_LOGIN_FAILED:
+    case REQUEST_LOGIN_FAILED:
+      return action.error;
+    case CLEAR_LOGIN_ERROR:
     case LOGOUT:
-      return false;
+      return {};
     default:
       return state;
   }

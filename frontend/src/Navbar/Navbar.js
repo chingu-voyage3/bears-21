@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
+import {logout} from '../Redux/actions';
 
 class navbar extends Component {
   static propTypes = {
-    user: PropTypes.bool,
+    user: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
   };
 
@@ -15,7 +16,8 @@ class navbar extends Component {
   }
 
   getBar() {
-    if (this.props.user) { // authenticated
+    const {name} = this.props.user;
+    if (name) { // authenticated
       return (
         <div>
           <ul className={css(styles.container)}>
@@ -31,6 +33,9 @@ class navbar extends Component {
             <li className={css(styles.navelement)}
               onClick={() => this.props.logout()}>
               <Link className={css(styles.links)} to="/logout">Logout</Link>
+            </li>
+            <li className={css(styles.navelement)} >
+              <span className={css(styles.links)}>Hi {name}</span>
             </li>
           </ul>
         </div>
@@ -94,9 +99,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const LOGOUT = "LOGOUT";
   return {
-    logout: () => {dispatch({type: LOGOUT})},
+    logout: () => {dispatch(logout())},
   }
 }
 

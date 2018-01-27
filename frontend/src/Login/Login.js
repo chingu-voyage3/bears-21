@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import { loginAction } from '../Redux/actions';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { requestLogin, clearLoginError } from '../Redux/actions';
 
 class login extends Component {
   static propTypes = {
-    onLogin: PropTypes.func.isRequired
+    requestLogin: PropTypes.func.isRequired,
+    clearLoginError: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -28,36 +28,50 @@ class login extends Component {
     document.removeEventListener("keydown", this.keyPressed);
   }
 
+  componentWillReceiveProps = newProps => {
+    let currentStatus = "";
+    if( newProps.user) {
+      if( newProps.user.error) {
+        currentStatus = newProps.user.error;
+      }
+    }
+    this.setState( {currentStatus})
+  };
+
   keyPressed = (e) => {
     if (e.keyCode === 13) {
       setTimeout(this.login, 500);
     }
   }
+  onFieldChange = e => {
+    this.props.clearLoginError();
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value});
+  }
 
   login = () => {
-    axios.post("/api/v1/login", {
-      email: this.state.email,
-      password: this.state.password,
-    })
-    .then(res => {
-      if (res.status === 200) {
-        localStorage.setItem("user", true);
-        this.props.onLogin();
-      }
-    })
-    .catch(() => {
-      this.setState({currentStatus: "ERROR!!"});
-    });
-
-    this.setState({email: "", password: ""});
+    const {email, password} = this.state;
+    this.props.requestLogin( {email, password});
   }
 
   render() {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.centered, styles.loginContainer)}>
-          <input placeholder="your@email.com" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} className={css(styles.textarea)}></input>
-          <input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea)}></input>
+          <input className={css(styles.textarea)}
+            name='email'
+            placeholder="your@email.com"
+            value={this.state.email}
+            onChange={this.onFieldChange}
+          />
+          <input className={css(styles.textarea)}
+            name='password'
+            placeholder="your password"
+            type="password"
+            value={this.state.password}
+            onChange={this.onFieldChange}
+          />
 
           <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>
           <button className={css(styles.login)} onClick={this.login}>Log in</button>
@@ -72,13 +86,18 @@ class login extends Component {
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: () => dispatch(loginAction())
-  }
-}
+    requestLogin: payload => dispatch(requestLogin(payload)),
+    clearLoginError: () => dispatch(clearLoginError())
+  };
+};
 
 const Login = connect(mapStateToProps, mapDispatchToProps)(login);
 export default Login;

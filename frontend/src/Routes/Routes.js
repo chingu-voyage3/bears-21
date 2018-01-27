@@ -17,17 +17,21 @@ import { withRouter } from 'react-router-dom';
 
 class routes extends Component {
   static propTypes = {
-    user: PropTypes.bool,
-    login: PropTypes.func.isRequired
+    user: PropTypes.object.isRequired,
   };
-  componentWillMount() {
-    if (localStorage.getItem("user")) { // user was logged in....
-      this.props.login();
+  state = {
+    logged_in: false
+  };
+  componentWillReceiveProps = newProps => {
+    let logged_in = false;
+    if( newProps.user && newProps.user.name) {
+      logged_in = true;
     }
-  }
+    this.setState( {logged_in})
+  };
 
   render() {
-    const {user} = this.props;
+    const user = this.state.logged_in;
     return (
       <Switch>
         <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
