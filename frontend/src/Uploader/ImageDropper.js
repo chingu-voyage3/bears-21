@@ -2,20 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 import Dropzone from 'react-dropzone';
-import {ImageDefault} from '../Image';
 
+const getDropzoneStyle = (show_image, url) => {
+  return {
+    width: "200px",
+    height: "200px",
+    backgroundPosition: "center",
+    backgroundImage: show_image? `url( ${url})`: '',
+    backgroundSize: '200px, auto, contain',
+    backgroundRepeat: 'no-repeat'
+  };
+};
 const reload_symbol = String.fromCharCode( 8635);
 const ImageDropper = (props) => (
   <div className={css(styles.well)}>
-    { props.show_image
-      ? <ImageDefault className={css( styles.image_style)} src={props.url}
-          missing_url="//via.placeholder.com/200x200?text=noimage"/>
-        : <Dropzone onDrop={props.onFileDropped} >
-        Drop files here or click to select.
-        Alternatively specify url to an online image in the url box
-        below and click preview button {reload_symbol}
-      </Dropzone>
-  }
+    <Dropzone onDrop={props.onFileDropped}
+        style={getDropzoneStyle(props.show_image, props.url)} >
+      {props.show_image
+          ? ""
+          : `Drop files here or click to select.\
+              Alternatively specify url to an online image in the url box\
+              below and click preview button ${reload_symbol}`
+      }
+    </Dropzone>
   </div>
 );
 
