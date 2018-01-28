@@ -43,6 +43,8 @@ app.use(session({
   keys: ['secretkey'],
   // at some point?
   // cookie: { maxAge: 1000 }
+  resave: true,
+  saveUninitialized: true
 }));
 
 // Passport JS is what we use to handle our logins
