@@ -6,7 +6,7 @@ import { Dummy } from '../Dummy';
 import Dashboard from '../Dashboard';
 import SearchLayout from "../Search";
 import Issue from '../Issue';
-import HouseDetail from '../House';
+import { HouseDetail, HouseDetailEdit} from '../House';
 import Profile from '../Profile';
 import { Login } from '../Login';
 import { Logout } from '../Logout';
@@ -42,7 +42,8 @@ class routes extends Component {
         <AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
         <AuthRoute path="/issue/:id" user={user} component={Issue} pathname={"/login"} />
         <Route path="/newissue" component={Dummy} />
-        <AuthRoute path="/house/:id" user={user} component={HouseDetail} pathname={"/login"} />
+        <AuthRoute path="/house/:id" user={user} component={HouseDetailEdit} pathname={"/login"} />
+        <Route path="/houseview/:id" component={HouseDetail} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={SearchLayout} />
         <Route path="*" component={Notfound} />
