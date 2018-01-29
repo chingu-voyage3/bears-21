@@ -19,7 +19,7 @@ const defaultHouse = {
 
 const initialState = {
   house: JSON.parse( JSON.stringify(defaultHouse)),
-  houseIsWorking: true,
+  houseIsWorking: false,
   houseError: {
     hasErrored: false,
     errorMessage: ""
