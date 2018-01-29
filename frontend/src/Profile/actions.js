@@ -9,3 +9,17 @@ export function getDetail(user_id) {
   })
   .then( response => response.json());
 }
+
+export function profileSave( user) {
+  const payload = new FormData();
+  payload.append( 'name', user.name);
+  payload.append( 'email', user.email);
+  payload.append( 'avatar', user.avatar);
+  return fetch( '/api/v1/user', {
+    method: 'post',
+    credentials: 'same-origin',
+    body: payload
+  })
+  .then( response => response.json())
+  .catch( err => {err});
+}

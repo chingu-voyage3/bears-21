@@ -1,48 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 
-class Detail extends Component {
-  state = {
-    email: "",
-    name: ""
-  };
-  onFieldChange = e => {
-    this.setState( {[e.target.name]: e.target.value});
-  };
-  componentWillMount = () => {
-    const {data, localUser} = this.props;
-    if (localUser) {
-      this.setState( {email: data.email, name: data.name});
-    }
-  };
-  render = () => {
-    const {name, email} = this.state;
-    const {data, localUser} = this.props;
-    return (
-      <div className={css(styles.wrapper)} >
-        <label className={css(styles.left_grid)}>Name</label>
-        <div className={css(styles.right_grid)} >
-          {localUser
-            ? <input name="name" value={name} onChange={this.onFieldChange} />
-            : data.name
-          }
-        </div>
-        <label className={css(styles.left_grid)}>Email</label>
-        <div className={css(styles.right_grid)} >
-          {localUser
-            ? <input name="email" value={email} onChange={this.onFieldChange}/>
-            : data.email
-          }
-        </div>
-      </div>
-    );
-  }
-}
+const Detail = ({data, localUser, onFieldChange}) => (
+  <div className={css(styles.wrapper)} >
+    <label className={css(styles.left_grid)}>Name</label>
+    <div className={css(styles.right_grid)} >
+      {localUser
+        ? <input name="name" value={data.name} onChange={onFieldChange} />
+        : data.name
+      }
+    </div>
+    <label className={css(styles.left_grid)}>Email</label>
+    <div className={css(styles.right_grid)} >
+      {localUser
+        ? <input name="email" value={data.email} onChange={onFieldChange}/>
+      : data.email
+      }
+    </div>
+  </div>
+);
 
 Detail.propTypes = {
   localUser: PropTypes.bool.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  onFieldChange: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
