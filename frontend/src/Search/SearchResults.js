@@ -7,6 +7,7 @@ import HouseList from './HouseList';
 import HouseItem from './HouseItem';
 import { fetchHouses } from './actions';
 import { getHousesByPostCode, getIsFetching } from './reducers';
+import SearchResultsLoader from './SearchResults.Loader';
 
 class SearchResults extends Component {
   static propTypes = {
@@ -22,7 +23,7 @@ class SearchResults extends Component {
   render() {
     const { houses=[], isFetching=true, postCode } = this.props;
     if (isFetching) {
-      return <h3>Loading...</h3>;
+      return <SearchResultsLoader />;
     }
     return (
       <div className={css(styles.container)}>
