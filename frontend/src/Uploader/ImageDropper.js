@@ -5,12 +5,14 @@ import Dropzone from 'react-dropzone';
 
 const getDropzoneStyle = (show_image, url) => {
   return {
+    padding: show_image? "0":"5px",
     width: "200px",
     height: "200px",
     backgroundPosition: "center",
     backgroundImage: show_image? `url( ${url})`: '',
     backgroundSize: '200px, auto, contain',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    border: show_image? "none" : "1px dashed grey"
   };
 };
 const reload_symbol = String.fromCharCode( 8635);
