@@ -25,6 +25,7 @@ HouseItem.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    cursor: 'pointer',
     background: '#fefff9',
     boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0',
     borderRadius: '4px',
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     margin: '10px',
-    maxWidth: '320px'
+    width: '320px'
   },
   image: {
     borderRadius: '4px 4px 0 0',
