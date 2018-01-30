@@ -29,6 +29,7 @@ router.post('/api/v1/issue', auth.isLoggedIn, upload.array('blobs', 3), catchAsy
 router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
 
 router.get('/api/v1/user/:id*?', auth.isLoggedIn, catchAsyncErrors( users.getDetail));
+router.post('/api/v1/user', auth.isLoggedIn, catchAsyncErrors(users.update));
 
 /**
  * 1. Validate the registration data
