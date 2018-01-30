@@ -18,7 +18,7 @@ export default class Uploader extends Component {
   componentWillMount = () => {
     const {currentImage} = this.props;
     if (currentImage) {
-      this.setState( {image_src: encodeURIComponent(currentImage), show_image: true});
+      this.setState( {image_src: currentImage, show_image: true});
     }
   };
   componentWillReceiveProps = newProps => {
