@@ -4,6 +4,7 @@ import {StyleSheet, css} from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
 import {getDetail, profileSave} from './actions';
+import loadImage from '../Image/actions';
 
 export default class Profile extends React.Component {
   static propTypes = {
@@ -11,35 +12,70 @@ export default class Profile extends React.Component {
     location: PropTypes.object.isRequired
   };
   state = {
+    message: "",
+    // true: me, false: arbitrary user
     local_user: false,
-    user: null
+    user: null,
+    avatar_src: null
   };
   componentWillMount = () => {
     const {match} = this.props;
     if (match.params.id) {
       getDetail(match.params.id)
       .then( user => {
-        this.setState({user, local_user:false})
+        this.setState({user, local_user:false});
+        this.setAvatarImageSrc( user.avatar);
       });
     } else {
-      this.setState( {user: JSON.parse(localStorage.getItem('user')), local_user: true});
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.setState( { user, local_user: true });
+      this.setAvatarImageSrc( user.avatar);
     }
   };
   onFieldChange = e => {
-    this.setState( {user: {...this.state.user, [e.target.name]: e.target.value}});
+    this.setState( {
+      user: {
+        ...this.state.user,
+        [e.target.name]: e.target.value,
+        message: ""
+      }
+    });
+  };
+  setAvatarImageSrc = image => {
+    // check for undefined, url, image mongo id, file
+    if ( typeof image === 'undefined' || image === null) {
+      this.setState( {
+        avatar_src: "//via.placeholder.com/200x200?text=No Profile Pic"
+      });
+    } else if (typeof image === 'string') {
+      if( image.indexOf('/') === -1) {
+        loadImage( image)
+        .then( url => {
+          this.setState( {avatar_src: url});
+        });
+      } else {
+        this.setState( {avatar_src: image});
+      }
+    } else { // typeof user.avatar === 'file'
+      this.setState( {avatar_src: URL.createObjectURL( image)});
+    }
+  }
+  changeImage = avatar => {
+    this.setState( {user: {...this.state.user, avatar}, message: ""});
+    this.setAvatarImageSrc( avatar);
   };
   save = () => {
     profileSave( this.state.user)
     .then( res => {
-      if( res.message){
-        this.setState( {message: res.message});
-      } else {
+      if( res.success){
         this.setState( {message: "Successfully Saved"});
+      } else {
+        this.setState( {message: res.message});
       }
     });
   };
   render = () => {
-    const {user, local_user, message} = this.state;
+    const {user, local_user, message, avatar_src} = this.state;
     if( user === null) {
       return (
         <div className={css(styles.container)}>
@@ -67,7 +103,10 @@ export default class Profile extends React.Component {
           : null
         }
         <div className={css(styles.wrapper)}>
-          <Avatar name={user.name} image={user.avatar} localUser={local_user} />
+          <Avatar name={user.name}
+            image={avatar_src}
+            localUser={local_user}
+            changeImage={this.changeImage} />
           <Detail data={user} localUser={local_user} onFieldChange={this.onFieldChange} />
         </div>
       </div>
