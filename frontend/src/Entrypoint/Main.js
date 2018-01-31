@@ -17,7 +17,7 @@ class app extends Component {
   };
   componentWillReceiveProps = newProps => {
     if( newProps.user) {
-      localStorage.setItem( 'user', JSON.stringify(newProps.user));
+      localStorage.setItem( 'user', JSON.stringify(newProps.user.user));
     }
   };
   render() {

@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {StyleSheet, css} from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
 import ProfileLoader from './Profile.Loader';
-import {getDetail, profileSave} from './actions';
+import {getDetail, profileSave} from '../Redux/userActions';
 import loadImage from '../Image/actions';
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
   static propTypes = {
+    isWorking: PropTypes.bool,
+    error: PropTypes.string,
     match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    getDetail: PropTypes.func.isRequired,
+    profileSave: PropTypes.func.isRequired
   };
   state = {
-    message: "",
     // true: me, false: arbitrary user
     local_user: false,
     user: null,
@@ -22,23 +26,30 @@ export default class Profile extends React.Component {
   componentWillMount = () => {
     const {match} = this.props;
     if (match.params.id) {
-      getDetail(match.params.id)
-      .then( user => {
-        this.setState({user, local_user:false});
-        this.setAvatarImageSrc( user.avatar);
-      });
+      this.props.getDetail(match.params.id);
+      this.setState( {local_user: false});
     } else {
       const user = JSON.parse(localStorage.getItem('user'));
       this.setState( { user, local_user: true });
       this.setAvatarImageSrc( user.avatar);
     }
   };
+  componentWillReceiveProps = newProps => {
+    console.log( "Profile will receive props:", newProps);
+    if( newProps.user){
+      if( newProps.error) {
+        this.setState( {message: newProps.error});
+      } else {
+        this.setState({user: newProps.user, message: "User Saved Successfully"});
+        this.setAvatarImageSrc( newProps.user.avatar);
+      }
+    }
+  };
   onFieldChange = e => {
     this.setState( {
       user: {
         ...this.state.user,
-        [e.target.name]: e.target.value,
-        message: ""
+        [e.target.name]: e.target.value
       }
     });
   };
@@ -62,22 +73,17 @@ export default class Profile extends React.Component {
     }
   }
   changeImage = avatar => {
-    this.setState( {user: {...this.state.user, avatar}, message: ""});
+    this.setState( {user: {...this.state.user, avatar}});
     this.setAvatarImageSrc( avatar);
   };
   save = () => {
-    profileSave( this.state.user)
-    .then( res => {
-      if( res.success){
-        this.setState( {message: "Successfully Saved"});
-      } else {
-        this.setState( {message: res.message});
-      }
-    });
+    this.props.profileSave( this.state.user);
   };
   render = () => {
-    const {user, local_user, message, avatar_src} = this.state;
-    if( user === null) {
+    const {user, local_user, avatar_src, message = false} = this.state;
+    console.log( "render profile, user:", user);
+    const {isWorking = false} = this.props;
+    if( isWorking) {
       return <ProfileLoader />;
     }
     const show_message = {
@@ -109,6 +115,22 @@ export default class Profile extends React.Component {
     );
   };
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+    isWorking: state.user.isWorking,
+    error: state.user.error
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    getDetail: id => dispatch(getDetail(id)),
+    profileSave: user => dispatch(profileSave(user))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 const styles = StyleSheet.create({
   container: {
