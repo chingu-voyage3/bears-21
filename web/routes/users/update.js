@@ -16,9 +16,7 @@ async function update( req, res) {
 
   try {
     await user.save();
-    console.log( "user updated:", user);
   } catch( e) {
-    console.error("user save failed:", e);
     res.json({success: false, message: e});
     return;
   }
