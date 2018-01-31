@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
+import ProfileLoader from './Profile.Loader';
 import {getDetail, profileSave} from './actions';
 import loadImage from '../Image/actions';
 
@@ -77,12 +78,7 @@ export default class Profile extends React.Component {
   render = () => {
     const {user, local_user, message, avatar_src} = this.state;
     if( user === null) {
-      return (
-        <div className={css(styles.container)}>
-          <h1>Profile</h1>
-          <p>Loading ...</p>
-        </div>
-      );
+      return <ProfileLoader />;
     }
     const show_message = {
       color: "tomato",
