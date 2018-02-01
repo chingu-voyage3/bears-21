@@ -35,7 +35,6 @@ class Profile extends React.Component {
     }
   };
   componentWillReceiveProps = newProps => {
-    console.log( "Profile will receive props:", newProps);
     if( newProps.user){
       if( newProps.error) {
         this.setState( {message: newProps.error});
@@ -81,7 +80,6 @@ class Profile extends React.Component {
   };
   render = () => {
     const {user, local_user, avatar_src, message = false} = this.state;
-    console.log( "render profile, user:", user);
     const {isWorking = false} = this.props;
     if( isWorking) {
       return <ProfileLoader />;

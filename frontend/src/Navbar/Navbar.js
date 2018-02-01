@@ -11,12 +11,7 @@ class navbar extends Component {
     logout: PropTypes.func.isRequired
   };
 
-  componentWillReceiveProps = newProps => {
-    console.log( "nav will receive new props, user:", newProps);
-  };
-
   render() {
-    console.log( "render nav, user:", this.props.user);
     return this.getBar();
   }
 
