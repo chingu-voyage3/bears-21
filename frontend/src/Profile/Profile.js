@@ -56,7 +56,7 @@ class Profile extends React.Component {
     // check for undefined, url, image mongo id, file
     if ( typeof image === 'undefined' || image === null) {
       this.setState( {
-        avatar_src: "//via.placeholder.com/200x200?text=No Profile Pic"
+        avatar_src: encodeURI( "//via.placeholder.com/200x200?text=No Profile Pic")
       });
     } else if (typeof image === 'string') {
       if( image.indexOf('/') === -1) {
