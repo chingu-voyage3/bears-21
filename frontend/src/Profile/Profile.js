@@ -6,7 +6,7 @@ import Avatar from './Avatar';
 import Detail from './Detail';
 import ProfileLoader from './Profile.Loader';
 import {getDetail, profileSave} from '../Redux/userActions';
-import loadImage from '../Image/actions';
+import {ImageRef} from '../Image';
 
 class Profile extends React.Component {
   static propTypes = {
@@ -53,23 +53,8 @@ class Profile extends React.Component {
     });
   };
   setAvatarImageSrc = image => {
-    // check for undefined, url, image mongo id, file
-    if ( typeof image === 'undefined' || image === null) {
-      this.setState( {
-        avatar_src: encodeURI( "//via.placeholder.com/200x200?text=No Profile Pic")
-      });
-    } else if (typeof image === 'string') {
-      if( image.indexOf('/') === -1) {
-        loadImage( image)
-        .then( url => {
-          this.setState( {avatar_src: url});
-        });
-      } else {
-        this.setState( {avatar_src: image});
-      }
-    } else { // typeof user.avatar === 'file'
-      this.setState( {avatar_src: URL.createObjectURL( image)});
-    }
+    ImageRef(image, "//via.placeholder.com/200x200?text=No Profile Pic")
+    .then( avatar_src => this.setState( {avatar_src}));
   }
   changeImage = avatar => {
     this.setState( {user: {...this.state.user, avatar}});
