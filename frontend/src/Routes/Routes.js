@@ -37,7 +37,7 @@ class routes extends Component {
         <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
         <NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
         <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
-        <AuthRoute path='/profile' user={user} component={Profile} pathname={'/login'} />
+        <AuthRoute path='/profile/:id?' user={user} component={Profile} pathname={'/login'} />
         <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
         <AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
         <AuthRoute path="/issue/:id" user={user} component={Issue} pathname={"/login"} />
@@ -86,7 +86,7 @@ NonAuthRoute.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
+    user: state.user.user,
   };
 };
 

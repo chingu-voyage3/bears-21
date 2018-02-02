@@ -43,7 +43,6 @@ async function upsert( req, res) {
       return;
     }
   }
-  // now deal with the blobs
   res.json( {success:true, issue});
 }
 

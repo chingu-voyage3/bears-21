@@ -15,7 +15,7 @@ export default class Register extends Component {
     };
   }
 
-  register() {
+  register = () => {
     axios.post("/api/v1/register", {
       email: this.state.email,
       name: this.state.name,

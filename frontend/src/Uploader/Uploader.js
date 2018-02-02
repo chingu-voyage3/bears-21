@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 import ImageDropper from './ImageDropper';
 import UrlInput from './UrlInput';
 import {ReloadButton} from '../Common/Buttons';
-import {CrossButton} from '../Common/Buttons';
 import {StyleSheet, css} from 'aphrodite';
 
 export default class Uploader extends Component {
   static propTypes = {
+    currentImage: PropTypes.string,
     addImage: PropTypes.func.isRequired
   };
   state = {
     show_image: false,
     url_text: "",
     image_src: ""
+  };
+  componentWillMount = () => {
+    const {currentImage} = this.props;
+    if (currentImage) {
+      this.setState( {image_src: currentImage, show_image: true});
+    }
+  };
+  componentWillReceiveProps = newProps => {
+    if( newProps.currentImage) {
+      this.setState( {image_src: newProps.currentImage, show_image: true});
+    }
   };
   onFileDropped = (files) => {
     this.setState( {
@@ -37,26 +48,21 @@ export default class Uploader extends Component {
       this.setPicUrl();
     }
   };
-  onClearPic = () => {
-    this.setState( {show_image: false});
-  };
   render = () => {
-    const missing_url = "//via.placeholder.com/200x200?text=No Image";
+    const missing_url = "via.placeholder.com/200x200?text=No Image";
     const {image_src, url_text, show_image} = this.state;
     const url = image_src?image_src:missing_url;
-
     return (
       <div className={css(styles.wrapper)} >
         <ImageDropper url={url}
           show_image={show_image}
-          missing_url="//via.placeholder.com/200x200?text=noimage"
+          missing_url={`${missing_url}`}
           onFileDropped={this.onFileDropped} />
         <UrlInput value={url_text}
           onUrlChange={this.onUrlChange}
           handleUrlKeyUp={this.handleUrlKeyUp}/>
         <div className={css(styles.btn_wrapper)}>
           <ReloadButton onClick={this.setPicUrl} title="Preview image" />
-          <CrossButton onClick={this.onClearPic} title="Clear preview" />
         </div>
       </div>
     );

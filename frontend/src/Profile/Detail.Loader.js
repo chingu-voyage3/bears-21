@@ -1,33 +1,36 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 
-const Detail = ({data, localUser, onFieldChange}) => (
+const Detail = () => (
   <div className={css(styles.wrapper)} >
-    <label className={css(styles.left_grid)}>Name</label>
+    <label className={css(styles.left_grid)}>
+      <div className={css(styles.label)} />
+    </label>
     <div className={css(styles.right_grid)} >
-      {localUser
-        ? <input name="name" value={data.name} onChange={onFieldChange} />
-        : data.name
-      }
+      <div className={css(styles.item)} />
     </div>
-    <label className={css(styles.left_grid)}>Email</label>
+    <label className={css(styles.left_grid)}>
+      <div className={css(styles.label)} />
+    </label>
     <div className={css(styles.right_grid)} >
-      {localUser
-        ? <input name="email" value={data.email} onChange={onFieldChange}/>
-      : data.email
-      }
+      <div className={css(styles.item)} />
     </div>
   </div>
 );
 
-Detail.propTypes = {
-  localUser: PropTypes.bool.isRequired,
-  data: PropTypes.object.isRequired,
-  onFieldChange: PropTypes.func.isRequired
-};
-
 const styles = StyleSheet.create({
+  label: {
+    width: "100px",
+    height: "2rem",
+    background: "grey",
+    borderRadius: "5px"
+  },
+  item: {
+    width: "200px",
+    height: "2rem",
+    background: "grey",
+    borderRadius: "5px"
+  },
   wrapper: {
     margin: '0 2rem',
     display: "grid",

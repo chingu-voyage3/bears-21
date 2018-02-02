@@ -2,5 +2,6 @@
 
 module.exports = {
   register: require('./register'),
-  getDetail: require('./getDetail')
+  getDetail: require('./getDetail'),
+  update: require('./update')
 };

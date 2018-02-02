@@ -1,23 +1,21 @@
 import fetch from 'cross-fetch';
+import * as UserTypes from './UserTypes';
 
-export const REQUEST_LOGIN_SUCCESS = 'REQUEST_LOGIN_SUCCESS';
 function requestLoginSuccess(user) {
   return {
-    type: REQUEST_LOGIN_SUCCESS,
+    type: UserTypes.REQUEST_LOGIN_SUCCESS,
     user
   };
 }
-export const REQUEST_LOGIN_FAILED = 'REQUEST_LOGIN_FAILED';
 function requestLoginFailed(error) {
   return {
-    type: REQUEST_LOGIN_FAILED,
+    type: UserTypes.REQUEST_LOGIN_FAILED,
     error
   };
 }
-export const CLEAR_LOGIN_ERROR = 'CLEAR_LOGIN_ERROR';
 export function clearLoginError() {
   return {
-    type: CLEAR_LOGIN_ERROR
+    type: UserTypes.CLEAR_LOGIN_ERROR
   };
 }
 export function requestLogin(payload) {
@@ -34,17 +32,15 @@ export function requestLogin(payload) {
   }
 }
 
-export const AUTO_LOGIN_SUCCESS = 'AUTO_LOGIN_SUCCESS';
 function autoLoginSuccess( user) {
   return {
-    type: AUTO_LOGIN_SUCCESS,
+    type: UserTypes.AUTO_LOGIN_SUCCESS,
     user
   }
 }
-export const AUTO_LOGIN_FAILED = 'AUTO_LOGIN_FAILED';
 function autoLoginFailed(error) {
   return {
-    type: AUTO_LOGIN_FAILED,
+    type: UserTypes.AUTO_LOGIN_FAILED,
     error
   }
 }
@@ -62,10 +58,9 @@ export function autoLogin() {
   };
 }
 
-export const LOGOUT = "LOGOUT";
 function requestLogout() {
   return {
-    type: LOGOUT
+    type: UserTypes.LOGOUT
   }
 }
 export function logout() {

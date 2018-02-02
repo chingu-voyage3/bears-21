@@ -13,7 +13,7 @@ class  HouseItemSelectable extends Component {
   render = () => {
     return (
       <div onClick={this.onClick}>
-        <HouseItem house={this.props.house} />;
+        <HouseItem house={this.props.house} />
       </div>
     );
   };
