@@ -1,3 +1,6 @@
+body {
+  user-select: none;
+}
 
 .container_vertical {
   display: flex;
