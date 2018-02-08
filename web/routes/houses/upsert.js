@@ -1,10 +1,11 @@
 'use strict'
 const util = require( '../util');
 const House = require( '../../../models/house');
+const logger = require( '../../logger');
 
 async function upsert( req, res) {
-  console.log( "text fields:", req.body);
-  console.log( "files:", req.files);
+  logger.info( `text fields:${JSON.stringify(req.body)}` );
+  logger.info( `files:${JSON.stringify(req.files)}` );
   const new_house = req.body._id?false:true;
   let house;
   if( new_house) {
@@ -23,7 +24,6 @@ async function upsert( req, res) {
   house.images = util.makeArrayFromBody( req.body.url);
   // now save any blob images
   const image_ids = await util.saveBlobs( req.files);
-  console.log( "blob images ids:", image_ids);
   house.images = house.images.concat( image_ids);
 
   await house.save();

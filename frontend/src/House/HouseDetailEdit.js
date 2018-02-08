@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
-import {ImageBlock, ImageList} from '../Image';
-import HouseForm from './HouseForm';
+import {ImageBlock, ImageListRemovable} from '../Image';
+import HouseFormEdit from './HouseFormEdit';
 import { houseFetchData, houseSaveData, houseReset } from './actions';
 
 class House extends Component {
@@ -80,7 +80,7 @@ class House extends Component {
   };
   render = () => {
     const {house} = this.state;
-    const {isWorking = true, hasErrored = false, errorMessage = ""} = this.props;
+    const {isWorking = false, hasErrored = false, errorMessage = ""} = this.props;
     if( isWorking) {
       return <p>Please wait ...</p>;
     }
@@ -95,11 +95,11 @@ class House extends Component {
         <div style={show_error} >
           {errorMessage}
         </div>
-        <HouseForm house={house}
+        <HouseFormEdit house={house}
           onFieldChange={this.onFieldChange}
           onSubmit={this.houseFormSubmit} />
         <ImageBlock addImage={this.addImage} />
-        <ImageList images={house.images} removeImage={this.removeImage} />
+        <ImageListRemovable images={house.images} removeImage={this.removeImage} />
       </div>
     );
   };

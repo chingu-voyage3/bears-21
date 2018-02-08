@@ -7,7 +7,7 @@ const HouseList = ({ children }) => (
   </div>
 );
 HouseList.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.array
 };
 
 export default HouseList;

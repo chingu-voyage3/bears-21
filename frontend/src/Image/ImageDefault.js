@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
-import loadImage from './actions';
+import ImageRef from './ImageRef';
 
 class ImageDefault extends React.Component {
   static propTypes = {
@@ -12,32 +12,36 @@ class ImageDefault extends React.Component {
     image_error: false,
     image_src: null
   };
-  component_unmounted = false;
-
+  component_mounted = false;
+  componentWillMount = () => {
+    this.setState( {
+      image_src: encodeURI("//via.placeholder.com/200x200?text=Loading...")
+    });
+  };
   componentDidMount = () => {
-    // data:image/jpeg;base64,data
-    this.component_unmounted = false;
-    const {src, missing_url} = this.props;
-    if( src) {
-      if( src.indexOf( '/') === -1){
-        this.setState( {image_src: missing_url});
-        // FIXME: we have to do this in a parent or re-render may cause
-        // this component to be replaced by another before fetch returns
-        loadImage( src)
-        .then( url => {
-          if( !this.component_unmounted) {
-            this.setState( {image_src: url});
-          }
-        });
-      } else {
-        this.setState( {image_src: src});
+    this.component_mounted = true;
+    ImageRef( this.props.src, "//via.placeholder.com/200x200?text=Not Found")
+    .then( image_src => {
+      // check component is mounted or we get warning can't setState on
+      // unmounted component
+      if( this.component_mounted) {
+        this.setState( {image_src});
       }
-    } else {
-      this.setState( {image_src: missing_url})
+    })
+    .catch( () => {
+      if (this.component_mounted) {
+        this.setState( {image_src: encodeURI(`//via.placeholder.com/200x200?text=Not Found`)});
+      }
+    });
+  };
+
+  componentWillReceiveProps = newProps => {
+    if( this.component_mounted && newProps.src && newProps.src !== this.props.src){
+      this.setState( {image_src: newProps.src, image_error: false});
     }
   };
   componentWillUnmount = () => {
-    this.component_unmounted = true;
+    this.component_mounted = false;
   };
   onImageError = () => {
     this.setState( {image_error: true, image_src: this.props.missing_url});

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Issue = mongoose.model('Issue').schema;
 const { Schema } = mongoose;
 const slug = require('slug');
 mongoose.Promise = global.Promise;
@@ -44,8 +43,24 @@ const houseSchema = new Schema({
     type: [String],
     default: []
   },
-  active: {type: Boolean, default: true}
-});
+  ratings: {
+    type: [{
+      user: { type: Schema.Types.ObjectId, ref: 'User'},
+      value: {
+        type: Number,
+        min: 1,
+        max: 5,
+        validate: {
+          validator: Number.isInteger,
+          message: '{VALUE} must be integer one to five'
+        }
+      }
+    }],
+    default: []
+  },
+  active: {type: Boolean, default: true},
+},
+{ toObject: { virtuals: true }, toJSON: {virtuals: true} });
 
 houseSchema.pre('save', function(next) {
   if (!this.isModified('title')) {
@@ -54,6 +69,24 @@ houseSchema.pre('save', function(next) {
   this.slug = slug(this.title);
   next();
 });
+
+houseSchema.virtual( 'rating')
+.get( function(){
+  return houseSchema.statics.calculateRating( this.ratings);
+});
+
+houseSchema.statics.calculateRating = (ratings) => {
+    if( ratings.length === 0) return 0;
+
+    const total = ratings.reduce( (acc,cur) => {
+      acc[cur.value-1] += 1;
+      return acc;
+    }, [0,0,0,0,0])
+    .reduce( (acc, cur, ndx) => {
+      return acc + cur * (ndx+1);
+    }, 0);
+    return total/ratings.length;
+};
 
 houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
   return this.find( { owner: req.user._id, active: true})
@@ -64,7 +97,15 @@ houseSchema.statics.findWithIssues = function findWithIssues(req, res) {
       console.error( "house issues findWithIssues failed:", err);
       res.json( []);
     } else {
-      res.json( docs);
+      const ret = docs.map( doc => {
+        const { _id, title, slug, description, created,
+          location, issues, owner, images} = doc;
+        const r = { _id, title, slug, description, created,
+          location, issues, owner, images};
+        r.rating = houseSchema.statics.calculateRating( doc.ratings);
+        return r;
+      });
+      res.json( ret);
     }
   });
 };

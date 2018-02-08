@@ -3,16 +3,37 @@ import houseIssues from '../Dashboard/reducers';
 import house from '../House/reducers';
 import issue from '../Issue/reducers';
 import search from '../Search/reducers';
+import * as UserTypes from './UserTypes';
 
-// QUESTION: shouldn't this reducer be in login with action?
-import { LOGIN, LOGOUT } from './actions.js';
-
-function reducer(state = false, action) {
+function reducer(state = {user:{}, isWorking:false, error:""}, action) {
   switch (action.type) {
-    case LOGIN:
-      return true;
-    case LOGOUT:
-      return false;
+    case UserTypes.AUTO_LOGIN_SUCCESS:
+    case UserTypes.REQUEST_LOGIN_SUCCESS:
+      return {...state,
+        user: action.user
+      };
+    case UserTypes.AUTO_LOGIN_FAILED:
+    case UserTypes.REQUEST_LOGIN_FAILED:
+      return {...state,
+        error: action.error
+      };
+    case UserTypes.USER_IS_WORKING:
+      return {...state,
+        isWorking: action.isWorking
+      };
+    case UserTypes.USER_SUCCESS:
+      return {...state,
+        user: action.user
+      };
+    case UserTypes.USER_ERRORED:
+      return {
+        error: action.userErrored
+      };
+    case UserTypes.CLEAR_LOGIN_ERROR:
+    case UserTypes.LOGOUT:
+      return {...state,
+        user: {}
+      };
     default:
       return state;
   }

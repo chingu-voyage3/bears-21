@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import { css, StyleSheet } from 'aphrodite';
 import 'url-search-params-polyfill';
 import HouseList from './HouseList';
-import HouseItem from './HouseItem';
+import HouseItemSelectable from './HouseItemSelectable';
 import { fetchHouses } from './actions';
 import { getHousesByPostCode, getIsFetching } from './reducers';
+import SearchResultsLoader from './SearchResults.Loader';
 
 class SearchResults extends Component {
   static propTypes = {
@@ -14,27 +16,41 @@ class SearchResults extends Component {
     isFetching: PropTypes.bool,
     postCode: PropTypes.string
   };
-
+  state = {
+    houseSelected: false
+  }
   componentWillMount() {
     loadData(this.props)
   }
-
-  render() {
+  houseSelected = house => {
+    this.setState( {houseSelected: house})
+  };
+  render = () => {
+    const {houseSelected = false} = this.state;
     const { houses=[], isFetching=true, postCode } = this.props;
+    if (houseSelected) {
+      return (
+        <Redirect to={{
+            pathname: `/houseview/${houseSelected._id}`,
+            state: {house: houseSelected}
+          }}
+        />
+      );
+    }
     if (isFetching) {
-      return <h3>Loading...</h3>;
+      return <SearchResultsLoader />;
     }
     return (
       <div className={css(styles.container)}>
         <h1 className={css(styles.heading)}>Search results for post code {postCode}</h1>
         <HouseList>
           {houses.map((house, i) =>
-            <HouseItem key={i} house={house} />)
+            <HouseItemSelectable key={i} house={house} onClick={this.houseSelected} />)
           }
         </HouseList>
       </div>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({

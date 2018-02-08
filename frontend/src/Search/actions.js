@@ -1,4 +1,4 @@
-import { SearchMock } from '../Core/service';
+import { SearchMock } from '../API/service';
 
 export const UPDATE_POST_CODE = 'UPDATE_POST_CODE';
 export function updatePostCode(postCode='') {

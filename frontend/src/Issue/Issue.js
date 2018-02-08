@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import IssueForm from './IssueForm';
-import {ImageBlock, ImageList} from '../Image';
+import {ImageBlock, ImageListRemovable} from '../Image';
 import {issueFetchData, issueSaveData, issueReset } from './actions';
 import {StyleSheet, css} from 'aphrodite';
 
@@ -89,7 +89,7 @@ class Issue extends Component {
           onFieldChange={this.onFieldChange}
           onSubmit={this.issueFormSubmit} />
         <ImageBlock addImage={this.addImage} />
-        <ImageList images={issue.images||[]} removeImage={this.removeImage} />
+        <ImageListRemovable images={issue.images||[]} removeImage={this.removeImage} />
       </div>
     );
   }

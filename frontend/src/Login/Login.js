@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import { loginAction } from '../Redux/actions';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { requestLogin, clearLoginError } from '../Redux/actions';
 
 class login extends Component {
   static propTypes = {
-    onLogin: PropTypes.func.isRequired
+    requestLogin: PropTypes.func.isRequired,
+    clearLoginError: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -28,40 +28,53 @@ class login extends Component {
     document.removeEventListener("keydown", this.keyPressed);
   }
 
+  componentWillReceiveProps = newProps => {
+    let currentStatus = "";
+    if( newProps.user) {
+      if( newProps.user.error) {
+        currentStatus = newProps.user.error;
+      }
+    }
+    this.setState( {currentStatus})
+  };
+
   keyPressed = (e) => {
     if (e.keyCode === 13) {
       setTimeout(this.login, 500);
     }
   }
+  onFieldChange = e => {
+    this.props.clearLoginError();
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value});
+  }
 
   login = () => {
-    axios.post("/api/v1/login", {
-      email: this.state.email,
-      password: this.state.password,
-    })
-    .then(res => {
-      if (res.status === 200) {
-        localStorage.setItem("user", true);
-        this.props.onLogin();
-      }
-    })
-    .catch(() => {
-      this.setState({currentStatus: "ERROR!!"});
-    });
-
-    this.setState({email: "", password: ""});
+    const {email, password} = this.state;
+    this.props.requestLogin( {email, password});
   }
 
   render() {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.centered, styles.loginContainer)}>
-          <div className={css(styles.title)}>Login</div>
-          <input placeholder="your@email.com" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
-          <input placeholder="your password" type="password" value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} className={css(styles.textarea, styles.boxes)}></input>
+          <input className={css(styles.textarea)}
+            name='email'
+            placeholder="your@email.com"
+            value={this.state.email}
+            onChange={this.onFieldChange}
+          />
+          <input className={css(styles.textarea)}
+            name='password'
+            placeholder="your password"
+            type="password"
+            value={this.state.password}
+            onChange={this.onFieldChange}
+          />
 
           <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>
-          <button className={css(styles.boxes, styles.login)} onClick={this.login}>LET ME IN</button>
+          <button className={css(styles.login)} onClick={this.login}>Log in</button>
 
           <div className={css(styles.accountHolder)}>
             <Link className={css(styles.account)} to="/register">Create Account</Link>
@@ -73,13 +86,18 @@ class login extends Component {
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: () => dispatch(loginAction())
-  }
-}
+    requestLogin: payload => dispatch(requestLogin(payload)),
+    clearLoginError: () => dispatch(clearLoginError())
+  };
+};
 
 const Login = connect(mapStateToProps, mapDispatchToProps)(login);
 export default Login;
@@ -91,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justiftyContext: "center",
+    justifyContent: "center"
   },
   box: {
     marginTop: 150,
@@ -101,14 +119,25 @@ const styles = StyleSheet.create({
   },
   textarea: {
     resize: "none",
+    fontSize: 18,
+    padding: '10px 10px 10px 5px',
     marginTop: 10,
     border: "none",
-    backgroundColor: "#F2F2F2",
-
+    background: '#fafafa',
+    borderRadius: 0,
+    width: '100%',
+    borderBottom: '1px solid #757575'
   },
   login: {
-    width: 286,
-    backgroundColor: "#49CF87",
+    padding: '12px 24px',
+    margin: '.3em 0 1em 0',
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 400,
+    background: "#FF5A5F",
+    border: 0,
+    borderRadius: 0,
+    lineHeight: '20px',
     color: "white",
    },
   boxes: {
@@ -124,8 +153,12 @@ const styles = StyleSheet.create({
     color: "white",
   },
   loginContainer: {
+    background: '#fafafa',
+    border: '1px solid #ebebeb',
+    padding: '1em 2em',
+    position: 'relative',
     width: 400,
-    height: 300,
+    maxHeight: 300
   },
   account: {
     marginRight: 5,
@@ -142,7 +175,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   background: {
-    backgroundColor: "#0079BF",
+    backgroundColor: "#f0f0f0",
+    padding: '5em 0'
   },
   status: {
     textAlign: "center",

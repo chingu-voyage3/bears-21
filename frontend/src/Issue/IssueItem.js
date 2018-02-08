@@ -21,11 +21,16 @@ export default class Issue extends Component {
 
 const styles = StyleSheet.create({
   issue_style: {
-    cursor: "pointer",
-    textAlign: "left",
-    listStyle: "none",
+    padding: '3px 5px',
+    cursor: 'pointer',
+    textAlign: 'left',
+    listStyle: 'none',
     ":hover": {
-      background: "lightgrey"
+      // what do you fancy for highlight? bg colour, border or text colour?
+      // background: "lightgrey"
+      // border: '1px solid rgba( 127,127,127,0.5)',
+      // padding: '2px 4px',
+      color: 'rgb( 171, 107, 90)'
     }
   }
 });

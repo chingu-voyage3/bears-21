@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { houseIssuesFetchData, houseDelete} from './actions';
 import {HouseList} from '../House';
+import DashboardLoader from './Dashboard.Loader';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -39,7 +40,7 @@ class Dashboard extends Component {
       return <p>Sorry data fetch failed</p>;
     }
     if( isLoading) {
-      return <p>Loading ...</p>;
+      return <DashboardLoader />;
     }
     return (
       <div style={{flex: '1'}}>

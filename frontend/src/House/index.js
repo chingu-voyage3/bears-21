@@ -1,5 +1,5 @@
-import House from './House';
+import HouseDetail from './HouseDetail';
+import HouseDetailEdit from './HouseDetailEdit';
 import HouseList from './HouseList';
 
-export default House;
-export {HouseList};
+export {HouseDetail, HouseDetailEdit, HouseList};

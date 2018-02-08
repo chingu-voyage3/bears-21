@@ -2,10 +2,8 @@
 
 const promisify = require('es6-promisify');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const express = require('express');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const path = require('path');
@@ -15,6 +13,7 @@ const expressValidator = require('express-validator');
 const passport = require('passport');
 const routes = require('./routes');
 const errorHandlers = require('./handlers/errorHandlers');
+const logger = require('./logger');
 
 const app = express();
 
@@ -41,7 +40,11 @@ app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
 app.use(session({
   secret: 'anything',
-  keys: ['secretkey']
+  keys: ['secretkey'],
+  // at some point?
+  // cookie: { maxAge: 1000 }
+  resave: true,
+  saveUninitialized: true
 }));
 
 // Passport JS is what we use to handle our logins
@@ -57,7 +60,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log("==============request user:", req.user);
+  logger.info(`==============request user:${req.user}`);
   return next();
 });
 

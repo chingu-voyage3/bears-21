@@ -5,49 +5,37 @@ import {StyleSheet, css} from 'aphrodite';
 export default class HouseForm extends Component {
   static propTypes = {
     house: PropTypes.object.isRequired,
-    onFieldChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
-  };
-  state = {
-    uploader_visible: false
-  };
-  toggleUploaderViz = () => {
-    this.setState( { uploader_visible: !this.state.uploader_visible});
   };
 
   render = () => {
     const {
       house,
-      onFieldChange,
-      onSubmit
     } = this.props;
     return (
       <form action="" className={css(styles.form)} >
         <label className={css(styles.left_grid)}>Title</label>
         <input name="title" type="text" placeholder="Title"
+          disabled="disabled"
           className={css(styles.right_grid)}
-          value={house.title} onChange={onFieldChange} />
+          value={house.title}/>
 
         <label className={css(styles.left_grid)}>Street</label>
         <input name="location.street" type="text" placeholder="Street"
+          disabled="disabled"
           className={css(styles.right_grid)}
-          value={house.location.street} onChange={onFieldChange} />
+          value={house.location.street} />
 
         <label className={css(styles.left_grid)}>Post Code</label>
         <input name="location.postCode" type="text" placeholder="Post Code"
+          disabled="disabled"
           className={css(styles.right_grid)}
-          value={house.location.postCode} onChange={onFieldChange} />
+          value={house.location.postCode} />
 
         <label className={css(styles.left_grid)}>Description</label>
         <textarea name="description" rows="6" cols="32" placeholder="Description"
+          disabled="disabled"
           className={css(styles.right_grid)}
-          value={house.description} onChange={onFieldChange} />
-
-        <button className={css(styles.right_grid)}
-          onClick={onSubmit}
-          type="button">
-          Save
-        </button>
+          value={house.description} />
       </form>
     );
   };

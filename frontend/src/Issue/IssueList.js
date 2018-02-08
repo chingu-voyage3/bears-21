@@ -22,7 +22,7 @@ export default class IssueList extends Component {
         <div className={css(styles.title)}>
           {this.props.title}
         </div>
-        <ul>
+        <ul className={css(styles.list)}>
           {items}
         </ul>
       </div>
@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     border: "1px solid lightgrey"
+  },
+  list: {
+    margin: '0.5rem',
+    padding: 0
   },
   title: {
     textAlign: "center"
