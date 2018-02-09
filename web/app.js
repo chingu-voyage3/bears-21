@@ -4,6 +4,8 @@ const promisify = require('es6-promisify');
 const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require( 'mongoose');
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const path = require('path');
@@ -44,7 +46,8 @@ app.use(session({
   // at some point?
   // cookie: { maxAge: 1000 }
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 // Passport JS is what we use to handle our logins
