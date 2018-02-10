@@ -1,18 +1,18 @@
 import * as UserTypes from '../Redux/UserTypes';
 
-function isWorking(isWorking = false) {
+export function isWorking(isWorking = false) {
   return {
     type: UserTypes.USER_IS_WORKING,
     isWorking
   };
 }
-function userErrored(error = "Unknown Error") {
+export function userErrored(error = "Unknown Error") {
   return {
     type: UserTypes.USER_ERRORED,
     error
   };
 }
-function userSuccess(user={}) {
+export function userSuccess(user={}) {
   return {
     type: UserTypes.USER_SUCCESS,
     user
