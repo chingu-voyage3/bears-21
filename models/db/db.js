@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 const config = require('./config');
 
 async function init () {
-  await mongoose.connect(config.uri, { useMongoClient: true });
+  await mongoose.connect(config.uri);
 }
 
 async function close () {
