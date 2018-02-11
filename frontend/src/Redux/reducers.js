@@ -3,11 +3,11 @@ import houseIssues from '../Dashboard/reducers';
 import house from '../House/reducers';
 import issue from '../Issue/reducers';
 import search from '../Search/reducers';
-import userReducer from './userReducer';
+import user from './userReducer';
 
 // user key has to be user
 export default combineReducers({
-  user: userReducer,
+  user,
   houseIssues,
   house,
   issue,
