@@ -6,7 +6,7 @@ import { Footer } from '../Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-import {autoLogin} from '../Redux/actions';
+import {autoLogin} from '../Redux/loginActions';
 
 class app extends Component {
   static propTypes = {

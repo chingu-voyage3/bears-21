@@ -1,13 +1,13 @@
 import fetch from 'cross-fetch';
 import * as UserTypes from './UserTypes';
 
-function requestLoginSuccess(user) {
+export function requestLoginSuccess(user) {
   return {
     type: UserTypes.REQUEST_LOGIN_SUCCESS,
     user
   };
 }
-function requestLoginFailed(error) {
+export function requestLoginFailed(error) {
   return {
     type: UserTypes.REQUEST_LOGIN_FAILED,
     error
@@ -32,13 +32,13 @@ export function requestLogin(payload) {
   }
 }
 
-function autoLoginSuccess( user) {
+export function autoLoginSuccess( user) {
   return {
     type: UserTypes.AUTO_LOGIN_SUCCESS,
     user
   }
 }
-function autoLoginFailed(error) {
+export function autoLoginFailed(error) {
   return {
     type: UserTypes.AUTO_LOGIN_FAILED,
     error
@@ -58,7 +58,7 @@ export function autoLogin() {
   };
 }
 
-function requestLogout() {
+export function requestLogout() {
   return {
     type: UserTypes.LOGOUT
   }

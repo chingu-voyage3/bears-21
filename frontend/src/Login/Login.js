@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { requestLogin, clearLoginError } from '../Redux/actions';
+import { requestLogin, clearLoginError } from '../Redux/loginActions';
 
 class login extends Component {
   static propTypes = {
