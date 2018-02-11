@@ -1,4 +1,4 @@
-import * as UserTypes from '../Redux/UserTypes';
+import * as UserTypes from './UserTypes';
 
 export function isWorking(isWorking = false) {
   return {
