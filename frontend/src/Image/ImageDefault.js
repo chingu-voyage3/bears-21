@@ -20,12 +20,24 @@ class ImageDefault extends React.Component {
   };
   componentDidMount = () => {
     this.component_mounted = true;
-    ImageRef( this.props.src, "//via.placeholder.com/200x200?text=Not Found")
+    this.createImage( this.props.src);
+  };
+
+  componentWillReceiveProps = newProps => {
+    if( this.component_mounted && newProps.src && newProps.src !== this.props.src){
+      this.createImage( newProps.src);
+    }
+  };
+  componentWillUnmount = () => {
+    this.component_mounted = false;
+  };
+  createImage = src => {
+    ImageRef( src, "//via.placeholder.com/200x200?text=Not Found")
     .then( image_src => {
       // check component is mounted or we get warning can't setState on
       // unmounted component
       if( this.component_mounted) {
-        this.setState( {image_src});
+        this.setState( {image_src, image_error:false});
       }
     })
     .catch( () => {
@@ -33,15 +45,6 @@ class ImageDefault extends React.Component {
         this.setState( {image_src: encodeURI(`//via.placeholder.com/200x200?text=Not Found`)});
       }
     });
-  };
-
-  componentWillReceiveProps = newProps => {
-    if( this.component_mounted && newProps.src && newProps.src !== this.props.src){
-      this.setState( {image_src: newProps.src, image_error: false});
-    }
-  };
-  componentWillUnmount = () => {
-    this.component_mounted = false;
   };
   onImageError = () => {
     this.setState( {image_error: true, image_src: this.props.missing_url});
@@ -52,7 +55,7 @@ class ImageDefault extends React.Component {
     return (
       <div>
         { image_error
-          ? <img className={css(styles.image)} src={missing_url} alt="noimage"/>
+          ? <img className={css(styles.image)} src={encodeURI(missing_url)} alt="missing"/>
           : <img className={css(styles.image)}
               src={image_src}
               alt="noimage"
