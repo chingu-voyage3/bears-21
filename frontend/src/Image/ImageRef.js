@@ -8,9 +8,8 @@ export default function ImageRef(src, missing_url) {
     } else if (typeof src === 'string') {
       if( src.indexOf('/') === -1) {
         loadImage( src)
-        .then( url => {
-          resolve(url);
-        });
+        .then( url => { resolve(url); })
+        .catch( () => reject(encodeURI(missing_url)));
       } else {
         resolve(src);
       }
