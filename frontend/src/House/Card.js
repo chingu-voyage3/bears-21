@@ -4,9 +4,9 @@ import {ImageDefault} from '../Image';
 import Rating from '../Rating';
 import {StyleSheet, css} from 'aphrodite';
 
-const Card = (props) => (
+const Card = props => (
   <div className={css(styles.container)}>
-    <ImageDefault src={props.house.images[0]} missing_url="//via.placeholder.com/350x150?No Image"/>
+    <ImageDefault src={props.house.images[0]} missing_url="//via.placeholder.com/350x150?text=No Image"/>
     <div className={css(styles.title)}>
       {props.house.title}
       <Rating currentRating={props.house.rating}
