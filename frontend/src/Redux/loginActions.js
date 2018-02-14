@@ -1,13 +1,13 @@
 import fetch from 'cross-fetch';
 import * as UserTypes from './UserTypes';
 
-function requestLoginSuccess(user) {
+export function requestLoginSuccess(user) {
   return {
     type: UserTypes.REQUEST_LOGIN_SUCCESS,
     user
   };
 }
-function requestLoginFailed(error) {
+export function requestLoginFailed(error) {
   return {
     type: UserTypes.REQUEST_LOGIN_FAILED,
     error
@@ -32,13 +32,13 @@ export function requestLogin(payload) {
   }
 }
 
-function autoLoginSuccess( user) {
+export function autoLoginSuccess( user) {
   return {
     type: UserTypes.AUTO_LOGIN_SUCCESS,
     user
   }
 }
-function autoLoginFailed(error) {
+export function autoLoginFailed(error) {
   return {
     type: UserTypes.AUTO_LOGIN_FAILED,
     error
@@ -58,7 +58,7 @@ export function autoLogin() {
   };
 }
 
-function requestLogout() {
+export function requestLogout() {
   return {
     type: UserTypes.LOGOUT
   }
@@ -67,36 +67,5 @@ export function logout() {
   return function(dispatch) {
     dispatch( requestLogout());
     return fetch('/api/v1/logout');
-  };
-}
-
-export const REQUEST_HOUSES = 'REQUEST_HOUSES';
-export function requestHouses(postCode) {
-  return {
-    type: REQUEST_HOUSES,
-    postCode
-  };
-}
-
-export const FETCH_HOUSES_SUCCESS = 'FETCH_HOUSES_SUCCESS';
-export function receiveHouses(postCode, json) {
-  return {
-    type: FETCH_HOUSES_SUCCESS,
-    postCode,
-    houses: json.data
-  };
-}
-
-export function fetchHouses(postCode) {
-  return function(dispatch) {
-    // Inform app that request is starting
-    dispatch(requestHouses(postCode));
-
-    return fetch(`/api/v1/houses?postCode=${postCode}`)
-      .then(
-        response => response.json(),
-        error => console.log('An error occurred.', error)
-      )
-      .then(json => dispatch(receiveHouses(postCode, json)));
   };
 }

@@ -11,7 +11,7 @@ import {ImageRef} from '../Image';
 class Profile extends React.Component {
   static propTypes = {
     isWorking: PropTypes.bool,
-    error: PropTypes.string,
+    error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     getDetail: PropTypes.func.isRequired,
