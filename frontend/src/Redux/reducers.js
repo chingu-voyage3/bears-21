@@ -5,7 +5,6 @@ import issue from '../Issue/reducers';
 import search from '../Search/reducers';
 import user from './userReducer';
 
-// user key has to be user
 export default combineReducers({
   user,
   houseIssues,

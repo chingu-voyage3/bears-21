@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { requestLogin, clearLoginError } from '../Redux/loginActions';
 
-class login extends Component {
+class Login extends Component {
   static propTypes = {
     requestLogin: PropTypes.func.isRequired,
     clearLoginError: PropTypes.func.isRequired
@@ -99,8 +99,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const Login = connect(mapStateToProps, mapDispatchToProps)(login);
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
 
 
 const styles = StyleSheet.create({

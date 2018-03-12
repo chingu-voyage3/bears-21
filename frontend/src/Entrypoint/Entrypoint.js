@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Routes from '../Routes/Routes';
+import { Routes } from '../Routes';
 import { Navbar } from '../Navbar';
 import { Footer } from '../Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-import {autoLogin} from '../Redux/loginActions';
+import { autoLogin } from '../Redux/loginActions';
 
-class app extends Component {
+class Entrypoint extends Component {
   static propTypes = {
     autoLogin: PropTypes.func.isRequired
   };
@@ -53,5 +53,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(app));
+const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(Entrypoint));
 export default App;

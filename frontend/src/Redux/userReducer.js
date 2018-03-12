@@ -1,6 +1,12 @@
 import * as UserTypes from './UserTypes';
 
-export default function userReducer(state = {user:{}, isWorking:false, error:false}, action) {
+const initialState = {
+  user: {},
+  isWorking: false,
+  error: false,
+};
+
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case UserTypes.AUTO_LOGIN_SUCCESS:
     case UserTypes.REQUEST_LOGIN_SUCCESS:
