@@ -101,9 +101,9 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
-    isWorking: state.user.isWorking,
-    error: state.user.error
+    user: state.userReducer.user,
+    isWorking: state.userReducer.isWorking,
+    error: state.userReducer.error
   };
 };
 const mapDispatchToProps = dispatch => {
