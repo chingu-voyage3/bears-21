@@ -22,18 +22,17 @@ export default class Register extends Component {
       password: this.state.password,
       "password-confirm": this.state.confirmedPassword,
     })
-    .then(() => {
-      // console.log(res);
+    .then(res => {
+      console.log(res);
     })
-    .catch(() => {
-      // console.log(err);
+    .catch(err => {
+      console.log(err);
     });
     this.setState({email: "", name: "", password: "", confirmedPassword: ""});
   }
 
 
   render() {
-    // console.log(this.state);
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.registerContainer, styles.centered)}>

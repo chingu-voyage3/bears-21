@@ -5,7 +5,7 @@ import {StyleSheet, css} from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
 import ProfileLoader from './Profile.Loader';
-import {getDetail, profileSave} from '../Redux/userActions';
+import {getDetail, profileSave} from '../User/userActions';
 import {ImageRef} from '../Image';
 
 class Profile extends React.Component {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { requestLogin, clearLoginError } from '../Redux/loginActions';
+import { requestLogin, clearLoginError } from './loginActions';
 
 class Login extends Component {
   static propTypes = {
@@ -88,7 +88,7 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.userReducer
   };
 };
 

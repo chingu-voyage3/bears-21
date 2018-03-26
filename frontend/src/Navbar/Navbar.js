@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import {logout} from '../Redux/loginActions';
+import {logout} from '../User/loginActions';
 
 class navbar extends Component {
   static propTypes = {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    user: state.user.user,
+    user: state.userReducer.user,
   }
 }
 
