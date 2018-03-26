@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     width: '280px',
     listStyle: 'none',
     maxHeight: '300px',
-    overflow: 'scroll'
+    'overflow-y': 'scroll',
+    'overflow-x': 'hidden',
   }
 });
 
