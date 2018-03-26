@@ -53,5 +53,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(Entrypoint));
-export default App;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entrypoint));
+
