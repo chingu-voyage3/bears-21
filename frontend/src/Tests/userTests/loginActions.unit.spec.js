@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import * as actions from './loginActions';
-import * as UserTypes from './UserTypes';
+import * as actions from '../../User/loginActions';
+import * as UserTypes from '../../User/UserTypes';
 
 describe( 'login actions', () => {
   const user = {email:"e@g.com", name:"e"};

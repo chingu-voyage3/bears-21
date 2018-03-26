@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as actions from './userActions';
-import * as UserTypes from './UserTypes';
+import * as actions from '../../User/userActions';
+import * as UserTypes from '../../User/UserTypes';
 import fetchMock from 'fetch-mock';
 import {expect} from 'chai';
 

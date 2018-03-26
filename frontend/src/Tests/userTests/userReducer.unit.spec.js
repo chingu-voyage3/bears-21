@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import userReducer from './userReducer';
-import * as UserTypes from './UserTypes';
+import userReducer from '../../User/reducer';
+import * as UserTypes from '../../User/UserTypes';
 
 describe( 'user reducer', () => {
   it( 'should initialise state', () => {

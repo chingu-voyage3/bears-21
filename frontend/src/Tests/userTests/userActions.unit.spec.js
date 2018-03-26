@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import * as actions from './userActions';
-import * as UserTypes from './UserTypes';
+import * as actions from '../../User/userActions';
+import * as UserTypes from '../../User/UserTypes';
 
 describe( "user actions", () => {
   it( "should create an action when working", () => {
