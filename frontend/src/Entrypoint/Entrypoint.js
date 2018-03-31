@@ -6,7 +6,7 @@ import { Footer } from '../Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-import { autoLogin } from '../User/loginActions';
+import { autoLogin } from '../User/userActions';
 
 class Entrypoint extends Component {
   static propTypes = {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import * as actions from '../../User/loginActions';
+import * as actions from '../../User/userActions';
 import * as UserTypes from '../../User/UserTypes';
 
 describe( 'login actions', () => {

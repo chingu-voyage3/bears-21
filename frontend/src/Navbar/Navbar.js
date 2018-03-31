@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import {logout} from '../User/loginActions';
+import {logout} from '../User/userActions';
 
 class navbar extends Component {
   static propTypes = {
