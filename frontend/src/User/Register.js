@@ -46,9 +46,7 @@ export default class Register extends Component {
       </div>
      );
   }
-
 }
-
 
 const styles = StyleSheet.create({
   centered: {
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContext: "center",
+    justifyContent: "center",
   },
   input: {
     resize: "none",
@@ -75,6 +73,7 @@ const styles = StyleSheet.create({
     padding: '3em 2em 2em 2em',
     position: 'relative',
     width: 400,
+    maxHeight: 430,
   },
   status: {
     width: 286,
@@ -94,6 +93,6 @@ const styles = StyleSheet.create({
   },
   background: {
     backgroundColor: "#f0f0f0",
-    padding: '5em 0'
+    padding: '5em 0',
   },
 });
