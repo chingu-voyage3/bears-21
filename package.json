@@ -43,7 +43,6 @@
     "super-request": "^1.2.0"
   },
   "scripts": {
-    "prepushnojsx": "npm run lint && npm run test",
     "start": "node index.js",
     "develop": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cross-env NODE_ENV=development supervisor -w web,models index.js",
@@ -60,8 +59,9 @@
     "test:all": "npm run test:unit && npm run test:e2e",
     "test": "npm run test:unit:models && cd frontend && npm run test:batch",
     "heroku-prebuild": "cd frontend && npm install && npm run build",
-    "postmerge": "./scripts/githooks/post-merge.sh",
-    "prepush": "npm run lint && npm run test"
+    "prepushnojsx": "npm run lint && npm run test",
+    "postmergee": "./scripts/githooks/post-merge.sh",
+    "prepushe": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
