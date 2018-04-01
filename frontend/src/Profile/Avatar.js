@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ImageDefault} from '../Image';
-import {Uploader} from '../Uploader';
-import {StyleSheet, css} from 'aphrodite';
+import Grid from 'material-ui/Grid';
+
+import { ImageDefault } from '../Image';
+import { Uploader } from '../Uploader';
 
 const Avatar = ({name, localUser, image, changeImage}) => (
-  <div className={css(styles.wrapper)}>
-    {localUser
-      ? <Uploader currentImage={image} addImage={changeImage} />
-      : <ImageDefault src={image} missing_url='//via.placeholder.com/200x200?text=noimg' />
-    }
-    <p>{name}</p>
-  </div>
+  <Grid container spacing={16} justify="center" direction="column">
+    <Grid item>
+      {localUser
+        ? <Uploader currentImage={image} addImage={changeImage} />
+        : <ImageDefault src={image} missing_url='//via.placeholder.com/200x200?text=noimg' />
+      }
+    </Grid>
+    <Grid item>
+      <p>{name}</p>
+    </Grid>
+  </Grid>
 );
 
 Avatar.propTypes = {
@@ -20,13 +25,5 @@ Avatar.propTypes = {
   image: PropTypes.string,
   changeImage: PropTypes.func.isRequired
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '0 1 200px'
-  }
-});
 
 export default Avatar;
