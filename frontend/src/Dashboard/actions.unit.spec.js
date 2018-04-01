@@ -1,5 +1,5 @@
 import { expect} from 'chai';
-import * as actions from '../../Dashboard/actions';
+import * as actions from './actions';
 
 describe( 'house actions', () => {
   it( 'should create an action when successfully deleting house', () => {

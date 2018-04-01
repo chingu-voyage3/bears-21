@@ -1,6 +1,6 @@
 import { expect} from 'chai';
-import reducer from '../../Dashboard/reducers';
-import * as actions from '../../Dashboard/actions';
+import reducer from './reducers';
+import * as actions from './actions';
 
 describe( 'dashbaord reducer', () => {
   it( 'should initialise state', () => {
