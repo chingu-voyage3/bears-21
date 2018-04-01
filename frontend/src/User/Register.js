@@ -58,12 +58,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContext: "center",
   },
-  mainContainer: {
-    border: "1px black solid",
-    width: 450,
-    height: 400,
-    marginTop: 150,
-  },
   input: {
     resize: "none",
     fontSize: 18,
@@ -74,11 +68,6 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     width: '100%',
     borderBottom: '1px solid #757575'
-  },
-  title: {
-    color: "white",
-    fontSize: 50,
-    marginBottom: 40,
   },
   registerContainer: {
     background: '#fafafa',

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: '100%',
     minHeight: '100vh',
-    //overflow: 'hidden',
+    overflow: 'hidden',
     flexDirection: 'column',
     backgroundColor: '#f0f0f0'
   }
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.userReducer
   };
 };
 const mapDispatchToProps = dispatch => {
