@@ -1,5 +1,5 @@
 import * as UserTypes from './UserTypes';
-import fetch from 'cross-fetch';
+
 
 export function requestLoginSuccess(user) {
   return {
