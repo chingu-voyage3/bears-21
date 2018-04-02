@@ -6,8 +6,8 @@ import { ImageDefault } from '../Image';
 import { Uploader } from '../Uploader';
 
 const Avatar = ({name, localUser, image, changeImage}) => (
-  <Grid container spacing={16} justify="center" direction="column">
-    <Grid item>
+  <Grid container justify="center" direction="column">
+    <Grid item xs={12}>
       {localUser
         ? <Uploader currentImage={image} addImage={changeImage} />
         : <ImageDefault src={image} missing_url='//via.placeholder.com/200x200?text=noimg' />

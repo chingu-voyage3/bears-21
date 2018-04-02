@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+
 import ImageDropper from './ImageDropper';
 import UrlInput from './UrlInput';
-import {ReloadButton} from '../Common/Buttons';
-import {StyleSheet, css} from 'aphrodite';
+import { ReloadButton } from '../Common/Buttons';
+import { StyleSheet, css } from 'aphrodite';
 
 export default class Uploader extends Component {
   static propTypes = {
@@ -53,18 +56,20 @@ export default class Uploader extends Component {
     const {image_src, url_text, show_image} = this.state;
     const url = image_src?image_src:missing_url;
     return (
-      <div className={css(styles.wrapper)} >
+      <Card>
         <ImageDropper url={url}
           show_image={show_image}
           missing_url={`${missing_url}`}
           onFileDropped={this.onFileDropped} />
-        <UrlInput value={url_text}
-          onUrlChange={this.onUrlChange}
-          handleUrlKeyUp={this.handleUrlKeyUp}/>
-        <div className={css(styles.btn_wrapper)}>
-          <ReloadButton onClick={this.setPicUrl} title="Preview image" />
-        </div>
-      </div>
+        <CardContent>
+          <UrlInput value={url_text}
+            onUrlChange={this.onUrlChange}
+            handleUrlKeyUp={this.handleUrlKeyUp}/>
+        </CardContent>
+        <CardActions>
+          <Button size="small" color="primary" onClick={this.setPicUrl}>Preview Image </Button>
+        </CardActions>
+      </Card>
     );
   };
 }
