@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import * as UserTypes from './UserTypes';
 
 export function requestLoginSuccess(user) {

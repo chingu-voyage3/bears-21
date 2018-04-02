@@ -6,7 +6,6 @@
   "dependencies": {
     "aphrodite": "^1.2.5",
     "axios": "^0.17.1",
-    "cross-fetch": "^1.1.1",
     "material-ui": "^1.0.0-beta.40",
     "prop-types": "^15.6.0",
     "react": "^16.3.0",
