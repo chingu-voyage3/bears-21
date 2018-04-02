@@ -3,7 +3,29 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import {logout} from '../Redux/loginActions';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
+
+import { logout } from '../Redux/loginActions';
+
+const navStyles = {
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flex: 1,
+  },
+  links: {
+    color: 'white',
+    textAlign: 'center',
+    padding: '14px 16px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+  },
+};
 
 class navbar extends Component {
   static propTypes = {
@@ -16,28 +38,23 @@ class navbar extends Component {
   }
 
   getBar() {
-    const {name} = this.props.user;
+    const { classes } = this.props;
+    const { name } = this.props.user;
     if (name) { // authenticated
       return (
-        <div>
-          <ul className={css(styles.container)}>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/">Hissues</Link>
-            </li>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/dashboard">Dashboard</Link>
-            </li>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/profile">Profile</Link>
-            </li>
-            <li className={css(styles.navelement)}
-              onClick={() => this.props.logout()}>
-              <Link className={css(styles.links)} to="/logout">Logout</Link>
-            </li>
-            <li className={css(styles.navelement)} >
-              <span className={css(styles.links)}>Hi {name}</span>
-            </li>
-          </ul>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="title" color="inherit">
+                <Link className={css(styles.links)} to="/">Hissues</Link>
+              </Typography>
+              <Typography color="inherit" className={classes.flex}>
+                <Link to="/dashboard" className={classes.links}>Dashboard</Link>
+                <Link to="/profile" className={classes.links}>Profile</Link>
+              </Typography>
+              <Button color="inherit">Hi {name}</Button>
+            </Toolbar>
+          </AppBar>
         </div>
       );
       // can't get these to work with redux. problem is inital state on new page
@@ -104,5 +121,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const NavBar = connect(mapStateToProps, mapDispatchToProps)(navbar);
-export default NavBar;
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(navStyles)(navbar));
