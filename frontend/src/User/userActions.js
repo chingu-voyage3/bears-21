@@ -24,6 +24,7 @@ export function requestLogin(payload) {
     return fetch('/api/v1/login', {
       method: 'post',
       headers: {'content-type': 'application/json'},
+      credentials: 'same-origin',
       body: JSON.stringify( payload)
     })
     .then( res => res.json())
