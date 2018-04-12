@@ -22,18 +22,17 @@ export default class Register extends Component {
       password: this.state.password,
       "password-confirm": this.state.confirmedPassword,
     })
-    .then(() => {
-      // console.log(res);
+    .then(res => {
+      console.log(res);
     })
-    .catch(() => {
-      // console.log(err);
+    .catch(err => {
+      console.log(err);
     });
     this.setState({email: "", name: "", password: "", confirmedPassword: ""});
   }
 
 
   render() {
-    // console.log(this.state);
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.registerContainer, styles.centered)}>
@@ -47,9 +46,7 @@ export default class Register extends Component {
       </div>
      );
   }
-
 }
-
 
 const styles = StyleSheet.create({
   centered: {
@@ -57,13 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContext: "center",
-  },
-  mainContainer: {
-    border: "1px black solid",
-    width: 450,
-    height: 400,
-    marginTop: 150,
+    justifyContent: "center",
   },
   input: {
     resize: "none",
@@ -76,17 +67,13 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottom: '1px solid #757575'
   },
-  title: {
-    color: "white",
-    fontSize: 50,
-    marginBottom: 40,
-  },
   registerContainer: {
     background: '#fafafa',
     border: '1px solid #ebebeb',
     padding: '3em 2em 2em 2em',
     position: 'relative',
     width: 400,
+    maxHeight: 430,
   },
   status: {
     width: 286,
@@ -106,6 +93,6 @@ const styles = StyleSheet.create({
   },
   background: {
     backgroundColor: "#f0f0f0",
-    padding: '5em 0'
+    padding: '5em 0',
   },
 });

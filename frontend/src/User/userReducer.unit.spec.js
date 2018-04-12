@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import userReducer from './userReducer';
+import userReducer from './reducer';
 import * as UserTypes from './UserTypes';
 
 describe( 'user reducer', () => {

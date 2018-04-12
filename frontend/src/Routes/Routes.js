@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import AuthRoute from './AuthRoute';
+import NonAuthRoute from './NonAuthRoute';
 import Notfound from '../Errors/Notfound';
 import { Dummy } from '../Dummy';
 import Dashboard from '../Dashboard';
@@ -8,14 +10,11 @@ import SearchLayout from "../Search";
 import Issue from '../Issue';
 import { HouseDetail, HouseDetailEdit} from '../House';
 import Profile from '../Profile';
-import { Login } from '../Login';
-import { Logout } from '../Logout';
-import { Register } from '../Register';
-import { Forgot } from '../Forgot';
+import { Login, Logout, Register, Forgot } from '../User';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-class routes extends Component {
+class Routes extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   };
@@ -41,8 +40,8 @@ class routes extends Component {
         <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
         <AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
         <AuthRoute path="/issue/:id" user={user} component={Issue} pathname={"/login"} />
-        <Route path="/newissue" component={Dummy} />
         <AuthRoute path="/house/:id" user={user} component={HouseDetailEdit} pathname={"/login"} />
+        <Route path="/newissue" component={Dummy} />
         <Route path="/houseview/:id" component={HouseDetail} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={SearchLayout} />
@@ -52,41 +51,9 @@ class routes extends Component {
   }
 }
 
-const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
-  <Route {...rest} render={ props => (
-    auth ? (
-      <Component {...props} />
-    ) : (
-      <Redirect
-        to={{ pathname: path }}
-      />
-    ))} />
-);
-AuthRoute.propTypes = {
-  user: PropTypes.bool,
-  component: PropTypes.func,
-  pathname: PropTypes.string
-};
-
-const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
-  <Route {...rest} render={ props => (
-    !auth ? (
-      <Component {...props} />
-    ) : (
-      <Redirect
-        to={{ pathname: path }}
-      />
-    ))} />
-);
-NonAuthRoute.propTypes = {
-  user: PropTypes.bool,
-  component: PropTypes.func,
-  pathname: PropTypes.string
-};
-
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.userReducer.user,
   };
 };
 
@@ -96,4 +63,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(routes));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));

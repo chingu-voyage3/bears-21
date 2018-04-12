@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { requestLogin, clearLoginError } from '../Redux/loginActions';
+import { requestLogin, clearLoginError } from './userActions';
 
-class login extends Component {
+class Login extends Component {
   static propTypes = {
     requestLogin: PropTypes.func.isRequired,
     clearLoginError: PropTypes.func.isRequired
@@ -88,7 +88,7 @@ class login extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.userReducer
   };
 };
 
@@ -99,8 +99,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const Login = connect(mapStateToProps, mapDispatchToProps)(login);
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
 
 
 const styles = StyleSheet.create({

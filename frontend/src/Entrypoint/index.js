@@ -1,3 +1,3 @@
-import Main from './Main';
+import Entrypoint from './Entrypoint';
 
-export { Main };
+export { Entrypoint };

@@ -5,7 +5,7 @@ import {StyleSheet, css} from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
 import ProfileLoader from './Profile.Loader';
-import {getDetail, profileSave} from '../Redux/userActions';
+import {getDetail, profileSave} from '../User/userActions';
 import {ImageRef} from '../Image';
 
 class Profile extends React.Component {
@@ -101,9 +101,9 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
-    isWorking: state.user.isWorking,
-    error: state.user.error
+    user: state.userReducer.user,
+    isWorking: state.userReducer.isWorking,
+    error: state.userReducer.error
   };
 };
 const mapDispatchToProps = dispatch => {
