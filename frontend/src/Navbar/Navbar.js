@@ -25,9 +25,16 @@ const navStyles = {
     textDecoration: 'none',
     cursor: 'pointer',
   },
+  title: {
+    color: 'white',
+    textAlign: 'center',
+    padding: '14px 16px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+  }
 };
 
-class navbar extends Component {
+class Navbar extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
@@ -45,36 +52,28 @@ class navbar extends Component {
         <div className={classes.root}>
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="title" color="inherit">
-                <Link className={css(styles.links)} to="/">Hissues</Link>
+              <Typography variant="title" color="inherit" className={classes.flex}>
+                <Link className={classes.title} to="/">Hissues</Link>
               </Typography>
-              <Typography color="inherit" className={classes.flex}>
-                <Link to="/dashboard" className={classes.links}>Dashboard</Link>
-                <Link to="/profile" className={classes.links}>Profile</Link>
-              </Typography>
-              <Button color="inherit">Hi {name}</Button>
+              <Link to="/dashboard" className={classes.links}>Dashboard</Link>
+              <Link to="/profile" className={classes.links}>Profile</Link>
+              <Link to='/logout' onClick={() => this.props.logout()} className={classes.links}>Logout</Link>
             </Toolbar>
           </AppBar>
         </div>
       );
-      // can't get these to work with redux. problem is inital state on new page
-      // <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
-      // <li className={css(styles.navelement)}>
-      //  <Link className={css(styles.links)} to={{
-      //      pathname: "/house",
-      //      state: { new_house: true}
-      //    }}>
-      //    New House
-      //  </Link>
-      // </li>
     } else { // not authenticated
       return (
-        <div>
-          <ul className={css(styles.container)}>
-            <li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
-            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
-          </ul>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="title" color="inherit" className={classes.flex}>
+                <Link className={classes.title} to='/'>Hissues</Link>
+              </Typography>
+              <Link to="/register" className={classes.links}>Register</Link>
+              <Link to='/login' onClick={() => this.props.logout()} className={classes.links}>Login</Link>
+            </Toolbar>
+          </AppBar>
         </div>
       );
     }
@@ -121,4 +120,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(navStyles)(navbar));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(navStyles)(Navbar));
