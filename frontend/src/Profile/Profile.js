@@ -84,7 +84,7 @@ class Profile extends React.Component {
       display: message ? "block": "none"
     };
     return (
-      <div style={{ padding: 40 }}>
+      <div style={{ padding: 40, flex: 1 }}>
         <Grid container spacing={16} justify="center">
           <Grid item xs={4}>
             <Avatar name={user.name}
