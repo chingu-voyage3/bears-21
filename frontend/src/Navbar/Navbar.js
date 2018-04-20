@@ -13,7 +13,7 @@ import { logout } from '../Redux/loginActions';
 
 const navStyles = {
   root: {
-    flexGrow: 1,
+    //flexGrow: 1,
   },
   flex: {
     flex: 1,
