@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {StyleSheet, css} from 'aphrodite';
+import { connect } from 'react-redux';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+
 import Avatar from './Avatar';
 import Detail from './Detail';
 import ProfileLoader from './Profile.Loader';
-import {getDetail, profileSave} from '../Redux/userActions';
-import {ImageRef} from '../Image';
+import { getDetail, profileSave } from '../Redux/userActions';
+import { ImageRef } from '../Image';
 
 class Profile extends React.Component {
   static propTypes = {
@@ -17,12 +19,14 @@ class Profile extends React.Component {
     getDetail: PropTypes.func.isRequired,
     profileSave: PropTypes.func.isRequired
   };
+
   state = {
     // true: me, false: arbitrary user
     local_user: false,
     user: null,
     avatar_src: null
   };
+
   componentWillMount = () => {
     const {match} = this.props;
     if (match.params.id) {
@@ -34,6 +38,7 @@ class Profile extends React.Component {
       this.setAvatarImageSrc( user.avatar);
     }
   };
+
   componentWillReceiveProps = newProps => {
     if( newProps.user){
       if( newProps.error) {
@@ -44,6 +49,7 @@ class Profile extends React.Component {
       }
     }
   };
+
   onFieldChange = e => {
     this.setState( {
       user: {
@@ -52,17 +58,21 @@ class Profile extends React.Component {
       }
     });
   };
+
   setAvatarImageSrc = image => {
     ImageRef(image, "//via.placeholder.com/200x200?text=No Profile Pic")
     .then( avatar_src => this.setState( {avatar_src}));
   }
+
   changeImage = avatar => {
     this.setState( {user: {...this.state.user, avatar}});
     this.setAvatarImageSrc( avatar);
   };
+
   save = () => {
     this.props.profileSave( this.state.user);
   };
+
   render = () => {
     const {user, local_user, avatar_src, message = false} = this.state;
     const {isWorking = false} = this.props;
@@ -71,29 +81,28 @@ class Profile extends React.Component {
     }
     const show_message = {
       color: "tomato",
-      display: message?"block":"none"
+      display: message ? "block": "none"
     };
     return (
-      <div className={css(styles.container)}>
-        <span className={css(styles.h1)}>Profile</span>
-        <div style={show_message} >
-          {message}
-        </div>
-        {local_user
-          ? <button type="button"
-              className={css(styles.save_width)}
-              onClick={this.save} >
-              Save
-            </button>
-          : null
-        }
-        <div className={css(styles.wrapper)}>
-          <Avatar name={user.name}
-            image={avatar_src}
-            localUser={local_user}
-            changeImage={this.changeImage} />
-          <Detail data={user} localUser={local_user} onFieldChange={this.onFieldChange} />
-        </div>
+      <div style={{ padding: 40, flex: 1 }}>
+        <Grid container spacing={16} justify="center">
+          <Grid item xs={4}>
+            <Avatar name={user.name}
+              image={avatar_src}
+              localUser={local_user}
+              changeImage={this.changeImage} />
+          </Grid>
+          <Grid item xs={6}>
+            <Detail data={user} localUser={local_user} onFieldChange={this.onFieldChange} />
+          </Grid>
+          <Grid container spacing={16} justify="center">
+            <Grid item>
+              <Button variant="raised" color="primary">
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
     );
   };
@@ -114,31 +123,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '1',
-    alignItems: "center"
-  },
-  h1: {
-    marginTop: '1rem',
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  wrapper: {
-    margin: '1rem',
-    padding: '1rem',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    border: '1px solid lightgrey',
-    borderRadius: '10px',
-    boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0',
-  },
-  save_width: {
-    width: "100px"
-  }
-});

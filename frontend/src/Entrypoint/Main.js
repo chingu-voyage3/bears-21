@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Routes from '../Routes/Routes';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import CssBaseline from 'material-ui/CssBaseline';
+
 import { Navbar } from '../Navbar';
 import { Footer } from '../Footer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-import {autoLogin} from '../Redux/loginActions';
+import { autoLogin } from '../Redux/loginActions';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#52c7b8',
+      main: '#009688',
+      dark: '#00675b',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#80e27e',
+      main: '#4caf50',
+      dark: '#087f23',
+      contrastText: '#000',
+    },
+  },
+});
 
 class app extends Component {
   static propTypes = {
@@ -22,11 +42,14 @@ class app extends Component {
   };
   render() {
     return (
-      <div className={css(styles.container)}>
-        <Navbar />
-        <Routes />
-        <Footer />
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className={css(styles.container)}>
+          <Navbar />
+          <Routes />
+          <Footer />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

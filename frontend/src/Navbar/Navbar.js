@@ -3,9 +3,38 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import {logout} from '../Redux/loginActions';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
 
-class navbar extends Component {
+import { logout } from '../Redux/loginActions';
+
+const navStyles = {
+  root: {
+    //flexGrow: 1,
+  },
+  flex: {
+    flex: 1,
+  },
+  links: {
+    color: 'white',
+    textAlign: 'center',
+    padding: '14px 16px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+  },
+  title: {
+    color: 'white',
+    textAlign: 'center',
+    padding: '14px 16px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+  }
+};
+
+class Navbar extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
@@ -16,48 +45,35 @@ class navbar extends Component {
   }
 
   getBar() {
-    const {name} = this.props.user;
+    const { classes } = this.props;
+    const { name } = this.props.user;
     if (name) { // authenticated
       return (
-        <div>
-          <ul className={css(styles.container)}>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/">Hissues</Link>
-            </li>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/dashboard">Dashboard</Link>
-            </li>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/profile">Profile</Link>
-            </li>
-            <li className={css(styles.navelement)}
-              onClick={() => this.props.logout()}>
-              <Link className={css(styles.links)} to="/logout">Logout</Link>
-            </li>
-            <li className={css(styles.navelement)} >
-              <span className={css(styles.links)}>Hi {name}</span>
-            </li>
-          </ul>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="title" color="inherit" className={classes.flex}>
+                <Link className={classes.title} to="/">Hissues</Link>
+              </Typography>
+              <Link to="/dashboard" className={classes.links}>Dashboard</Link>
+              <Link to="/profile" className={classes.links}>Profile</Link>
+              <Link to='/logout' onClick={() => this.props.logout()} className={classes.links}>Logout</Link>
+            </Toolbar>
+          </AppBar>
         </div>
       );
-      // can't get these to work with redux. problem is inital state on new page
-      // <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/newissue">New Issue</Link></li>
-      // <li className={css(styles.navelement)}>
-      //  <Link className={css(styles.links)} to={{
-      //      pathname: "/house",
-      //      state: { new_house: true}
-      //    }}>
-      //    New House
-      //  </Link>
-      // </li>
     } else { // not authenticated
       return (
-        <div>
-          <ul className={css(styles.container)}>
-            <li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
-            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
-          </ul>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="title" color="inherit" className={classes.flex}>
+                <Link className={classes.title} to='/'>Hissues</Link>
+              </Typography>
+              <Link to="/register" className={classes.links}>Register</Link>
+              <Link to='/login' onClick={() => this.props.logout()} className={classes.links}>Login</Link>
+            </Toolbar>
+          </AppBar>
         </div>
       );
     }
@@ -104,5 +120,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const NavBar = connect(mapStateToProps, mapDispatchToProps)(navbar);
-export default NavBar;
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(navStyles)(Navbar));

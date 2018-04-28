@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-
 const API_ROOT = '/api/v1';
 
 const endPoint = 'https://raw.githubusercontent.com/Gibbs/uk-postcodes/master/data/postcodes.json';
