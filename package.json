@@ -61,7 +61,7 @@
     "test": "npm run test:unit:models && cd frontend && npm run test:batch",
     "heroku-prebuild": "cd frontend && npm install && npm run build",
     "postmerge": "./scripts/githooks/post-merge.sh",
-    "prepush": "npm run lint && npm run test"
+    "prepushe": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
