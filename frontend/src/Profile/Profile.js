@@ -54,7 +54,9 @@ class Profile extends React.Component {
   };
   setAvatarImageSrc = image => {
     ImageRef(image, "//via.placeholder.com/200x200?text=No Profile Pic")
-    .then( avatar_src => this.setState( {avatar_src}));
+    .then( avatar_src => this.setState( {avatar_src}))
+    // eslint-disable-next-line no-console
+    .catch(e => console.error('ImageRef failed:', e));
   }
   changeImage = avatar => {
     this.setState( {user: {...this.state.user, avatar}});
