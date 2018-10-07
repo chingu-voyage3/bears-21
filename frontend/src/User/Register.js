@@ -23,10 +23,10 @@ export default class Register extends Component {
       "password-confirm": this.state.confirmedPassword,
     })
     .then(res => {
-      console.log(res);
+      console.log("RESPONSE", res);
     })
     .catch(err => {
-      console.log(err);
+      console.log("ERROR: ", err);
     });
     this.setState({email: "", name: "", password: "", confirmedPassword: ""});
   }
