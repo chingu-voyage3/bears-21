@@ -27,9 +27,15 @@ export function requestLogin(payload) {
       credentials: 'same-origin',
       body: JSON.stringify( payload)
     })
-    .then( res => res.json())
+    .then( res => {
+      if (!res.ok) {
+        throw new Error(res.status + " " + res.statusText);
+      } return res.json()
+    })
     .then( json => dispatch(requestLoginSuccess(json)))
-    .catch( err => dispatch(requestLoginFailed(err)));
+    .catch( err => {
+      dispatch(requestLoginFailed(err.message))
+    });
   }
 }
 
