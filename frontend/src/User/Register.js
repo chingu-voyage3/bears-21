@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+const SignupSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .required('Required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords do not match')
+});
+
+const defaultValues = {
+  email: '',
+  password: '',
+  confirmPassword: ''
+};
 
 export default class Register extends Component {
-
   constructor() {
     super();
     this.state = {
       email: "",
       name: "",
       password: "",
-      confirmedPassword: "",
-      currentStatus: "",
+      confirmPassword: "",
     };
   }
 
@@ -20,7 +36,7 @@ export default class Register extends Component {
       email: this.state.email,
       name: this.state.name,
       password: this.state.password,
-      "password-confirm": this.state.confirmedPassword,
+      confirmPassword: this.state.confirmPassword,
     })
     .then(res => {
       console.log("RESPONSE", res);
@@ -28,7 +44,7 @@ export default class Register extends Component {
     .catch(err => {
       console.log("ERROR: ", err);
     });
-    this.setState({email: "", name: "", password: "", confirmedPassword: ""});
+    this.setState({email: "", name: "", password: "", confirmPassword: ""});
   }
 
 
@@ -36,15 +52,34 @@ export default class Register extends Component {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.registerContainer, styles.centered)}>
-          <input placeholder="your name" className={css(styles.input)} onChange={e => this.setState({name: e.target.value})}></input>
-          <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>
-          <input placeholder="your password" type="password" className={css(styles.input)} onChange={e => this.setState({password: e.target.value})}></input>
-          <input placeholder="confirm password" type="password" className={css(styles.input)} onChange={e => this.setState({confirmedPassword: e.target.value})}></input>
-          <div className={css(styles.status)}></div>
-          <button className={css(styles.button)} onClick={this.register}>Sign up</button>
+          <Formik
+            initialValues={defaultValues}
+            validationSchema={SignupSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              console.log(values);
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+            }}
+          >
+            {({ touched, errors, isSubmitting }) => (
+              <Form>
+                <Field placeholder="Email" type="email" name="email" className={css(styles.input)} />
+                <ErrorMessage name="email" component="div" />
+                <Field placeholder="Password" type="password" name="password" className={css(styles.input)} />
+                <ErrorMessage name="password" component="div" />
+                <Field placeholder="Confirm Password" type="password" name="confirmPassword" className={css(styles.input)} />
+                <ErrorMessage name="confirmPassword" component="div" />
+                <button type="submit" className={css(styles.button)}>
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
-     );
+    );
   }
 }
 

@@ -2,38 +2,41 @@
 
 const promisify = require('es6-promisify');
 const User = require('../../../models/user');
+const boom = require('boom');
+const joi = require('joi');
 
-exports.validateRegister = (req, res, next) => {
-  // Below methods are added to req object by express-validator module
-  req.sanitizeBody('name');
-  req.checkBody('name', 'You must supply a name!').notEmpty();
-  if (process.env.NODE_ENV === "development") {
-    req.sanitizeBody('email');
-  } else {
-    req.checkBody('email', 'That Email is not valid!').isEmail();
-    req.sanitizeBody('email').normalizeEmail({
-      gmail_remove_dots: false,
-      remove_extension: false,
-      gmail_remove_subaddress: false
-    });
+const registerSchema = joi
+  .object({
+    email: joi
+      .string()
+      .email()
+      .required(),
+    password: joi.string().required(),
+    confirmPassword: joi.string().required(),
+  })
+  .unknown()
+  .required();
+
+async function isEmailTaken(email) {
+  let result = true;
+  const user = await User.findOne({ email });
+  if (user) {
+    result = false;
   }
-  req.checkBody('password', 'Password Cannot be Blank!').notEmpty();
-  req.checkBody('password-confirm', 'Confirmed Password cannot be blank!').notEmpty();
-  req.checkBody('password-confirm', 'Oops! Your passwords do not match').equals(req.body.password);
+  return result;
+}
 
-  const errors = req.validationErrors();
-  if (errors) {
-    // stop the fn from running
-    return res.status(400).json({
-      'errors': errors.map(err => err.msg)
-    });
-  }
-  next(); // there were no errors!
-};
+async function run(req, res, next) {
+  console.log('In register');
+  const account = joi.attempt(req.body, registerSchema);
 
-exports.register = async (req, res, next) => {
-  const user = new User({ email: req.body.email, name: req.body.name });
-  const register = promisify(User.register, User);
-  await register(user, req.body.password);
-  next(); // pass to authController.login
-};
+  const { email } = account;
+  const emailTaken = await isEmailTaken(email);
+  if (emailTaken) {
+    throw boom.conflict('Email is already taken.');
+  };
+
+  const user = new User(req.body).save();
+}
+
+module.exports = run;

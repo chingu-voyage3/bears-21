@@ -37,8 +37,7 @@ router.post('/api/v1/user', auth.isLoggedIn, upload.array('blobs', 1), catchAsyn
  * 3. Log them in
  */
 router.post('/api/v1/register',
-  users.register.validateRegister,
-  catchAsyncErrors(users.register.register),
+  catchAsyncErrors(users.register),
   auth.login
 );
 

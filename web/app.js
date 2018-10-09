@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 app.use(cors());
 // Middlewares
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
