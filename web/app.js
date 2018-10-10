@@ -62,11 +62,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  logger.info(`==============request user:${req.user}`);
-  return next();
-});
-
 app.use(routes);
 
 if (app.get('env') === 'development') {

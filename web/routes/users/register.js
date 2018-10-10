@@ -1,6 +1,5 @@
 'use strict'
 
-const promisify = require('es6-promisify');
 const User = require('../../../models/user');
 const boom = require('boom');
 const joi = require('joi');
@@ -27,7 +26,6 @@ async function isEmailTaken(email) {
 }
 
 async function run(req, res, next) {
-  console.log('In register');
   const account = joi.attempt(req.body, registerSchema);
 
   const { email } = account;
@@ -36,7 +34,9 @@ async function run(req, res, next) {
     throw boom.conflict('Email is already taken.');
   };
 
-  const user = new User(req.body).save();
+  const user = new User(req.body);
+  await user.save();
+  res.status(201).json({ ...user });
 }
 
 module.exports = run;

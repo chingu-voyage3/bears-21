@@ -40,14 +40,17 @@ export default class Register extends Component {
             validationSchema={SignupSchema}
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(true);
+              this.setState({
+                errors: null
+              });
               axios.post("/api/v1/register", values)
                 .then(res => {
                   setSubmitting(false);
                 })
-                .catch(err => {
+                .catch(({ response }) => {
                   setSubmitting(false);
                   this.setState({
-                    errors: "Server error."
+                    errors: response ? response.data.message : "Server error."
                   });
                 });
             }}

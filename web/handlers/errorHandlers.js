@@ -3,7 +3,7 @@
   In development we show good error messages so if we hit a syntax error
   or any other previously un-handled error, we can show good info on what happened
 */
-function developmentErrors (err, req, res) {
+function developmentErrors (err, req, res, next) {
   err.stack = err.stack || '';
   const errorDetails = {
     message: err.message,
@@ -27,7 +27,7 @@ function developmentErrors (err, req, res) {
   Production Error Hanlder
   No stacktraces are leaked to user
 */
-function productionErrors (err, req, res) {
+function productionErrors (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

@@ -3,10 +3,8 @@
 const boom = require('boom');
 
 function catchAsyncErrors (middleware) {
-  console.log('In Catch Async');
   return (req, res, next) => Promise.resolve(middleware(req, res, next))
     .catch(err => {
-      console.log(err);
       if (err.isJoi) {
         const message = err.details.map(detail => detail.message).join(', ');
         return next(boom.badRequest(message));
