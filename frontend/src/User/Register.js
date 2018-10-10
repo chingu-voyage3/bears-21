@@ -3,6 +3,8 @@ import { css, StyleSheet } from 'aphrodite';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import isEmpty from 'lodash/isEmpty';
+
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -21,57 +23,49 @@ const defaultValues = {
 };
 
 export default class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      email: "",
-      name: "",
-      password: "",
-      confirmPassword: "",
+      errors: null
     };
   }
-
-  register = () => {
-    axios.post("/api/v1/register", {
-      email: this.state.email,
-      name: this.state.name,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-    })
-    .then(res => {
-      console.log("RESPONSE", res);
-    })
-    .catch(err => {
-      console.log("ERROR: ", err);
-    });
-    this.setState({email: "", name: "", password: "", confirmPassword: ""});
-  }
-
 
   render() {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.registerContainer, styles.centered)}>
+          {this.state.errors && <h2>{this.state.errors}</h2>}
           <Formik
             initialValues={defaultValues}
             validationSchema={SignupSchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values);
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
+              setSubmitting(true);
+              axios.post("/api/v1/register", values)
+                .then(res => {
+                  setSubmitting(false);
+                })
+                .catch(err => {
+                  setSubmitting(false);
+                  this.setState({
+                    errors: "Server error."
+                  });
+                });
             }}
           >
-            {({ touched, errors, isSubmitting }) => (
+            {({ dirty, touched, errors, isSubmitting }) => (
               <Form>
                 <Field placeholder="Email" type="email" name="email" className={css(styles.input)} />
                 <ErrorMessage name="email" component="div" />
                 <Field placeholder="Password" type="password" name="password" className={css(styles.input)} />
                 <ErrorMessage name="password" component="div" />
-                <Field placeholder="Confirm Password" type="password" name="confirmPassword" className={css(styles.input)} />
+                <Field placeholder="Confirm Password"
+                       type="password"
+                       name="confirmPassword"
+                       className={css(styles.input)} />
                 <ErrorMessage name="confirmPassword" component="div" />
-                <button type="submit" className={css(styles.button)}>
+                <button type="submit"
+                        className={css(styles.button)}
+                        disabled={isSubmitting || !isEmpty(errors) || !dirty}>
                   Submit
                 </button>
               </Form>
