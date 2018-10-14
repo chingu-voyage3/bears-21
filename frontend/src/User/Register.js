@@ -16,6 +16,7 @@ const SignupSchema = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'Passwords do not match')
 });
 
+
 const defaultValues = {
   email: '',
   password: '',
@@ -46,6 +47,7 @@ export default class Register extends Component {
               axios.post("/api/v1/register", values)
                 .then(res => {
                   setSubmitting(false);
+                  this.props.history.push('/login');
                 })
                 .catch(({ response }) => {
                   setSubmitting(false);

@@ -18,27 +18,27 @@ class Routes extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   };
+
   state = {
-    logged_in: false
+    loggedIn: false
   };
+
   componentWillReceiveProps = newProps => {
-    let logged_in = false;
-    if( newProps.user && newProps.user.name) {
-      logged_in = true;
+    if(newProps.user && newProps.user.email) {
+      this.setState({ loggedIn: true });
     }
-    this.setState( {logged_in})
   };
 
   render() {
-    const user = this.state.logged_in;
+    const user = this.state.loggedIn;
     return (
       <Switch>
         <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
         <NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
         <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
-        <AuthRoute path='/profile/:id?' user={user} component={Profile} pathname={'/login'} />
-        <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={ "/login"} />
-        <AuthRoute path="/admin" component={Dummy} pathname={ "/login" } />
+        <AuthRoute path='/profile/:id?' user={user} component={Profile} pathname={"/login"} />
+        <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={"/login"} />
+        <AuthRoute path="/admin" component={Dummy} pathname={"/login"} />
         <AuthRoute path="/issue/:id" user={user} component={Issue} pathname={"/login"} />
         <AuthRoute path="/house/:id" user={user} component={HouseDetailEdit} pathname={"/login"} />
         <Route path="/newissue" component={Dummy} />

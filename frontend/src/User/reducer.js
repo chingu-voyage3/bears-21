@@ -8,10 +8,14 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case UserTypes.REQUEST_LOGIN_START:
+      return {...state, isWorking: true };
+    case UserTypes.LOGIN:
     case UserTypes.AUTO_LOGIN_SUCCESS:
     case UserTypes.REQUEST_LOGIN_SUCCESS:
       return {...state,
-        user: action.user
+        user: { ...action.user },
+        isWorking: false
       };
     case UserTypes.AUTO_LOGIN_FAILED:
     case UserTypes.REQUEST_LOGIN_FAILED:

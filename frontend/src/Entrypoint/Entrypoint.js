@@ -2,24 +2,33 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Routes } from '../Routes';
 import { Navbar } from '../Navbar';
-import { Footer } from '../Footer';
 import { connect } from 'react-redux';
+import { Footer } from '../Footer';
 import { withRouter } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { autoLogin } from '../User/userActions';
 
 class Entrypoint extends Component {
   static propTypes = {
-    autoLogin: PropTypes.func.isRequired
+    me: PropTypes.func.isRequired
   };
+
+  constructor(props){
+    super(props);
+    this.state = {user: null};
+  }
+
   componentWillMount = () => {
-    this.props.autoLogin();
+    this.props.me();
   };
-  componentWillReceiveProps = newProps => {
-    if( newProps.user) {
-      localStorage.setItem( 'user', JSON.stringify(newProps.user.user));
+
+  componentWillReceiveProps = (newProps) => {
+    console.log(newProps);
+    if(newProps.user) {
+      this.setState({ user: newProps.user });
     }
   };
+
   render() {
     return (
       <div className={css(styles.container)}>
@@ -47,11 +56,13 @@ const mapStateToProps = state => {
     user: state.userReducer
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
-    autoLogin: () => dispatch( autoLogin())
+    me: () => dispatch(autoLogin())
   };
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entrypoint));
+
 

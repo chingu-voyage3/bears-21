@@ -10,16 +10,14 @@ const registerSchema = joi
       .string()
       .email()
       .required(),
-    password: joi.string().required(),
-    confirmPassword: joi.string().required(),
-  })
-  .unknown()
-  .required();
+    password: joi.string().required().strict(),
+    confirmPassword: joi.string().valid(joi.ref('password')).required().strict(),
+  });
 
 async function isEmailTaken(email) {
   let result = true;
   const user = await User.findOne({ email });
-  if (user) {
+  if (!user) {
     result = false;
   }
   return result;
@@ -34,9 +32,19 @@ async function run(req, res, next) {
     throw boom.conflict('Email is already taken.');
   };
 
-  const user = new User(req.body);
-  await user.save();
-  res.status(201).json({ ...user });
+  let user;
+  try {
+    user = new User(req.body);
+    user = await user.save();
+  } catch (err) {
+    console.error(err);
+    throw boom.badImplementation();
+  }
+  res.status(201).json({
+    id: user._id,
+    email: user.email,
+    avatar: user.avatar
+  });
 }
 
 module.exports = run;

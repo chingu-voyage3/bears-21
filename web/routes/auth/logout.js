@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 function logout (req, res) {
   req.logout();

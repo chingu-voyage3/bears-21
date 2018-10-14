@@ -12,6 +12,8 @@ const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const expressValidator = require('express-validator');
+
+const auth = require('./routes/auth');
 const passport = require('passport');
 const routes = require('./routes');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -53,8 +55,8 @@ app.use(session({
 // Passport JS is what we use to handle our logins
 app.use(passport.initialize());
 app.use(passport.session());
+auth.init();
 
-require('./handlers/passport');
 
 // promisify some callback based APIs
 app.use((req, res, next) => {

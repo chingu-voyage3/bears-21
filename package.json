@@ -4,6 +4,7 @@
   "description": "The ultimate solution to your housing issues",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^3.0.1",
     "boom": "^7.2.0",
     "chalk": "^2.3.0",
     "connect-mongo": "^2.0.1",

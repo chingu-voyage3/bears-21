@@ -1,5 +1,10 @@
 import * as UserTypes from './UserTypes';
 
+export function requestLoginStart() {
+  return {
+    type: UserTypes.REQUEST_LOGIN_START
+  };
+}
 
 export function requestLoginSuccess(user) {
   return {
@@ -7,17 +12,20 @@ export function requestLoginSuccess(user) {
     user
   };
 }
+
 export function requestLoginFailed(error) {
   return {
     type: UserTypes.REQUEST_LOGIN_FAILED,
     error
   };
 }
+
 export function clearLoginError() {
   return {
     type: UserTypes.CLEAR_LOGIN_ERROR
   };
 }
+
 export function requestLogin(payload) {
   return function(dispatch) {
     dispatch( clearLoginError());
@@ -27,41 +35,44 @@ export function requestLogin(payload) {
       credentials: 'same-origin',
       body: JSON.stringify( payload)
     })
-    .then( res => {
+    .then(res => {
       if (!res.ok) {
         throw new Error(res.status + " " + res.statusText);
       } return res.json()
     })
-    .then( json => dispatch(requestLoginSuccess(json)))
-    .catch( err => {
+    .then(json => dispatch(requestLoginSuccess(json)))
+    .catch(err => {
       dispatch(requestLoginFailed(err.message))
     });
   }
 }
 
-export function autoLoginSuccess( user) {
+export function autoLoginSuccess(user) {
   return {
-    type: UserTypes.AUTO_LOGIN_SUCCESS,
+    type: UserTypes.LOGIN,
     user
   }
 }
+
 export function autoLoginFailed(error) {
   return {
     type: UserTypes.AUTO_LOGIN_FAILED,
     error
   }
 }
+
 export function autoLogin() {
   return function(dispatch) {
-    return fetch('/api/v1/user',{
+    dispatch(requestLoginStart());
+    return fetch('/api/v1/me',{
       credentials: 'same-origin'
     })
     .then( res => {
       if( res.ok) return res.json();
       return {};
     })
-    .then( json => dispatch(autoLoginSuccess(json)))
-    .catch( err => dispatch(autoLoginFailed(err)));
+    .then(json => dispatch(autoLoginSuccess(json)))
+    .catch(err => dispatch(autoLoginFailed(err)));
   };
 }
 
@@ -70,13 +81,13 @@ export function requestLogout() {
     type: UserTypes.LOGOUT
   }
 }
+
 export function logout() {
   return function(dispatch) {
     dispatch( requestLogout());
     return fetch('/api/v1/logout');
   };
 }
-
 
 export function isWorking(isWorking = false) {
   return {

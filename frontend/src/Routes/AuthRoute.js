@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Route, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
+import { autoLogin } from '../User/userActions';
 
-const AuthRoute = ({ user: auth, component: Component, pathname: path, ...rest }) => (
+
+const AuthRoute = ({ user, component: Component, pathname: path, ...rest }) => (
   <Route {...rest} render={ props => (
-    auth ? (
+    user ? (
       <Component {...props} />
     ) : (
       <Redirect

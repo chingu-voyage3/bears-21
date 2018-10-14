@@ -70,6 +70,16 @@ async function stop () {
   return exitCode;
 }
 
+process.on('unhandledRejection', async err => {
+  console.error('Unhandled rejection', err);
+  process.exit(1);
+});
+
+process.on('uncaughtException', async err => {
+  console.error('Uncaught exception', err);
+  process.exit(1);
+});
+
 module.exports = {
   init,
   stop

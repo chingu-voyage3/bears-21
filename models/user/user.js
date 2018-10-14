@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
   active: Boolean,
   email: String,
   name: {
     type: String,
-    required: 'Please supply a name',
     trim: true
   },
   avatar: String,
@@ -20,6 +20,10 @@ userSchema.pre("save", function (next) {
     next();
   });
 });
+
+userSchema.methods.validatePassword = async function (password) {
+  const isAuthorized = bcrypt.compareSync(password, this.password);
+};
 
 
 module.exports = mongoose.model('User', userSchema);

@@ -28,7 +28,7 @@ router.post('/api/v1/issue', auth.isLoggedIn, upload.array('blobs', 3), catchAsy
 // NOTE: no auth required
 router.get('/api/v1/image/:id', catchAsyncErrors( images.grab));
 
-router.get('/api/v1/user/:id*?', auth.isLoggedIn, catchAsyncErrors( users.getDetail));
+router.get('/api/v1/user/:id*?', auth.isLoggedIn, catchAsyncErrors(users.get));
 router.post('/api/v1/user', auth.isLoggedIn, upload.array('blobs', 1), catchAsyncErrors(users.update));
 
 /**
@@ -37,9 +37,17 @@ router.post('/api/v1/user', auth.isLoggedIn, upload.array('blobs', 1), catchAsyn
  * 3. Log them in
  */
 router.post('/api/v1/register',
-  catchAsyncErrors(users.register),
+  catchAsyncErrors(users.create),
   auth.login
 );
+
+router.get('/api/v1/me', async function me (req, res, next) {
+  const { user } = req;
+  res.json({
+    id: user._id,
+    email: user.email
+  });
+});
 
 router.post('/api/v1/login', auth.login);
 router.get('/api/v1/logout', auth.logout);

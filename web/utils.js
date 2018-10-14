@@ -5,6 +5,7 @@ const boom = require('boom');
 function catchAsyncErrors (middleware) {
   return (req, res, next) => Promise.resolve(middleware(req, res, next))
     .catch(err => {
+      console.log('Next', err);
       if (err.isJoi) {
         const message = err.details.map(detail => detail.message).join(', ');
         return next(boom.badRequest(message));
@@ -12,6 +13,7 @@ function catchAsyncErrors (middleware) {
       if (!err.isBoom) {
         return next(boom.badImplementation(err));
       }
+      console.log('Next');
       next(err);
     });
 }
