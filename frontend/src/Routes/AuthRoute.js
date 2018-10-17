@@ -1,24 +1,61 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { autoLogin } from '../User/userActions';
+import * as userApi from '../API/user';
+
+class AuthRoute extends React.PureComponent {
+  state = {
+    loading: true,
+    isLoggedIn: false
+  };
+
+  async componentDidMount() {
+    this.setState({
+      loading: true
+    });
+    try {
+      const { data } = await userApi.getMe();
+      this.setState({
+        loading: false,
+        isLoggedIn: !!data.id
+      });
+    } catch (error) {
+      this.setState({
+        isLoggedIn: false
+      });
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+
+  }
 
 
-const AuthRoute = ({ user, component: Component, pathname: path, ...rest }) => (
-  <Route {...rest} render={ props => (
-    user ? (
-      <Component {...props} />
-    ) : (
-      <Redirect
-        to={{ pathname: path }}
-      />
-    )
-  )} />
-);
+  renderRoute = (routeProps) => {
+    if (this.state.loading) {
+      return <div>Loading...</div>;
+    }
+    if (this.state.isLoggedIn) {
+      const { component: Component } = this.props;
+      return <Component {...routeProps} />;
+    } else {
+      return (<Redirect
+          to={{
+            pathname: "/login",
+              state: { next: routeProps.location.pathname }
+          }}
+        />);
+    }
+  }
+
+  render() {
+    const { component: Component, pathname: path, ...rest } = this.props;
+    return <Route {...rest} render={this.renderRoute} />;
+  }
+}
 
 AuthRoute.propTypes = {
-  user: PropTypes.bool,
   component: PropTypes.func,
   pathname: PropTypes.string
 };

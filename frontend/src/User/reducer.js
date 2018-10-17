@@ -13,31 +13,41 @@ export default function userReducer(state = initialState, action) {
     case UserTypes.LOGIN:
     case UserTypes.AUTO_LOGIN_SUCCESS:
     case UserTypes.REQUEST_LOGIN_SUCCESS:
-      return {...state,
+      return {
+        ...state,
         user: { ...action.user },
         isWorking: false
       };
     case UserTypes.AUTO_LOGIN_FAILED:
     case UserTypes.REQUEST_LOGIN_FAILED:
-      return {...state,
-        error: action.error
+      return {
+        ...state,
+        error: action.error,
+        isWorking: false
       };
     case UserTypes.USER_IS_WORKING:
-      return {...state,
-        isWorking: action.isWorking
+      return {
+        ...state,
+        isWorking: true
       };
     case UserTypes.USER_SUCCESS:
-      return {...state,
-        user: action.user
+      return {
+        ...state,
+        user: action.user,
+        isWorking: false
       };
     case UserTypes.USER_ERRORED:
-      return {...state,
-        error: action.error
+      return {
+        ...state,
+        error: action.error,
+        isWorking: false
       };
     case UserTypes.CLEAR_LOGIN_ERROR:
     case UserTypes.LOGOUT:
-      return {...state,
-        user: {}
+      return {
+        ...state,
+        user: {},
+        isWorking: false
       };
     default:
       return state;

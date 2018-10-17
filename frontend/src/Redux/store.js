@@ -5,4 +5,4 @@ import reducer from "./reducers";
 
 const logger = createLogger();
 
-export default createStore( reducer, applyMiddleware( thunk, logger));
+export default createStore(reducer, applyMiddleware(thunk, logger));

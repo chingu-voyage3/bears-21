@@ -15,32 +15,17 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 class Routes extends Component {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-  };
-
-  state = {
-    loggedIn: false
-  };
-
-  componentWillReceiveProps = newProps => {
-    if(newProps.user && newProps.user.email) {
-      this.setState({ loggedIn: true });
-    }
-  };
-
   render() {
-    const user = this.state.loggedIn;
     return (
       <Switch>
-        <NonAuthRoute path="/login" user={user} component={Login} pathname={ "/dashboard" } />
-        <NonAuthRoute path="/register" user={user} component={Register} pathname={ "/dashboard" } />
-        <NonAuthRoute path="/forgot" user={user} component={Forgot} pathname={ "/dashboard" } />
-        <AuthRoute path='/profile/:id?' user={user} component={Profile} pathname={"/login"} />
-        <AuthRoute path="/dashboard" user={user} component={Dashboard} pathname={"/login"} />
+        <NonAuthRoute path="/login" component={Login} pathname={ "/dashboard" } />
+        <NonAuthRoute path="/register" component={Register} pathname={ "/dashboard" } />
+        <NonAuthRoute path="/forgot" component={Forgot} pathname={ "/dashboard" } />
+        <AuthRoute path='/profile/:id?' component={Profile} pathname={"/login"} />
+        <AuthRoute path="/dashboard" component={Dashboard} pathname={"/login"} />
         <AuthRoute path="/admin" component={Dummy} pathname={"/login"} />
-        <AuthRoute path="/issue/:id" user={user} component={Issue} pathname={"/login"} />
-        <AuthRoute path="/house/:id" user={user} component={HouseDetailEdit} pathname={"/login"} />
+        <AuthRoute path="/issue/:id" component={Issue} pathname={"/login"} />
+        <AuthRoute path="/house/:id" component={HouseDetailEdit} pathname={"/login"} />
         <Route path="/newissue" component={Dummy} />
         <Route path="/houseview/:id" component={HouseDetail} />
         <Route path="/logout" component={Logout} />
@@ -57,10 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-   login: () => dispatch({ type: "LOGIN" }),
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));
+export default withRouter(connect(mapStateToProps, null)(Routes));

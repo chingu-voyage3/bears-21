@@ -8,6 +8,7 @@
     "boom": "^7.2.0",
     "chalk": "^2.3.0",
     "connect-mongo": "^2.0.1",
+    "connect-redis": "^3.4.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "es6-promisify": "^5.0.0",

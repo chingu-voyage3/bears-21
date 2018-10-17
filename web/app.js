@@ -3,8 +3,6 @@
 const promisify = require('es6-promisify');
 const bodyParser = require('body-parser');
 const express = require('express');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 const mongoose = require( 'mongoose');
 const cookieParser = require('cookie-parser');
 const http = require('http');
@@ -12,6 +10,9 @@ const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const expressValidator = require('express-validator');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const RedisStore = require('connect-redis')(session);
 
 const auth = require('./routes/auth');
 const passport = require('passport');
@@ -30,7 +31,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
 });
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 // Middlewares
 // app.use(morgan('tiny'));
 // Takes the raw requests and turns them into usable properties on req.body
@@ -43,19 +44,19 @@ app.use(cookieParser());
 app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
 app.use(session({
+  store: new RedisStore(),
   secret: 'anything',
   keys: ['secretkey'],
-  // at some point?
-  // cookie: { maxAge: 1000 }
+  cookie: { secure: false, maxAge:86400000 },
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  //store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 // Passport JS is what we use to handle our logins
+auth.init();
 app.use(passport.initialize());
 app.use(passport.session());
-auth.init();
 
 
 // promisify some callback based APIs

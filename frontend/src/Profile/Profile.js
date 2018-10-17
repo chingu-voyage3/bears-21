@@ -29,7 +29,7 @@ class Profile extends React.Component {
       this.props.getDetail(match.params.id);
       this.setState( {local_user: false});
     } else {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const { user } = this.props;
       this.setState( { user, local_user: true });
       this.setAvatarImageSrc( user.avatar);
     }

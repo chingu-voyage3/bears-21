@@ -1,4 +1,5 @@
 import * as UserTypes from './UserTypes';
+import * as userApi from '../API/user';
 
 export function requestLoginStart() {
   return {
@@ -86,6 +87,13 @@ export function logout() {
   return function(dispatch) {
     dispatch( requestLogout());
     return fetch('/api/v1/logout');
+  };
+}
+
+export function register(body) {
+  return async dispatch => {
+    const { user } = await userApi.register(body);
+    dispatch({ type: 'LOGIN', user });
   };
 }
 

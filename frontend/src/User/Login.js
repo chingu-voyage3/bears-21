@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
+import * as userApi from '../API/user';
 
-import { requestLogin, clearLoginError } from './userActions';
+import { requestLoginSuccess, clearLoginError } from './userActions';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -26,7 +26,7 @@ const defaultValues = {
 
 class Login extends Component {
   static propTypes = {
-    requestLogin: PropTypes.func.isRequired,
+    requestLoginSuccess: PropTypes.func.isRequired,
     clearLoginError: PropTypes.func.isRequired
   };
 
@@ -39,12 +39,12 @@ class Login extends Component {
 
   componentWillReceiveProps = newProps => {
     let currentStatus = "";
-    if( newProps.user) {
-      if( newProps.user.error) {
+    if(newProps.user) {
+      if(newProps.user.error) {
         currentStatus = newProps.user.error;
       }
     }
-    this.setState( {currentStatus})
+    this.setState({currentStatus})
   };
 
   render() {
@@ -60,18 +60,18 @@ class Login extends Component {
               this.setState({
                 errors: null
               });
-              axios.post("/api/v1/login", values)
-                .then(res => {
-                  setSubmitting(false);
-                  console.log(this.props.history);
-                  this.props.history.push('/dashboard');
-                })
-                .catch(({ response }) => {
-                  setSubmitting(false);
-                  this.setState({
-                    errors: response ? response.data.message : "Server error."
-                  });
+              try {
+                const { data } = await userApi.login(values);
+                this.props.requestLoginSuccess(data);
+                this.props.history.push('/dashboard');
+              } catch (err) {
+                console.error(err);
+                this.setState({
+                  errors: err.response ? err.response.data.message : "Server error."
                 });
+              } finally {
+                setSubmitting(false);
+              }
             }}
           >
             {({ dirty, touched, errors, isSubmitting }) => (
@@ -105,7 +105,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestLogin: payload => dispatch(requestLogin(payload)),
+    requestLoginSuccess: payload => dispatch(requestLoginSuccess(payload)),
     clearLoginError: () => dispatch(clearLoginError())
   };
 };

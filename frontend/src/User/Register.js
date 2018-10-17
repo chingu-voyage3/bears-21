@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
-import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
+import * as userApi from '../API/user';
 
 
 const SignupSchema = Yup.object().shape({
@@ -39,22 +39,21 @@ export default class Register extends Component {
           <Formik
             initialValues={defaultValues}
             validationSchema={SignupSchema}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
               setSubmitting(true);
               this.setState({
                 errors: null
               });
-              axios.post("/api/v1/register", values)
-                .then(res => {
-                  setSubmitting(false);
-                  this.props.history.push('/login');
-                })
-                .catch(({ response }) => {
-                  setSubmitting(false);
-                  this.setState({
-                    errors: response ? response.data.message : "Server error."
-                  });
+              try {
+                await userApi.register(values);
+                this.props.history.push('/login');
+              } catch ({ response }) {
+                this.setState({
+                  errors: response ? response.data.message : "Server error."
                 });
+              } finally {
+                setSubmitting(false);
+              }
             }}
           >
             {({ dirty, touched, errors, isSubmitting }) => (

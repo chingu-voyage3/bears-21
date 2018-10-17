@@ -15,9 +15,9 @@ const NonAuthRoute = ({ user: auth, component: Component, pathname: path, ...res
 );
 
 NonAuthRoute.propTypes = {
-user: PropTypes.bool,
-component: PropTypes.func,
-pathname: PropTypes.string
+  user: PropTypes.bool,
+  component: PropTypes.func,
+  pathname: PropTypes.string
 };
 
 export default NonAuthRoute;

@@ -41,13 +41,13 @@ router.post('/api/v1/register',
   auth.login
 );
 
-router.get('/api/v1/me', async function me (req, res, next) {
+router.get('/api/v1/me', catchAsyncErrors(async function me (req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.json({ id: null });;
+  }
   const { user } = req;
-  res.json({
-    id: user._id,
-    email: user.email
-  });
-});
+  res.json({id: user._id, email: user.email});
+}));
 
 router.post('/api/v1/login', auth.login);
 router.get('/api/v1/logout', auth.logout);

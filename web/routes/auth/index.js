@@ -6,10 +6,12 @@ const User = require('../../../models/user');
 
 function init () {
   passport.serializeUser(function(user, done) {
+    console.log('Serialize', user);
     done(null, user);
   });
 
   passport.deserializeUser(function(user, done) {
+    console.log('DeSerialize', user);
     done(null, user);
   });
 
