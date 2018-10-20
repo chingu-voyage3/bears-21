@@ -11,7 +11,7 @@ class Logout extends Component {
       dispatch({
         type: 'LOGOUT'
       });
-      //this.props.history.push('/login');
+      this.props.history.push('/login');
     } catch (err) {
       console.error(err);
     }

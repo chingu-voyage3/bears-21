@@ -15,9 +15,6 @@ const HouseItem = ({ house }) => (
     <p className={css(styles.content)}>{house.description}</p>
   </div>
 );
-HouseItem.propTypes = {
-  house: PropTypes.object
-};
 
 HouseItem.propTypes = {
   house: PropTypes.object.isRequired

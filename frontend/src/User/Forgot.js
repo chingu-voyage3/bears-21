@@ -4,12 +4,11 @@ import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
 
 import {
-  Button,
-  TextButton,
   ButtonRow,
   FormContent,
   FullView,
-  FieldInput
+  FieldInput,
+  SubmitButton
 } from './style';
 import * as userApi from '../API/user';
 
@@ -60,13 +59,10 @@ export default class Forgot extends PureComponent {
               <FieldInput placeholder="Email" type="email" name="email" />
               <ErrorMessage name="email" component="div" />
               <ButtonRow>
-                <TextButton onClick={this.onCancelClick}>
-                  Cancel
-                </TextButton>
-                <Button type="submit"
+                <SubmitButton type="submit"
                         disabled={isSubmitting || !isEmpty(errors) || !dirty}>
                   Submit
-                </Button>
+                </SubmitButton>
               </ButtonRow>
             </FormContent>
           )}

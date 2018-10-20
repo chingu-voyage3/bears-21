@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 
+import { Footer } from '../Footer';
 import { houseIssuesFetchData, houseDelete } from './actions';
 import { HouseList } from '../House';
 import DashboardLoader from './Dashboard.Loader';
@@ -62,6 +63,7 @@ class Dashboard extends Component {
         <h1>Dashboard</h1>
         <button type="button" onClick={this.onNewHouse} >New House</button>
         <HouseList data={houseIssues} onDeleteHouse={this.onDeleteHouse} />
+        <Footer />
       </div>
     );
   }

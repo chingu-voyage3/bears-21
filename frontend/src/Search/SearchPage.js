@@ -2,11 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
+
 import SubmitInput from './SubmitInput';
 import Form from './Form';
 import AutoCompleteList from './AutoCompleteList';
 import { searchPostCodes } from './actions';
 import { getSuggestions, getIsFetchingSuggestions } from './reducers';
+import { Footer } from '../Footer';
+
+const FlexCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+`;
+
+const Wrapper = styled(FlexCol)`
+  grid-area: content;
+  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+`;
 
 const mapStateToProps = (state) => ({
   suggestions: getSuggestions(state),
@@ -52,7 +72,7 @@ class SearchPage extends Component {
     const { suggestions=[] } = this.props;
 
     return (
-      <div className={css(styles.container)}>
+      <Wrapper>
         <header className={css(styles.header)}>
           <Form onSubmit={this.handleSubmit}>
             <input type="search"
@@ -87,17 +107,13 @@ class SearchPage extends Component {
             </section>
           </div>
         </article>
-      </div>
+        <Footer />
+      </Wrapper>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    display: 'flex',
-    width: '100%'
-  },
   article: {
     margin: '0 auto auto',
     maxWidth: '60rem',

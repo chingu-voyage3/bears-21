@@ -12,7 +12,6 @@ import Issue from '../Issue';
 import { HouseDetail, HouseDetailEdit} from '../House';
 import Profile from '../Profile';
 import Navbar from '../Navbar';
-import { Footer } from '../Footer';
 import { Login, Logout, Register, Forgot } from '../User';
 
 
@@ -85,7 +84,6 @@ class Routes extends Component {
             <Route path="/" component={DashboardFallback} />
             <Route path="*" component={Notfound} />
           </Switch>
-          <Route component={Footer} />
         </Body>
       </ThemeProvider>
     );

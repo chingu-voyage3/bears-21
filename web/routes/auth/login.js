@@ -6,14 +6,15 @@ const boom = require('boom');
 function login (req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
-      throw boom.badImplementation();
+      next(boom.badImplementation());
     }
     if (!user) {
-      throw boom.unauthorized('Invalid email or password.');
+      return next(boom.unauthorized('Invalid email or password.'));
     }
     req.logIn(user, function(err) {
       if (err) {
-        throw boom.badImplementation();
+        console.error(err);
+        return next(boom.badImplementation());
       }
       res.send({
         id: user._id,

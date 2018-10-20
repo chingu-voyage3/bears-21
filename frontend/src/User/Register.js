@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
@@ -74,6 +75,7 @@ export default class Register extends Component {
                             disabled={isSubmitting || !isEmpty(errors) || !dirty}>
                 Submit
               </SubmitButton>
+              <Link to="/login">Login</Link>
             </FormContent>
           )}
         </Formik>

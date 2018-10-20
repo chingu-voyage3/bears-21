@@ -1,23 +1,19 @@
+import styled from 'styled-components';
 import React from 'react';
-import { css, StyleSheet } from 'aphrodite';
 
-const Footer = () => (
-  <footer className={css(styles.footer)}>
-    <section className={css(styles.section)}>
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: stretch;
+  align-content: stretch;
+  flex: auto;
+  position: relative;
+  padding: 32px;
+`;
+
+export default () => (
+  <Footer>
+    <section>
       Made by bears-21 with <span role="img" aria-label="heart">❤️ </span>
     </section>
-  </footer>
+  </Footer>
 );
-export default Footer;
-
-const styles = StyleSheet.create({
-  footer: {
-    color: '#715c57',
-    padding: '2rem',
-    backgroundColor: '#dae6f1'
-  },
-  section: {
-    width: '100%',
-    textAlign: 'center'
-  }
-});
