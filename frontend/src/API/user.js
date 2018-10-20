@@ -1,12 +1,21 @@
 import api from './api'
 
-const KEY = 'HISSUES';
+export const KEY = 'HISSUES';
 
 export async function login(body) {
   const { data } = await api.post('/login', body);
-  console.log('Setting localstorage', data);
-  localStorage.setItem(KEY, JSON.stringify(data));
+  localStorage.setItem(KEY, JSON.stringify({
+    currentUser: { ...data }
+  }));
   return data;
+}
+
+export async function forgotPassword(body) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 2000);
+  });
 }
 
 export async function register(body) {
@@ -14,7 +23,9 @@ export async function register(body) {
   return data;
 }
 
-export function logout() {
+export async function logout() {
+  console.log('In logout');
+  await api.post('/logout');
   localStorage.removeItem(KEY);
 }
 

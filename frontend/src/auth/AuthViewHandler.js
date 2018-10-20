@@ -1,13 +1,10 @@
 import React  from 'react';
 import {connect} from 'react-redux';
-
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
+import isEmpty from 'lodash/isEmpty';
 
 class AuthViewHandler extends React.Component<Props, State> {
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     const { currentUser, children, data } = this.props;
 
     if (!isEmpty(currentUser)) return children(true);
@@ -18,8 +15,6 @@ class AuthViewHandler extends React.Component<Props, State> {
   }
 }
 
-export default connect((state) => {
-  console.log(state);
-
-  return { currentUser: state.userReducer.user };
-})(AuthViewHandler);
+export default connect((state) => ({
+  currentUser: state.userReducer.user
+}))(AuthViewHandler);

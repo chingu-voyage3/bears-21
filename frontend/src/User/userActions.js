@@ -84,10 +84,9 @@ export function requestLogout() {
 }
 
 export function logout() {
-  return function(dispatch) {
-    dispatch( requestLogout());
-    return fetch('/api/v1/logout');
-  };
+  return {
+    type: UserTypes.LOGOUT
+  }
 }
 
 export function register(body) {

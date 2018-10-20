@@ -11,9 +11,10 @@ import SearchLayout from "../Search";
 import Issue from '../Issue';
 import { HouseDetail, HouseDetailEdit} from '../House';
 import Profile from '../Profile';
-import { Navbar } from '../Navbar';
+import Navbar from '../Navbar';
 import { Footer } from '../Footer';
 import { Login, Logout, Register, Forgot } from '../User';
+
 
 const FlexCol = styled.div`
   display: flex;
@@ -61,27 +62,27 @@ const signedOutFallback = (
 
 const LoginFallback = signedOutFallback(() => <Redirect to="/" />, Login);
 const RegisterFallback = signedOutFallback(() => <Redirect to="/" />, Register);
+const DashboardFallback = signedOutFallback(Dashboard, SearchLayout);
 
 class Routes extends Component {
   render() {
-    const { currentUser } = this.props;
     return (
       <ThemeProvider theme={theme}>
         <Body>
           <Route component={Navbar} />
           <Switch>
-            <Route path="/login" component={LoginFallback} />
-            <Route path="/register" component={RegisterFallback}  />
-            <Route path="/forgot" component={Forgot} />
-            <Route path='/profile/:id?' component={Profile} pathname={"/login"} />
-            <Route path="/dashboard" component={Dashboard} pathname={"/login"} />
-            <Route path="/admin" component={Dummy} pathname={"/login"} />
-            <Route path="/issue/:id" component={Issue} pathname={"/login"} />
-            <Route path="/house/:id" component={HouseDetailEdit} pathname={"/login"} />
-            <Route path="/newissue" component={Dummy} />
-            <Route path="/houseview/:id" component={HouseDetail} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/" component={SearchLayout} />
+            <Route exact={true} path="/logout" component={Logout} />
+            <Route exact={true} path="/register" component={RegisterFallback}  />
+            <Route exact={true} path="/login" component={LoginFallback} />
+            <Route exact={true} path="/forgot" component={Forgot} />
+            <Route exact={true} path='/profile/:id?' component={Profile} pathname={"/login"} />
+            <Route exact={true} path="/dashboard" component={Dashboard} pathname={"/login"} />
+            <Route exact={true} path="/admin" component={Dummy} pathname={"/login"} />
+            <Route exact={true} path="/issue/:id" component={Issue} pathname={"/login"} />
+            <Route exact={true} path="/house/:id" component={HouseDetailEdit} pathname={"/login"} />
+            <Route exact={true} path="/newissue" component={Dummy} />
+            <Route exact={true} path="/houseview/:id" component={HouseDetail} />
+            <Route path="/" component={DashboardFallback} />
             <Route path="*" component={Notfound} />
           </Switch>
           <Route component={Footer} />

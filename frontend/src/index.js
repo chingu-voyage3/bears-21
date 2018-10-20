@@ -4,10 +4,12 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from "react-redux";
 import { initStore } from "./Redux/store";
+
 import Routes from './Routes';
 import './styles.css';
+import { KEY } from './API/api';
 
-const storedData = localStorage.getItem('hissues');
+const storedData = JSON.parse(localStorage.getItem(KEY));
 
 const store = initStore({
   userReducer: {

@@ -5,4 +5,6 @@ const api = axios.create({
   withCredentials: true
 });
 
+export const KEY = 'HISSUES';
+
 export default api;

@@ -5,7 +5,7 @@ import {StyleSheet, css} from 'aphrodite';
 const DashboardLoader = () => (
   <div style={{flex: '1'}}>
     <h1>Dashboard</h1>
-    <button type="button" disabled="true" className={css(styles.button)}/>
+    <button type="button" disabled={true} className={css(styles.button)}/>
     <HouseListLoader />
   </div>
 );

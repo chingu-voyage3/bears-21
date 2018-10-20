@@ -50,6 +50,6 @@ router.get('/api/v1/me', catchAsyncErrors(async function me (req, res, next) {
 }));
 
 router.post('/api/v1/login', auth.login);
-router.get('/api/v1/logout', auth.logout);
+router.post('/api/v1/logout', auth.logout);
 
 module.exports = router;

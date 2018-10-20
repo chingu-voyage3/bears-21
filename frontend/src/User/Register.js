@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { css, StyleSheet } from 'aphrodite';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
-import * as userApi from '../API/user';
 
+import {
+  FormContent,
+  FullView,
+  FieldInput,
+  SubmitButton
+} from './style';
+import * as userApi from '../API/user';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,99 +38,46 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div className={css(styles.centered, styles.background)}>
-        <div className={css(styles.registerContainer, styles.centered)}>
-          {this.state.errors && <h2>{this.state.errors}</h2>}
-          <Formik
-            initialValues={defaultValues}
-            validationSchema={SignupSchema}
-            onSubmit={async (values, { setSubmitting }) => {
-              setSubmitting(true);
+      <FullView>
+        {this.state.errors && <h2>{this.state.errors}</h2>}
+        <Formik
+          initialValues={defaultValues}
+          validationSchema={SignupSchema}
+          onSubmit={async (values, { setSubmitting }) => {
+            setSubmitting(true);
+            this.setState({
+              errors: null
+            });
+            try {
+              await userApi.register(values);
+              this.props.history.push('/login');
+            } catch ({ response }) {
               this.setState({
-                errors: null
+                errors: response ? response.data.message : "Server error."
               });
-              try {
-                await userApi.register(values);
-                this.props.history.push('/login');
-              } catch ({ response }) {
-                this.setState({
-                  errors: response ? response.data.message : "Server error."
-                });
-              } finally {
-                setSubmitting(false);
-              }
-            }}
-          >
-            {({ dirty, touched, errors, isSubmitting }) => (
-              <Form>
-                <Field placeholder="Email" type="email" name="email" className={css(styles.input)} />
-                <ErrorMessage name="email" component="div" />
-                <Field placeholder="Password" type="password" name="password" className={css(styles.input)} />
-                <ErrorMessage name="password" component="div" />
-                <Field placeholder="Confirm Password"
-                       type="password"
-                       name="confirmPassword"
-                       className={css(styles.input)} />
-                <ErrorMessage name="confirmPassword" component="div" />
-                <button type="submit"
-                        className={css(styles.button)}
-                        disabled={isSubmitting || !isEmpty(errors) || !dirty}>
-                  Submit
-                </button>
-              </Form>
-            )}
-          </Formik>
-        </div>
-      </div>
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({ dirty, touched, errors, isSubmitting }) => (
+            <FormContent>
+              <FieldInput placeholder="Email" type="email" name="email"  />
+              <ErrorMessage name="email" component="div" />
+              <FieldInput placeholder="Password" type="password" name="password" />
+              <ErrorMessage name="password" component="div" />
+              <FieldInput placeholder="Confirm Password"
+                     type="password"
+                     name="confirmPassword" />
+              <ErrorMessage name="confirmPassword" component="div" />
+              <SubmitButton type="submit"
+                            disabled={isSubmitting || !isEmpty(errors) || !dirty}>
+                Submit
+              </SubmitButton>
+            </FormContent>
+          )}
+        </Formik>
+      </FullView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  centered: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    resize: "none",
-    fontSize: 18,
-    padding: '10px 10px 10px 5px',
-    marginTop: 10,
-    border: "none",
-    background: '#fafafa',
-    borderRadius: 0,
-    width: '100%',
-    borderBottom: '1px solid #757575'
-  },
-  registerContainer: {
-    background: '#fafafa',
-    border: '1px solid #ebebeb',
-    padding: '3em 2em 2em 2em',
-    position: 'relative',
-    width: 400,
-    maxHeight: 430,
-  },
-  status: {
-    width: 286,
-    height: 25,
-  },
-  button: {
-    padding: '12px 24px',
-    margin: '.3em 0 1em 0',
-    width: '100%',
-    fontSize: 16,
-    fontWeight: 400,
-    background: "#FF5A5F",
-    border: 0,
-    borderRadius: 0,
-    lineHeight: '20px',
-    color: "white",
-  },
-  background: {
-    backgroundColor: "#f0f0f0",
-    padding: '5em 0',
-  },
-});
