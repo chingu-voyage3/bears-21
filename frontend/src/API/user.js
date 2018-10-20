@@ -1,10 +1,11 @@
 import api from './api'
 
-const KEY = 'CURRENT_USER';
+const KEY = 'HISSUES';
 
 export async function login(body) {
   const { data } = await api.post('/login', body);
-  localStorage.setItem(KEY, data);
+  console.log('Setting localstorage', data);
+  localStorage.setItem(KEY, JSON.stringify(data));
   return data;
 }
 

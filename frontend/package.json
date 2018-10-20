@@ -17,6 +17,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "styled-components": "^4.0.2",
     "url-search-params-polyfill": "^2.0.1",
     "yup": "^0.26.6"
   },

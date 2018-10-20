@@ -61,8 +61,8 @@ class Login extends Component {
                 errors: null
               });
               try {
-                const { data } = await userApi.login(values);
-                this.props.requestLoginSuccess(data);
+                const user = await userApi.login(values);
+                this.props.requestLoginSuccess(user);
                 this.props.history.push('/dashboard');
               } catch (err) {
                 console.error(err);
