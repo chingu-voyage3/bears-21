@@ -8,6 +8,7 @@ export const Footer = styled.footer`
   flex: auto;
   position: relative;
   padding: 32px;
+  justify-content: center;
 `;
 
 export default () => (

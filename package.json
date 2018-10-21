@@ -27,6 +27,7 @@
     "passport-local-mongoose": "^4.4.0",
     "pug": "^2.0.0-rc.4",
     "react": "^16.5.2",
+    "react-select": "^2.1.0",
     "slug": "^0.9.1",
     "supervisor": "^0.12.0",
     "validator": "^9.2.0"

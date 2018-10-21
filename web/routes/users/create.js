@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const User = require('../../../models/user');
 const boom = require('boom');
@@ -12,6 +12,7 @@ const registerSchema = joi
       .required(),
     password: joi.string().required().strict(),
     confirmPassword: joi.string().valid(joi.ref('password')).required().strict(),
+    option: joi.string().required().strict()
   });
 
 async function isEmailTaken(email) {
@@ -34,6 +35,8 @@ async function run(req, res, next) {
 
   let user;
   try {
+    // TODO(vpoddar): Handle options
+    delete req.body.option;
     user = new User(req.body);
     user = await user.save();
   } catch (err) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
 
@@ -10,7 +10,9 @@ import {
   FormContent,
   FullView,
   FieldInput,
-  SubmitButton
+  FieldInputError,
+  Heading,
+  RegisterButton,
 } from './style';
 import * as userApi from '../API/user';
 import { requestLoginSuccess, clearLoginError } from './userActions';
@@ -79,14 +81,22 @@ class Login extends Component {
         >
           {({ dirty, touched, errors, isSubmitting }) => (
             <FormContent>
-              <FieldInput placeholder="Email" type="email" name="email" />
-              <ErrorMessage name="email" component="div" />
-              <FieldInput placeholder="Password" type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
-              <SubmitButton type="submit"
-                            disabled={isSubmitting || !isEmpty(errors) || !dirty}>
+              <Heading>Login</Heading>
+              {
+                errors.email && touched.email
+                ? <FieldInputError placeholder="Email" type="email" name="email" />
+                : <FieldInput placeholder="Email" type="email" name="email" />
+              }
+              {
+                errors.password && touched.password
+                ? <FieldInputError placeholder="Password" type="password" name="password" />
+                : <FieldInput placeholder="Password" type="password" name="password" />
+              }
+              <RegisterButton
+                  type="submit"
+                  disabled={isSubmitting || !isEmpty(errors) || !dirty}>
                 Submit
-              </SubmitButton>
+              </RegisterButton>
 
               <Link to="/register">Create Account</Link>
               <Link to="/forgot">Recover Password</Link>

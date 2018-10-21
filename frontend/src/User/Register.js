@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
 
@@ -8,33 +8,41 @@ import {
   FormContent,
   FullView,
   FieldInput,
-  SubmitButton
+  FieldInputError,
+  Heading,
+  RegisterButton,
+  StyledSelect
 } from './style';
 import * as userApi from '../API/user';
+
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
-    .required('Required'),
+    .required('Email Required'),
   password: Yup.string()
-    .required('Required'),
+    .required('Password Required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'Passwords do not match')
+    .required('Confirm Password Required'),
 });
 
+const options = [
+  { value: 'agency', label: 'Agency'},
+  { value: 'tenant', label: 'Tenant'},
+  { value: 'owner', label: 'Owner'},
+];
 
 const defaultValues = {
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  option: 'Tenant'
 };
 
 export default class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      errors: null
-    };
+  state = {
+    errors: null
   }
 
   render() {
@@ -63,18 +71,41 @@ export default class Register extends Component {
         >
           {({ dirty, touched, errors, isSubmitting }) => (
             <FormContent>
-              <FieldInput placeholder="Email" type="email" name="email"  />
-              <ErrorMessage name="email" component="div" />
-              <FieldInput placeholder="Password" type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
-              <FieldInput placeholder="Confirm Password"
-                     type="password"
-                     name="confirmPassword" />
-              <ErrorMessage name="confirmPassword" component="div" />
-              <SubmitButton type="submit"
-                            disabled={isSubmitting || !isEmpty(errors) || !dirty}>
+              <Heading>Register</Heading>
+              {
+                errors.email && touched.email
+                ? <FieldInputError placeholder="Email" type="email" name="email" />
+                : <FieldInput placeholder="Email" type="email" name="email" />
+              }
+              {
+                errors.password && touched.password
+                ? <FieldInputError placeholder="Password" type="password" name="password" />
+                : <FieldInput placeholder="Password" type="password" name="password" />
+              }
+              {
+                errors.confirmPassword && touched.confirmPassword
+                ? <FieldInputError placeholder="Confirm Password" type="password" name="confirmPassword" />
+                : <FieldInput placeholder="Confirm Password" type="password" name="confirmPassword" />
+              }
+              <StyledSelect
+                id="option"
+                defaultValue={options[0]}
+                options={options}
+              />
+              {
+                errors.email && touched.email && <span>{ errors.email }</span>
+              }
+              {
+                errors.password && touched.password && <span>{ errors.password }</span>
+              }
+              {
+                errors.confirmPassword && touched.confirmPassword && <span>{ errors.confirmPassword }</span>
+              }
+              <RegisterButton
+                  type="submit"
+                  disabled={isSubmitting || !isEmpty(errors) || !dirty}>
                 Submit
-              </SubmitButton>
+              </RegisterButton>
               <Link to="/login">Login</Link>
             </FormContent>
           )}

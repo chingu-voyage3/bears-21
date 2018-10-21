@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
+import Select from 'react-select';
+
+export const Heading = styled.h1`
+  font-size: 40px;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-put;
+  font-weight: 200;
+  color: #fff;
+`;
+
+export const StyledSelect = styled(Select)`
+  width: 100%;
+  margin-bottom: 10px;
+`;
 
 export const FullView = styled.div`
   position: fixed;
@@ -17,6 +31,7 @@ export const FullView = styled.div`
   align-items: center;
   overflow-y: scroll;
   -webkit-transform: translate3d(0, 0, 0);
+  background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 `;
 
 
@@ -88,15 +103,35 @@ export const ButtonRow = styled.div`
 
 
 export const FieldInput = styled(Field)`
-  resize: none;
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
-  margin-top: 10px;
-  border: none;
-  background: #fafafa;
-  border-radius: 0;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
-  border-bottom: 1px solid #757575;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.25s;
+  font-weight: 300;
+`;
+
+export const FieldInputError = styled(Field)`
+  outline: 0;
+  border: 1px solid red;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.25s;
+  font-weight: 300;
 `;
 
 export const SubmitButton = styled(Button)`
@@ -110,4 +145,21 @@ export const SubmitButton = styled(Button)`
   border-radius: 0;
   line-height: 20px;
   color: white;
+`;
+
+
+export const RegisterButton = styled.button`
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+  &:hover{
+    background-color: rgb(245, 247, 249);
+  }
 `;

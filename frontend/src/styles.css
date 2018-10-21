@@ -26,6 +26,11 @@ input:focus {
   border-color: rgba( 127, 127, 255, 0.5);
 }
 
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 textarea {
   padding: 5px;
   border-radius: 10px;

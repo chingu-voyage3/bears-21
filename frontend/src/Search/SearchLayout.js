@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { StyleSheet, css } from 'aphrodite';
 import styled from 'styled-components';
 
 import SearchPage from './SearchPage';
@@ -25,14 +24,5 @@ const Search = () => (
     </Switch>
   </Page>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
-});
 
 export default Search;
