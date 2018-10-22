@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, css} from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 
-const cross_symbol = String.fromCharCode( 10799);
+const cross_symbol = String.fromCharCode(10799);
 
-const CrossButton = (props) => (
-  <button type="button" title={props.title}
+const CrossButton = props => (
+  <button
+    type="button"
+    title={props.title}
     className={css(styles.cross_box_colour)}
-    onClick={props.onClick} >
+    onClick={props.onClick}
+  >
     {cross_symbol}
   </button>
 );
@@ -19,7 +22,7 @@ CrossButton.propTypes = {
 
 const styles = StyleSheet.create({
   cross_box_colour: {
-    background: "tomato" // "linear-gradient( to top, #49CF87, #40C080)"
+    background: 'tomato' // "linear-gradient( to top, #49CF87, #40C080)"
   }
 });
 

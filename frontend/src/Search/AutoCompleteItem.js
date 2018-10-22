@@ -4,7 +4,9 @@ import { css, StyleSheet } from 'aphrodite';
 
 const AutoCompleteItem = ({ link, text }) => (
   <li className={css(styles.li)}>
-    <a className={css(styles.a)} href={link}>{text}</a>
+    <a className={css(styles.a)} href={link}>
+      {text}
+    </a>
   </li>
 );
 

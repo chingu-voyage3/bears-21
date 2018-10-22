@@ -4,7 +4,10 @@ import { css, StyleSheet } from 'aphrodite';
 const Footer = () => (
   <footer className={css(styles.footer)}>
     <section className={css(styles.section)}>
-      Made by bears-21 with <span role="img" aria-label="heart">❤️ </span>
+      Made by bears-21 with{' '}
+      <span role="img" aria-label="heart">
+        ❤️{' '}
+      </span>
     </section>
   </footer>
 );

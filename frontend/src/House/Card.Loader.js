@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, css} from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 
 const CardLoader = () => (
   <div className={css(styles.container)}>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     margin: '10px',
-    width: '320px',
+    width: '320px'
   }
 });
 

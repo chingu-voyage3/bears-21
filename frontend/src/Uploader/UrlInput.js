@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, css} from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 
-const UrlInput = (props) => (
-  <div className={css(styles.wrapper)} >
+const UrlInput = props => (
+  <div className={css(styles.wrapper)}>
     Url
-    <input type="text" value={props.url_text}
+    <input
+      type="text"
+      value={props.url_text}
       onChange={props.onUrlChange}
-      onKeyUp={props.handleUrlKeyUp}/>
+      onKeyUp={props.handleUrlKeyUp}
+    />
   </div>
 );
 UrlInput.propTypes = {
@@ -19,8 +22,8 @@ export default UrlInput;
 
 const styles = StyleSheet.create({
   wrapper: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }
 });

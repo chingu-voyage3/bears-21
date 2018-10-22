@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ImageDefault} from '../Image';
-import {Uploader} from '../Uploader';
-import {StyleSheet, css} from 'aphrodite';
+import { ImageDefault } from '../Image';
+import { Uploader } from '../Uploader';
+import { StyleSheet, css } from 'aphrodite';
 
-const Avatar = ({name, localUser, image, changeImage}) => (
+const Avatar = ({ name, localUser, image, changeImage }) => (
   <div className={css(styles.wrapper)}>
-    {localUser
-      ? <Uploader currentImage={image} addImage={changeImage} />
-      : <ImageDefault src={image} missing_url='//via.placeholder.com/200x200?text=noimg' />
-    }
+    {localUser ? (
+      <Uploader currentImage={image} addImage={changeImage} />
+    ) : (
+      <ImageDefault
+        src={image}
+        missing_url="//via.placeholder.com/200x200?text=noimg"
+      />
+    )}
     <p>{name}</p>
   </div>
 );

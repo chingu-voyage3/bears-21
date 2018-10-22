@@ -63,13 +63,7 @@
     "prepushnojsx": "npm run lint && npm run test",
     "postmergee": "./scripts/githooks/post-merge.sh",
     "prepushe": "npm run lint && npm run test",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "precommit": "yarn prettier --write \"{,!(node_modules)/**/}*.js}\""
   },
   "repository": {
     "type": "git",

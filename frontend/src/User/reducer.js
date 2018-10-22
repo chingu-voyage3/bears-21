@@ -3,36 +3,42 @@ import * as UserTypes from './UserTypes';
 const initialState = {
   user: {},
   isWorking: false,
-  error: false,
+  error: false
 };
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case UserTypes.AUTO_LOGIN_SUCCESS:
     case UserTypes.REQUEST_LOGIN_SUCCESS:
-      return {...state,
+      return {
+        ...state,
         user: action.user
       };
     case UserTypes.AUTO_LOGIN_FAILED:
     case UserTypes.REQUEST_LOGIN_FAILED:
-      return {...state,
+      return {
+        ...state,
         error: action.error
       };
     case UserTypes.USER_IS_WORKING:
-      return {...state,
+      return {
+        ...state,
         isWorking: action.isWorking
       };
     case UserTypes.USER_SUCCESS:
-      return {...state,
+      return {
+        ...state,
         user: action.user
       };
     case UserTypes.USER_ERRORED:
-      return {...state,
+      return {
+        ...state,
         error: action.error
       };
     case UserTypes.CLEAR_LOGIN_ERROR:
     case UserTypes.LOGOUT:
-      return {...state,
+      return {
+        ...state,
         user: {}
       };
     default:

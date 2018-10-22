@@ -16,8 +16,8 @@ class Entrypoint extends Component {
     this.props.autoLogin();
   };
   componentWillReceiveProps = newProps => {
-    if( newProps.user) {
-      localStorage.setItem( 'user', JSON.stringify(newProps.user.user));
+    if (newProps.user) {
+      localStorage.setItem('user', JSON.stringify(newProps.user.user));
     }
   };
   render() {
@@ -49,9 +49,13 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    autoLogin: () => dispatch( autoLogin())
+    autoLogin: () => dispatch(autoLogin())
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entrypoint));
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Entrypoint)
+);
