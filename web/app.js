@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const mongoose = require( 'mongoose');
+const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const path = require('path');
@@ -40,15 +40,17 @@ app.use(cookieParser());
 // Used heavily on userController.validateRegister
 app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
-app.use(session({
-  secret: 'anything',
-  keys: ['secretkey'],
-  // at some point?
-  // cookie: { maxAge: 1000 }
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
+app.use(
+  session({
+    secret: 'anything',
+    keys: ['secretkey'],
+    // at some point?
+    // cookie: { maxAge: 1000 }
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
 
 // Passport JS is what we use to handle our logins
 app.use(passport.initialize());

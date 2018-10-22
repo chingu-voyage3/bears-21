@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const reload_symbol = String.fromCharCode( 8635);
-const ReloadButton = (props) => (
-  <button type="button" onClick={props.onClick} title={props.title} >
+const reload_symbol = String.fromCharCode(8635);
+const ReloadButton = props => (
+  <button type="button" onClick={props.onClick} title={props.title}>
     {reload_symbol}
   </button>
 );

@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-function logout (req, res) {
+function logout(req, res) {
   req.logout();
   res.json({});
 }
