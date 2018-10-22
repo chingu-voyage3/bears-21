@@ -1,5 +1,5 @@
 {
-  "name": "genie",
+  "name": "Hissues",
   "version": "1.0.0",
   "description": "The ultimate solution to your housing issues",
   "main": "index.js",
@@ -31,13 +31,14 @@
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.1",
     "dotenv": "^4.0.0",
-    "eslint": "^3.19.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint": "^5.7.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.5.1",
-    "eslint-watch": "^3.1.3",
     "husky": "^0.14.3",
+    "lint-staged": "^7.3.0",
     "mocha": "^4.0.1",
     "nock": "^9.1.5",
+    "prettier": "^1.14.3",
     "sinon": "^4.1.3",
     "sinon-chai": "^2.14.0",
     "super-request": "^1.2.0"
@@ -61,7 +62,14 @@
     "heroku-prebuild": "cd frontend && npm install && npm run build",
     "prepushnojsx": "npm run lint && npm run test",
     "postmergee": "./scripts/githooks/post-merge.sh",
-    "prepushe": "npm run lint && npm run test"
+    "prepushe": "npm run lint && npm run test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
