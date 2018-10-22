@@ -44,13 +44,12 @@ app.use(cookieParser());
 app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
 app.use(session({
-  store: new RedisStore(),
   secret: 'anything',
   keys: ['secretkey'],
   cookie: { secure: false, maxAge:86400000 },
   resave: true,
   saveUninitialized: true,
-  //store: new MongoStore({ mongooseConnection: mongoose.connection })
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 // Passport JS is what we use to handle our logins

@@ -21,12 +21,14 @@ function init () {
     },
     function(email, password, done) {
       User.findOne({ email }, async function (err, user) {
-        if (err) { return done(err); }
+        if (err) {
+          console.error(err);
+          return done(err);
+        }
         if (!user) {
           return done(null, false, { message: 'Incorrect username.' });
         }
         const isAuthed = await user.validatePassword(password);
-        console.log('isAutherd============================', isAuthed);
         if (!isAuthed) {
           return done(null, false, { message: 'Incorrect password.' });
         }
