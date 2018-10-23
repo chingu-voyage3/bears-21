@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ImageDefault } from '../Image';
-import { RatingSummary } from '../Rating';
+import {ImageDefault} from '../Image';
+import {RatingSummary} from '../Rating';
 import { css, StyleSheet } from 'aphrodite';
 
 // <h4 style={{margin: '0', padding: '0 3.5%', lineHeight: '1.2'}}>{house.title}</h4>
 const HouseItem = ({ house }) => (
   <div className={css(styles.container)}>
-    <ImageDefault
-      src={house.images[0]}
-      missing_url="http://via.placeholder.com/350x150"
-    />
+    <ImageDefault src={house.images[0]} missing_url="http://via.placeholder.com/350x150" />
     <span className={css(styles.title)}>
       <RatingSummary value={house.rating} />
       {house.title}

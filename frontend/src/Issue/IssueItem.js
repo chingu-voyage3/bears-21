@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class Issue extends Component {
   static propTypes = {
@@ -8,11 +8,11 @@ export default class Issue extends Component {
     onIssueClick: PropTypes.func.isRequired
   };
   onClick = () => {
-    this.props.onIssueClick(this.props.issue);
+    this.props.onIssueClick( this.props.issue);
   };
   render = () => {
     return (
-      <li className={css(styles.issue_style)} onClick={this.onClick}>
+      <li className={css(styles.issue_style)} onClick={this.onClick} >
         {this.props.issue.title}
       </li>
     );
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     textAlign: 'left',
     listStyle: 'none',
-    ':hover': {
+    ":hover": {
       // what do you fancy for highlight? bg colour, border or text colour?
       // background: "lightgrey"
       // border: '1px solid rgba( 127,127,127,0.5)',

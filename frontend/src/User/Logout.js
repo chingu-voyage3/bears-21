@@ -3,7 +3,7 @@ import { css, StyleSheet } from 'aphrodite';
 
 export default class Logout extends Component {
   render() {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     return (
       <div className={css(styles.centered)}>
         <div>You have successfully been logged out!</div>
@@ -14,10 +14,10 @@ export default class Logout extends Component {
 
 const styles = StyleSheet.create({
   centered: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   }
 });

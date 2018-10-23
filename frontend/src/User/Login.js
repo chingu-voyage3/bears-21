@@ -14,81 +14,71 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
-      currentStatus: ''
+      email: "",
+      password: "",
+      currentStatus: "",
     };
   }
 
   componentDidMount = () => {
-    document.addEventListener('keydown', this.keyPressed);
-  };
+    document.addEventListener("keydown", this.keyPressed);
+  }
 
   componentWillUnmount = () => {
-    document.removeEventListener('keydown', this.keyPressed);
-  };
+    document.removeEventListener("keydown", this.keyPressed);
+  }
 
   componentWillReceiveProps = newProps => {
-    let currentStatus = '';
-    if (newProps.user) {
-      if (newProps.user.error) {
+    let currentStatus = "";
+    if( newProps.user) {
+      if( newProps.user.error) {
         currentStatus = newProps.user.error;
       }
     }
-    this.setState({ currentStatus });
+    this.setState( {currentStatus})
   };
 
-  keyPressed = e => {
+  keyPressed = (e) => {
     if (e.keyCode === 13) {
       setTimeout(this.login, 500);
     }
-  };
+  }
   onFieldChange = e => {
     this.props.clearLoginError();
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({ [name]: value });
-  };
+    this.setState({[name]: value});
+  }
 
   login = () => {
-    const { email, password } = this.state;
-    this.props.requestLogin({ email, password });
-  };
+    const {email, password} = this.state;
+    this.props.requestLogin( {email, password});
+  }
 
   render() {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.centered, styles.loginContainer)}>
-          <input
-            className={css(styles.textarea)}
-            name="email"
+          <input className={css(styles.textarea)}
+            name='email'
             placeholder="your@email.com"
             value={this.state.email}
             onChange={this.onFieldChange}
           />
-          <input
-            className={css(styles.textarea)}
-            name="password"
+          <input className={css(styles.textarea)}
+            name='password'
             placeholder="your password"
             type="password"
             value={this.state.password}
             onChange={this.onFieldChange}
           />
 
-          <div className={css(styles.boxes, styles.status)}>
-            {this.state.currentStatus}
-          </div>
-          <button className={css(styles.login)} onClick={this.login}>
-            Log in
-          </button>
+          <div className={css(styles.boxes, styles.status)}>{this.state.currentStatus}</div>
+          <button className={css(styles.login)} onClick={this.login}>Log in</button>
 
           <div className={css(styles.accountHolder)}>
-            <Link className={css(styles.account)} to="/register">
-              Create Account
-            </Link>
-            <Link className={css(styles.account)} to="/forgot">
-              Recover Password
-            </Link>
+            <Link className={css(styles.account)} to="/register">Create Account</Link>
+            <Link className={css(styles.account)} to="/forgot">Recover Password</Link>
           </div>
         </div>
       </div>
@@ -109,31 +99,30 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+
 
 const styles = StyleSheet.create({
   centered: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
   },
   box: {
     marginTop: 150,
     height: 200,
     width: 450,
-    border: '1px solid black'
+    border: "1px solid black",
   },
   textarea: {
-    resize: 'none',
+    resize: "none",
     fontSize: 18,
     padding: '10px 10px 10px 5px',
     marginTop: 10,
-    border: 'none',
+    border: "none",
     background: '#fafafa',
     borderRadius: 0,
     width: '100%',
@@ -145,23 +134,23 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 16,
     fontWeight: 400,
-    background: '#FF5A5F',
+    background: "#FF5A5F",
     border: 0,
     borderRadius: 0,
     lineHeight: '20px',
-    color: 'white'
-  },
+    color: "white",
+   },
   boxes: {
     width: 270,
     height: 25,
-    border: 'none',
+    border: "none",
     paddingLeft: 8,
-    paddingRight: 8
+    paddingRight: 8,
   },
   title: {
     fontSize: 50,
     marginBottom: 40,
-    color: 'white'
+    color: "white",
   },
   loginContainer: {
     background: '#fafafa',
@@ -174,23 +163,23 @@ const styles = StyleSheet.create({
   account: {
     marginRight: 5,
     marginLeft: 5,
-    textDecoration: 'none',
-    ':link': {
-      color: 'black'
+    textDecoration: "none",
+    ":link": {
+      color: "black",
     },
-    ':visited': {
-      color: 'black'
-    }
+    ":visited": {
+      color: "black",
+    },
   },
   accountHolder: {
-    marginTop: 10
+    marginTop: 10,
   },
   background: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: '5em 0'
   },
   status: {
-    textAlign: 'center',
-    lineHeight: '25px'
-  }
+    textAlign: "center",
+    lineHeight: "25px",
+  },
 });

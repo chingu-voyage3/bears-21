@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const chalk = require('chalk');
 
@@ -7,10 +7,10 @@ const divider = chalk.gray('\n-----------------------------------');
 /* eslint-disable no-console */
 
 module.exports = {
-  info: msg => {
+  info: (msg) => {
     console.log('\n' + chalk.green(msg));
   },
-  error: err => {
+  error: (err) => {
     console.log('\n' + chalk.red(err));
   },
   appStarted: (host, port) => {

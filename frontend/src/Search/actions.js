@@ -1,7 +1,7 @@
 import { SearchMock } from '../API/service';
 
 export const UPDATE_POST_CODE = 'UPDATE_POST_CODE';
-export function updatePostCode(postCode = '') {
+export function updatePostCode(postCode='') {
   return {
     type: UPDATE_POST_CODE,
     postCode
@@ -9,7 +9,7 @@ export function updatePostCode(postCode = '') {
 }
 
 export const SEARCH_HOUSES_REQUEST = 'SEARCH_HOUSES';
-export function searchHouses(postCode = '') {
+export function searchHouses(postCode='') {
   return {
     type: SEARCH_HOUSES_REQUEST,
     postCode
@@ -47,17 +47,15 @@ export function searchHousesSuccess(postCode, json) {
   return {
     type: SEARCH_HOUSES_SUCCESS,
     postCode,
-    houses: (json.houses || []).filter(
-      house =>
-        house.location.postCode
-          .toLowerCase()
-          .includes(postCode.toLowerCase()) && house.active
-    )
+    houses: (json.houses || [])
+      .filter(house => house.location.postCode.toLowerCase()
+                            .includes(postCode.toLowerCase()) &&
+                       house.active)
   };
 }
 
 export const SEARCH_HOUSES_FAILURE = 'SEARCH_HOUSES_FAILURE';
-export function searchHousesFailed(postCode = '', err) {
+export function searchHousesFailed(postCode='', err) {
   return {
     type: SEARCH_HOUSES_FAILURE,
     postCode,
@@ -77,18 +75,16 @@ export function fetchHouses(postCode) {
 }
 
 export function searchPostCodes(postCode) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(updatePostCode(postCode));
     dispatch(searchPostCodeStart(postCode));
     SearchMock.getAll()
-      .then(json => dispatch(searchPostCodeSuccess(postCode, json)))
-      .catch(err => dispatch(searchPostCodeFailed(postCode, err)));
+              .then(json => dispatch(searchPostCodeSuccess(postCode, json)))
+              .catch(err => dispatch(searchPostCodeFailed(postCode, err)));
   };
 }
 
 function findMatchingPostCodes(postCodes, key) {
-  const suggestions = postCodes.filter(p =>
-    p.text.toLowerCase().includes(key.toLowerCase())
-  );
+  const suggestions = postCodes.filter(p => p.text.toLowerCase().includes(key.toLowerCase()));
   return suggestions;
 }

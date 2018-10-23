@@ -1,6 +1,7 @@
 {
   "root": true,
   "parser": "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module",
@@ -9,18 +10,19 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "plugins": ["prettier", "react"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
   "rules": {
-    "prettier/prettier": "error",
     "no-console": 1,
     "react/display-name": "warn",
     "react/prop-types": "warn"
   },
-  "env": {
-    "es6": true,
-    "node": true,
-    "mocha": true,
-    "commonjs": true,
-    "browser": true
-  }
+  "plugins": [
+    "react"
+  ]
 }

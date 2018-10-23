@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PlusButton = props => (
-  <button type="button" title={props.title} onClick={props.onClick}>
+const PlusButton = (props) => (
+  <button type="button" title={props.title} onClick={props.onClick} >
     +
   </button>
 );

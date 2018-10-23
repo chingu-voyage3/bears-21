@@ -12,7 +12,7 @@ const issueSchema = new Schema({
   title: {
     type: String,
     trim: true,
-    required: 'title is required'
+    required: "title is required"
   },
   description: {
     type: String,
@@ -43,8 +43,8 @@ const issueSchema = new Schema({
   },
   house: {
     type: Schema.Types.ObjectId,
-    ref: 'House',
-    required: 'house is required'
+    ref: "House",
+    required: "house is required"
   }
 });
 

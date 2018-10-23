@@ -3,84 +3,65 @@ import { css, StyleSheet } from 'aphrodite';
 import axios from 'axios';
 
 export default class Register extends Component {
+
   constructor() {
     super();
     this.state = {
-      email: '',
-      name: '',
-      password: '',
-      confirmedPassword: '',
-      currentStatus: ''
+      email: "",
+      name: "",
+      password: "",
+      confirmedPassword: "",
+      currentStatus: "",
     };
   }
 
   register = () => {
-    axios
-      .post('/api/v1/register', {
-        email: this.state.email,
-        name: this.state.name,
-        password: this.state.password,
-        'password-confirm': this.state.confirmedPassword
-      })
-      .then(res => {
-        console.log('RESPONSE', res);
-      })
-      .catch(err => {
-        console.log('ERROR: ', err);
-      });
-    this.setState({ email: '', name: '', password: '', confirmedPassword: '' });
-  };
+    axios.post("/api/v1/register", {
+      email: this.state.email,
+      name: this.state.name,
+      password: this.state.password,
+      "password-confirm": this.state.confirmedPassword,
+    })
+    .then(res => {
+      console.log("RESPONSE", res);
+    })
+    .catch(err => {
+      console.log("ERROR: ", err);
+    });
+    this.setState({email: "", name: "", password: "", confirmedPassword: ""});
+  }
+
 
   render() {
     return (
       <div className={css(styles.centered, styles.background)}>
         <div className={css(styles.registerContainer, styles.centered)}>
-          <input
-            placeholder="your name"
-            className={css(styles.input)}
-            onChange={e => this.setState({ name: e.target.value })}
-          />
-          <input
-            placeholder="your@example.com"
-            className={css(styles.input)}
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <input
-            placeholder="your password"
-            type="password"
-            className={css(styles.input)}
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <input
-            placeholder="confirm password"
-            type="password"
-            className={css(styles.input)}
-            onChange={e => this.setState({ confirmedPassword: e.target.value })}
-          />
-          <div className={css(styles.status)} />
-          <button className={css(styles.button)} onClick={this.register}>
-            Sign up
-          </button>
+          <input placeholder="your name" className={css(styles.input)} onChange={e => this.setState({name: e.target.value})}></input>
+          <input placeholder="your@example.com" className={css(styles.input)} onChange={e => this.setState({email: e.target.value})}></input>
+          <input placeholder="your password" type="password" className={css(styles.input)} onChange={e => this.setState({password: e.target.value})}></input>
+          <input placeholder="confirm password" type="password" className={css(styles.input)} onChange={e => this.setState({confirmedPassword: e.target.value})}></input>
+          <div className={css(styles.status)}></div>
+          <button className={css(styles.button)} onClick={this.register}>Sign up</button>
         </div>
       </div>
-    );
+     );
   }
 }
 
 const styles = StyleSheet.create({
   centered: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   input: {
-    resize: 'none',
+    resize: "none",
     fontSize: 18,
     padding: '10px 10px 10px 5px',
     marginTop: 10,
-    border: 'none',
+    border: "none",
     background: '#fafafa',
     borderRadius: 0,
     width: '100%',
@@ -92,11 +73,11 @@ const styles = StyleSheet.create({
     padding: '3em 2em 2em 2em',
     position: 'relative',
     width: 400,
-    maxHeight: 430
+    maxHeight: 430,
   },
   status: {
     width: 286,
-    height: 25
+    height: 25,
   },
   button: {
     padding: '12px 24px',
@@ -104,14 +85,14 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 16,
     fontWeight: 400,
-    background: '#FF5A5F',
+    background: "#FF5A5F",
     border: 0,
     borderRadius: 0,
     lineHeight: '20px',
-    color: 'white'
+    color: "white",
   },
   background: {
-    backgroundColor: '#f0f0f0',
-    padding: '5em 0'
-  }
+    backgroundColor: "#f0f0f0",
+    padding: '5em 0',
+  },
 });

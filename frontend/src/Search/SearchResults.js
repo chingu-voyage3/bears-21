@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import { css, StyleSheet } from 'aphrodite';
 import 'url-search-params-polyfill';
 import HouseList from './HouseList';
@@ -18,22 +18,21 @@ class SearchResults extends Component {
   };
   state = {
     houseSelected: false
-  };
+  }
   componentWillMount() {
-    loadData(this.props);
+    loadData(this.props)
   }
   houseSelected = house => {
-    this.setState({ houseSelected: house });
+    this.setState( {houseSelected: house})
   };
   render = () => {
-    const { houseSelected = false } = this.state;
-    const { houses = [], isFetching = true, postCode } = this.props;
+    const {houseSelected = false} = this.state;
+    const { houses=[], isFetching=true, postCode } = this.props;
     if (houseSelected) {
       return (
-        <Redirect
-          to={{
+        <Redirect to={{
             pathname: `/houseview/${houseSelected._id}`,
-            state: { house: houseSelected }
+            state: {house: houseSelected}
           }}
         />
       );
@@ -43,17 +42,11 @@ class SearchResults extends Component {
     }
     return (
       <div className={css(styles.container)}>
-        <h1 className={css(styles.heading)}>
-          Search results for post code {postCode}
-        </h1>
+        <h1 className={css(styles.heading)}>Search results for post code {postCode}</h1>
         <HouseList>
-          {houses.map((house, i) => (
-            <HouseItemSelectable
-              key={i}
-              house={house}
-              onClick={this.houseSelected}
-            />
-          ))}
+          {houses.map((house, i) =>
+            <HouseItemSelectable key={i} house={house} onClick={this.houseSelected} />)
+          }
         </HouseList>
       </div>
     );
@@ -73,6 +66,7 @@ const styles = StyleSheet.create({
     color: '#262637'
   }
 });
+
 
 function loadData(props) {
   props.fetchHouses(parse(getSearchParams(props)).postCode);
@@ -98,9 +92,6 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  {
-    fetchHouses
-  }
-)(SearchResults);
+export default connect(mapStateToProps, {
+  fetchHouses
+})(SearchResults);
