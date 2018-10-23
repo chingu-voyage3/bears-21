@@ -9,19 +9,18 @@ import {
   FieldInput,
   FieldInputError,
   Heading,
-  RegisterButton,
+  RegisterButton
 } from './style';
 import * as userApi from '../API/user';
-
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
-    .required('Required'),
+    .required('Required')
 });
 
 const defaultValues = {
-  email: '',
+  email: ''
 };
 
 export default class Forgot extends PureComponent {
@@ -47,7 +46,7 @@ export default class Forgot extends PureComponent {
               await userApi.forgotPassword(values);
             } catch ({ response }) {
               this.setState({
-                errors: response ? response.data.message : "Server error."
+                errors: response ? response.data.message : 'Server error.'
               });
             } finally {
               setSubmitting(false);
@@ -57,13 +56,19 @@ export default class Forgot extends PureComponent {
           {({ dirty, touched, errors, isSubmitting }) => (
             <FormContent>
               <Heading>Forgot Password?</Heading>
-              {
-                errors.email && touched.email
-                ? <FieldInputError placeholder="Email" type="email" name="email" />
-                : <FieldInput placeholder="Email" type="email" name="email" />
-              }
-              <RegisterButton type="submit"
-                      disabled={isSubmitting || !isEmpty(errors) || !dirty}>
+              {errors.email && touched.email ? (
+                <FieldInputError
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                />
+              ) : (
+                <FieldInput placeholder="Email" type="email" name="email" />
+              )}
+              <RegisterButton
+                type="submit"
+                disabled={isSubmitting || !isEmpty(errors) || !dirty}
+              >
                 Submit
               </RegisterButton>
             </FormContent>
@@ -71,6 +76,5 @@ export default class Forgot extends PureComponent {
         </Formik>
       </FullView>
     );
-  }
-
+  };
 }

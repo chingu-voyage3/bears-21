@@ -2,7 +2,7 @@
 
 const boom = require('boom');
 
-function isLoggedIn (req, res, next) {
+function isLoggedIn(req, res, next) {
   // first check if the user is authenticated
   if (req.isAuthenticated()) {
     return next(); // carry on! They are logged in!

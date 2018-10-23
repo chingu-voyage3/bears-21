@@ -5,14 +5,19 @@ const util = require('../util');
 const boom = require('boom');
 const joi = require('joi');
 
-const updateSchema = joi
-  .object({
-    id: joi.string().guid({version: 'uuidv4'}).required(),
-    name: joi.string().required(),
-    email: joi.string().email().required(),
-    avatar: joi.string().required(),
-    files: joi.any()
-  });
+const updateSchema = joi.object({
+  id: joi
+    .string()
+    .guid({ version: 'uuidv4' })
+    .required(),
+  name: joi.string().required(),
+  email: joi
+    .string()
+    .email()
+    .required(),
+  avatar: joi.string().required(),
+  files: joi.any()
+});
 
 async function update(req, res, next) {
   let { id, name, email, avatar, files } = joi.attempt(req.body, updateSchema);

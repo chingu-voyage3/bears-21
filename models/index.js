@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const issue = require('./issue');
 const house = require('./house');

@@ -1,12 +1,15 @@
-import api from './api'
+import api from './api';
 
 export const KEY = 'HISSUES';
 
 export async function login(body) {
   const { data } = await api.post('/login', body);
-  localStorage.setItem(KEY, JSON.stringify({
-    currentUser: { ...data }
-  }));
+  localStorage.setItem(
+    KEY,
+    JSON.stringify({
+      currentUser: { ...data }
+    })
+  );
   return data;
 }
 

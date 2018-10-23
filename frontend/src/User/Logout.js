@@ -22,6 +22,9 @@ class Logout extends Component {
   }
 }
 
-export default connect(null, (dispatch) => ({
-  dispatch,
-}))(Logout);
+export default connect(
+  null,
+  dispatch => ({
+    dispatch
+  })
+)(Logout);

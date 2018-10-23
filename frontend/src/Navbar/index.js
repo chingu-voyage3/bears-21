@@ -5,34 +5,42 @@ import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-
 class C extends Component {
   static propTypes = {
-    currentUser: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
   };
 
   render() {
     const { currentUser } = this.props;
     const loggedIn = !isEmpty(currentUser);
 
-    if (loggedIn) { // authenticated
+    if (loggedIn) {
+      // authenticated
       const { name } = currentUser;
       return (
         <div>
           <ul className={css(styles.container)}>
             <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/">Hissues</Link>
+              <Link className={css(styles.links)} to="/">
+                Hissues
+              </Link>
             </li>
             <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/dashboard">Dashboard</Link>
+              <Link className={css(styles.links)} to="/dashboard">
+                Dashboard
+              </Link>
             </li>
             <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/profile">Profile</Link>
+              <Link className={css(styles.links)} to="/profile">
+                Profile
+              </Link>
             </li>
             <li className={css(styles.navelement)}>
-              <Link className={css(styles.links)} to="/logout">Logout</Link>
+              <Link className={css(styles.links)} to="/logout">
+                Logout
+              </Link>
             </li>
-            <li className={css(styles.navelement)} >
+            <li className={css(styles.navelement)}>
               <span className={css(styles.links)}>Hi {name}</span>
             </li>
           </ul>
@@ -48,19 +56,31 @@ class C extends Component {
       //    New House
       //  </Link>
       // </li>
-    } else { // not authenticated
+    } else {
+      // not authenticated
       return (
         <div>
           <ul className={css(styles.container)}>
-            <li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
-            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
-            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
+            <li className={css(styles.titleelement)}>
+              <Link className={css(styles.links)} to="/">
+                Hissues
+              </Link>
+            </li>
+            <li className={css(styles.navelement)}>
+              <Link className={css(styles.links)} to="/login">
+                Login
+              </Link>
+            </li>
+            <li className={css(styles.navelement)}>
+              <Link className={css(styles.links)} to="/register">
+                Register
+              </Link>
+            </li>
           </ul>
         </div>
       );
     }
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -74,10 +94,10 @@ const styles = StyleSheet.create({
     background: 'linear-gradient(to right, rgba(107,183,86,0.95), #008f68)'
   },
   navelement: {
-    float: 'right',
+    float: 'right'
   },
   titleelement: {
-    float: 'left',
+    float: 'left'
   },
   links: {
     display: 'block',
@@ -85,14 +105,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: '14px 16px',
     textDecoration: 'none',
-    cursor: 'pointer',
-  },
+    cursor: 'pointer'
+  }
 });
-
 
 const mapStateToProps = state => ({
-  currentUser: state.userReducer.user,
+  currentUser: state.userReducer.user
 });
-
 
 export default connect(mapStateToProps)(C);

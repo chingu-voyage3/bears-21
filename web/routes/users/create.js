@@ -4,16 +4,25 @@ const User = require('../../../models/user');
 const boom = require('boom');
 const joi = require('joi');
 
-const registerSchema = joi
-  .object({
-    email: joi
-      .string()
-      .email()
-      .required(),
-    password: joi.string().required().strict(),
-    confirmPassword: joi.string().valid(joi.ref('password')).required().strict(),
-    option: joi.string().required().strict()
-  });
+const registerSchema = joi.object({
+  email: joi
+    .string()
+    .email()
+    .required(),
+  password: joi
+    .string()
+    .required()
+    .strict(),
+  confirmPassword: joi
+    .string()
+    .valid(joi.ref('password'))
+    .required()
+    .strict(),
+  option: joi
+    .string()
+    .required()
+    .strict()
+});
 
 async function isEmailTaken(email) {
   let result = true;
@@ -31,7 +40,7 @@ async function run(req, res, next) {
   const emailTaken = await isEmailTaken(email);
   if (emailTaken) {
     throw boom.conflict('Email is already taken.');
-  };
+  }
 
   let user;
   try {
