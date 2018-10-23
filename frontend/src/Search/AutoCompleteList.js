@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { css, StyleSheet } from 'aphrodite';
 import AutoCompleteItem from './AutoCompleteItem';
 
-const AutoCompleteList = ({ items = [] }) => {
-  const listItems = items.map((item, idx) => (
-    <AutoCompleteItem key={idx} {...item} />
-  ));
+const AutoCompleteList = ({ items=[] }) => {
+  const listItems = items.map((item, idx) => <AutoCompleteItem key={idx} {...item} />);
   return (
     <div className={css(styles.wrapper)}>
       <ul className={css(styles.list)}>{listItems}</ul>
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
     listStyle: 'none',
     maxHeight: '300px',
     'overflow-y': 'scroll',
-    'overflow-x': 'hidden'
+    'overflow-x': 'hidden',
   }
 });
 

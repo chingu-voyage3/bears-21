@@ -1,5 +1,5 @@
-'use strict';
+'use strict'
 
 module.exports = {
-  grab: require('./grab')
+  grab: require( './grab')
 };

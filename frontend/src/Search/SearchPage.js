@@ -8,7 +8,7 @@ import AutoCompleteList from './AutoCompleteList';
 import { searchPostCodes } from './actions';
 import { getSuggestions, getIsFetchingSuggestions } from './reducers';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   suggestions: getSuggestions(state),
   isFetching: getIsFetchingSuggestions(state)
 });
@@ -29,51 +29,42 @@ class SearchPage extends Component {
   constructor(props) {
     super(props);
     const { onChangePostCode } = props;
-    this.changePostCode = e => onChangePostCode(e.target.value);
+    this.changePostCode = e => onChangePostCode(e.target.value)
   }
 
   getInputValue = () => {
     return this.input.value;
-  };
+  }
 
-  handleKeyUp = e => {
+  handleKeyUp = (e) => {
     if (e.keyCode === 13) {
       this.handleSubmit(e);
     }
-  };
+  }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const postCode = this.getInputValue();
     this.props.history.push(`search?postCode=${postCode}`);
-  };
+  }
 
   render = () => {
-    const { suggestions = [] } = this.props;
+    const { suggestions=[] } = this.props;
 
     return (
       <div className={css(styles.container)}>
         <header className={css(styles.header)}>
           <Form onSubmit={this.handleSubmit}>
-            <input
-              type="search"
-              className={css(styles.input)}
-              placeholder="Enter Postcode"
-              ref={c => {
-                this.input = c;
-              }}
-              onChange={this.changePostCode}
-              onKeyUp={this.handleKeyUp}
-              required
-            />
+            <input type="search"
+                   className={css(styles.input)}
+                   placeholder="Enter Postcode"
+                   ref={(c) => { this.input = c; }}
+                   onChange={this.changePostCode}
+                   onKeyUp={this.handleKeyUp} required />
             <SubmitInput />
           </Form>
-          <AutoCompleteList
-            items={suggestions.map(s => ({
-              link: `/search?postCode=${s.postCode}`,
-              text: s.text
-            }))}
-          />
+          <AutoCompleteList items={
+            suggestions.map(s => ({link: `/search?postCode=${s.postCode}`, text: s.text}))} />
         </header>
         <article className={css(styles.article)}>
           <h2 className={css(styles.h2)}>Features</h2>
@@ -98,7 +89,7 @@ class SearchPage extends Component {
         </article>
       </div>
     );
-  };
+  }
 }
 
 const styles = StyleSheet.create({
@@ -110,7 +101,7 @@ const styles = StyleSheet.create({
   article: {
     margin: '0 auto auto',
     maxWidth: '60rem',
-    padding: '3em 2rem'
+    padding: '3em 2rem',
   },
   h2: {
     width: '100%',
@@ -136,18 +127,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   header: {
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1451934403379-ffeff84932da?auto=format&fit=crop&w=1284&q=80')",
+    backgroundImage: "url('https://images.unsplash.com/photo-1451934403379-ffeff84932da?auto=format&fit=crop&w=1284&q=80')",
     backgroundPosition: 'center',
     padding: '8rem 2rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%'
+    width: '100%',
   },
   input: {
     border: 0,
@@ -162,7 +152,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

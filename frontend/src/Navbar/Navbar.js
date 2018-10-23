@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import { logout } from '../User/userActions';
+import {logout} from '../User/userActions';
 
 class navbar extends Component {
   static propTypes = {
@@ -16,36 +16,25 @@ class navbar extends Component {
   }
 
   getBar() {
-    const { name } = this.props.user;
-    if (name) {
-      // authenticated
+    const {name} = this.props.user;
+    if (name) { // authenticated
       return (
         <div>
           <ul className={css(styles.container)}>
             <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/">
-                Hissues
-              </Link>
+              <Link className={css(styles.links)} to="/">Hissues</Link>
             </li>
             <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/dashboard">
-                Dashboard
-              </Link>
+              <Link className={css(styles.links)} to="/dashboard">Dashboard</Link>
             </li>
             <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/profile">
-                Profile
-              </Link>
+              <Link className={css(styles.links)} to="/profile">Profile</Link>
             </li>
-            <li
-              className={css(styles.navelement)}
-              onClick={() => this.props.logout()}
-            >
-              <Link className={css(styles.links)} to="/logout">
-                Logout
-              </Link>
+            <li className={css(styles.navelement)}
+              onClick={() => this.props.logout()}>
+              <Link className={css(styles.links)} to="/logout">Logout</Link>
             </li>
-            <li className={css(styles.navelement)}>
+            <li className={css(styles.navelement)} >
               <span className={css(styles.links)}>Hi {name}</span>
             </li>
           </ul>
@@ -61,31 +50,19 @@ class navbar extends Component {
       //    New House
       //  </Link>
       // </li>
-    } else {
-      // not authenticated
+    } else { // not authenticated
       return (
         <div>
           <ul className={css(styles.container)}>
-            <li className={css(styles.titleelement)}>
-              <Link className={css(styles.links)} to="/">
-                Hissues
-              </Link>
-            </li>
-            <li className={css(styles.navelement)}>
-              <Link className={css(styles.links)} to="/login">
-                Login
-              </Link>
-            </li>
-            <li className={css(styles.navelement)}>
-              <Link className={css(styles.links)} to="/register">
-                Register
-              </Link>
-            </li>
+            <li className={css(styles.titleelement)}><Link className={css(styles.links)} to="/">Hissues</Link></li>
+            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/login">Login</Link></li>
+            <li className={css(styles.navelement)}><Link className={css(styles.links)} to="/register">Register</Link></li>
           </ul>
         </div>
       );
     }
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -99,10 +76,10 @@ const styles = StyleSheet.create({
     background: 'linear-gradient(to right, rgba(107,183,86,0.95), #008f68)'
   },
   navelement: {
-    float: 'right'
+    float: 'right',
   },
   titleelement: {
-    float: 'left'
+    float: 'left',
   },
   links: {
     display: 'block',
@@ -110,26 +87,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: '14px 16px',
     textDecoration: 'none',
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 });
+
 
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user
-  };
+    user: state.userReducer.user,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logout: () => {
-      dispatch(logout());
-    }
-  };
+    logout: () => {dispatch(logout())},
+  }
 }
 
-const NavBar = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(navbar);
+const NavBar = connect(mapStateToProps, mapDispatchToProps)(navbar);
 export default NavBar;

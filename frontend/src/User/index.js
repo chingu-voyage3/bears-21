@@ -4,4 +4,4 @@ import Forgot from './Forgot';
 import Logout from './Logout';
 import userReducer from './reducer';
 
-export { Login, Logout, Register, Forgot, userReducer };
+export { Login, Logout, Register, Forgot , userReducer};

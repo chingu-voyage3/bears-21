@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const { expect } = require('chai');
 const mongoose = require('mongoose');
@@ -24,13 +24,13 @@ describe('House', () => {
         street: 'Some street'
       },
       ratings: [
-        { user: mongoose.Types.ObjectId(), value: 1 },
-        { user: mongoose.Types.ObjectId(), value: 2 },
-        { user: mongoose.Types.ObjectId(), value: 3 },
-        { user: mongoose.Types.ObjectId(), value: 4 },
-        { user: mongoose.Types.ObjectId(), value: 5 }
+        { user: mongoose.Types.ObjectId(), value: 1},
+        { user: mongoose.Types.ObjectId(), value: 2},
+        { user: mongoose.Types.ObjectId(), value: 3},
+        { user: mongoose.Types.ObjectId(), value: 4},
+        { user: mongoose.Types.ObjectId(), value: 5},
       ]
-    };
+    }
   });
 
   afterEach(async () => {
@@ -48,13 +48,13 @@ describe('House', () => {
       expect(houseInDB.slug).to.eql(houseToInsert.slug);
     });
   });
-  describe('.rating', () => {
-    it('should return rating 3', async () => {
+  describe( '.rating', () => {
+    it( 'should return rating 3', async () => {
       const house = new House(houseToInsert);
       await house.save();
       const houseInDB = await House.findById(_id);
 
-      expect(houseInDB.rating).to.equal(3);
+      expect( houseInDB.rating).to.equal( 3);
     });
   });
 });

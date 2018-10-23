@@ -1,16 +1,16 @@
-export const HOUSE_RESET = 'HOUSE_RESET';
-export const HOUSE_HAS_ERRORED = 'HOUSE_HAS_ERRORED';
-export const HOUSE_IS_WORKING = 'HOUSE_IS_WORKING';
-export const HOUSE_FETCH_DATA_SUCCESS = 'HOUSE_FETCH_DATA_SUCCESS';
-export const HOUSE_SAVE_DATA_SUCCESS = 'HOUSE_SAVE_DATA_SUCCESS';
+export const HOUSE_RESET = "HOUSE_RESET";
+export const HOUSE_HAS_ERRORED = "HOUSE_HAS_ERRORED";
+export const HOUSE_IS_WORKING = "HOUSE_IS_WORKING";
+export const HOUSE_FETCH_DATA_SUCCESS = "HOUSE_FETCH_DATA_SUCCESS";
+export const HOUSE_SAVE_DATA_SUCCESS = "HOUSE_SAVE_DATA_SUCCESS";
 
 export function houseReset() {
   return {
-    type: HOUSE_RESET
+    type: HOUSE_RESET,
   };
 }
 
-export function houseHasErrored(hasErrored, errorMessage = 'Unknown Error') {
+export function houseHasErrored(hasErrored, errorMessage = "Unknown Error") {
   return {
     type: HOUSE_HAS_ERRORED,
     hasErrored,
@@ -40,87 +40,87 @@ export function houseSaveDataSuccess(house) {
   };
 }
 
-export function houseFetchData(house) {
-  return dispatch => {
-    dispatch(houseHasErrored(false));
-    dispatch(houseIsWorking(true));
-    fetch('api/v1/houses', {
+export function houseFetchData( house) {
+  return (dispatch) => {
+    dispatch( houseHasErrored( false));
+    dispatch( houseIsWorking( true));
+    fetch( 'api/v1/houses', {
       method: 'get',
       headers: {
-        Accept: 'application/json',
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       credentials: 'same-origin',
-      body: JSON.stringify(house._id)
+      body: JSON.stringify( house._id)
     })
-      .then(response => response.json())
-      .then(json => {
-        if (json.message) {
-          dispatch(houseHasErrored(true, json.message));
-        } else {
-          dispatch(houseFetchDataSuccess(json.house));
-        }
-        dispatch(houseIsWorking(false));
-      })
-      .catch(() => dispatch(houseHasErrored(true, 'Unknown Error')));
+    .then( response => response.json())
+    .then( json => {
+      if( json.message) {
+        dispatch( houseHasErrored(true, json.message))
+      } else {
+        dispatch( houseFetchDataSuccess(json.house))
+      }
+      dispatch( houseIsWorking(false));
+    })
+    .catch( () => dispatch( houseHasErrored(true, "Unknown Error")));
   };
 }
 
-export function houseSaveData(house) {
-  return dispatch => {
-    dispatch(houseHasErrored(false));
-    dispatch(houseIsWorking(true));
+export function houseSaveData( house) {
+  return (dispatch) => {
+    dispatch( houseHasErrored( false));
+    dispatch( houseIsWorking( true));
     let payload = new FormData();
     let url_images = [];
     let blob_images = [];
-    house.images.forEach(img => {
-      if (typeof img === 'string') {
-        url_images.push(img);
+    house.images.forEach( (img) => {
+      if( typeof img === "string") {
+        url_images.push( img);
       } else {
-        blob_images.push(img);
+        blob_images.push( img);
       }
     });
-    Object.keys(house).forEach(key => {
-      switch (key) {
-        case 'images':
-          url_images.forEach(url => {
-            payload.append('url', url);
-          });
-          blob_images.forEach(blob => {
-            payload.append('blobs', blob);
-          });
-          break;
-        case 'issues':
-          house.issues.forEach(i => {
-            payload.append('issues', i._id);
-          });
-          break;
-        case 'location':
-          payload.append('street', house.location.street);
-          payload.append('postCode', house.location.postCode);
-          break;
-        default:
-          payload.append([key], house[key]);
-          break;
+    Object.keys( house).forEach( (key) => {
+      switch( key) {
+      case "images":
+        url_images.forEach( (url) => {
+          payload.append( "url", url);
+        });
+        blob_images.forEach( (blob) => {
+          payload.append( 'blobs', blob);
+        });
+        break;
+      case "issues":
+        house.issues.forEach( (i) => {
+          payload.append( 'issues', i._id);
+        });
+        break;
+      case "location":
+        payload.append( 'street', house.location.street);
+        payload.append( 'postCode', house.location.postCode);
+        break;
+      default:
+        payload.append( [key], house[key]);
+        break;
       }
     });
-    fetch('/api/v1/house', {
+    fetch( '/api/v1/house', {
       method: 'post',
       credentials: 'same-origin',
       body: payload
     })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(houseIsWorking(false));
-        if (json.message) {
-          dispatch(houseHasErrored(true, json.message));
-        } else {
-          dispatch(houseSaveDataSuccess(json.house));
-        }
-      })
-      .catch(() => {
-        dispatch(houseIsWorking(false));
-        dispatch(houseHasErrored(true, 'unknown error'));
-      });
+    .then( response => response.json())
+    .then( json => {
+      dispatch( houseIsWorking(false));
+      if( json.message) {
+        dispatch( houseHasErrored(true, json.message));
+      } else {
+        dispatch( houseSaveDataSuccess(json.house));
+      }
+    })
+    .catch( () => {
+      dispatch( houseIsWorking(false));
+      dispatch( houseHasErrored( true, "unknown error"));
+    });
   };
 }

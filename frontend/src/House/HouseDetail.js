@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
-import { ImageList } from '../Image';
+import {ImageList} from '../Image';
 import HouseForm from './HouseForm';
 import { houseFetchData, houseSaveData, houseReset } from './actions';
 
@@ -21,11 +21,11 @@ class House extends Component {
   };
   state = {
     house: {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       location: {
-        street: '',
-        postCode: ''
+        street: "",
+        postCode: ""
       },
       images: [],
       issue: []
@@ -33,71 +33,67 @@ class House extends Component {
     redirect_issue: null
   };
   componentWillMount = () => {
-    const { match, location } = this.props;
+    const {match, location} = this.props;
     this.props.resetData();
-    if (match.params.id !== 'new') {
-      this.setState({ house: location.state.house });
+    if( match.params.id !== "new") {
+      this.setState( {house: location.state.house})
     }
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.isSaved) {
-      this.props.history.push('/dashboard');
+  componentWillReceiveProps = (nextProps) => {
+    if( nextProps.isSaved) {
+      this.props.history.push("/dashboard");
     }
   };
 
   houseFormSubmit = () => {
-    this.props.saveData(this.state.house);
+    this.props.saveData( this.state.house);
   };
 
   onFieldChange = e => {
-    const { house } = { ...this.state };
+    const {house} = {...this.state};
     // check for location and handle sub objects {street,postCode}
     const re = /(.*)\.(.*)/;
-    const m = e.target.name.match(re);
-    if (m) {
+    const m = e.target.name.match( re);
+    if( m){
       house[m[1]][m[2]] = e.target.value;
     } else {
       house[e.target.name] = e.target.value;
     }
-    this.setState({ house });
+    this.setState( { house});
   };
   addImage = image => {
-    const { house } = this.state;
-    this.setState({
-      house: { ...house, images: house.images.concat([image]) }
-    });
+    const {house} = this.state;
+    this.setState( {house: {...house, images: house.images.concat([image])}});
   };
   removeImage = src => {
-    const ni = this.state.house.images.filter(img => {
+    const ni = this.state.house.images.filter( (img) => {
       let ret = true;
-      if (typeof img === 'string') {
-        if (img === src) ret = false;
+      if( typeof img === "string") {
+        if( img === src) ret = false;
       } else {
-        if (img.preview === src) ret = false;
+        if( img.preview === src) ret = false;
       }
       return ret;
     });
-    this.setState({ house: { ...this.state.house, images: ni } });
+    this.setState( {house: {...this.state.house, images: ni}});
   };
   render = () => {
-    const { house } = this.state;
-    const {
-      isWorking = false,
-      hasErrored = false,
-      errorMessage = ''
-    } = this.props;
-    if (isWorking) {
+    const {house} = this.state;
+    const {isWorking = false, hasErrored = false, errorMessage = ""} = this.props;
+    if( isWorking) {
       return <p>Please wait ...</p>;
     }
     const show_error = {
-      color: 'tomato',
-      display: hasErrored ? 'block' : 'none'
+      color: "tomato",
+      display: hasErrored?"block":"none"
     };
     return (
       <div className={css(styles.centered)}>
         <h1>House (View)</h1>
-        <div style={show_error}>{errorMessage}</div>
+        <div style={show_error} >
+          {errorMessage}
+        </div>
         <HouseForm house={house} />
         <ImageList images={house.images} />
       </div>
@@ -107,11 +103,11 @@ class House extends Component {
 
 const styles = StyleSheet.create({
   centered: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   }
 });
 
@@ -127,13 +123,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetData: () => dispatch(houseReset()),
-    fetchData: (url, house) => dispatch(houseFetchData(url, house)),
-    saveData: (url, house) => dispatch(houseSaveData(url, house))
+    resetData: () => dispatch( houseReset()),
+    fetchData: (url,house) => dispatch( houseFetchData( url, house)),
+    saveData:  (url,house) => dispatch( houseSaveData( url, house))
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(House);
+export default connect( mapStateToProps, mapDispatchToProps)(House);

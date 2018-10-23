@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite';
 
 const filled_star = String.fromCharCode(9733);
 
-const Summary = props => (
-  <div className={css(styles.stars)}>
+const Summary = (props) => (
+  <div className={css(styles.stars)} >
     {filled_star}
-    <div className={css(styles.rating_value)}>{props.value}</div>
+    <div className={css(styles.rating_value)} >
+      {props.value}
+    </div>
   </div>
 );
 
 Summary.propTypes = {
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
 const styles = StyleSheet.create({

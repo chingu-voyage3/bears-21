@@ -5,11 +5,4 @@ import ImageList from './ImageList';
 import ImageListRemovable from './ImageListRemovable';
 import ImageRemovable from './ImageRemovable';
 
-export {
-  ImageRef,
-  ImageBlock,
-  ImageDefault,
-  ImageList,
-  ImageListRemovable,
-  ImageRemovable
-};
+export {ImageRef, ImageBlock, ImageDefault, ImageList, ImageListRemovable, ImageRemovable};
