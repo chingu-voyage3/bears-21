@@ -70,7 +70,8 @@
     "heroku-prebuild": "cd frontend && npm install && npm run build",
     "prepushnojsx": "npm run lint && npm run test",
     "postmergee": "./scripts/githooks/post-merge.sh",
-    "prepushe": "npm run lint && npm run test"
+    "prepushe": "npm run lint && npm run test",
+    "precommit": "./node_modules/prettier/bin-prettier.js --write '{,!(node_modules)/**/}*.js'"
   },
   "repository": {
     "type": "git",
