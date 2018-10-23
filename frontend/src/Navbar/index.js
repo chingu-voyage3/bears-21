@@ -5,7 +5,6 @@ import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-
 class Navbar extends Component {
   static propTypes = {
     currentUser: PropTypes.object.isRequired
