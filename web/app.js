@@ -3,7 +3,7 @@
 const promisify = require('es6-promisify');
 const bodyParser = require('body-parser');
 const express = require('express');
-const mongoose = require( 'mongoose');
+const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const path = require('path');
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
 });
 
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 // Middlewares
 // app.use(morgan('tiny'));
 // Takes the raw requests and turns them into usable properties on req.body
@@ -43,20 +43,21 @@ app.use(cookieParser());
 // Used heavily on userController.validateRegister
 app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
-app.use(session({
-  secret: 'anything',
-  keys: ['secretkey'],
-  cookie: { secure: false, maxAge:86400000 },
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
+app.use(
+  session({
+    secret: 'anything',
+    keys: ['secretkey'],
+    cookie: { secure: false, maxAge: 86400000 },
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
 
 // Passport JS is what we use to handle our logins
 auth.init();
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // promisify some callback based APIs
 app.use((req, res, next) => {

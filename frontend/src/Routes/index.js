@@ -7,13 +7,12 @@ import AuthViewHandler from '../auth/AuthViewHandler';
 import Notfound from '../Errors/Notfound';
 import { Dummy } from '../Dummy';
 import Dashboard from '../Dashboard';
-import SearchLayout from "../Search";
+import SearchLayout from '../Search';
 import Issue from '../Issue';
-import { HouseDetail, HouseDetailEdit} from '../House';
+import { HouseDetail, HouseDetailEdit } from '../House';
 import Profile from '../Profile';
 import Navbar from '../Navbar';
 import { Login, Logout, Register, Forgot } from '../User';
-
 
 const FlexCol = styled.div`
   display: flex;
@@ -46,11 +45,8 @@ const Choose = props => {
   );
 };
 
-const signedOutFallback = (
-  Component,
-  FallbackComponent
-) => {
-  return (props) => (
+const signedOutFallback = (Component, FallbackComponent) => {
+  return props => (
     <Choose
       {...props}
       FallbackComponent={FallbackComponent}
@@ -71,14 +67,39 @@ class Routes extends Component {
           <Route component={Navbar} />
           <Switch>
             <Route exact={true} path="/logout" component={Logout} />
-            <Route exact={true} path="/register" component={RegisterFallback}  />
+            <Route exact={true} path="/register" component={RegisterFallback} />
             <Route exact={true} path="/login" component={LoginFallback} />
             <Route exact={true} path="/forgot" component={Forgot} />
-            <Route exact={true} path='/profile/:id?' component={Profile} pathname={"/login"} />
-            <Route exact={true} path="/dashboard" component={Dashboard} pathname={"/login"} />
-            <Route exact={true} path="/admin" component={Dummy} pathname={"/login"} />
-            <Route exact={true} path="/issue/:id" component={Issue} pathname={"/login"} />
-            <Route exact={true} path="/house/:id" component={HouseDetailEdit} pathname={"/login"} />
+            <Route
+              exact={true}
+              path="/profile/:id?"
+              component={Profile}
+              pathname={'/login'}
+            />
+            <Route
+              exact={true}
+              path="/dashboard"
+              component={Dashboard}
+              pathname={'/login'}
+            />
+            <Route
+              exact={true}
+              path="/admin"
+              component={Dummy}
+              pathname={'/login'}
+            />
+            <Route
+              exact={true}
+              path="/issue/:id"
+              component={Issue}
+              pathname={'/login'}
+            />
+            <Route
+              exact={true}
+              path="/house/:id"
+              component={HouseDetailEdit}
+              pathname={'/login'}
+            />
             <Route exact={true} path="/newissue" component={Dummy} />
             <Route exact={true} path="/houseview/:id" component={HouseDetail} />
             <Route path="/" component={DashboardFallback} />
@@ -89,6 +110,5 @@ class Routes extends Component {
     );
   }
 }
-
 
 export default Routes;

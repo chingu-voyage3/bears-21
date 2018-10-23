@@ -1,16 +1,16 @@
-'use strict'
-const util = require( '../util');
+'use strict';
+const util = require('../util');
 const Issue = require('../../../models/issue');
 const House = require('../../../models/house');
 const logger = require('../../logger');
 
-async function upsert( req, res) {
-  const new_issue = req.body._id?false:true;
+async function upsert(req, res) {
+  const new_issue = req.body._id ? false : true;
   let issue;
-  if( new_issue) {
+  if (new_issue) {
     issue = new Issue();
   } else {
-    issue = await Issue.findById( req.body._id);
+    issue = await Issue.findById(req.body._id);
   }
   issue.title = req.body.title;
   issue.description = req.body.description;
@@ -19,31 +19,31 @@ async function upsert( req, res) {
   issue.priority = req.body.priority;
   issue.house = req.body.house;
   // ok to save image url with basic issue detail
-  issue.images = util.makeArrayFromBody( req.body.url);
+  issue.images = util.makeArrayFromBody(req.body.url);
   // save blobs
-  const image_ids = await util.saveBlobs( req.files);
-  issue.images = issue.images.concat( image_ids);
+  const image_ids = await util.saveBlobs(req.files);
+  issue.images = issue.images.concat(image_ids);
 
   try {
     await issue.save();
-  } catch( e) {
-    logger.error( `issue upsert resave failed:${JSON.stringify(e)}`);
-    res.json( {success: false, message: e});
+  } catch (e) {
+    logger.error(`issue upsert resave failed:${JSON.stringify(e)}`);
+    res.json({ success: false, message: e });
     return;
   }
   // save the issue owner (house) id for new issues
-  if( new_issue) {
-    const house = await House.findById( req.body.house);
-    house.issues.push( issue._id);
+  if (new_issue) {
+    const house = await House.findById(req.body.house);
+    house.issues.push(issue._id);
     try {
       await house.save();
-    } catch( e) {
-      logger.error( `issue house id save failed:${JSON.stringify(e)}`);
-      res.json( {success: false, message: e});
+    } catch (e) {
+      logger.error(`issue house id save failed:${JSON.stringify(e)}`);
+      res.json({ success: false, message: e });
       return;
     }
   }
-  res.json( {success:true, issue});
+  res.json({ success: true, issue });
 }
 
 module.exports = upsert;

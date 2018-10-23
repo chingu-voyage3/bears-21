@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import houseIssues from '../Dashboard/reducers';
 import house from '../House/reducers';
 import issue from '../Issue/reducers';

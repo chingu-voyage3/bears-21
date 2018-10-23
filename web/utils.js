@@ -2,9 +2,9 @@
 
 const boom = require('boom');
 
-function catchAsyncErrors (middleware) {
-  return (req, res, next) => Promise.resolve(middleware(req, res, next))
-    .catch(err => {
+function catchAsyncErrors(middleware) {
+  return (req, res, next) =>
+    Promise.resolve(middleware(req, res, next)).catch(err => {
       if (err.isJoi) {
         const message = err.details.map(detail => detail.message).join(', ');
         return next(boom.badRequest(message));
@@ -16,9 +16,9 @@ function catchAsyncErrors (middleware) {
     });
 }
 
-function errorHandler (err, req, res, next) {
+function errorHandler(err, req, res, next) {
   if (res.headersSent) {
-    return next(err)
+    return next(err);
   }
   res.status(500).json({ error: err });
 }

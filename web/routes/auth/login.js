@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
 const passport = require('passport');
 const boom = require('boom');
 
-function login (req, res, next) {
+function login(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       next(boom.badImplementation());

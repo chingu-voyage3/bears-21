@@ -34,7 +34,6 @@ export const FullView = styled.div`
   background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 `;
 
-
 export const Content = styled.div`
   width: 100%;
   max-width: 768px;
@@ -74,7 +73,7 @@ export const Button = styled.button`
   margin: 5px;
   padding: 12px 16px;
   font-weight: bold;
-  background: linear-gradient( to top, #49CF87, #40C080);
+  background: linear-gradient(to top, #49cf87, #40c080);
   border-radius: 10px;
 `;
 
@@ -100,7 +99,6 @@ export const ButtonRow = styled.div`
     margin: 8px;
   }
 `;
-
 
 export const FieldInput = styled(Field)`
   outline: 0;
@@ -136,17 +134,16 @@ export const FieldInputError = styled(Field)`
 
 export const SubmitButton = styled(Button)`
   padding: 12px 24px;
-  margin: .3em 0 1em 0;
+  margin: 0.3em 0 1em 0;
   width: 100%;
   font-size: 16px;
   font-weight: 400;
-  background: #FF5A5F;
+  background: #ff5a5f;
   border: 0;
   border-radius: 0;
   line-height: 20px;
   color: white;
 `;
-
 
 export const RegisterButton = styled.button`
   outline: 0;
@@ -159,7 +156,7 @@ export const RegisterButton = styled.button`
   cursor: pointer;
   font-size: 18px;
   transition-duration: 0.25s;
-  &:hover{
+  &:hover {
     background-color: rgb(245, 247, 249);
   }
 `;

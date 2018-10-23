@@ -40,9 +40,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const Dummy = () => (
-  <div className={css(styles.container)}>
-  </div>
-);
+const Dummy = () => <div className={css(styles.container)} />;
 
 export default Dummy;

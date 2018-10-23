@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -12,7 +12,7 @@ import DashboardLoader from './Dashboard.Loader';
 class Dashboard extends Component {
   static propTypes = {
     currentUser: PropTypes.object.isRequired,
-    houseIssues: PropTypes.arrayOf( PropTypes.object),
+    houseIssues: PropTypes.arrayOf(PropTypes.object),
     isLoading: PropTypes.bool,
     hasErrored: PropTypes.bool,
     fetchData: PropTypes.func.isRequired,
@@ -21,47 +21,55 @@ class Dashboard extends Component {
 
   state = {
     redirect_new_house: false
-  }
+  };
 
   componentDidMount = () => {
-    this.props.fetchData( '/api/v1/house-issues');
-  }
+    this.props.fetchData('/api/v1/house-issues');
+  };
 
   onNewHouse = () => {
-    this.setState( {redirect_new_house:true})
-  }
+    this.setState({ redirect_new_house: true });
+  };
 
-  onDeleteHouse = (house_id) => {
-    this.props.deleteHouse( house_id);
-  }
+  onDeleteHouse = house_id => {
+    this.props.deleteHouse(house_id);
+  };
 
   render() {
     const { currentUser } = this.props;
     const isLoggedIn = !isEmpty(currentUser);
 
-    if(!isLoggedIn) {
+    if (!isLoggedIn) {
       console.error('Invalid state, should not be here');
     }
 
-    if(this.state.redirect_new_house) {
+    if (this.state.redirect_new_house) {
       return (
-        <Redirect to={{
-            pathname: "/house/new",
-            state: {new_house: true}
-          }} />
+        <Redirect
+          to={{
+            pathname: '/house/new',
+            state: { new_house: true }
+          }}
+        />
       );
     }
-    const {hasErrored = false, isLoading = true, houseIssues = []} = this.props;
-    if( hasErrored) {
+    const {
+      hasErrored = false,
+      isLoading = true,
+      houseIssues = []
+    } = this.props;
+    if (hasErrored) {
       return <p>Sorry data fetch failed</p>;
     }
-    if( isLoading) {
+    if (isLoading) {
       return <DashboardLoader />;
     }
     return (
-      <div style={{flex: '1'}}>
+      <div style={{ flex: '1' }}>
         <h1>Dashboard</h1>
-        <button type="button" onClick={this.onNewHouse} >New House</button>
+        <button type="button" onClick={this.onNewHouse}>
+          New House
+        </button>
         <HouseList data={houseIssues} onDeleteHouse={this.onDeleteHouse} />
         <Footer />
       </div>
@@ -77,8 +85,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteHouse: (house_id) => dispatch( houseDelete(house_id)),
-  fetchData: (url) => dispatch( houseIssuesFetchData(url))
+  deleteHouse: house_id => dispatch(houseDelete(house_id)),
+  fetchData: url => dispatch(houseIssuesFetchData(url))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

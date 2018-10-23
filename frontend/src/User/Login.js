@@ -12,23 +12,21 @@ import {
   FieldInput,
   FieldInputError,
   Heading,
-  RegisterButton,
+  RegisterButton
 } from './style';
 import * as userApi from '../API/user';
 import { requestLoginSuccess, clearLoginError } from './userActions';
-
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
-  password: Yup.string()
-    .required('Required'),
+  password: Yup.string().required('Required')
 });
 
 const defaultValues = {
   email: '',
-  password: '',
+  password: ''
 };
 
 class Login extends Component {
@@ -40,18 +38,18 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errors: null,
+      errors: null
     };
   }
 
   componentWillReceiveProps = newProps => {
-    let currentStatus = "";
-    if(newProps.user) {
-      if(newProps.user.error) {
+    let currentStatus = '';
+    if (newProps.user) {
+      if (newProps.user.error) {
         currentStatus = newProps.user.error;
       }
     }
-    this.setState({currentStatus})
+    this.setState({ currentStatus });
   };
 
   render() {
@@ -72,7 +70,9 @@ class Login extends Component {
               this.props.history.push('/dashboard');
             } catch (err) {
               this.setState({
-                errors: err.response ? err.response.data.message : "Server error."
+                errors: err.response
+                  ? err.response.data.message
+                  : 'Server error.'
               });
             } finally {
               setSubmitting(false);
@@ -82,19 +82,32 @@ class Login extends Component {
           {({ dirty, touched, errors, isSubmitting }) => (
             <FormContent>
               <Heading>Login</Heading>
-              {
-                errors.email && touched.email
-                ? <FieldInputError placeholder="Email" type="email" name="email" />
-                : <FieldInput placeholder="Email" type="email" name="email" />
-              }
-              {
-                errors.password && touched.password
-                ? <FieldInputError placeholder="Password" type="password" name="password" />
-                : <FieldInput placeholder="Password" type="password" name="password" />
-              }
+              {errors.email && touched.email ? (
+                <FieldInputError
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                />
+              ) : (
+                <FieldInput placeholder="Email" type="email" name="email" />
+              )}
+              {errors.password && touched.password ? (
+                <FieldInputError
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                />
+              ) : (
+                <FieldInput
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                />
+              )}
               <RegisterButton
-                  type="submit"
-                  disabled={isSubmitting || !isEmpty(errors) || !dirty}>
+                type="submit"
+                disabled={isSubmitting || !isEmpty(errors) || !dirty}
+              >
                 Submit
               </RegisterButton>
 
@@ -117,4 +130,7 @@ const mapDispatchToProps = dispatch => ({
   clearLoginError: () => dispatch(clearLoginError())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

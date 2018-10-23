@@ -14,7 +14,10 @@ export const Footer = styled.footer`
 export default () => (
   <Footer>
     <section>
-      Made by bears-21 with <span role="img" aria-label="heart">❤️ </span>
+      Made by bears-21 with{' '}
+      <span role="img" aria-label="heart">
+        ❤️{' '}
+      </span>
     </section>
   </Footer>
 );
