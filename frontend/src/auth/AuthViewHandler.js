@@ -1,5 +1,5 @@
-import React  from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 class AuthViewHandler extends React.Component<Props, State> {
@@ -15,6 +15,6 @@ class AuthViewHandler extends React.Component<Props, State> {
   }
 }
 
-export default connect((state) => ({
+export default connect(state => ({
   currentUser: state.userReducer.user
 }))(AuthViewHandler);

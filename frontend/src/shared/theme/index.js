@@ -5,8 +5,8 @@ export const theme = {
     wash: '#F5F8FC',
     border: '#DFE7EF',
     hairline: '#A3AFBF',
-    inactive: '#DFE7EF',
-  },
+    inactive: '#DFE7EF'
+  }
 };
 
 export default theme;

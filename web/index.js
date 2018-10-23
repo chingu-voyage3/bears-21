@@ -12,7 +12,7 @@ process.on('SIGTERM', async () => {
 });
 
 const promisify = require('es6-promisify');
-const fs = require( 'fs');
+const fs = require('fs');
 const config = require('./config');
 const logger = require('./logger');
 const { db } = require('../models');
@@ -21,16 +21,16 @@ const app = require('./app');
 // do not init the process if a crucial component can not start up
 const initDb = db.init;
 const initServer = promisify(app.listen, app);
-async function init () {
+async function init() {
   const upload_dir = process.env.IMAGE_UPLOAD_DIR;
   // check image upload dir
-  if( fs.existsSync( upload_dir)) {
-    logger.info("image upload directory present");
+  if (fs.existsSync(upload_dir)) {
+    logger.info('image upload directory present');
   } else {
     try {
-      fs.mkdirSync( upload_dir, 484);
-      logger.info( `created image upload directory: ${upload_dir}`);
-    } catch( err) {
+      fs.mkdirSync(upload_dir, 484);
+      logger.info(`created image upload directory: ${upload_dir}`);
+    } catch (err) {
       // we can't get error EEXIST here so bail
       logger.error(`Couldn't init file upload dir: ${err}`);
       process.exit(1);
@@ -50,7 +50,7 @@ async function init () {
 
 const closeDb = db.close;
 const closeServer = promisify(app.close, app);
-async function stop () {
+async function stop() {
   // start with a normal exit code
   let exitCode = 0;
   try {

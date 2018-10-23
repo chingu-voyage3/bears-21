@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import {StyleSheet, css} from 'aphrodite';
-import {CrossButton, PlusButton} from '../Common/Buttons';
+import { StyleSheet, css } from 'aphrodite';
+import { CrossButton, PlusButton } from '../Common/Buttons';
 
 export default class House extends Component {
   static propTypes = {
@@ -20,17 +20,17 @@ export default class House extends Component {
   };
   onDeleteHouse = e => {
     e.stopPropagation();
-    this.props.onDeleteHouse( this.props.house);
+    this.props.onDeleteHouse(this.props.house);
   };
   render = () => {
-    const {house} = this.props;
+    const { house } = this.props;
     return (
-      <div className={css(styles.wrapper)} onClick={this.onEditHouse} >
+      <div className={css(styles.wrapper)} onClick={this.onEditHouse}>
         <Card house={house} />
-        <div className={css(styles.add_issue_style)} >
+        <div className={css(styles.add_issue_style)}>
           <PlusButton title="Add Issue" onClick={this.onNewIssue} />
         </div>
-        <div className={css(styles.close_button)} >
+        <div className={css(styles.close_button)}>
           <CrossButton title="Delete House" onClick={this.onDeleteHouse} />
         </div>
       </div>
@@ -40,19 +40,19 @@ export default class House extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: "relative",
-    cursor: "pointer",
-    display: "flex",
-    justifyContent: "space-around"
+    position: 'relative',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'space-around'
   },
   close_button: {
-    position: "absolute",
-    top: "0px",
-    right: "0px"
+    position: 'absolute',
+    top: '0px',
+    right: '0px'
   },
   add_issue_style: {
-    position: "absolute",
-    top: "30px",
+    position: 'absolute',
+    top: '30px',
     right: 0
   }
 });

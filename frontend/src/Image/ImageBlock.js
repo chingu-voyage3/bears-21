@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Uploader} from '../Uploader';
-import {StyleSheet, css} from 'aphrodite';
-import {PlusButton} from '../Common/Buttons';
+import { Uploader } from '../Uploader';
+import { StyleSheet, css } from 'aphrodite';
+import { PlusButton } from '../Common/Buttons';
 
 export default class ImageBlock extends Component {
   static propTypes = {
@@ -12,20 +12,23 @@ export default class ImageBlock extends Component {
     uploader_visible: false
   };
   toggleUploaderVisibility = () => {
-    this.setState( { uploader_visible: !this.state.uploader_visible});
+    this.setState({ uploader_visible: !this.state.uploader_visible });
   };
   render = () => {
     const show_uploader = {
-      display: this.state.uploader_visible?"flex":"none"
+      display: this.state.uploader_visible ? 'flex' : 'none'
     };
     return (
       <div>
-        <div className={css(styles.header)} >
+        <div className={css(styles.header)}>
           Images
-          <PlusButton onClick={this.toggleUploaderVisibility} title="Toggle Image Uploader" />
+          <PlusButton
+            onClick={this.toggleUploaderVisibility}
+            title="Toggle Image Uploader"
+          />
         </div>
-        <div style={show_uploader} >
-          <Uploader addImage={this.props.addImage}/>
+        <div style={show_uploader}>
+          <Uploader addImage={this.props.addImage} />
         </div>
       </div>
     );

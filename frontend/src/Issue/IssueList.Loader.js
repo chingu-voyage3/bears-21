@@ -1,13 +1,13 @@
 import React from 'react';
-import {StyleSheet, css} from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 
 const IssueListLoader = () => (
   <div className={css(styles.column_wrapper)}>
     <div className={css(styles.title)} />
     <ul className={css(styles.list)}>
       <li className={css(styles.li)} />
-      <li className={css(styles.li)} style={{opacity:"0.6"}} />
-      <li className={css(styles.li)} style={{opacity:"0.2"}} />
+      <li className={css(styles.li)} style={{ opacity: '0.6' }} />
+      <li className={css(styles.li)} style={{ opacity: '0.2' }} />
     </ul>
   </div>
 );
@@ -15,11 +15,11 @@ const IssueListLoader = () => (
 const styles = StyleSheet.create({
   column_wrapper: {
     margin: '10px',
-    padding: "1em 0px",
-    width: "30%",
-    display: "flex",
+    padding: '1em 0px',
+    width: '30%',
+    display: 'flex',
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     alignItems: 'center',
     boxShadow: '0px 0px 5px 2px rgba(0, 0, 0, 0.19)',
     background: 'lightgrey'
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: '1.5rem',
     background: 'grey',
     borderRadius: '5px'
-  },
+  }
 });
 
 export default IssueListLoader;

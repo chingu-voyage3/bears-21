@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types'
-import {Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import IssueList from './IssueList';
 
 export default class FilteredIssueList extends Component {
@@ -12,23 +12,28 @@ export default class FilteredIssueList extends Component {
   state = {
     redirect: null
   };
-  onIssueClick = (issue) => {
-    this.setState( {redirect: issue});
+  onIssueClick = issue => {
+    this.setState({ redirect: issue });
   };
   render = () => {
-    const {data, statusFilter, title} = this.props;
-    if( this.state.redirect) {
-      return <Redirect to={{
-        pathname: `/issue/${this.state.redirect._id}`,
-        state: { issue: this.state.redirect }
-      }} />;
+    const { data, statusFilter, title } = this.props;
+    if (this.state.redirect) {
+      return (
+        <Redirect
+          to={{
+            pathname: `/issue/${this.state.redirect._id}`,
+            state: { issue: this.state.redirect }
+          }}
+        />
+      );
     }
-    const filtered_list = data.filter( item => item.status === statusFilter);
+    const filtered_list = data.filter(item => item.status === statusFilter);
     return (
       <IssueList
         items={filtered_list}
         title={title}
-        onIssueClick={this.onIssueClick} />
+        onIssueClick={this.onIssueClick}
+      />
     );
   };
 }

@@ -25,14 +25,12 @@ class AuthRoute extends React.PureComponent {
       });
     } finally {
       this.setState({
-        loading: false,
+        loading: false
       });
     }
-
   }
 
-
-  renderRoute = (routeProps) => {
+  renderRoute = routeProps => {
     if (this.state.loading) {
       return <div>Loading...</div>;
     }
@@ -40,14 +38,16 @@ class AuthRoute extends React.PureComponent {
       const { component: Component } = this.props;
       return <Component {...routeProps} />;
     } else {
-      return (<Redirect
+      return (
+        <Redirect
           to={{
-            pathname: "/login",
-              state: { next: routeProps.location.pathname }
+            pathname: '/login',
+            state: { next: routeProps.location.pathname }
           }}
-        />);
+        />
+      );
     }
-  }
+  };
 
   render() {
     const { component: Component, pathname: path, ...rest } = this.props;
