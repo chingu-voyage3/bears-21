@@ -1,6 +1,4 @@
-import api from './api';
-
-export const KEY = 'HISSUES';
+import api, { KEY } from './api';
 
 export async function login(body) {
   const { data } = await api.post('/login', body);
@@ -27,7 +25,6 @@ export async function register(body) {
 }
 
 export async function logout() {
-  console.log('In logout');
   await api.post('/logout');
   localStorage.removeItem(KEY);
 }

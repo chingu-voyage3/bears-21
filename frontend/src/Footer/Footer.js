@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 
-export const Footer = styled.footer`
+const Footer = styled.footer`
   display: flex;
   justify-content: stretch;
   align-content: stretch;

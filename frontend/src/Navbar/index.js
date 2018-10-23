@@ -5,7 +5,8 @@ import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-class C extends Component {
+
+class Navbar extends Component {
   static propTypes = {
     currentUser: PropTypes.object.isRequired
   };
@@ -113,4 +114,4 @@ const mapStateToProps = state => ({
   currentUser: state.userReducer.user
 });
 
-export default connect(mapStateToProps)(C);
+export default connect(mapStateToProps)(Navbar);
