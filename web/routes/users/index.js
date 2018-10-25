@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  register: require('./register'),
-  getDetail: require('./getDetail'),
+  create: require('./create'),
+  get: require('./get'),
   update: require('./update')
 };

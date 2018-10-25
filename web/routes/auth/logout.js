@@ -1,8 +1,18 @@
-'use strict'
+'use strict';
 
-function logout (req, res) {
+const boom = require('boom');
+
+function logout(req, res) {
   req.logout();
-  res.json({});
+  console.log(req.session.destroy);
+  req.session.destroy(err => {
+    if (err) {
+      console.error(err);
+      throw boom.badImplementation();
+    }
+    res.clearCookie('connect.sid');
+    res.json({ message: 'Logged Out' });
+  });
 }
 
 module.exports = logout;

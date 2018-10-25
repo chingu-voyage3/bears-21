@@ -7,45 +7,50 @@ import {
 } from './actions';
 
 const defaultHouse = {
-  title: "",
-  description: "",
+  title: '',
+  description: '',
   location: {
-    street: "",
-    postCode: ""
+    street: '',
+    postCode: ''
   },
   images: [],
   issues: []
 };
 
 const initialState = {
-  house: JSON.parse( JSON.stringify(defaultHouse)),
+  house: JSON.parse(JSON.stringify(defaultHouse)),
   houseIsWorking: false,
   houseError: {
     hasErrored: false,
-    errorMessage: ""
+    errorMessage: ''
   },
-  houseIsSaved: false,
+  houseIsSaved: false
 };
 
-function house( state, action ) {
-  if( typeof state === "undefined") {
-    state = JSON.parse( JSON.stringify( initialState))
+function house(state, action) {
+  if (typeof state === 'undefined') {
+    state = JSON.parse(JSON.stringify(initialState));
   }
-  switch( action.type) {
+  switch (action.type) {
     case HOUSE_HAS_ERRORED:
-      return {...state,
+      return {
+        ...state,
         houseError: {
           hasErrored: action.hasErrored,
-          errorMessage: action.errorMessage||""
+          errorMessage: action.errorMessage || ''
         },
         houseIsSaved: false
       };
     case HOUSE_IS_WORKING:
-      return {...state, houseIsWorking: action.isWorking};
+      return { ...state, houseIsWorking: action.isWorking };
     case HOUSE_FETCH_DATA_SUCCESS:
-      return {...state, house: action.house};
+      return { ...state, house: action.house };
     case HOUSE_SAVE_DATA_SUCCESS:
-      return {...state, house: action.house, houseIsSaved: action.houseIsSaved};
+      return {
+        ...state,
+        house: action.house,
+        houseIsSaved: action.houseIsSaved
+      };
     case HOUSE_RESET:
       return Object.assign({}, initialState);
     default:

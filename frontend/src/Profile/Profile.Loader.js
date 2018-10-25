@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, css} from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 import AvatarLoader from './Avatar.Loader';
 import DetailLoader from './Detail.Loader';
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     flex: '1',
-    alignItems: "center"
+    alignItems: 'center'
   },
   h1: {
     marginTop: '1rem',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     border: '1px solid lightgrey',
     borderRadius: '10px',
-    boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0',
+    boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0'
   }
 });
 

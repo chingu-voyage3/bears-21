@@ -3,15 +3,18 @@
 const promisify = require('es6-promisify');
 const bodyParser = require('body-parser');
 const express = require('express');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const mongoose = require( 'mongoose');
+const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const expressValidator = require('express-validator');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const RedisStore = require('connect-redis')(session);
+
+const auth = require('./routes/auth');
 const passport = require('passport');
 const routes = require('./routes');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -28,9 +31,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
 });
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 // Middlewares
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,31 +43,26 @@ app.use(cookieParser());
 // Used heavily on userController.validateRegister
 app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
-app.use(session({
-  secret: 'anything',
-  keys: ['secretkey'],
-  // at some point?
-  // cookie: { maxAge: 1000 }
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
+app.use(
+  session({
+    secret: 'anything',
+    keys: ['secretkey'],
+    cookie: { secure: false, maxAge: 86400000 },
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
 
 // Passport JS is what we use to handle our logins
+auth.init();
 app.use(passport.initialize());
 app.use(passport.session());
-
-require('./handlers/passport');
 
 // promisify some callback based APIs
 app.use((req, res, next) => {
   req.login = promisify(req.login, req);
   next();
-});
-
-app.use((req, res, next) => {
-  logger.info(`==============request user:${req.user}`);
-  return next();
 });
 
 app.use(routes);

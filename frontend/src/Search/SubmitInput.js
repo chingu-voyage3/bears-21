@@ -1,8 +1,13 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-const SubmitInput = (props) => (
-  <input type="submit" value="search" {...props} className={css(styles.input)} />
+const SubmitInput = props => (
+  <input
+    type="submit"
+    value="search"
+    {...props}
+    className={css(styles.input)}
+  />
 );
 export default SubmitInput;
 

@@ -1,23 +1,30 @@
-import React, { Component } from 'react';
-import { css, StyleSheet } from 'aphrodite';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import { connect } from 'react-redux';
 
-export default class Logout extends Component {
+import { logout } from '../API/user';
+
+class Logout extends Component {
+  async componentDidMount() {
+    const { dispatch } = this.props;
+    try {
+      await logout();
+      dispatch({
+        type: 'LOGOUT'
+      });
+      this.props.history.push('/login');
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   render() {
-    localStorage.removeItem("user");
-    return (
-      <div className={css(styles.centered)}>
-        <div>You have successfully been logged out!</div>
-      </div>
-    );
+    return null;
   }
 }
 
-const styles = StyleSheet.create({
-  centered: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  }
-});
+export default connect(
+  null,
+  dispatch => ({
+    dispatch
+  })
+)(Logout);
