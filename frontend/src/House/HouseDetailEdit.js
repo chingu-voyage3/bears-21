@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { css, StyleSheet } from 'aphrodite';
 import { ImageBlock, ImageListRemovable } from '../Image';
 import HouseFormEdit from './HouseFormEdit';
 import { houseFetchData, houseSaveData, houseReset } from './actions';
+import styled, { css } from 'styled-components';
 
 class House extends Component {
   static propTypes = {
@@ -91,14 +91,10 @@ class House extends Component {
       return <p>Please wait ...</p>;
     }
     const op_type = typeof house._id === 'undefined' ? 'New' : 'Edit';
-    const show_error = {
-      color: 'tomato',
-      display: hasErrored ? 'block' : 'none'
-    };
     return (
-      <div className={css(styles.centered)}>
+      <Centered>
         <h1>House ({op_type})</h1>
-        <div style={show_error}>{errorMessage}</div>
+        <ErrorMessage hasErrored={hasErrored}>{errorMessage}</ErrorMessage>
         <HouseFormEdit
           house={house}
           onFieldChange={this.onFieldChange}
@@ -109,20 +105,29 @@ class House extends Component {
           images={house.images}
           removeImage={this.removeImage}
         />
-      </div>
+      </Centered>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  centered: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+const Centered = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ErrorMessage = styled.div`
+  color: tomato;
+  display: none;
+
+  ${props =>
+    props.hasErrored &&
+    css`
+      display: block;
+    `};
+`;
 
 const mapStateToProps = state => {
   return {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import styled, { css } from 'styled-components';
 
 export default class HouseForm extends Component {
   static propTypes = {
@@ -10,67 +10,71 @@ export default class HouseForm extends Component {
   render = () => {
     const { house } = this.props;
     return (
-      <form action="" className={css(styles.form)}>
-        <label className={css(styles.left_grid)}>Title</label>
-        <input
+      <Form action="">
+        <LeftGrid>Title</LeftGrid>
+        <RightGridLabel
           name="title"
           type="text"
           placeholder="Title"
           disabled="disabled"
-          className={css(styles.right_grid)}
           value={house.title}
         />
 
-        <label className={css(styles.left_grid)}>Street</label>
-        <input
+        <LeftGrid>Street</LeftGrid>
+        <RightGridLabel
           name="location.street"
           type="text"
           placeholder="Street"
           disabled="disabled"
-          className={css(styles.right_grid)}
           value={house.location.street}
         />
 
-        <label className={css(styles.left_grid)}>Post Code</label>
-        <input
+        <LeftGrid>Post Code</LeftGrid>
+        <RightGridLabel
           name="location.postCode"
           type="text"
           placeholder="Post Code"
           disabled="disabled"
-          className={css(styles.right_grid)}
           value={house.location.postCode}
         />
 
-        <label className={css(styles.left_grid)}>Description</label>
-        <textarea
+        <LeftGrid>Description</LeftGrid>
+        <RightGridText
           name="description"
           rows="6"
           cols="32"
           placeholder="Description"
           disabled="disabled"
-          className={css(styles.right_grid)}
           value={house.description}
         />
-      </form>
+      </Form>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  form: {
-    margin: '10px auto',
-    maxWidth: '600px',
-    display: 'grid',
-    alignItems: 'baseline',
-    gridTemplateColumns: '100px 1fr',
-    gridGap: '8px'
-  },
-  left_grid: {
-    lineHeight: '1.5em',
-    textAlign: 'right',
-    gridColumn: '1 / 2'
-  },
-  right_grid: {
-    gridColumn: '2/3'
-  }
-});
+const Form = styled.form`
+  margin: 10px auto;
+  max-width: 600px;
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: 100px 1fr;
+  grid-gap: 8px;
+`;
+
+const LeftGrid = styled.label`
+  line-height: 1.5em;
+  text-align: right;
+  grid-column: 1 / 2;
+`;
+
+const sharedGrid = css`
+  grid-column: 2 / 3;
+`;
+
+const RightGridLabel = styled.input`
+  ${sharedGrid};
+`;
+
+const RightGridText = styled.textarea`
+  ${sharedGrid};
+`;
