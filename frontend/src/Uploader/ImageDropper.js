@@ -9,7 +9,7 @@ const getDropzoneStyle = (show_image, url) => {
     width: '200px',
     height: '200px',
     backgroundPosition: 'center',
-    backgroundImage: show_image ? `url( ${url})` : '',
+    backgroundImage: show_image ? `url(${url})` : '',
     backgroundSize: '200px, auto, contain',
     backgroundRepeat: 'no-repeat',
     border: show_image ? 'none' : '1px dashed grey'
@@ -37,8 +37,6 @@ ImageDropper.propTypes = {
   onFileDropped: PropTypes.func.isRequired
 };
 
-export default ImageDropper;
-
 const styles = StyleSheet.create({
   image_style: {
     maxWidth: '200px',
@@ -50,3 +48,5 @@ const styles = StyleSheet.create({
     marginBottom: '0px'
   }
 });
+
+export default ImageDropper;

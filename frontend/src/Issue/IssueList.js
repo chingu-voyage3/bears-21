@@ -9,18 +9,19 @@ export default class IssueList extends Component {
     items: PropTypes.array.isRequired, // array of issues
     onIssueClick: PropTypes.func.isRequired
   };
-  // TODO: should we need this?
-  onIssueClick = issue => {
-    this.props.onIssueClick(issue);
-  };
   render = () => {
-    const items = this.props.items.map((item, i) => (
-      <IssueItem issue={item} key={i} onIssueClick={this.onIssueClick} />
-    ));
     return (
       <div className={css(styles.column_wrapper)}>
         <div className={css(styles.title)}>{this.props.title}</div>
-        <ul className={css(styles.list)}>{items}</ul>
+        <ul className={css(styles.list)}>
+          {this.props.items.map((item, i) => (
+            <IssueItem
+              issue={item}
+              key={i}
+              onIssueClick={this.props.onIssueClick}
+            />
+          ))}
+        </ul>
       </div>
     );
   };
