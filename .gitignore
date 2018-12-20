@@ -16,3 +16,7 @@ npm-debug.log
 uploads/
 frontend/public/images/
 web/images/
+
+
+# yarn
+yarn.lock
