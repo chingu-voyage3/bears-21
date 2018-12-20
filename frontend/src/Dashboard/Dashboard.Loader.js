@@ -1,25 +1,23 @@
 import React from 'react';
 import HouseListLoader from '../House/HouseList.Loader';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 const DashboardLoader = () => (
   <div style={{ flex: '1' }}>
     <h1>Dashboard</h1>
-    <button type="button" disabled={true} className={css(styles.button)} />
+    <StyledButton type="button" disabled={true} />
     <HouseListLoader />
   </div>
 );
 
-const styles = StyleSheet.create({
-  button: {
-    width: '80px',
-    height: '1.5rem',
-    background: 'lightgrey',
-    borderRadius: '10px',
-    ':hover': {
-      boxShadow: 'none'
-    }
+const StyledButton = styled.button`
+  width: 80px;
+  height: 1.5rem;
+  background: lightgrey;
+  border-radius: 10px;
+  &:hover {
+    box-shadow: none;
   }
-});
+`;
 
 export default DashboardLoader;
