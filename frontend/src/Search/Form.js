@@ -1,14 +1,11 @@
 import React from 'react';
-import { css, StyleSheet } from 'aphrodite';
+import styled from 'styled-components';
 
-const Form = props => <form {...props} className={css(styles.form)} />;
-export default Form;
+export default props => <StyledForm {...props} />;
 
-const styles = StyleSheet.create({
-  form: {
-    display: 'flex',
-    border: '10px solid rgba(0,0,0,0.3)',
-    borderRadius: '5px',
-    zIndex: '10'
-  }
-});
+const StyledForm = styled.form`
+  display: flex;
+  border: 10px solid rgbd(0, 0, 0, 0.3);
+  border-radius: 5px;
+  z-index: 10;
+`;

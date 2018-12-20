@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ImageDefault } from '../Image';
 import { Uploader } from '../Uploader';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 const Avatar = ({ name, localUser, image, changeImage }) => (
-  <div className={css(styles.wrapper)}>
+  <Wrapper>
     {localUser ? (
       <Uploader currentImage={image} addImage={changeImage} />
     ) : (
@@ -15,8 +15,14 @@ const Avatar = ({ name, localUser, image, changeImage }) => (
       />
     )}
     <p>{name}</p>
-  </div>
+  </Wrapper>
 );
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 200px;
+`;
 
 Avatar.propTypes = {
   localUser: PropTypes.bool.isRequired,
@@ -24,13 +30,5 @@ Avatar.propTypes = {
   image: PropTypes.string,
   changeImage: PropTypes.func.isRequired
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '0 1 200px'
-  }
-});
 
 export default Avatar;
