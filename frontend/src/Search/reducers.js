@@ -9,7 +9,6 @@ import {
   SEARCH_POST_CODE_FAILED
 } from './actions';
 
-
 /**
  * {
  *    searchedPostCode: '',
@@ -77,11 +76,11 @@ function houses(
 ) {
   switch (action.type) {
     case SEARCH_HOUSES_REQUEST:
-      return {...state, isFetching: true};
+      return { ...state, isFetching: true };
     case SEARCH_HOUSES_SUCCESS:
-      return {...state, isFetching: false, items: action.houses};
+      return { ...state, isFetching: false, items: action.houses };
     case SEARCH_HOUSES_FAILURE:
-      return {...state, isFetching: false, errorMessage: ''};
+      return { ...state, isFetching: false, errorMessage: '' };
     default:
       return state;
   }
@@ -92,7 +91,8 @@ function housesByPostCode(state = {}, action) {
     case SEARCH_HOUSES_REQUEST:
     case SEARCH_HOUSES_SUCCESS:
     case SEARCH_HOUSES_FAILURE:
-      return {...state,
+      return {
+        ...state,
         [action.postCode]: houses(state[action.postCode], action)
       };
     default:
@@ -105,23 +105,25 @@ export default combineReducers({
   searchedPostCode,
   suggestions,
   isFetching
-})
+});
 
 // Selectors
 export const getHousesByPostCode = (state, postCode) => {
-  return state.search.housesByPostCode[postCode] ?
-    state.search.housesByPostCode[postCode].items : [];
+  return state.search.housesByPostCode[postCode]
+    ? state.search.housesByPostCode[postCode].items
+    : [];
 };
 
 export const getIsFetching = (state, postCode) => {
-  return state.search.housesByPostCode[postCode] ?
-    state.search.housesByPostCode[postCode].isFetching : false;
+  return state.search.housesByPostCode[postCode]
+    ? state.search.housesByPostCode[postCode].isFetching
+    : false;
 };
 
-export const getSuggestions = (state) => {
+export const getSuggestions = state => {
   return state.search.suggestions;
 };
 
-export const getIsFetchingSuggestions = (state) => {
+export const getIsFetchingSuggestions = state => {
   return state.search.isFetching;
 };

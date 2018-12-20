@@ -1,14 +1,17 @@
-'use strict'
+'use strict';
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const config = require('./config');
 
-async function init () {
-  await mongoose.connect(config.uri);
+async function init() {
+  await mongoose.connect(
+    config.uri,
+    { useNewUrlParser: true }
+  );
 }
 
-async function close () {
+async function close() {
   await mongoose.connection.close();
 }
 

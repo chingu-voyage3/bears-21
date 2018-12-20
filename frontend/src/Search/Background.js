@@ -2,7 +2,11 @@ import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 const Background = () => (
-  <img src="http://lorempixel.com/1000/600/abstract" className={css(styles.img)} alt="background" />
+  <img
+    src="http://lorempixel.com/1000/600/abstract"
+    className={css(styles.img)}
+    alt="background"
+  />
 );
 export default Background;
 

@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import {
   HOUSE_DELETE_SUCCESS,
   HOUSE_ISSUES_FETCH_DATA_SUCCESS,
@@ -6,8 +6,8 @@ import {
   HOUSE_ISSUES_HAS_ERRORED
 } from './actions';
 
-function houseIssuesHasErrored( state = false, action) {
-  switch( action.type) {
+function houseIssuesHasErrored(state = false, action) {
+  switch (action.type) {
     case HOUSE_ISSUES_HAS_ERRORED:
       return action.hasErrored;
     default:
@@ -15,8 +15,8 @@ function houseIssuesHasErrored( state = false, action) {
   }
 }
 
-function houseIssuesIsLoading( state = true, action) {
-  switch( action.type) {
+function houseIssuesIsLoading(state = true, action) {
+  switch (action.type) {
     case HOUSE_ISSUES_IS_LOADING:
       return action.isLoading;
     default:
@@ -24,12 +24,12 @@ function houseIssuesIsLoading( state = true, action) {
   }
 }
 
-function houseIssues( state = [], action) {
-  switch( action.type) {
+function houseIssues(state = [], action) {
+  switch (action.type) {
     case HOUSE_ISSUES_FETCH_DATA_SUCCESS:
-      return action.houseIssues;
+      return [...action.houseIssues];
     case HOUSE_DELETE_SUCCESS:
-      return state.filter( house => house._id !== action.house_id);
+      return state.filter(house => house._id !== action.house_id);
     default:
       return state;
   }

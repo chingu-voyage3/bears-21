@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, css} from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 
 const AvatarLoader = () => (
   <div className={css(styles.wrapper)}>
@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
     background: 'lightgrey'
   },
   name: {
-    margin: "10px",
-    width: "100px",
-    height: "1.2rem",
+    margin: '10px',
+    width: '100px',
+    height: '1.2rem',
     background: 'lightgrey'
   }
 });

@@ -13,22 +13,6 @@ body {
   justify-content: center;
 }
 
-button {
-  cursor: pointer;
-  margin: 5px;
-  padding: 2px 5px;
-  font-weight: bold;
-  background: linear-gradient( to top, #49CF87, #40C080);
-  border-radius: 10px;
-}
-button:hover {
-  box-shadow: 0px 0px 10px yellow;
-}
-button:focus {
-  outline: 0;
-  box-shadow: 0px 0px 10px orange;
-}
-
 input {
   line-height: 1.5em;
   border-radius: 5px;
@@ -37,8 +21,14 @@ input {
   margin-right: 5px;
   margin-bottom: 5px;
 }
+
 input:focus {
   border-color: rgba( 127, 127, 255, 0.5);
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 textarea {
