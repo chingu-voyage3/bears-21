@@ -5,7 +5,10 @@ mongoose.Promise = global.Promise;
 const config = require('./config');
 
 async function init() {
-  await mongoose.connect(config.uri);
+  await mongoose.connect(
+    config.uri,
+    { useNewUrlParser: true }
+  );
 }
 
 async function close() {
