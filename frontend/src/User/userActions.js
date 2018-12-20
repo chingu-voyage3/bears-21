@@ -51,7 +51,7 @@ export function requestLogin(payload) {
 
 export function autoLoginSuccess(user) {
   return {
-    type: UserTypes.LOGIN,
+    type: UserTypes.AUTO_LOGIN_SUCCESS,
     user
   };
 }
