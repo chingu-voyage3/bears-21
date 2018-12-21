@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, StyleSheet } from 'aphrodite';
 import AutoCompleteItem from './AutoCompleteItem';
+import styled from 'styled-components';
 
 const AutoCompleteList = ({ items = [] }) => {
   const listItems = items.map((item, idx) => (
     <AutoCompleteItem key={idx} {...item} />
   ));
   return (
-    <div className={css(styles.wrapper)}>
-      <ul className={css(styles.list)}>{listItems}</ul>
-    </div>
+    <Wrapper>
+      <List>{listItems}</List>
+    </Wrapper>
   );
 };
 
@@ -18,23 +18,21 @@ AutoCompleteList.propTypes = {
   items: PropTypes.array
 };
 
-const styles = StyleSheet.create({
-  wrapper: {
-    position: 'absolute',
-    top: '290px',
-    zIndex: '1000'
-  },
-  list: {
-    background: '#fff',
-    margin: 0,
-    padding: 0,
-    position: 'relative',
-    width: '280px',
-    listStyle: 'none',
-    maxHeight: '300px',
-    'overflow-y': 'scroll',
-    'overflow-x': 'hidden'
-  }
-});
+const Wrapper = styled.div`
+  position: absolute;
+  top: 290px;
+  z-index: 1000;
+`;
+
+const List = styled.ul`
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 280px;
+  list-style: none;
+  max-height: 300px;
+  overflow-x: hidden;
+`;
 
 export default AutoCompleteList;
