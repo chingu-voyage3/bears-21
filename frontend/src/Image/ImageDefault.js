@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
 import ImageRef from './ImageRef';
+import styled from 'styled-components';
 
 class ImageDefault extends React.Component {
   static propTypes = {
@@ -61,30 +61,19 @@ class ImageDefault extends React.Component {
     return (
       <div>
         {image_error ? (
-          <img
-            className={css(styles.image)}
-            src={encodeURI(missing_url)}
-            alt="missing"
-          />
+          <Image src={encodeURI(missing_url)} alt="missing" />
         ) : (
-          <img
-            className={css(styles.image)}
-            src={image_src}
-            alt="noimage"
-            onError={this.onImageError}
-          />
+          <Image src={image_src} alt="noimage" onError={this.onImageError} />
         )}
       </div>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  image: {
-    borderRadius: '4px 4px 0 0',
-    width: '100%',
-    padding: '0'
-  }
-});
+const Image = styled.img`
+  border-radius: 4px 4px 0 0;
+  width: 100%;
+  padding: 0;
+`;
 
 export default ImageDefault;
