@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
 import { postRating } from './actions';
-
 import Overview from './Overview';
 import Bar from './Bar';
+import styled from 'styled-components';
 
 export default class Rating extends React.Component {
   static propTypes = {
@@ -34,7 +33,7 @@ export default class Rating extends React.Component {
   render = () => {
     const { show_rating_bar, currentRating } = this.state;
     return (
-      <div className={css(styles.wrapper)}>
+      <Wrapper>
         <Bar
           visible={show_rating_bar}
           onSelected={this.ratingSelected}
@@ -46,19 +45,17 @@ export default class Rating extends React.Component {
           onEnter={this.showRatingBar}
           onLeave={this.hideRatingBar}
         />
-      </div>
+      </Wrapper>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    position: 'relative',
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    flex: '1',
-    fontSize: '2rem'
-  }
-});
+const Wrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  font-size: 2rem;
+`;

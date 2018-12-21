@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import IssueItem from './IssueItem';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 export default class IssueList extends Component {
   static propTypes = {
@@ -11,9 +11,9 @@ export default class IssueList extends Component {
   };
   render = () => {
     return (
-      <div className={css(styles.column_wrapper)}>
-        <div className={css(styles.title)}>{this.props.title}</div>
-        <ul className={css(styles.list)}>
+      <ColWrapper>
+        <Title>{this.props.title}</Title>
+        <List>
           {this.props.items.map((item, i) => (
             <IssueItem
               issue={item}
@@ -21,26 +21,26 @@ export default class IssueList extends Component {
               onIssueClick={this.props.onIssueClick}
             />
           ))}
-        </ul>
-      </div>
+        </List>
+      </ColWrapper>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  column_wrapper: {
-    padding: '1em 0px',
-    width: '30%',
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    border: '1px solid lightgrey'
-  },
-  list: {
-    margin: '0.5rem',
-    padding: 0
-  },
-  title: {
-    textAlign: 'center'
-  }
-});
+const ColWrapper = styled.div`
+  padding: 1em 0;
+  width: 30%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 1px solid lightgrey;
+`;
+
+const List = styled.ul`
+  margin: 0.5rem;
+  padding: 0;
+`;
+
+const Title = styled.div`
+  text-align: center;
+`;

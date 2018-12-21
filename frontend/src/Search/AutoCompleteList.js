@@ -19,8 +19,8 @@ AutoCompleteList.propTypes = {
 };
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 290px;
+  position: relative;
+  /* top: 290px; */
   z-index: 1000;
 `;
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
 import Star from './Star';
+import styled, { css } from 'styled-components';
 
 export default class Bar extends Component {
   static propTypes = {
@@ -29,55 +29,37 @@ export default class Bar extends Component {
     const { stars } = this.state;
     const { visible, onEnter, onSelected } = this.props;
     return (
-      <div
-        className={css(styles.wrapper)}
-        style={{ display: visible ? 'block' : 'none' }}
+      <Wrapper
+        visible={visible}
         onMouseEnter={onEnter}
         onMouseLeave={this.onLeaveBar}
       >
-        <Star
-          selected={onSelected}
-          lit={stars[0]}
-          ratingValue={1}
-          onEnter={this.onEnter}
-        />
-        <Star
-          selected={onSelected}
-          lit={stars[1]}
-          ratingValue={2}
-          onEnter={this.onEnter}
-        />
-        <Star
-          selected={onSelected}
-          lit={stars[2]}
-          ratingValue={3}
-          onEnter={this.onEnter}
-        />
-        <Star
-          selected={onSelected}
-          lit={stars[3]}
-          ratingValue={4}
-          onEnter={this.onEnter}
-        />
-        <Star
-          selected={onSelected}
-          lit={stars[4]}
-          ratingValue={5}
-          onEnter={this.onEnter}
-        />
-      </div>
+        {[0, 1, 2, 3, 4].map(x => (
+          <Star
+            selected={onSelected}
+            lit={stars[x]}
+            ratingValue={x + 1}
+            onEnter={this.onEnter}
+          />
+        ))}
+      </Wrapper>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    position: 'absolute',
-    zIndex: '100',
-    top: '0.6rem',
-    right: '2.1rem',
-    backgroundColor: 'rgba( 171, 197, 90, 0.85)',
-    borderRadius: '10px 0px 0px 10px',
-    fontSize: '1.5rem'
-  }
-});
+const Wrapper = styled.div`
+  position: absolute;
+  z-index: 100;
+  top: 0.6rem;
+  right: 2.1rem;
+  background-color: rgba(171, 197, 90, 0.85);
+  border-radius: 10px 0 0 10px;
+  font-size: 1.5rem;
+  display: none;
+
+  ${props =>
+    props.visible &&
+    css`
+      display: block;
+    `};
+`;

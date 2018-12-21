@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 const filled_star = String.fromCharCode(9733);
 
@@ -9,16 +9,15 @@ const clicked = e => {
 };
 
 const Overview = props => (
-  <div
+  <Star
     title={`Overall:${props.value}`}
-    className={css(styles.stars)}
     onClick={clicked}
     onMouseEnter={props.onEnter}
     onMouseLeave={props.onLeave}
   >
     {filled_star}
-    <div className={css(styles.rating_value)}>{Math.round(props.value)}</div>
-  </div>
+    <Rating>{Math.round(props.value)}</Rating>
+  </Star>
 );
 
 Overview.propTypes = {
@@ -27,22 +26,21 @@ Overview.propTypes = {
   onLeave: PropTypes.func.isRequired
 };
 
-const styles = StyleSheet.create({
-  stars: {
-    position: 'relative',
-    color: 'gold',
-    background: 'transparent',
-    borderRadius: '0px 10px 10px 0px',
-    fontSize: '2.5rem'
-  },
-  rating_value: {
-    position: 'absolute',
-    color: 'rgba( 5,5,5, 0.5)',
-    top: '1rem',
-    left: '0.9rem',
-    fontSize: '0.8rem',
-    fontWeight: 'bold'
-  }
-});
+const Star = styled.div`
+  position: relative;
+  color: gold;
+  background: transparent;
+  border-radius: 0 10px 10px 0;
+  font-size: 2.5rem;
+`;
+
+const Rating = styled.div`
+  position: absolute;
+  color: rgba(5, 5, 5, 0.5);
+  top: 1rem;
+  left: 0.9rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+`;
 
 export default Overview;

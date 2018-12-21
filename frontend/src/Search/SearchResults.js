@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { css, StyleSheet } from 'aphrodite';
 import 'url-search-params-polyfill';
 import HouseList from './HouseList';
 import HouseItemSelectable from './HouseItemSelectable';
 import { fetchHouses } from './actions';
 import { getHousesByPostCode, getIsFetching } from './reducers';
 import SearchResultsLoader from './SearchResults.Loader';
+import styled from 'styled-components';
 
 class SearchResults extends Component {
   static propTypes = {
@@ -42,10 +42,8 @@ class SearchResults extends Component {
       return <SearchResultsLoader />;
     }
     return (
-      <div className={css(styles.container)}>
-        <h1 className={css(styles.heading)}>
-          Search results for post code {postCode}
-        </h1>
+      <Container>
+        <Heading>Search results for post code {postCode}</Heading>
         <HouseList>
           {houses.map((house, i) => (
             <HouseItemSelectable
@@ -55,24 +53,23 @@ class SearchResults extends Component {
             />
           ))}
         </HouseList>
-      </div>
+      </Container>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flex: '1',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  heading: {
-    fontWeight: '500',
-    fontSize: '22px',
-    color: '#262637'
-  }
-});
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Heading = styled.h1`
+  font-weight: 500;
+  font-size: 22px;
+  color: #262637;
+`;
 
 function loadData(props) {
   props.fetchHouses(parse(getSearchParams(props)).postCode);

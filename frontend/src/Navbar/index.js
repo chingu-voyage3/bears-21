@@ -16,7 +16,7 @@ class Navbar extends Component {
 
     if (loggedIn) {
       // authenticated
-      const { name } = currentUser;
+      // const { name } = currentUser;
       return (
         <div>
           <Container>
