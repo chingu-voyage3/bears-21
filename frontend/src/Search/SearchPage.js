@@ -1,43 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, css } from 'aphrodite';
 import styled from 'styled-components';
-
 import SubmitInput from './SubmitInput';
 import Form from './Form';
 import AutoCompleteList from './AutoCompleteList';
 import { searchPostCodes } from './actions';
 import { getSuggestions, getIsFetchingSuggestions } from './reducers';
 import { Footer } from '../Footer';
-
-const FlexCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-`;
-
-const Wrapper = styled(FlexCol)`
-  grid-area: content;
-  height: 100%;
-  min-height: 100vh;
-  min-width: 100vw;
-  width: 100%;
-  max-width: 100vw;
-  overflow: hidden;
-`;
-
-const mapStateToProps = state => ({
-  suggestions: getSuggestions(state),
-  isFetching: getIsFetchingSuggestions(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  onChangePostCode: postCode => {
-    dispatch(searchPostCodes(postCode));
-  }
-});
 
 class SearchPage extends Component {
   static propTypes = {
@@ -73,11 +43,10 @@ class SearchPage extends Component {
 
     return (
       <Wrapper>
-        <header className={css(styles.header)}>
+        <Header>
           <Form onSubmit={this.handleSubmit}>
-            <input
+            <Input
               type="search"
-              className={css(styles.input)}
               placeholder="Enter Postcode"
               ref={c => {
                 this.input = c;
@@ -94,87 +63,118 @@ class SearchPage extends Component {
               text: s.text
             }))}
           />
-        </header>
-        <article className={css(styles.article)}>
-          <h2 className={css(styles.h2)}>Features</h2>
-          <div className={css(styles.content)}>
-            <section className={css(styles.section)}>
-              <h3 className={css(styles.h3)}>Search houses</h3>
+        </Header>
+        <Article>
+          <Header2>Features</Header2>
+          <Content>
+            <Section>
+              <Header3>Search houses</Header3>
               <p>Loren lipsum</p>
-            </section>
-            <section className={css(styles.section)}>
-              <h3 className={css(styles.h3)}>Manage issues</h3>
+            </Section>
+            <Section>
+              <Header3>Manage issues</Header3>
               <p>Loren lipsum</p>
-            </section>
-            <section className={css(styles.section)}>
-              <h3 className={css(styles.h3)}>Track communication</h3>
+            </Section>
+            <Section>
+              <Header3>Track communication</Header3>
               <p>Loren lipsum</p>
-            </section>
-            <section className={css(styles.section)}>
-              <h3 className={css(styles.h3)}>Refer and earn</h3>
+            </Section>
+            <Section>
+              <Header3>Refer and earn</Header3>
               <p>Loren lipsum</p>
-            </section>
-          </div>
-        </article>
+            </Section>
+          </Content>
+        </Article>
         <Footer />
       </Wrapper>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  article: {
-    margin: '0 auto auto',
-    maxWidth: '60rem',
-    padding: '3em 2rem'
-  },
-  h2: {
-    width: '100%',
-    textAlign: 'center',
-    fontWeight: '400',
-    fontSize: '2rem',
-    color: '#ff5a5f'
-  },
-  h3: {
-    display: 'flex',
-    alignItems: 'center',
-    color: '#7d93aa',
-    fontSize: '1.4em',
-    fontWeight: '400',
-    marginBottom: '.75rem',
-    marginTop: '1rem'
-  },
-  section: {
-    width: 'calc(50% - 1rem)',
-    fontSize: '1.1rem'
-  },
-  content: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  header: {
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1451934403379-ffeff84932da?auto=format&fit=crop&w=1284&q=80')",
-    backgroundPosition: 'center',
-    padding: '8rem 2rem',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%'
-  },
-  input: {
-    border: 0,
-    margin: 0,
-    padding: '10px',
-    background: 'white',
-    lineHeight: '50px',
-    fontSize: '20px',
-    borderRadius: 0,
-    outline: 0,
-    borderRight: '1px solid rgba(0,0,0,0.2)'
+const FlexCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+`;
+
+const Wrapper = styled(FlexCol)`
+  grid-area: content;
+  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+`;
+
+const Article = styled.article`
+  margin: 0 auto auto;
+  max-width: 60rem;
+  padding: 3em 2rem;
+`;
+
+const Header2 = styled.h2`
+  width: 100%;
+  text-align: center;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #ff5a5f;
+`;
+
+const Header3 = styled.h3`
+  display: flex;
+  align-items: center;
+  color: #7d93aa;
+  font-size: 1.4em;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  margin-top: 1rem;
+`;
+
+const Section = styled.section`
+  width: calc(50% - 1rem);
+  font-size: 1.1rem;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const Header = styled.div`
+  background-image: url('https://images.unsplash.com/photo-1451934403379-ffeff84932da?auto=format&fit=crop&w=1284&q=80');
+  background-position: center;
+  padding: 8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const Input = styled.input`
+  border: 0;
+  margin: 0;
+  padding: 10px;
+  background: white;
+  line-height: 50px;
+  font-size: 20px;
+  border-radius: 0;
+  outline: 0;
+  border-right: 1px solid rgb(0, 0, 0, 0.2);
+`;
+
+const mapStateToProps = state => ({
+  suggestions: getSuggestions(state),
+  isFetching: getIsFetchingSuggestions(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChangePostCode: postCode => {
+    dispatch(searchPostCodes(postCode));
   }
 });
 

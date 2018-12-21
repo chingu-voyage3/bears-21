@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Uploader } from '../Uploader';
-import { StyleSheet, css } from 'aphrodite';
 import { PlusButton } from '../Common/Buttons';
+import styled, { css } from 'styled-components';
 
 export default class ImageBlock extends Component {
   static propTypes = {
@@ -15,31 +15,35 @@ export default class ImageBlock extends Component {
     this.setState({ uploader_visible: !this.state.uploader_visible });
   };
   render = () => {
-    const show_uploader = {
-      display: this.state.uploader_visible ? 'flex' : 'none'
-    };
     return (
       <div>
-        <div className={css(styles.header)}>
+        <Header>
           Images
           <PlusButton
             onClick={this.toggleUploaderVisibility}
             title="Toggle Image Uploader"
           />
-        </div>
-        <div style={show_uploader}>
+        </Header>
+        <UploaderStyle show={this.state.uploader_visible}>
           <Uploader addImage={this.props.addImage} />
-        </div>
+        </UploaderStyle>
       </div>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  header: {
-    display: 'flex',
-    flex: '1',
-    justifyContent: 'center',
-    alignItems: 'baseline'
-  }
-});
+const UploaderStyle = styled.div`
+  display: none;
+  ${props =>
+    props.show &&
+    css`
+      display: flex;
+    `};
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: baseline;
+`;

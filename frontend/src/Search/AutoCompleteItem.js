@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, StyleSheet } from 'aphrodite';
+import styled from 'styled-components';
 
 const AutoCompleteItem = ({ link, text }) => (
-  <li className={css(styles.li)}>
-    <a className={css(styles.a)} href={link}>
-      {text}
-    </a>
-  </li>
+  <List>
+    <Anchor href={link}>{text}</Anchor>
+  </List>
 );
 
 AutoCompleteItem.propTypes = {
@@ -15,16 +13,15 @@ AutoCompleteItem.propTypes = {
   text: PropTypes.string
 };
 
-const styles = StyleSheet.create({
-  a: {
-    color: 'black',
-    textDecoration: 'none'
-  },
-  li: {
-    background: '#fff',
-    padding: '1rem 1rem',
-    borderBottom: '1px solid #D8D8D8'
-  }
-});
+const Anchor = styled.a`
+  color: black;
+  text-decoration: none;
+`;
+
+const List = styled.li`
+  background: #fff;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #d8d8d8;
+`;
 
 export default AutoCompleteItem;

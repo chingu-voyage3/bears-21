@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
 import Dropzone from 'react-dropzone';
+import styled from 'styled-components';
 
 const getDropzoneStyle = (show_image, url) => {
   return {
@@ -9,7 +9,7 @@ const getDropzoneStyle = (show_image, url) => {
     width: '200px',
     height: '200px',
     backgroundPosition: 'center',
-    backgroundImage: show_image ? `url( ${url})` : '',
+    backgroundImage: show_image ? `url(${url})` : '',
     backgroundSize: '200px, auto, contain',
     backgroundRepeat: 'no-repeat',
     border: show_image ? 'none' : '1px dashed grey'
@@ -17,7 +17,7 @@ const getDropzoneStyle = (show_image, url) => {
 };
 const reload_symbol = String.fromCharCode(8635);
 const ImageDropper = props => (
-  <div className={css(styles.well)}>
+  <Well>
     <Dropzone
       onDrop={props.onFileDropped}
       style={getDropzoneStyle(props.show_image, props.url)}
@@ -28,7 +28,7 @@ const ImageDropper = props => (
               Alternatively specify url to an online image in the url box\
               below and click preview button ${reload_symbol}`}
     </Dropzone>
-  </div>
+  </Well>
 );
 
 ImageDropper.propTypes = {
@@ -37,16 +37,9 @@ ImageDropper.propTypes = {
   onFileDropped: PropTypes.func.isRequired
 };
 
-export default ImageDropper;
+const Well = styled.div`
+  padding: 10px;
+  margin-bottom: 0;
+`;
 
-const styles = StyleSheet.create({
-  image_style: {
-    maxWidth: '200px',
-    maxHeight: '200px'
-  },
-  well: {
-    padding: '10px',
-    paddingBottom: '10px',
-    marginBottom: '0px'
-  }
-});
+export default ImageDropper;

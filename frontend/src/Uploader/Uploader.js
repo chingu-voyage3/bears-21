@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImageDropper from './ImageDropper';
 import UrlInput from './UrlInput';
 import { ReloadButton } from '../Common/Buttons';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 export default class Uploader extends Component {
   static propTypes = {
@@ -53,7 +53,7 @@ export default class Uploader extends Component {
     const { image_src, url_text, show_image } = this.state;
     const url = image_src ? image_src : missing_url;
     return (
-      <div className={css(styles.wrapper)}>
+      <Wrapper>
         <ImageDropper
           url={url}
           show_image={show_image}
@@ -65,27 +65,26 @@ export default class Uploader extends Component {
           onUrlChange={this.onUrlChange}
           handleUrlKeyUp={this.handleUrlKeyUp}
         />
-        <div className={css(styles.btn_wrapper)}>
+        <ButtonWrapper>
           <ReloadButton onClick={this.setPicUrl} title="Preview image" />
-        </div>
-      </div>
+        </ButtonWrapper>
+      </Wrapper>
     );
   };
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    padding: '0px 10px',
-    border: '2px solid darkgrey',
-    borderRadius: '10px',
-    boxShadow: '0px 0px 8px 0 #ccc',
-    background: 'lightgrey',
-    maxWidth: '240px'
-  },
-  btn_wrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    fontSize: '0.8em'
-  }
-});
+const Wrapper = styled.div`
+  padding: 0 10px;
+  border: 2px solid darkgrey;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 #ccc;
+  background: lightgrey;
+  max-width: 240px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 0.8rem;
+`;

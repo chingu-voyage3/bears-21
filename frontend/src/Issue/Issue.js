@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import IssueForm from './IssueForm';
 import { ImageBlock, ImageListRemovable } from '../Image';
 import { issueFetchData, issueSaveData, issueReset } from './actions';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 class Issue extends Component {
   static propTypes = {
@@ -87,7 +87,7 @@ class Issue extends Component {
       display: hasErrored ? 'block' : 'none'
     };
     return (
-      <div className={css(styles.wrapper)}>
+      <Wrapper>
         <h1>Issue ({op_type})</h1>
         <div style={show_error}>{errorMessage}</div>
         <IssueForm
@@ -100,10 +100,17 @@ class Issue extends Component {
           images={issue.images || []}
           removeImage={this.removeImage}
         />
-      </div>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const mapStateToProps = state => {
   return {
@@ -127,12 +134,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Issue);
-
-const styles = StyleSheet.create({
-  wrapper: {
-    display: 'flex',
-    flex: '1',
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
-});

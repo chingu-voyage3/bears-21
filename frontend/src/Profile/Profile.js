@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, css } from 'aphrodite';
 import Avatar from './Avatar';
 import Detail from './Detail';
 import ProfileLoader from './Profile.Loader';
 import { getDetail, profileSave } from '../User/userActions';
 import { ImageRef } from '../Image';
+import styled, { css } from 'styled-components';
 
 class Profile extends React.Component {
   static propTypes = {
@@ -74,24 +74,16 @@ class Profile extends React.Component {
     if (isWorking) {
       return <ProfileLoader />;
     }
-    const show_message = {
-      color: 'tomato',
-      display: message ? 'block' : 'none'
-    };
     return (
-      <div className={css(styles.container)}>
-        <span className={css(styles.h1)}>Profile</span>
-        <div style={show_message}>{message}</div>
+      <Container>
+        <Header>Profile</Header>
+        <Message message={message}>{message}</Message>
         {local_user ? (
-          <button
-            type="button"
-            className={css(styles.save_width)}
-            onClick={this.save}
-          >
+          <SaveWidth type="button" onClick={this.save}>
             Save
-          </button>
+          </SaveWidth>
         ) : null}
-        <div className={css(styles.wrapper)}>
+        <Wrapper>
           <Avatar
             name={user.name}
             image={avatar_src}
@@ -103,11 +95,51 @@ class Profile extends React.Component {
             localUser={local_user}
             onFieldChange={this.onFieldChange}
           />
-        </div>
-      </div>
+        </Wrapper>
+      </Container>
     );
   };
 }
+
+const Message = styled.div`
+  color: tomato;
+  display: none;
+
+  ${props =>
+    props.message &&
+    css`
+      display: block;
+    `};
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+`;
+
+const Header = styled.span`
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
+`;
+
+const SaveWidth = styled.button`
+  width: 100px;
+`;
 
 const mapStateToProps = state => {
   return {
@@ -127,31 +159,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Profile);
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '1',
-    alignItems: 'center'
-  },
-  h1: {
-    marginTop: '1rem',
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  wrapper: {
-    margin: '1rem',
-    padding: '1rem',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    border: '1px solid lightgrey',
-    borderRadius: '10px',
-    boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0'
-  },
-  save_width: {
-    width: '100px'
-  }
-});

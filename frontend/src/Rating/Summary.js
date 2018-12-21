@@ -1,36 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
-const filled_star = String.fromCharCode(9733);
+const STAR_SYMBOL = String.fromCharCode(9733);
 
 const Summary = props => (
-  <div className={css(styles.stars)}>
-    {filled_star}
-    <div className={css(styles.rating_value)}>{props.value}</div>
-  </div>
+  <Stars>
+    {STAR_SYMBOL}
+    <RatingValue>{props.value}</RatingValue>
+  </Stars>
 );
 
 Summary.propTypes = {
   value: PropTypes.number.isRequired
 };
 
-const styles = StyleSheet.create({
-  stars: {
-    position: 'relative',
-    color: 'gold',
-    borderRadius: '10px',
-    fontSize: '3rem',
-    fontWeight: 'normal'
-  },
-  rating_value: {
-    position: 'absolute',
-    color: 'rgba( 5,5,5, 0.5)',
-    fontSize: '0.8rem',
-    top: '1.4rem',
-    left: '1.1rem',
-    fontWeight: 'bold'
-  }
-});
+const Stars = styled.div`
+  position: relative;
+  color: gold;
+  border-radius: 10px;
+  font-size: 3rem;
+  font-weight: normal;
+`;
+
+const RatingValue = styled.div`
+  position: absolute;
+  color: rgba(5, 5, 5, 0.5);
+  font-size: 0.8rem;
+  top: 1.4rem;
+  left: 1.1rem;
+  font-weight: bold;
+`;
 
 export default Summary;

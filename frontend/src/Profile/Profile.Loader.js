@@ -1,41 +1,41 @@
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite';
 import AvatarLoader from './Avatar.Loader';
 import DetailLoader from './Detail.Loader';
+import styled from 'styled-components';
 
 const ProfileLoader = () => (
-  <div className={css(styles.container)}>
-    <span className={css(styles.h1)}>Profile</span>
-    <div className={css(styles.wrapper)}>
+  <Container>
+    <Header>Profile</Header>
+    <Wrapper>
       <AvatarLoader />
       <DetailLoader />
-    </div>
-  </div>
+    </Wrapper>
+  </Container>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '1',
-    alignItems: 'center'
-  },
-  h1: {
-    marginTop: '1rem',
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  wrapper: {
-    margin: '1rem',
-    padding: '1rem',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    border: '1px solid lightgrey',
-    borderRadius: '10px',
-    boxShadow: 'rgba(0, 0, 0, 0.19) 0 0 8px 0'
-  }
-});
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+`;
+
+const Header = styled.span`
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
+`;
 
 export default ProfileLoader;

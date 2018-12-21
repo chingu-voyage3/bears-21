@@ -11,7 +11,6 @@ function init() {
   });
 
   passport.deserializeUser(function(user, done) {
-    console.log('DeSerialize', user);
     done(null, user);
   });
 

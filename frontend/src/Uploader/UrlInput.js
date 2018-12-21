@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 const UrlInput = props => (
-  <div className={css(styles.wrapper)}>
+  <Container>
     Url
     <input
       type="text"
@@ -11,19 +11,18 @@ const UrlInput = props => (
       onChange={props.onUrlChange}
       onKeyUp={props.handleUrlKeyUp}
     />
-  </div>
+  </Container>
 );
 UrlInput.propTypes = {
   url_text: PropTypes.string,
   onUrlChange: PropTypes.func.isRequired,
   handleUrlKeyUp: PropTypes.func.isRequired
 };
-export default UrlInput;
 
-const styles = StyleSheet.create({
-  wrapper: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  }
-});
+const Container = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export default UrlInput;

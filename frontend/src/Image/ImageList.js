@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageDefault from './ImageDefault';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 export default class ImageList extends React.Component {
   static propTypes = {
@@ -16,32 +16,31 @@ export default class ImageList extends React.Component {
         src = img.preview;
       }
       return (
-        <div className={css(styles.wrapper)} key={src}>
+        <Wrapper key={src}>
           <ImageDefault
             src={src}
             missing_url="//via.placeholder.com/200x200?text=no image"
           />
-        </div>
+        </Wrapper>
       );
     });
-    return <div className={css(styles.container)}>{image_list}</div>;
+    return <Container>{image_list}</Container>;
   };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    margin: '10px'
-  },
-  wrapper: {
-    padding: '0px 20px',
-    border: '2px solid darkgrey',
-    borderRadius: '10px',
-    boxShadow: '0px 0px 8px 0 #ccc',
-    background: 'lightgrey',
-    maxWidth: '220px'
-  }
-});
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 10px;
+`;
+
+const Wrapper = styled.div`
+  padding: 0 20px;
+  border: 2px solid darkgrey;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 #ccc;
+  background: lightgrey;
+  max-width: 220px;
+`;

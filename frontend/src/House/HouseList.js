@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import HouseWithUpdateButtons from './HouseWithUpdateButtons';
 import { FilteredIssueList } from '../Issue';
-import { StyleSheet, css } from 'aphrodite';
+import styled from 'styled-components';
 
 export default class HouseList extends Component {
   static propTypes = {
@@ -44,7 +44,7 @@ export default class HouseList extends Component {
     const { data } = this.props;
     const house_list = data.map((house, ndx) => {
       return (
-        <div className={css(styles.wrapper)} key={ndx}>
+        <Wrapper key={ndx}>
           <HouseWithUpdateButtons
             house={house}
             onNewIssue={this.onNewIssue}
@@ -61,17 +61,15 @@ export default class HouseList extends Component {
             statusFilter="resolved"
             title="Resolved Issues"
           />
-        </div>
+        </Wrapper>
       );
     });
-    return <div className={css(styles.list)}>{house_list}</div>;
+    return <div>{house_list}</div>;
   };
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'space-around'
-  }
-});
+const Wrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+`;
